@@ -1,0 +1,100 @@
+\if@titlepage
+  \renewcommand{\maketitle}{%
+    \begin{titlepage}%
+      \let\footnotesize\small
+      \let\footnoterule\relax
+      \let\footnote\thanks
+      \null\vfil
+      \if@slide
+        {\footnotesize \@date}%
+        \begin{center}
+          \mbox{} \\[1zw]
+          \large
+          {\maybeblue\hrule height0pt depth2pt\relax}\par
+          \smallskip
+          \textbf{\@title}
+          \smallskip
+          {\maybeblue\hrule height0pt depth2pt\relax}\par
+          \vfill
+          {\small \@author}%
+        \end{center}
+      \else
+      \vskip 60\p@
+      \begin{center}%
+        {\Large \textbf{\@title} \par}%
+        \vskip 3em%
+        {\large
+          \lineskip .75em
+          \begin{tabular}[t]{c}%
+            \@author
+          \end{tabular}\par}%
+        \vskip 1.5em
+        {\large \@date \par}%
+      \end{center}%
+      \fi
+      \par
+      \@thanks\vfil\null
+    \end{titlepage}%
+    \setcounter{footnote}{0}%
+    \global\let\thanks\relax
+    \global\let\maketitle\relax
+    \global\let\@thanks\@empty
+    \global\let\@author\@empty
+    \global\let\@date\@empty
+    \global\let\@title\@empty
+    \global\let\title\relax
+    \global\let\author\relax
+    \global\let\date\relax
+    \global\let\and\relax
+  }%
+\else
+  \renewcommand{\maketitle}{\par
+    \begingroup
+      \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+      \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+      \long\def\@makefntext##1{\advance\leftskip 3zw
+        \parindent 1zw\noindent
+        \llap{\@textsuperscript{\normalfont\@thefnmark}\hskip0.3zw}##1}%
+      \if@twocolumn
+        \ifnum \col@number=\@ne
+          \@maketitle
+        \else
+          \twocolumn[\@maketitle]%
+        \fi
+      \else
+        \newpage
+        \global\@topnum\z@  % Prevents figures from going at top of page.
+        \@maketitle
+      \fi
+      \plainifnotempty
+      \@thanks
+    \endgroup
+    \setcounter{footnote}{0}%
+    \global\let\thanks\relax
+    \global\let\maketitle\relax
+    \global\let\@thanks\@empty
+    \global\let\@author\@empty
+    \global\let\@date\@empty
+    \global\let\@title\@empty
+    \global\let\title\relax
+    \global\let\author\relax
+    \global\let\date\relax
+    \global\let\and\relax
+  }
+  \def\@maketitle{%
+    \newpage
+    \begin{center}%
+      \let\footnote\thanks
+      {\large \textbf{\@title(\@date)}}%
+    \end{center}%
+	\begin{flushright}
+      {
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+	\end{flushright}
+    \par\vskip 1.5em
+    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
+  }
+\fi
+

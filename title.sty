@@ -1,100 +1,30 @@
-\if@titlepage
-  \renewcommand{\maketitle}{%
-    \begin{titlepage}%
-      \let\footnotesize\small
-      \let\footnoterule\relax
-      \let\footnote\thanks
-      \null\vfil
-      \if@slide
-        {\footnotesize \@date}%
-        \begin{center}
-          \mbox{} \\[1zw]
-          \large
-          {\maybeblue\hrule height0pt depth2pt\relax}\par
-          \smallskip
-          \textbf{\@title}
-          \smallskip
-          {\maybeblue\hrule height0pt depth2pt\relax}\par
-          \vfill
-          {\small \@author}%
-        \end{center}
-      \else
-      \vskip 60\p@
-      \begin{center}%
-        {\Large \textbf{\@title} \par}%
-        \vskip 3em%
-        {\large
-          \lineskip .75em
-          \begin{tabular}[t]{c}%
-            \@author
-          \end{tabular}\par}%
-        \vskip 1.5em
-        {\large \@date \par}%
-      \end{center}%
-      \fi
-      \par
-      \@thanks\vfil\null
-    \end{titlepage}%
-    \setcounter{footnote}{0}%
-    \global\let\thanks\relax
-    \global\let\maketitle\relax
-    \global\let\@thanks\@empty
-    \global\let\@author\@empty
-    \global\let\@date\@empty
-    \global\let\@title\@empty
-    \global\let\title\relax
-    \global\let\author\relax
-    \global\let\date\relax
-    \global\let\and\relax
-  }%
-\else
-  \renewcommand{\maketitle}{\par
-    \begingroup
-      \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-      \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-      \long\def\@makefntext##1{\advance\leftskip 3zw
-        \parindent 1zw\noindent
-        \llap{\@textsuperscript{\normalfont\@thefnmark}\hskip0.3zw}##1}%
-      \if@twocolumn
-        \ifnum \col@number=\@ne
-          \@maketitle
-        \else
-          \twocolumn[\@maketitle]%
-        \fi
-      \else
-        \newpage
-        \global\@topnum\z@  % Prevents figures from going at top of page.
-        \@maketitle
-      \fi
-      \plainifnotempty
-      \@thanks
-    \endgroup
-    \setcounter{footnote}{0}%
-    \global\let\thanks\relax
-    \global\let\maketitle\relax
-    \global\let\@thanks\@empty
-    \global\let\@author\@empty
-    \global\let\@date\@empty
-    \global\let\@title\@empty
-    \global\let\title\relax
-    \global\let\author\relax
-    \global\let\date\relax
-    \global\let\and\relax
-  }
-  \def\@maketitle{%
-    \newpage
-    \begin{center}%
-      \let\footnote\thanks
-      {\large \textbf{\@title(\@date)}}%
-    \end{center}%
-	\begin{flushright}
-      {
-        \begin{tabular}[t]{c}%
-          \@author
-        \end{tabular}\par}%
-	\end{flushright}
-    \par\vskip 1.5em
-    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
-  }
-\fi
+% ページのレイアウト
 
+\setlength{\evensidemargin}{\oddsidemargin}		% 偶数ページと奇数ページとでマージンを合わせる
+\setlength{\textwidth}{\fullwidth}
+\pagestyle{plain}
+
+% part, chapter, section の設定
+
+\renewcommand{\prepartname}{S}					% 部の prefix を "S" へ
+\renewcommand{\postpartname}{ターム}			% 部の suffix を「ターム」へ
+\renewcommand{\thepart}{\arabic{part}}			% タームの番号はローマ数字で
+\renewcommand{\postchaptername}{回}				% 章の suffix を「章」ではなく「回」へ
+\renewcommand{\thesection}{\arabic{section}}	% 章の番号は「第 n 回」の n だけに
+
+% 各回のタイトル見出しの変更
+
+\def\@makechapterhead#1{%
+	\vbox to1.0truecm{%					% 1cm の箱を作る
+		\vskip5truemm					% 罫線から 5mm の空きを取る
+		\begin{center}					% センタリング開始
+		\bfseries						% 太字へ
+		{\Large\nameref{part\thepart}}	% 授業名を出力
+		{\Large\prechaptername}%		% 「第」の文字列を出力
+		{\Large\thechapter}%			% 何回目かを出力
+		{\Large\postchaptername}%		% 「回」の文字列を出力
+		{\Large \qquad #1}%				% 章タイトルを出力
+		\end{center}%					% センタリング終了
+		\vss%							% ハコの高さが 1cm になるように空きを取る
+	}
+}

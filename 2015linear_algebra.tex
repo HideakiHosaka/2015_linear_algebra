@@ -4,45 +4,13 @@
 
 \usepackage[hidelinks]{hyperref}				% ハイパーリンクと \namelink に使う
 \usepackage{otf}								% 丸囲みの①を出すのに使う
-
-% ページのレイアウト
-
-\setlength{\evensidemargin}{\oddsidemargin}		% 偶数ページと奇数ページとでマージンを合わせる
-\setlength{\textwidth}{\fullwidth}
-\pagestyle{plain}
-
-% part, chapter, section の設定
-
-\renewcommand{\prepartname}{S}					% 部の prefix を "S" へ
-\renewcommand{\postpartname}{ターム}			% 部の suffix を「ターム」へ
-\renewcommand{\thepart}{\arabic{part}}			% タームの番号はローマ数字で
-\renewcommand{\postchaptername}{回}				% 章の suffix を「章」ではなく「回」へ
-\renewcommand{\thesection}{\arabic{section}}	% 章の番号は「第 n 回」の n だけに
-
-% 各回のタイトル見出しの変更
-
-\makeatletter
-\def\@makechapterhead#1{%
-	\vbox to1.0truecm{%					% 1cm の箱を作る
-		\vskip5truemm					% 罫線から 5mm の空きを取る
-		\begin{center}					% センタリング開始
-		\bfseries						% 太字へ
-		{\Large\nameref{part\thepart}}	% 授業名を出力
-		{\Large\prechaptername}%		% 「第」の文字列を出力
-		{\Large\thechapter}%			% 何回目かを出力
-		{\Large\postchaptername}%		% 「回」の文字列を出力
-		{\Large \qquad #1}%				% 章タイトルを出力
-		\end{center}%					% センタリング終了
-		\vss%							% ハコの高さが 1cm になるように空きを取る
-	}
-}
-\makeatother
+\usepackage{title}								% タイトル等の見た目を調整するスタイルファイル
 
 \begin{document}
 
 \frontmatter
 
-\title{数理科学基礎(線型代数学) / 線形代数学\\レポート解答解説}
+\title{数理科学基礎(線形代数学) / 線形代数学\\レポート解答解説}
 \author{穂坂 秀昭}
 
 \maketitle

@@ -14,6 +14,7 @@
 
 % 各回のタイトル見出しの変更
 
+\makeatletter
 \def\@makechapterhead#1{%
 	\vbox to1.0truecm{%					% 1cm の箱を作る
 		\vskip5truemm					% 罫線から 5mm の空きを取る
@@ -28,3 +29,4 @@
 		\vss%							% ハコの高さが 1cm になるように空きを取る
 	}
 }
+\makeatother

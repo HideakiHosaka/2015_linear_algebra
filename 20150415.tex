@@ -380,7 +380,7 @@ $f(z) = a_0 + a_1 z + \cdots + a_n z^n$とおく。このとき$a_0,a_1,\ldots,a
 
 ちなみに$2$次方程式は解の公式を使えば常に解けますが、Galois理論というものを使うと、$5$次以上の多項式に対する「解の公式」が存在しないことまで証明できます。}。これが代数学の基本定理と呼ばれる内容です。
 
-そして「根が$1$個は存在する」ことが分かると、そこから「定数でない$n$次多項式はいつも$n$個の根を持つ」ことまで言えてしまいます。このことを問題で確かめ、最後に代数学の基本定理の証明を与えましょう\footnote{この証明には微分積分学の知識が必要なので、今は読み解くのが難しいかもしれません。連続函数の性質を習った後で読むと、手頃な勉強になるでしょう。}。
+そして「根が$1$個は存在する」ことが分かると、そこから「定数でない$n$次多項式はいつも$n$個の根を持つ」ことまで言えてしまいます。このことを問題で確かめてから、最後に代数学の基本定理の証明を与えましょう\footnote{この証明には微分積分学の知識が必要なので、今は読み解くのが難しいかもしれません。連続函数の性質を習った後で読むと、手頃な勉強になるでしょう。}。
 
 \paragraph{代数学の基本定理: 問2の解答}
 $f$の次数に関する帰納法で示す。まず$\deg f=1$のときは$1$次式$1$個の積である。次に、$n-1$次以下の全ての複素係数多項式が$1$次式の積に分解すると仮定する。このとき$f(z)$を$n$次多項式とすると、代数学の基本定理より$f(z)$の根が存在する。それを$\alpha$とすると$f(z)=(z-\alpha)g(z)$と書け、$g(z)$は$n-1$次多項式となる。帰納法の過程から$g(z)$は$1$次式の積に分解するので、$f(z)$全体も$1$次式の積となる。
@@ -390,17 +390,31 @@ $f$の次数に関する帰納法で示す。まず$\deg f=1$のときは$1$次�
 
 $|f(0)|=1$より、$f(z)$の定数項は$0$でない。定数項の次に低い次数の項が$a_k z^k$だとして、$f(z) = a_0 + a_k z^k + a_{k+1} z^{k+1} + \cdots + a_n z^n$とおく。いま$a_0 = r_0 e^{i\theta_0}$, $a_k = r_k e^{i\theta_k}$と書ける。これらを用いて$z_0:=re^{i(\theta_0-\theta_k+\pi)/k}$と定めると
 \begin{align*}
-f(z_0) &= a_0 + a_k z^k \Bigl( 1 + \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr)
-= r_0e^{i\theta_0} + r_k e^{i\theta_k} \Bigl(re^{(\theta_0-\theta_k+\pi)/k}\Bigr)^k \Bigl( 1 + \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr)\\
-&= r_0e^{i\theta_0} + r_k r^k e^{i(\theta_0+\pi)} \Bigl( 1 + \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr)
-= (r_0-r_kr^k) e^{\theta_0} - r_k r^k e^{i\theta_0} \Bigl( \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr)
+f(z_0) &= a_0 + a_k z_0^k \Bigl( 1 + \frac{a_{k+1}}{a_k} z_0 + \cdots + \frac{a_n}{a_k} z_0^{n-k}\Bigr)
+= r_0e^{i\theta_0} + r_k e^{i\theta_k} \Bigl(re^{(\theta_0-\theta_k+\pi)/k}\Bigr)^k \Bigl( 1 + \frac{a_{k+1}}{a_k} z_0 + \cdots + \frac{a_n}{a_k} z_0^{n-k}\Bigr)\\
+&= r_0e^{i\theta_0} + r_k r^k e^{i(\theta_0+\pi)} \Bigl( 1 + \frac{a_{k+1}}{a_k} z_0 + \cdots + \frac{a_n}{a_k} z_0^{n-k}\Bigr)
+= (r_0-r_kr^k) e^{i\theta_0} - r_k r^k e^{i\theta_0} \Bigl( \frac{a_{k+1}}{a_k} z_0 + \cdots + \frac{a_n}{a_k} z_0^{n-k}\Bigr)
 \end{align*}
-となる。よって$r$を十分小さく取れば
+となる。よって$|e^{i\theta}|=1$と三角不等式より、$|f(z_0)|$は
 \begin{align*}
-|f(z_0)| \leq |r_0-r_k r^k | + r_k r^k \Bigl| \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr|
-= r_0-r_k r^k + r_k r^k \Bigl| \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a_k} z^{n-k}\Bigr|
+|f(z_0)| &\leq |r_0-r_k r^k | + r_k r^k \Bigl| \frac{a_{k+1}}{a_k} z_0 + \cdots + \frac{a_n}{a_k} z_0^{n-k}\Bigr|
+= |r_0-r_k r^k| + r_k r^k|z_0| \Bigl| \frac{a_{k+1}}{a_k} + \frac{a_{k+2}}{a_{k+1}}z_0  + \cdots + \frac{a_n}{a_k} z_0^{n-k-1}\Bigr| \\
+&\leq |r_0-r_k r^k| + r_k r^{k+1}\Bigl\{\Bigl|\frac{a_{k+1}}{a_k}\Bigr| + \Bigl|\frac{a_{k+2}}{a_k} z_0\Bigr| + \cdots + \Bigl|\frac{a_{n}}{a_k} z_0^{n-k-1}\Bigr|\Bigr\}
 \end{align*}
-となる。ここで第$3$項は$O(r^{k+1})$だから、$r$を十分小さく取っておけば$r_kr^k$より絶対値を小さくできる。これより$|f(z_0)|<r_0=|f(0)|$となることが分かった。 \qed
+となる。この式で
+\[
+M := \max\Bigl\{\Bigl|\frac{a_{k+1}}{a_k}\Bigr|, \Bigl|\frac{a_{k+2}}{a_k} z_0\Bigr|, \ldots, \Bigl|\frac{a_{n}}{a_k} z_0^{n-k-1}\Bigr|\Bigr\}
+\]
+とおくと、$|f(z_0)|\leq |r_0-r_kr^k| + r_k r^{k+1}(n-k-1)M$が得られる。そこで
+\[
+r := \min\Bigl\{\Bigl|\frac{r_0}{r_k}\Bigr|^{\frac{1}{k}} , \frac{1}{2(n-k-1)M}\Bigr\}
+\]
+と取れば、$ r_0-r_k r^k \geq 0 $ かつ$ r \leq \frac{1}{2(n-k-1)M} $なので
+\[
+|f(z_0)|\leq r_0 - r_k r^k + r_k r^{k+1}(n-k-1)M \leq r_0 - r_k r^k \bigl( 1 - r(n-k-1)M\bigr)
+\leq r_0 - \frac{r_k r^k}{2} < r_0
+\]
+である。これより$|f(z_0)|<r_0=|f(0)|$となることが分かった。 \qed
 
 
 \paragraph{代数学の基本定理の証明}
@@ -418,26 +432,26 @@ f(z_0) &= a_0 + a_k z^k \Bigl( 1 + \frac{a_{k+1}}{a_k} z + \cdots + \frac{a_n}{a
 
 $f(z)=a_n z^n + a_{n-1} z^{n-1} + \cdots + a_0$とおく。このとき
 \[
-|f(z)| = |a_n||z|^n\Bigl|1+\frac{a_{n-1}}{z} + \cdots + \frac{a_0}{z^n}\Bigr|
+|f(z)| = |a_n||z|^n\Bigl|1+\frac{a_{n-1}}{a_n z} + \cdots + \frac{a_0}{a_n z^n}\Bigr|
 \]
 である。ここで三角不等式$|z_1|-|z_2|\leq|z_1-z_2|$を使うと、$|z_1+z_2|\geq|z_1|-|-z_2|=|z_1|-|z_2|$なので
 \begin{align*}
-\Bigl|1+\frac{a_{n-1}}{z} + \cdots + \frac{a_0}{z^n}\Bigr|
-&\geq \Bigl|1+\frac{a_{n-1}}{z} + \cdots + \frac{a_1}{z^{n-1}}\Bigr| - \Bigl|\frac{a_0}{z^n}\Bigr| \geq \cdots
-\geq 1-\Bigl|\frac{a_{n-1}}{z}\Bigr| - \cdots -\Bigl|\frac{a_{0}}{z^n}\Bigr|
+\Bigl|1+\frac{a_{n-1}}{a_n z} + \cdots + \frac{a_0}{a_n z^n}\Bigr|
+&\geq \Bigl|1+\frac{a_{n-1}}{a_n z} + \cdots + \frac{a_1}{a_n z^{n-1}}\Bigr| - \Bigl|\frac{a_0}{a_n z^n}\Bigr| \geq \cdots
+\geq 1-\Bigl|\frac{a_{n-1}}{a_n z}\Bigr| - \cdots -\Bigl|\frac{a_{0}}{a_n z^n}\Bigr|
 \end{align*}
 となる。ここで
 \[
-R_0:=\max\Biggl\{\frac{n|a_{n-1}|}{0.1},\Biggl(\frac{n|a_{n-2}|}{0.1}\Biggr)^{\frac{1}{2}},\ldots,\Biggl(\frac{n|a_{0}|}{0.1}\Biggr)^{\frac{1}{n}}\Biggr\}
+R_0:=\max\Biggl\{\frac{n|a_{n-1}|}{0.1|a_n|},\Biggl(\frac{n|a_{n-2}|}{0.1|a_n|}\Biggr)^{\frac{1}{2}},\ldots,\Biggl(\frac{n|a_{0}|}{0.1|a_n|}\Biggr)^{\frac{1}{n}}\Biggr\}
 \]
-とおく\footnote{$0.1$という数に本質的な意味はありません。$1$未満の任意の正の数$\varepsilon$に対し、ここでの議論が成り立ちます。}と、$|z|>|R_0|$のとき、全ての$1\leq k\leq n-1$に対し
+とおく\footnote{$0.1$という数に本質的な意味はありません。この$0.1$は、$1$未満の任意の正の数$\varepsilon$に置き換えても正しい式が得られます。}と、$|z|>|R_0|$のとき、全ての$1\leq k\leq n-1$に対し
 \[
-\Bigl|\frac{a_{n-k}}{z^k}\Bigr| = \frac{|a_{n-k}|}{|z|^k} < \frac{|a_{n-k}|}{R_0^k} \leq |a_{n-k}|\Biggl(\frac{0.1}{n|a_{n-k}|}\Biggr)^{\frac{1}{k}\cdot k} = \frac{0.1}{n}
+\Bigl|\frac{a_{n-k}}{a_n z^k}\Bigr| = \frac{|a_{n-k}|}{|a_n||z|^k} < \frac{|a_{n-k}|}{|a_n|R_0^k} \leq \frac{|a_{n-k}|}{|a_n|}\Biggl(\frac{0.1|a_n|}{n|a_{n-k}|}\Biggr)^{\frac{1}{k}\cdot k} = \frac{0.1}{n}
 \]
 となる。よって
 \[
-\Bigl|1+\frac{a_{n-1}}{z} + \cdots + \frac{a_0}{z^n}\Bigr| \geq
-1-\Bigl|\frac{a_{n-1}}{z}\Bigr| - \cdots -\Bigl|\frac{a_{0}}{z^n}\Bigr|
+\Bigl|1+\frac{a_{n-1}}{a_n z} + \cdots + \frac{a_0}{a_n z^n}\Bigr| \geq
+1-\Bigl|\frac{a_{n-1}}{a_n z}\Bigr| - \cdots -\Bigl|\frac{a_{0}}{a_n z^n}\Bigr|
 > 1-\frac{0.1}{n}-\cdots-\frac{0.1}{n} = 0.9
 \]
 となる。さらに正の実数$R$を
@@ -446,7 +460,7 @@ R:=\max\Biggl\{\Biggl(\frac{|f(0)|}{0.9|a_n|}\Biggr)^{\frac{1}{n}},R_0\Biggr\}
 \]
 とおくと、$|z|>R$のとき
 \[
-|f(z)| = |a_n||z|^n\Bigl|1+\frac{a_{n-1}}{z} + \cdots + \frac{a_0}{z^n}\Bigr| > |a_n|\Biggl(\frac{|f(0)|}{0.9|a_n|}\Biggr)^{\frac{1}{n}\cdot n} \cdot 0.9 = |f(0)|
+|f(z)| = |a_n||z|^n\Bigl|1+\frac{a_{n-1}}{a_n z} + \cdots + \frac{a_0}{a_n z^n}\Bigr| > |a_n|\Biggl(\frac{|f(0)|}{0.9|a_n|}\Biggr)^{\frac{1}{n}\cdot n} \cdot 0.9 = |f(0)|
 \]
 となる。
 

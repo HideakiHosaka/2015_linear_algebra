@@ -1,0 +1,89 @@
+\chapter{種々の函数}
+
+\begin{flushright}
+担当教員: 植野 義明 / TA: 穂坂 秀昭 \\
+講義日時: 2015年4月22日 1限
+\end{flushright}
+
+\section{逆三角函数}
+
+\paragraph{問2, 3} $\tan$の加法定理
+\[
+\tan(x+y) = \frac{\tan x + \tan y}{1 - \tan x\tan y}
+\]
+に$u=\tan x$, $v=\tan y$を代入すると
+\begin{align*}
+\arctan u + \arctan y
+&= x + y = \arctan \tan(x+y)
+= \arctan \frac{\tan x + \tan y}{1 - \tan x\tan y}
+= \arctan \Bigl(\frac{u+v}{1-uv}\Bigr)
+\end{align*}
+を得る。この式で$u=1/2$, $v=1/3$とおくと、右辺は
+\[
+\arctan \Bigl(\frac{u+v}{1-uv}\Bigr) = \arctan \Bigl(\frac{1/2+1/3}{1-1/6}\Bigr) = \arctan 1 = \frac{\pi}{4}
+\]
+なので
+\[
+\frac{\pi}{4} = \arctan \frac{1}{2} + \arctan \frac{1}{3}
+\]
+が得られる。これはEulerの公式と呼ばれる
+
+また$u=v=1/5$とおくと、同じように計算することで
+\[
+2\arctan\frac{1}{5} = \arctan\frac{2/5}{1-(1/25)} = \arctan\frac{5}{12}
+\]
+となる。さらに$u=v=5/12$に対しては
+\[
+2\arctan\frac{5}{12} = \arctan\frac{10/12}{1-(25/144)} = \arctan\frac{120}{119}
+\]
+である。そして$u=120/119$に対し$(u+v)/(1-uv)=1$となる$v$を求めると、$v=(1-u)/(1+u)=-1/239$となる。これらをまとめると
+\begin{align*}
+\frac{\pi}{4}
+&= \arctan \frac{\frac{120}{119}+\frac{-1}{239}}{1-\frac{120}{119}\frac{-1}{239}}
+= \arctan \frac{120}{119} + \arctan\frac{-1}{239}
+= 2\arctan\frac{5}{12} - \arctan\frac{1}{239}
+= 4\arctan\frac{1}{5} - \arctan\frac{1}{239}
+\end{align*}
+
+\paragraph{問4}
+\begin{enumerate}
+\item[(1)] $(3+i)(7+i) = 20+10i$
+\item[(2)] $(2+i)(3+i) = 5+5i$
+\item[(3)] $(5+i)^4/(239+i) = 2+2i$
+\end{enumerate}
+\[
+\arctan\frac{1}{3} + \arctan\frac{1}{7} = \arctan\frac{1}{2},
+\arctan\frac{1}{2} + \arctan\frac{1}{3} = \arctan{1} = \frac{\pi}{4},
+4\arctan\frac{1}{5} - \arctan\frac{1}{239} = \arctan{1} = \frac{\pi}{4}
+\]
+
+\paragraph{問5} 45度
+
+\subsection{双曲線函数}
+
+\paragraph{問6}
+(b)
+\begin{align*}
+\cosh x \cosh y + \sinh x \sinh y
+&= \frac{e^x + e^{-x}}{2} \frac{e^y + e^{-y}}{2} + \frac{e^x - e^{-x}}{2}\frac{e^y - e^{-y}}{2} \\
+&= \frac{e^{x+y} + e^{x-y} + e^{-x+y} + e^{-(x+y)}}{4} + \frac{e^{x+y} - e^{x-y} - e^{-x+y} + e^{-(x+y)}}{4} \\
+&= \cosh(x+y) \\
+\sinh x \cosh y + \cosh x \sinh y
+&= \frac{e^x - e^{-x}}{2} \frac{e^y + e^{-y}}{2} + \frac{e^x + e^{-x}}{2}\frac{e^y - e^{-y}}{2} \\
+&= \frac{e^{x+y} + e^{x-y} - e^{-x+y} - e^{-(x+y)}}{4} + \frac{e^{x+y} + e^{x-y} - e^{-x+y} - e^{-(x+y)}}{4} \\
+&= \sinh(x+y)
+\end{align*}
+
+\noindent (c) 
+$y=\cosh x = (e^x+e^{-x})/2$とおくと、$(e^x)^2 + 1 = 2ye^x$である。よって$e^x$の$2$次方程式$(e^x)^2 - 2y e^x+1=0$を解いて
+$e^x = y\pm\sqrt{y^2-1}$を得る。よって$\arccosh y = x = \log(y\pm\sqrt{y^2-1})$である。$\pm$の符号は上の枝と下の枝
+
+同様に$y=\sinh x = (e^x - e^{-x})/2$を$e^x$について解くと$e^x=y\pm\sqrt{y^2+1}$を得る。ただし$e^x>0$なので$-$の符号は不適である。よって$x=\arcsinh x=\log(y+\sqrt{y^2+1})$が得られる。
+
+\noindent (d)
+\begin{align*}
+(\cosh x)' &= \sinh x & 
+(\arccosh x)' &= \frac{1+\frac{2x}{2\sqrt{x^2-1}}}{x+\sqrt{x^2-1}} = \frac{1}{\sqrt{x^2-1}} \\
+(\sinh x)' &= \cosh x &
+(\arcsinh x)' &= \frac{1+\frac{2x}{2\sqrt{x^2+1}}}{x+\sqrt{x^2+1}} = \frac{1}{\sqrt{x^2+1}}
+\end{align*}

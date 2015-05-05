@@ -2,8 +2,9 @@
 
 % パッケージ類の読み込み
 
-\usepackage[hidelinks]{hyperref}				% ハイパーリンクと \namelink に使う
-\usepackage{otf}								% 丸囲みの①を出すのに使う
+\usepackage[dvipdfmx,hidelinks]{hyperref}			% ハイパーリンクと \namelink に使う
+\usepackage{pxjahyper}
+\usepackage{otf}									% 丸囲みの①を出すのに使う
 \usepackage{title}								% タイトル等の見た目を調整する手製スタイルファイル
 \usepackage{comment}							% 複数行にわたるコメントアウト
 
@@ -12,6 +13,8 @@
 \usepackage[dvipdfmx]{graphicx}					% 外部画像の取り込みなど
 
 \def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}
+\DeclareMathOperator\arccosh{arccosh}
+\DeclareMathOperator\arcsinh{arcsinh}
 
 \begin{document}
 
@@ -29,7 +32,8 @@
 \part{数理科学基礎(線形代数学)}\label{part1}
 
 \include{20150415}
+\include{20150422}
 
-\part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
+\part[線形代数学1]{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
 
 \end{document}

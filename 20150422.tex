@@ -7,8 +7,11 @@
 
 \section{逆函数について}
 
+今回のテーマの一つは逆函数です。問題にはなっていませんが、逆函数の基本的なことを確認しておきましょう。
+
 \subsection{逆函数の定義と例}
 
+\paragraph{逆函数とは}
 函数とは、数に対して何かしらの数を対応させる規則のことです。たとえば$f(x)=x^2$という函数は、実数$x\in\mathbb{R}$に$x^2\in\mathbb{R}$という数を対応させています。他にも三角函数、対数函数や指数函数といった有名な函数があり、そしてこれらの函数を合成するとさらに色々な函数を作ることができますが、どの函数も\textbf{数に数を対応させる}ことには間違いありません。別の言い方をすれば、僕たちが普段「函数」と呼んでいるものは、定義域と値域が実数全体$\mathbb{R}$の部分集合であるような写像です\footnote{ただし、この用語の使い方は慣用的なもので、厳密な取り決めがあるわけではありません。たとえば定義域や値域がベクトルの集合であっても、函数と呼ぶことはままあります。}。
 
 さて函数$f(x)$が与えられると、数$x$が与えられた時に$f$の値$f(x)$が定まります。そしてしばしば「数$y$が与えられたとき、$y=f(x)$となる数$x$を求めたい」という状況が生じます。対応$x\mapsto f(x)$ではなく、その逆の対応を求めたいわけです。このように函数$f$が与えられたとき、「数$y$に対し、$y=f(x)$となる$x$を対応させる」という方法で定義される函数を$f$の\textbf{逆函数}と言い、$f^{-1}$と書きます。$x\rightarrow f(x)$の対応が逆になるので、逆函数のグラフは元の函数のグラフを直線$y=x$について線対称に折り返したものになります。
@@ -34,6 +37,48 @@
 \section{逆三角函数と円周率の近似公式}
 
 \subsection{逆三角函数の定義}
+
+念の為に三角函数の定義を確認しておきます。単位円周上の点$\mathrm{P}$に対し、$x$軸の非負の部分と半直線OPのなす角が$\theta$であるとき、$\mathrm{P}$の座標を$(\cos \theta,\sin\theta)$と表すのでした。そして残りは$\tan\theta:=\sin\theta/\cos\theta$, $\cot \theta:=1/\tan\theta$, $\sec\theta:=1/\cos\theta$, $\csc\theta:=1/\sin\theta$と定めます。これを図に描くと次のようになります。
+
+\begin{figure}[h!tbp]
+\begin{center}
+\begin{picture}(300,150)
+% 外側の三角形
+\put(30,10){\line(1,0){240}}
+\put(30,10){\line(0,1){120}}
+\put(30,130){\line(2,-1){240}}
+
+% theta 方向の動径
+\put(30,10){\line(1,2){48}}
+\put(50,60){$1$}
+
+% cos, sin を書き入れるための点線
+\put(30,10){\dashbox(48,96)}
+
+\put(42,97){$\cos\theta$}
+\put(80,60){$\sin\theta$}
+
+\put(78,106){\qbezier(0,0)(20,-5)(65,-25)}
+\put(270,10){\qbezier(0,0)(-30,20)(-105,60)}
+\put(145,73){$\tan\theta$}
+
+\put(30,130){\qbezier(0,0)(10,3)(19,-3)}
+\put(78,106){\qbezier(0,0)(-3,10)(-9,12)}
+\put(50,122){$\cot\theta$}
+
+\put(30,10){\qbezier(0,0)(5,-5)(95,-7)}
+\put(270,10){\qbezier(0,0)(-5,-5)(-95,-7)}
+\put(138,1){$\sec\theta$}
+
+\put(30,10){\qbezier(0,0)(-5,5)(-10,55)}
+\put(30,130){\qbezier(0,0)(-5,-5)(-10,-50)}
+\put(8,70){$\csc\theta$}
+
+\put(45,15){$\theta$}
+\put(30,10){\qbezier(12,0)(10,8)(5,10)}
+\end{picture}
+\end{center}
+\end{figure}
 
 三角函数の逆函数を逆三角函数といいます。また$\cos$, $\sin$, $\tan$の逆函数をそれぞれ$\arccos$, $\arcsin$, $\arctan$と書きます。ただし三角函数はすべて周期函数なので、ある意味「単射から最も遠い函数」です。たとえば$\sin x = 1/2$となる実数$x$は無限個存在してしまいます。ですから逆三角函数を考えるには、三角函数の定義域を制限して主値を選ぶ必要があります。通常、主値は次のように選びます。
 
@@ -103,17 +148,17 @@ $y = \arccos x$ & $y = \arcsin x$ & $y = \arctan x$
 \end{align*}
 を得る。この式で$u=1/2$, $v=1/3$とおくと
 \[
-\arctan \frac{1}{2} + \arctan \frac{1}{3} = \arctan \Bigl(\frac{1/2+1/3}{1-1/6}\Bigr) = \arctan 1 = \frac{\pi}{4}
+\arctan \frac{1}{2} + \arctan \frac{1}{3} = \arctan \Bigl(\frac{\frac{1}{2}+\frac{1}{3}}{1-\frac{1}{6}}\Bigr) = \arctan 1 = \frac{\pi}{4}
 \]
 が得られる。これはEulerの公式と呼ばれる。
 
 また$u=v=1/5$とおくと、同じように計算することで
 \[
-2\arctan\frac{1}{5} = \arctan\frac{2/5}{1-(1/25)} = \arctan\frac{5}{12}
+2\arctan\frac{1}{5} = \arctan\frac{\frac{2}{5}}{1-\frac{1}{25}} = \arctan\frac{5}{12}
 \]
 となる。さらに$u=v=5/12$に対しては
 \[
-2\arctan\frac{5}{12} = \arctan\frac{10/12}{1-(25/144)} = \arctan\frac{120}{119}
+2\arctan\frac{5}{12} = \arctan\frac{\frac{10}{12}}{1-\frac{25}{144}} = \arctan\frac{120}{119}
 \]
 である。そして$u=120/119$に対し$(u+v)/(1-uv)=1$となる$v$を求めると、$v=(1-u)/(1+u)=-1/239$となる。これらをまとめると、Machinの公式を得る。
 \begin{align*}
@@ -194,6 +239,8 @@ $\arctan$には、実は次のような近似公式があります:
 
 \section{双曲線函数と逆双曲線函数}
 
+最後のテーマは、双曲線函数と呼ばれる函数たちです。これらは指数函数の四則演算で書けるという意味では、そこまで目新しいものではありません。ですが三角函数と良く似た性質を持ち、かつ置換積分などの際に役立つので、性質を知っておくと便利です。
+
 \subsection{双曲線函数}
 
 \paragraph{定義}
@@ -205,6 +252,63 @@ $\arctan$には、実は次のような近似公式があります:
 
 これらが双曲線函数と呼ばれる所以の一つは、双曲線のパラメータ表示を与えるからです。三角函数は$\cos^2 t + \sin^2 t =1$という恒等式を満たしましたが、双曲線函数では$\cosh^2 t - \sinh^2 t = 1$という式が成り立ちます。したがって$t$が動けば、点$(\cosh t,\sinh t)$は双曲線$x^2-y^2=1$の上を動きます。ただし$\cosh t>0$なので、このパラメータ表示は双曲線の右側だけしか与えていません。双曲線の左側のパラメータ表示は$(-\cosh t,\sinh t)$で与えられます。
 
+\paragraph{問6}
+双曲線$u^2-v^2=1$上に、下図で塗りつぶされた部分の面積が$x/2$となるような点に取る。この点の座標を$(\cosh x, \sinh x)$と書く。$\cosh x$と$\sinh x$の明示的な式を求めよう。面積の計算には積分が必要である。積分計算を楽にするため、この双曲線を正の向き\footnote{数学でいう「正の向き」は、反時計回りです。}に$45^{\circ}$回転させる。そうすると双曲線$u^2-v^2=1$は、直線$y=x$上で原点からの距離が$1$である点、すなわち点$(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}})$を通る反比例のグラフになる。よって回転後の式は$\eta=\frac{1}{2\xi}$である\footnote{$\eta,\xi$はそれぞれギリシャ文字のエータとグザイです。}。
+
+\begin{figure}[h!tbp]
+\begin{center}
+\hfil
+\includegraphics[width = 50 truemm, trim = 0 0  30 40, clip]{20150422-fig-hyp1.pdf}
+\begin{picture}(0,0)
+\put(-65,88){\circle*{3}}
+\put(-64,80){$(\cosh x,\sinh x)$}
+\put(-110,37){$\displaystyle \frac{x}{2}$}
+\put(-40,110){$u^2-v^2=1$}
+\end{picture}
+ \hfil
+\includegraphics[width = 50 truemm, trim = 0 0 30 40, clip]{20150422-fig-hyp2.pdf}  \hfil ~
+\end{center}
+\end{figure}
+
+縦より横に積分した方が見やすいので、面積を求めるべき部分を直線$y=x$について折り返す。すると、次の二つの図で示された面積は等しいことが分かる。$\mathrm{AB}\cdot\mathrm{BC} = \mathrm{PQ}\cdot\mathrm{CQ} = \frac{1}{2}$が成り立ち、$\triangle\mathrm{ABC}$と$\triangle\mathrm{CQP}$の面積が等しくなるからである。
+
+\begin{figure}[h!tbp]
+\begin{center}
+\hfil
+\begin{picture}(0,0)
+\put(23,75){$\eta=\frac{1}{2\xi}$}
+\end{picture}
+\includegraphics[width = 50 truemm,trim = 0 0 10 110, clip]{20150422-fig-hyp3.pdf} \hfil
+\begin{picture}(0,0)
+\put(3,-8){$\mathrm{C}$}
+\put(37,-8){$\mathrm{B}$}
+\put(36,39){$\mathrm{A}$}
+\put(108,13){$\mathrm{P}$}
+\put(107,-8){$\mathrm{Q}$}
+\put(23,75){$\eta=\frac{1}{2\xi}$}
+\end{picture}
+\includegraphics[width = 50 truemm,trim = 0 0 10 110, clip]{20150422-fig-hyp4.pdf} \hfil ~
+\end{center}
+\end{figure}
+
+さて点$\mathrm{Q}$の$\xi$座標を$\xi_0$とおく。$\mathrm{B}$の$\xi$座標は$\frac{1}{\sqrt{2}}$なので、積分で面積を計算すると
+\[
+\frac{x}{2} = \int_{\frac{1}{\sqrt{2}}}^{\xi_0} \frac{d\xi} {2\xi} = \frac{1}{2}\Bigl(\log \xi_0 - \log\frac{1}{\sqrt{2}}\Bigr)
+= \frac{1}{2} \log(\sqrt{2}\xi_0)
+\]
+と求まる。一方で点$\mathrm{P}$は、点$(\cosh x, \sinh x)$を$x$軸について折り返してから正の向きに$45^{\circ}$度回転さることで得られるのであった。ゆえに、この平面を複素平面と同一視することで$\mathrm{P}$の座標が
+\[
+\overline{\cosh x + i \sinh x} \times e^{i\pi/4} = (\cosh x - i \sinh x)\Bigl(\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i \Bigr)
+= \frac{\cosh x + \sinh x}{\sqrt{2}} + \text{(虚部)}
+\]
+と分かる。この実部が$\xi_0$なので、面積の計算と合わせて$x = \log (\sqrt{2}\xi_0) = \log(\cosh x + \sinh x)$が従う。つまり$\cosh x + \sinh x = e^x$である。
+
+最後に、点$(\cosh x,\sinh x)$は双曲線$u^2-v^2=1$の上にあったことを思い出す。これより
+\[
+1 = \cosh^2 x - \sinh ^2 x (\cosh x - \sinh x)(\cosh x + \sinh x) = (\cosh x - \sinh x ) e^x
+\]
+という式が得られる。すなわち$\cosh x - \sinh x = e^{-x}$である。かくして$\cosh x$と$\sinh x$の連立$1$次方程式が得られたので、これを解いて$\cosh x$と$\sinh x$の求める式を得る。
+
 \paragraph{グラフ}  双曲線函数のグラフは次の通りです。$\cosh x$と$\sinh x$のグラフに点線で描き込まれているのは、函数$e^x / 2$と$\pm e^{-x} / 2$です。
 \begin{table}[h!tbp]
 \begin{center}
@@ -212,8 +316,8 @@ $\arctan$には、実は次のような近似公式があります:
 \includegraphics[width = 50 truemm]{20150422-fig-cosh.pdf} &
 \includegraphics[width = 50 truemm]{20150422-fig-sinh.pdf} &
 \begin{picture}(0,0)
-\put(2,1){\dashbox{1.2}(72.3,0)}
-\put(74.3,89){\dashbox{1.2}(72,0)}
+\put(2,0){\dashbox{1.2}(72.3,0)}
+\put(74.3,88.5){\dashbox{1.2}(72,0)}
 \put(76,36){$0$}
 \put(75,-2){$-1$}
 \put(66,86){$1$}
@@ -241,7 +345,7 @@ $y = \cosh x$ & $y = \sinh x$ & $y = \tanh x$
 
 加法定理が成り立ちますから、当然ながら$n$倍角の公式や和積・積和公式の類も三角函数のやつを少し修正するだけで得られます。これらの公式は、たまに双曲線函数の掛け算を積分する際に役立ちます。大学入試のときみたいに頑張って公式を暗記する必要まではありませんが、「三角函数と同じ公式がある」ことは頭の片隅に置いておきましょう。
 
-\paragraph{問6 (c) の解答と導函数}
+\paragraph{問6 (d) の解答と導函数}
 計算すると一瞬で$(\cosh x)' = \sinh x $, $(\sinh x)' = \cosh x$が分かります。これも符号の付き方が微妙に違うだけで、三角函数とよく似ています。また今の計算から、$y=\cosh x$と$y=\sinh x$は両方とも微分方程式$y''=y$の解だとが分かります。これも、単振動の方程式$y''=-y$の解が三角函数で得られることと似ています。
 
 \paragraph{双曲線函数と三角函数の関係}
@@ -251,11 +355,11 @@ $y = \cosh x$ & $y = \sinh x$ & $y = \tanh x$
 \cosh i\theta = \frac{e^{i\theta} + e^{-i\theta}}{2} &= \cos \theta, &
 \sinh i\theta = \frac{e^{i\theta} - e^{-i\theta}}{2} &= i\sin \theta, &
 \end{align*}
-というように、なんと三角函数が出てきます。つまり複素数$z\in\mathbb{C}$に対し$(e^z \pm e^{-z})/2$という函数を考えたとき、この函数は実軸上では双曲線函数に、虚軸上では三角函数 (の$i$倍) に化けるのです。このように$\cosh$と$\cos$, $\sinh$と$\sin$の共通の親玉となる函数がいるので、似たような挙動を示していたのです。
+というように、なんと三角函数が出てきます。つまり複素数$z\in\mathbb{C}$に対し$(e^z \pm e^{-z})/2$という函数を考えたとき\footnote{一般の複素数$z=a+i\theta$に対しては、$e^z := e^a e^{i\theta}$と定めます。}、この函数は実軸上では双曲線函数に、虚軸上では三角函数 (の$i$倍) に化けるのです。このように$\cosh$と$\cos$, $\sinh$と$\sin$の共通の親玉となる函数がいるので、似たような挙動を示していたのです。
 
 \subsection{逆双曲線函数}
 
-双曲線函数の逆函数を逆双曲線函数といい、三角函数の時と同様、頭に``arc''を付けて$\arccosh$などと表します。これらの函数は、$\log$と平方根で表せます。
+双曲線函数の逆函数を逆双曲線函数といい、三角函数の時と同様、頭に``arc''を付けて$\arccosh$などと表します。これらの函数は、$\log$と平方根で表せます。したがって微分も、今まで知っている知識だけでてできます。
 
 \paragraph{問6 (c) の解答}
 
@@ -264,24 +368,21 @@ $e^x = y\pm\sqrt{y^2-1}$を得る。よって$\arccosh y = x = \log(y\pm\sqrt{y^
 
 同様に$y=\sinh x = (e^x - e^{-x})/2$を$e^x$について解くと$e^x=y\pm\sqrt{y^2+1}$を得る。ただし$e^x>0$なので$-$の符号は不適である。よって$x=\arcsinh x=\log(y+\sqrt{y^2+1})$が得られる。
 
-\subsection{問題解答}
-
-\paragraph{問6}
-(a) 点$(u_0,v_0)$を双曲線$u^2-v^2=1$上の、$u_0,v_0>0$を満たす点とする。このとき$\sinh\colon\mathbb{R}\rightarrow\mathbb{R}$は全単射だから、$v_0=\sinh t_0$となる$t_0$がただ一つ存在する。このとき$u_0^2=1+v_0^2=\cosh^2 t_0$となるので、$u_0>0$と合わせて$u_0=\cosh t_0$を得る。そして$u$軸、双曲線と直線$\mathrm{OP}$とで囲まれる部分の面積は
-\begin{align*}
-\int_0^{u_0} \frac{v_0}{u_0}u du - \int_1^{u_0} \sqrt{u^2-1} du
-&= \frac{u_0v_0}{2} - \int_0^{t_0} \sqrt{\cosh^2 t -1} \sinh t \,dt 
-= \frac{u_0v_0}{2} - \int_0^{t_0} \sinh^2 t \,dt  \\
-&= \frac{u_0v_0}{2} - \int_0^{t_0} \frac{\cosh 2t - 1}{2} \,dt
-= \frac{u_0v_0}{2} + \frac{t_0}{2} - \frac{\sinh 2t_0}{4} \\
-&= \frac{\cosh t_0 \sinh t_0}{2} + \frac{t_0}{2} - \frac{\sinh t_0 \cosh t_0}{2} = \frac{t_0}{2}
-\end{align*}
-となる。
-
-\noindent (d) 地道に計算すると、次のようになる。
+\paragraph{問6 (d) の解答} 地道に計算すると、次のようになる。
 \begin{align*}
 (\arccosh x)' &= \frac{1+\frac{2x}{2\sqrt{x^2-1}}}{x+\sqrt{x^2-1}} = \frac{1}{\sqrt{x^2-1}}, &
 (\arcsinh x)' &= \frac{1+\frac{2x}{2\sqrt{x^2+1}}}{x+\sqrt{x^2+1}} = \frac{1}{\sqrt{x^2+1}}
 \end{align*}
 逆函数の微分法を使っても良い。$y=\cosh x$のとき$(\arccosh y)' = 1 / (\cosh x)' = 1 / \sinh x = 1 / \sqrt{y^2-1}$となる。
+
+%(a) 点$(u_0,v_0)$を双曲線$u^2-v^2=1$上の、$u_0,v_0>0$を満たす点とする。このとき$\sinh\colon\mathbb{R}\rightarrow\mathbb{R}$は全単射だから、$v_0=\sinh t_0$となる$t_0$がただ一つ存在する。このとき$u_0^2=1+v_0^2=\cosh^2 t_0$となるので、$u_0>0$と合わせて$u_0=\cosh t_0$を得る。そして$u$軸、双曲線と直線$\mathrm{OP}$とで囲まれる部分の面積は
+%\begin{align*}
+%\int_0^{u_0} \frac{v_0}{u_0}u du - \int_1^{u_0} \sqrt{u^2-1} du
+%&= \frac{u_0v_0}{2} - \int_0^{t_0} \sqrt{\cosh^2 t -1} \sinh t \,dt 
+%= \frac{u_0v_0}{2} - \int_0^{t_0} \sinh^2 t \,dt  \\
+%&= \frac{u_0v_0}{2} - \int_0^{t_0} \frac{\cosh 2t - 1}{2} \,dt
+%= \frac{u_0v_0}{2} + \frac{t_0}{2} - \frac{\sinh 2t_0}{4} \\
+%&= \frac{\cosh t_0 \sinh t_0}{2} + \frac{t_0}{2} - \frac{\sinh t_0 \cosh t_0}{2} = \frac{t_0}{2}
+%\end{align*}
+%となる。
 

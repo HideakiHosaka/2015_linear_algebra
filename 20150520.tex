@@ -1,0 +1,763 @@
+\chapter{行列とその演算}
+
+\begin{flushright}
+担当教員: 植野 義明 / TA: 穂坂 秀昭 \\
+講義日時: 2015年5月20日 1限
+\end{flushright}
+
+\section{総和記号の使い方}
+
+\subsection{最もありふれた使い方}
+
+総和記号$\sum$の使い方として、最もありふれたものは
+\[
+\sum_{i = 1}^n a_i := a_1 + a_2  + \cdots + a_n
+\]
+というものでしょう。$n$個の数$a_1,a_2,\ldots,a_n$が与えられたとき、それの全ての和を上に書いたように、$\sum$記号で表すのでした。
+
+$\sum$記号は数学でよく現れる「数列の和」を表せるという意味で便利な記号ですが、それ以上に「記号操作で複雑な計算を片付けられる」という点が強力です。
+
+\paragraph{線型性}
+$\sum$の最も大事な性質は、次の\textbf{線型性}と呼ばれる性質です。
+\begin{align*}
+\sum_{k = 1}^n  (a_k + b_k) &= \sum_{k = 1}^n a_k + \sum_{k = 1}^n b_k, \qquad
+\sum_{k = 1}^n \alpha a_k = \alpha \sum_{k = 1}^n a_k
+\end{align*}
+式自体の意味は単純で、$1$つ目は足し算の順序の入れ替え、$2$つ目はかっこでくくる操作を表しています。
+\begin{align*}
+(a_1 + b_1) + (a_2 + b_2) + \cdots + (a_n + b_n) &= (a_1 + a_ 2 + \cdots + a_n) + (b_1 + b_2 + \cdots + b_n) \\
+\alpha a_1 + \alpha a_2 + \cdots + \alpha a_n &= \alpha (a_1 + a_2 + \cdots + a_n)
+\end{align*}
+実際に式変形をするときは、線型性の公式を左から右、右から左の両方で使います。すなわち今の式を
+\begin{itemize}
+\item 添字が同じ範囲を走る$\sum$が足されているときは、それをひとまとめにしてよい
+\item $\sum$の中に足し算があれば、それを$2$つの$\sum$に分割できる
+\item $\sum$の添字と関係ない数は、いつでも$\sum$を前後に飛び越えられる
+\end{itemize}
+と読むわけです。
+
+\paragraph{添字のシフトと和の順序の反転}
+
+$\sum$の添字はずらすことが可能です。たとえば
+\[
+\sum_{k = 1}^n a_k = a_1 + a_2 + \cdots + a_n, \qquad \sum_{k = 0}^n a_{k+1} = a_1 + a_2 + \cdots + a_n
+\]
+ですね。項を書き出してしまえば当たり前ですが、$k$が走る範囲をずらしても、それに合わせて$\sum$の中の式に出てくる$k$を適当にずらせば、表す式は全く同じになります。
+
+同じようにして、足す順序を逆順にすることもできます。$a_1 + a_2 + \cdots + a_n = a_n + a_{n-1} + \cdots + a_1$ですから
+\[
+\sum_{k = 1}^n a_k = \sum_{k = 1}^n a_{n+1-k}
+\]
+という式が成り立ちます。
+
+これらの添字の変換は、主に線型性と組み合わせて$2$つの$\sum$をくっつけるときに使います。たとえば$\sum_{k = 1}^n k$の公式は、次のようにして導くことができます。
+\begin{align*}
+2 \sum_{k = 1}^n k
+&= \sum_{k = 1}^n k + \sum_{k = 1}^n k
+= \sum_{k = 1}^n k + \sum_{k = 1 }^n (n + 1 - k)
+= \sum_{k = 1}^n \bigl\{ k + (n + 1 - k) \bigr\}
+= \sum_{k = 1}^n (n+1) 
+= n(n+1)
+\end{align*}
+もう一つ別の証明を挙げておきます。こっちの手法は、$\sum k^2$や$\sum k^3$の公式を導くのにも使えます。
+\begin{align*}
+(n+1)^2 -1
+&=\sum_{k = 1}^n \{(k + 1)^2 - k^2\}
+= \sum_{k = 1} ^n (2k+1) 
+= 2\sum_{k = 1}^n k + \sum_{k = 1}^n 1
+= 2\sum_{k = 1}^n k + n \\
+\therefore \sum_{k = 1} ^n  k
+&= \frac{(n+1)^2-1-n}{2}
+= \frac{n^2 + n}{2}
+\end{align*}
+どちらの証明でも、$1$つ$1$つの式変形が「和の順序の反転」や「線型性で$\sum$をまとめる / ばらす」といった操作だけしか行っていないことに気を付けてください。このように「$\sum$の公式をそのまま当てはめる」という操作を繰り返すだけで証明を完了できることが、$\sum$を使う大きなメリットなのです。
+
+% 差分の話
+
+%\paragraph{公式}
+%\[
+%\sum_{i = 1}^n i = \frac{n(n+1)}{2}, \sum_{i = 1}^n r^i = \frac{r^{n+1} - 1}{r - 1}
+%\]
+
+\subsection{集合を走る添字に関する和}
+
+さて$\sum_{k =1}^n a_k$は「$k$を順番に$1,2,\ldots,n$と動かし、出てくる項を全部足す」という意味でした。ですが「順番に足す」という意味は別に大事ではありません。どうせ足し算だから、順序を入れ替えたって結果は変わらない\footnote{ここで考えているのは有限個の足し算だけです。無限級数などの代数的に扱えない場合は全く考えていません。}からです。そこで順番を考えず、「集合のそれぞれの元に対応する項を足す」という意味でも$\sum$を使います。たとえば
+\[
+\sum_{k\in\{1,3,5\}} a_k = a_1 + a_3 + a_5
+\]
+という感じです。$\{1,3,5\}$の元は$1$と$3$と$5$だから、$k$が$1,3,5$を動くのに合わせて対応する$a_k$、つまり$a_1$と$a_3$と$a_5$を足し合わせるというのが左辺の$\sum$の意味です。新しい$\sum$を使えば、これまで使っていた$\sum$は
+\[
+\sum_{k = 1}^n a_k = \sum_{k\in\{1,2,\ldots,n\}} a_k
+\]
+と書き表せます。だから新しい$\sum$の使い方は、今までの$\sum$が拡張されたものになっています。後々見ていくように、$\sum$の添字に整数以外のものを使えるのは、実は非常に役立ちます。
+
+さらに省略した書き方として、$\sum$の下に「添字の満たすべき条件」を書く場合があります。たとえば
+\[
+\sum_{1\leq k\leq 5, \text{$k$は奇数}} a_k = a_1 + a_3 + a_5
+\]
+と書きます。集合$\{k\in\mathbb{N}\mid 1\leq k\leq 5, \text{$k$は奇数}\}$は$\{1,3,5\}$と同じです。この集合を$\sum$の下の狭いスペースに書くと非常に見苦しいので「縦棒の右側に書かれる条件だけを$\sum$の下に書いてしまおう」という魂胆です。だから
+\[
+\sum_{1\leq k\leq 5} a_k = \sum_{k\in\{1,2,3,4,5\}} a_k = \sum_{k = 1}^5 a_k = a_1 + a_2 + a_3 + a_4 + a_5
+\]
+などという意味になります。このとき一番左の表記法では``$k\in\mathbb{N}$''という条件が地味に抜け落ちますが、その部分については「読者が空気を読んで察する」という暗黙のルールがあります\footnote{勉強する人に向かって「空気読め」は割とヒドい言葉のような気がするのですが、ちょっとでも新しい$\sum$記号を使ってみると、逆に「一々$\sum$の下に集合を書くなんてかったるい」と思うようになってしまうんですよね……。}。頑張って読み解いてください。
+
+さらに、この$\sum$記法に慣れるとこんなこともできます。
+\[
+\sum_{k \in A\cup B} a_k = \sum_{k \in A} a_k  + \sum_{k \in B} a_k - \sum_{k \in A\cap B} a_k
+\]
+$\sum$の添字が集合を走る場合、集合の分割に応じて$\sum$を分割できます。もし和にダブりがあればその部分を引いて補正しなければいけませんが、ダブりなくばらせば第$3$項は消えます。
+
+\subsection{添字について}
+
+ここで、$\sum$の添字について$2$つほど注意をしておきます。
+
+\paragraph{ダミー変数}
+
+次の式を見てください。
+\[
+\sum_{k = 1}^n a_k = \sum_{l = 1}^n a_l
+\]
+当たり前のことですが、ここで大事なのは\textbf{$\sum$で走る文字は自由に取り換えても良い}という点です。左辺の$\sum$では、$k$は「$1$から$n$までの整数を動くこと」だけを示すのに使われているのであって、$k$という文字自体が式中で意味を持っているわけではありません。$k$という文字は、$\sum$の中だけで有効です。こういう変数を\textbf{ダミー変数}と言います。
+
+$\sum$を$1$個単独で使ってる場合は、ダミー変数の文字を変えるご利益はそんなにありません。せいぜい複素数を足し算する時、虚数単位とこんがらがらないよう添字を$i$から$j$に変えるくらいでしょうか。ですが$\sum$が入った複数個の式をかけて変形するようになると、割と頻繁に変数の衝突が起きたりします。そういう場合に文字の取り換えは、地味ですが計算を遂行するのに大変役立ちます。
+
+\paragraph{変数のスコープ}
+
+今のダミー変数について、$\sum$の添字は\textbf{式中の一部分でのみ意味がある}と言いました。この添字が有効な範囲を、プログラミングの言葉で\textbf{変数のスコープ}といいます。たとえば
+\[
+\sum_{k=1}^n \uwave{(2k - 1)} = n^2
+\]
+の左辺における$k$のスコープは、下線を引いた$2k-1$の場所です。
+
+当たり前のことですが、$\sum$で使われる変数はスコープ外で意味を持ちません。ですから式を見直してみて「$\sum$の外にダミー変数が飛び出していた」とか「$\sum$の計算をし終わった後にダミー変数が残っていた」などという場合、スコープを考えるだけで明らかに計算ミスがあると分かります。今みたいな単純な式だと気になりませんが、$\sum$の入った複雑な式では変数のスコープを意識すると計算がしやすくなります。心の片隅に置いといてください。
+
+\subsection{二重和}
+
+ここまで$\sum$の使い方を色々説明してきましたが、実用面を考えると、さらに一歩踏み込んで多重の$\sum$を取り扱う必要があります。
+
+計算の定義自体は今までの$\sum$と変わりません。たとえば
+\[
+\sum_{k = 1}^m \sum_{l  = 1}^n a_{k,l} = \sum_{k = 1}^m \Biggl\{\sum_{l  = 1}^n a_{k,l}\Biggr\}
+\]
+というように「内側の$\sum$をまず足し、その結果を外側の$\sum$でさらに足し合わせる」というだけです。$\sum$を元々「$1$列に並べた数を足し合わせる」という方法で使っていたことになぞらえれば、二重和は「長方形に並べた数を足し合わせる」という感じです。ただ二重和の場合
+\[
+\sum_{k = 1}^m \sum_{l  = 1}^k a_{k,l} = \sum_{k = 1}^m \Biggl\{\sum_{l  = 1}^k a_{k, l}\Biggr\} = (a_{1, 1}) + (a_{2, 1} + a_{2, 2}) + (a_{3, 1} + a_{3, 2} + a_{3, 3}) + \cdots
+\]
+のように、「外側の$\sum$のダミー変数を使って、内側の$\sum$で添字の範囲を指定する」という技ができたりします。この場合、三角形に並べた数を全部足すという意味になります。
+
+このような場合に、足し算の順序を上手くコントロールするための添字の扱い方を見ていきましょう。
+
+\paragraph{和の順序の交換} 一番基本的な二重和
+\begin{align*}
+\sum_{k = 1}^m \sum_{l  = 1}^n a_{k, l} 
+= \sum_{k = 1}^m (a_{k, 1} + a_{k, 2} + \cdots + a_{k, n} )
+=
+\begin{cases}
+ &a_{1, 1} + a_{1, 2} + \cdots + a_{1, n} \\
++ &a_{2, 1} + a_{2, 2} + \cdots + a_{2, n} \\
++ &\cdots \\
++ &a_{m, 1} + a_{m, 2} + \cdots + a_{m, n}
+\end{cases}
+\end{align*}
+を考えてみましょう。この計算は、横向きに足し合わせた結果を縦に足し合わせても、縦向きに足し合わせた結果を横に足し合わせても全く同じ結果になります。これを$\sum$で表現すると
+\[
+\sum_{k = 1}^m \sum_{l  = 1}^n a_{k, l} =
+\sum_{l  = 1}^n \sum_{k = 1}^m a_{k, l} 
+\]
+となります。一方、
+\begin{align*}
+\sum_{k = 1}^n \sum_{l  = 1}^k a_{k,l}
+= \sum_{k = 1}^n (a_{k, 1} + a_{k, 2} + \cdots + a_{k, k})
+=
+\begin{cases}
+ &a_{1, 1} \\
++ &a_{2, 1} + a_{2, 2} \\
++ &\cdots \\
++ &a_{n, 1} + a_{n, 2} + \cdots + a_{n, n}
+\end{cases}
+\end{align*}
+のような場合、外側と内側の$\sum$を安直に入れ替えることはできません。この事実は「内側の$\sum$の上限を与える$k$が、外側の$\sum$のスコープの外に出られない」とも言えます。ですから「内側の$\sum$の範囲指定に外側の$\sum$の変数が使われていない限り、$2$つの$\sum$の順番を入れ替えることができる」というのが結論です。$\sum$の変数が集合を走る場合でも、同じことが言えます。
+
+\paragraph{$\sum$の結合と分割} 次の式を見てください。
+\[
+\sum_{k = 1}^m \sum_{l = 1}^n a_{k, l} = \sum_{1\leq k\leq m} \sum_{1\leq l\leq n} a_{k, l} = \sum_{1\leq k \leq m, 1\leq l\leq n} a_{k, l}
+\]
+こんな感じで、$2$つの$\sum$をくっつけることができます。元々の二重和を「$k$が$\{1,2,\ldots,m\}$を走り、$l$が$\{1,2,\ldots,n\}$を走る」と書き換えた上で、さらに集合の直積を利用して「$(k,l)$が$\{1,2,\ldots,m\}\times\{1,2,\ldots,n\}$を走る」と書き換えました。こういう風に集合の直積を使うと、$2$つの$\sum$を$1$つにくっつけられます。逆に$\sum$の添字が直積集合を走るときは、$\sum$を$2$つにばらすことができます。
+
+あんまり大した意味が無いようにも見えますが、三重以上に$\sum$が重なる状況では、$\sum$を$1$つにまとめると案外式が見やすくなったりします。また「$\sum$の添字は集合の上を走る」という意識を持っておくと、$\sum$の添字を操作するときに、式が正しいかどうかを添字の走る集合が等しいかどうかという問題に帰着させて考えられます。
+
+\paragraph{添字の変数変換} 最後に、添字の変数変換を紹介します。
+\begin{align*}
+\sum_{k = 1}^n \sum_{l  = 1}^k a_{k,l}
+=
+\begin{cases}
+ &a_{1, 1} \\
++ &a_{2, 1} + a_{2, 2} \\
++ &\cdots \\
++ &a_{n, 1} + a_{n, 2} + \cdots + a_{n, n}
+\end{cases}
+\end{align*}
+この足し方を図示したのが、次の一番左の図です。
+\begin{figure}[h!tbp]
+\centering
+\begin{picture}(80,90)
+\put(0,0){\vector(0,1){80}}
+\put(0,0){\vector(1,0){80}}
+\put(80,0){$k$}
+\put(5,75){$l$}
+\put(10,10){\circle*{3}}
+\put(30,10){\circle*{3}}
+\put(30,10){\vector(0,1){18}}
+\put(30,30){\circle*{3}}
+\put(50,10){\circle*{3}}
+\put(50,10){\vector(0,1){18}}
+\put(50,30){\circle*{3}}
+\put(50,30){\vector(0,1){18}}
+\put(50,50){\circle*{3}}
+\put(70,10){\circle*{3}}
+\put(70,10){\vector(0,1){18}}
+\put(70,30){\circle*{3}}
+\put(70,30){\vector(0,1){18}}
+\put(70,50){\circle*{3}}
+\put(70,50){\vector(0,1){18}}
+\put(70,70){\circle*{3}}
+\end{picture}\qquad
+\begin{picture}(80,90)
+\put(0,0){\vector(0,1){80}}
+\put(0,0){\vector(1,0){80}}
+\put(80,0){$k$}
+\put(5,75){$l$}
+\put(10,10){\circle*{3}}
+\put(10,10){\vector(1,0){18}}
+\put(30,10){\circle*{3}}
+\put(30,10){\vector(1,0){18}}
+\put(30,30){\circle*{3}}
+\put(30,30){\vector(1,0){18}}
+\put(50,10){\circle*{3}}
+\put(50,10){\vector(1,0){18}}
+\put(50,30){\circle*{3}}
+\put(50,30){\vector(1,0){18}}
+\put(50,50){\circle*{3}}
+\put(50,50){\vector(1,0){18}}
+\put(70,10){\circle*{3}}
+\put(70,30){\circle*{3}}
+\put(70,50){\circle*{3}}
+\put(70,70){\circle*{3}}
+\end{picture}\qquad
+\begin{picture}(80,90)
+\put(80,0){$k$}
+\put(5,75){$l$}
+\put(0,0){\vector(0,1){80}}
+\put(0,0){\vector(1,0){80}}
+\put(10,10){\circle*{3}}
+\put(10,10){\vector(1,1){18}}
+\put(30,10){\circle*{3}}
+\put(30,10){\vector(1,1){18}}
+\put(30,30){\circle*{3}}
+\put(30,30){\vector(1,1){18}}
+\put(50,10){\circle*{3}}
+\put(50,10){\vector(1,1){18}}
+\put(50,30){\circle*{3}}
+\put(50,30){\vector(1,1){18}}
+\put(50,50){\circle*{3}}
+\put(50,50){\vector(1,1){18}}
+\put(70,10){\circle*{3}}
+\put(70,30){\circle*{3}}
+\put(70,50){\circle*{3}}
+\put(70,70){\circle*{3}}
+\end{picture}
+\end{figure}
+
+そして図中にも書いたように、この二重和は色々な足し方ができます。この図をじっくり見れば
+\[
+\sum_{k = 1}^n \sum_{l = 1}^k a_{k, l}
+= \sum_{l = 1}^n \sum_{k = l}^n a_{k, l}
+= \sum_{p = 1}^n \sum_{k = 1}^{n + 1 - p} a_{p - 1 + k, k}
+\]
+が分かるはずです。集合で言えば、$\{(k,l)\in\{1,2,\ldots,n\} \mid l \leq k\}$を鉛直な直線や、あるいは軸と$45^{\circ}$の傾きをなす直線でスライスして分割しているわけです。このように二重和では「格子の各点に項が対応している」と捉えることで、外と中の$\sum$をそのまま入れ替えることはできなくても、足し方を色々変えることができます。特に、斜めの足し算はしばしば式変形のキーポイントになります。
+
+$\sum$の変数変換は実際にやってみると案外間違えやすいのですが、そういう時はきちんと格子を描き「どの範囲の項が足されるか」を絵で描きましょう。そうすればぐっと間違いは減るはずです。
+
+\subsection{総積記号}
+最後に$\sum$の掛け算バージョンである$\prod$を紹介します。使い方は$\sum$と全く同じで
+\[
+\prod_{k = 1}^n a_i = a_1 a_2 \cdots a_k
+\]
+という意味です。たとえば$\prod_{k = 1}^n k = n!$など。$\sum$のときと同様、添字は集合を走ることもあります。
+
+この記号も色々使いどころがあります。特に
+\[
+\sum_{k = 1}^n \log a_k = \log \prod_{k = 1}^n a_k, \qquad \prod_{k = 1}^n p^{a_k} = p^{\sum_{k = 1}^n a_k}
+\]
+という形の式変形は知っておくと、計算がサクサク進むと思います。
+
+\section{行列とその演算}
+
+\subsection{行列の和と積}
+数を縦に$m$個、横に$n$個並べたものを$m\times n$型あるいは$(m, n)$型の\textbf{行列}といいます。また、行列の中にある一つ一つの数を\textbf{成分}といいます。特に$i$行$j$列にある成分を指して$(i,j)$成分という呼び方をします。
+
+同じ型の行列に対しては「同じ位置にある成分を足す」、すなわち
+\[
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
++
+\begin{pmatrix}
+b_{11} & b_{12} & \cdots & b_{1n} \\
+b_{21} & b_{22} & \cdots & b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+b_{m1} & b_{m2} & \cdots & b_{mn}
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\
+a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}
+\end{pmatrix}
+\]
+です。そして積は、$(m,n)$型行列$A$と$(n,l)$型行列$B$との間でだけ定義され、その$(i,j)$成分は
+\[
+(AB)_{ij} = \sum_{k = 1}^n a_{ik}b_{kj}
+\]
+です。これだと何をやっているか分からないのですが、行列を
+\[
+\biggl(
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\ \hline
+a_{21} & a_{22} & a_{23} 
+\end{array}
+\biggr)
+\Biggl(
+\begin{array}{c|c|c}
+b_{11} & b_{12} & b_{13} \\
+b_{21} & b_{22} & b_{23} \\
+b_{31} & b_{32} & b_{33}
+\end{array}
+\Biggr)
+\]
+と区切れば、$AB$の$(i,j)$成分は「$A$の$i$行目と$B$の$j$列目との内積」だと分かります。慣れないうちは、こうやってきちんと行と列を区切ることをお勧めします。
+
+こんなややこしい定義をするのには相応の事情はあるのですが、それよりも\textbf{行列の積は役立つ}という事実が大事です。数学で使うだけでなく、Googleが検索クエリを処理するとき\footnote{学習院大学の田崎晴明先生が執筆中の教科書 \url{http://www.gakushuin.ac.jp/~881791/mathbook/index.html} 内の「グーグルのページランク」の節に、解説があります。あるいは原論文 \url{http://infolab.stanford.edu/pub/papers/google.pdf} を見ても良いでしょう。}とか、脳神経のモデルを作るときとか\footnote{池谷裕二『単純な脳、複雑な「私」』(講談社ブルーバックス) の付録を参照。}、その他行列の使い道は山ほどあります。ですので行列の掛け算の仕方は徹底的に練習して、体で覚えてください。
+
+\subsection{行列の積の性質}
+行列の積で非常に特徴的なのは\textbf{順序を変えると結果が変わる}という性質です。具体例を一つやってみます。
+
+\paragraph{問8の解答}
+\begin{align*}
+\begin{pmatrix}
+1 & 2 & 4 \\
+3 & 1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+-2 & 2 \\
+7 & 5 \\
+-1 & -3
+\end{pmatrix}
+=
+\begin{pmatrix}
+8 & 0 \\
+0 & 8
+\end{pmatrix}, 
+\begin{pmatrix}
+-2 & 2 \\
+7 & 5 \\
+-1 & -3
+\end{pmatrix}
+\begin{pmatrix}
+1 & 2 & 4 \\
+3 & 1 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+4 & -2 & -6 \\
+22 & 19 & 33 \\
+-10 & -5 & -7
+\end{pmatrix}
+\end{align*}
+
+\paragraph{非可換性}
+
+今の例では、行列の積$AB$と$BA$の結果がサイズ違いになりました。他にも「$AB$は掛け算できるが$BA$は掛け算ができない」とか「$AB$と$BA$は同じ形の行列になるが結果は違う」とか色々な場合がありますが、とにかく大事なのは\textbf{行列の積は、ほとんどの場合順序を入れ替えられない}ことです。だから多項式$(x+y)^n$, $(x+y)(x-y)$などの展開公式もそのままは使えません。気を付けてください。
+
+\paragraph{零因子}
+さらに行列の場合、\textbf{零行列でない行列動詞の積が零行列になる}こともあります。たとえば
+$\begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix}^2 = O$
+です。これも普通の数や多項式とは大きく違うことです。このような「上手く行列をかけると$O$にできる」性質を持つ行列は\textbf{零因子}と呼ばれます。
+
+\section{有名な公式たち}
+
+\subsection{Cayley--Hamiltonの公式}
+
+問6 (b) に現れる等式は\textbf{Cayley--Hamiltonの公式}と呼ばれています。式が正しいことを確かめましょう。
+
+\paragraph{問6の解答}
+(a) $(A - aE)(A - dE) = A^2 - (a+d) A + (ad-bc) E$である。よって
+\begin{align*}
+&\begin{pmatrix}
+a & b \\ 
+c & d 
+\end{pmatrix}^2
+-
+(a+d)
+\begin{pmatrix}
+a & b \\ 
+c & d 
+\end{pmatrix}
++
+ad
+\begin{pmatrix}
+1 & 0 \\ 
+0 & 1 
+\end{pmatrix} \\
+&=
+\begin{pmatrix}
+a^2 +bc & ab +bd \\ 
+ac +cd & bc + d^2 
+\end{pmatrix}
+-
+\begin{pmatrix}
+a^2 + ad & ab +bd\\ 
+ac + cd & ad + d^2
+\end{pmatrix}
++
+\begin{pmatrix}
+ad & 0 \\ 
+0 & ad
+\end{pmatrix}
+=
+\begin{pmatrix}
+bc & 0\\ 
+0 & bc
+\end{pmatrix}
+\end{align*}
+
+(b) $A^2 - (a+d)A + (ad-bc) E = (A - aE)(A - dE) -bc E = O$
+
+\paragraph{対角和と行列式} 一般に$2$次正方行列に対し
+\[
+\tr
+\begin{pmatrix}
+a & b \\
+c  & d
+\end{pmatrix}
+:= a+d, \qquad
+\det
+\begin{pmatrix}
+a & b \\
+c  & d
+\end{pmatrix}
+:= ad - bc
+\]
+をそれぞれ行列の\textbf{対角和} (\underline{tr}ace)、\textbf{行列式} (\underline{det}erminant)といいます。対角和は文字通り、行列の対角線上にある成分を全部足し合わせたものです。行列式については第$3$回の解答で「$2$本のベクトルが張る平行四辺形の符号付き面積」という意味を説明しました。これらを用いて、Cayley--Hamiltonの公式は$A - (\tr A) A + (\det A) E = O$と書けます。
+
+\subsection{余因子行列と逆行列}
+
+\paragraph{余因子行列}
+問4 (3)に現れる行列
+$\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}$
+を
+$\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+の\textbf{余因子行列}といいます。余因子行列は「元の行列にかけたら単位行列の行列式倍になる」という大事な性質を持っています。後で$3$次以上の正方行列に対する余因子行列の定義もやりますが、$2$次の余因子行列は$3$次以上のものと比べても格段に使用頻度が高いです。どんな行列が与えられても脊髄反射で余因子行列が答えられるよう、暗記しておいてください。
+
+まず、余因子行列の掛け算をやってみましょう。
+
+\paragraph{問4 (3)の解答}
+\begin{align*}
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}
+=
+\begin{pmatrix}
+ad-bc & 0 \\
+0 & ad-bc
+\end{pmatrix}
+=
+(ad-bc)E
+= (\det A) E
+\end{align*}
+
+\paragraph{Cayley--Hamiltonの定理の帰結} ここで、先ほどの$A^2 - (\tr A) A + (\det A) E = O$を思い出しましょう。この式を移項すると$(\det A) E = A\bigl((\tr A) E - A\bigr)$が得られます。そして実際に計算してみても
+\[
+A - (\tr A) E
+=
+\begin{pmatrix}
+a + d & 0 \\
+0 & a + d
+\end{pmatrix}
+-
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+=
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}
+\]
+なので、余因子行列が$(\tr A) E - A$と表せることが分かりました。
+
+この式からは、とても大事なことが分かります。一般に同じサイズの正方行列であっても、掛け算の順番を入れ替えると結果が変わることがあるのでした。しかし$A$と$A$、あるいは$A$と$E$の掛け算は、いつでも順番をひっくり返せます。したがって$A\bigl((\tr A) E - A\bigr) = \bigl((\tr A) E - A\bigr) A = (\det A) E$が成り立ちます。余因子行列は\textbf{左右のどちら側からかけても、単位行列の$(\det A)$倍}になるのです。
+
+\paragraph{逆行列}
+ここで、さらに$\det A\neq 0$の場合を考えてみます。このとき
+\[
+A^{-1} := \bigl((\tr A) - E \bigr)/(\det A)
+= \frac{1}{ad-bc}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}
+\]
+とおくと、余因子行列の計算から$AA^{-1} = E$が分かります。単位行列$E$は数における$1$みたいなものだから、$A^{-1}$は$A$の逆数みたいなものですね。そこで$A^{-1}$を$A$の\textbf{逆行列}といいます。
+
+$A^{-1}$は余因子行列を$\det A$で割っただけですから、$A^{-1}$と$A$の積も交換可能です。よって$A^{-1}A = A A^{-1} = E$が成り立ちます。\textbf{逆行列は、左からかけても右からかけても単位行列になる}のです。行列の積を計算するときに順番がひっくり返せないのは少々面倒ですが、逆行列についてはそういう面倒なことは起きないので安心してください。
+
+問4の残りと問7は、余因子行列の公式に全部押し付けられます。
+\paragraph{問4 (1), (2)の解答}
+\[
+\begin{pmatrix}
+5 & 6 \\
+4 & 5
+\end{pmatrix}
+\begin{pmatrix}
+5 & -6 \\
+-4 & 5
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}, 
+\begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}
+\begin{pmatrix}
+4 & -2 \\
+-3 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+-2 & 0 \\
+0 & -2
+\end{pmatrix}
+\]
+
+\paragraph{問7の解答}
+
+\[
+\begin{pmatrix}
+1 & -2 \\
+2 & -3
+\end{pmatrix}
+\begin{pmatrix}
+-3 & 2 \\
+-2 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}, 
+\begin{pmatrix}
+-3 & 2 \\
+-2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & -2 \\
+2 & -3
+\end{pmatrix}
+= 
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\]
+
+\paragraph{逆行列の存在条件}
+
+最後に、逆行列が存在するための条件について触れておきます。余因子行列から逆行列を作るには$(\det A)$で割る操作が必要なので、$\det A = 0$の場合に破綻が生じます。そして、$\det A = 0$の場合はどうやっても逆行列が作れないことが、次のように示せます。
+
+成分計算によって、$2$つの$2$次正方行列$A, B$に対して$\det (AB) = (\det A)(\det B)$が確かめられます。よって、もし行列$A$の逆行列$A^{-1}$が存在すれば、$A A^{-1} = E$の両辺の行列式を取って$(\det A)(\det A^{-1}) = \det E =1$が得られます。これより$\det A \neq 0$が従います。
+
+この議論で、逆行列が存在するならば$\det A \neq 0$だと分かりました。逆に$\det A \neq 0$の場合は、余因子行列から逆行列を作れることを既に示しています。ですから$2$次正方行列の場合に、\textbf{逆行列が存在することと$\det A \neq 0$は同値}な条件だと分かりました。
+
+\subsection{交換子}
+同じ大きさの$2$つの正方行列$A, B$に対し、$[A, B] := AB - BA$と書きます。この$[,]$のことを\textbf{交換子}と言います。$A$と$B$が交換する、すなわち$AB = BA$なら$[A, B] = 0$ですから、交換子は「$2$つの行列がどれくらい交換しないか」を測るものです。実際に、次の$H, E, F$で計算してみましょう。
+\begin{align*}
+H =
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}, \qquad
+E =
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}, \qquad
+F =
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}.
+\end{align*}
+
+\paragraph{問5の解答}
+\begin{align*}
+[H, X]
+&=
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+ & &=
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & -1 \\
+0 & 0
+\end{pmatrix}
+& &= 
+\begin{pmatrix}
+0 & 2 \\
+0 & 0
+\end{pmatrix}
+& &= 2X \\
+[H, Y]
+&=
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+& &=
+\begin{pmatrix}
+0 & 0 \\
+-1 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+& &= -
+\begin{pmatrix}
+0 & 0 \\
+2 & 0
+\end{pmatrix}
+& &= -2Y \\
+[X, Y]
+&=
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+& &=
+\begin{pmatrix}
+1 & 0 \\
+0 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 0 \\
+0 & 1
+\end{pmatrix}
+& &=
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+& &= H
+\end{align*}
+
+\paragraph{Lie環$\mathfrak{sl}_2$}
+今の$[H, X] = 2X$, $[H, Y] = -2Y$, $[X, Y] = H$という公式、ただ計算すればそれで終わりなのですが、実は「Lie環$\mathfrak{sl}_2$の交換関係」という名前が付いています。また行列$X, Y, H$の$3$つ組は$\mathfrak{sl}_2$-tripleと呼ばれます。物理や数学を専攻にすると、将来お世話になることがあるかもしれません。
+
+\paragraph{問9の解答}
+\[
+{}^t\bm{v}M\bm{v} = 4xy + z^2
+\]
+\[
+A^2 = 
+B^2 = 
+C^2 = 
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+, \qquad
+{}^t AMA = 
+{}^t BMB = 
+{}^t CMC =
+\begin{pmatrix}
+0 & 2 & 0 \\
+2 & 0 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+= M
+\]
+\[
+{}^t(A\bm{v})M(A\bm{v}) = {}^t\bm{v}{}^t AMA\bm{v} = {}^t\bm{v}M\bm{v}
+\]
+

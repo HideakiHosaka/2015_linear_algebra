@@ -14,6 +14,16 @@
 \usepackage{subfigure}							% 小さい図を並べるためのパッケージ
 \usepackage{ulem}								% 下つきの波線など、色々な下線を引くためのパッケージ
 
+\def\teachername{植野 義明}
+\def\TAname{穂坂 秀昭}
+
+\def\lectureinfo#1{%
+\begin{flushright}%
+担当教員: \teachername / TA: \TAname \\%
+講義日時: #1%
+\end{flushright}%
+}
+
 \def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}
 \def\bm{\boldsymbol}
 
@@ -49,5 +59,7 @@
 \include{20150527}
 
 \part[線形代数学1]{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
+
+\include{20150610}
 
 \end{document}

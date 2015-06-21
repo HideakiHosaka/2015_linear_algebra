@@ -3,7 +3,7 @@
 % パッケージ類の読み込み
 
 \usepackage[dvipdfmx,hidelinks]{hyperref}			% ハイパーリンクと \namelink に使う
-\usepackage{pxjahyper}
+\usepackage{pxjahyper}							% PDF にしたときしおりが文字化けするのを避ける
 \usepackage{otf}									% 丸囲みの①を出すのに使う
 \usepackage{title}								% タイトル等の見た目を調整する手製スタイルファイル
 \usepackage{comment}							% 複数行にわたるコメントアウト
@@ -13,6 +13,7 @@
 \usepackage[dvipdfmx]{graphicx}					% 外部画像の取り込みなど
 \usepackage{subfigure}							% 小さい図を並べるためのパッケージ
 \usepackage{ulem}								% 下つきの波線など、色々な下線を引くためのパッケージ
+\usepackage{tikz-cd}								% 可換図式を書くためのパッケージ
 
 \def\teachername{植野 義明}
 \def\TAname{穂坂 秀昭}
@@ -27,14 +28,22 @@
 \def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}
 \def\bm{\boldsymbol}
 
-\DeclareMathOperator\cosec{cosec}
-\DeclareMathOperator\sech{sech}
-\DeclareMathOperator\cosech{cosech}
-\DeclareMathOperator\arccosh{arccosh}
-\DeclareMathOperator\arcsinh{arcsinh}
+\DeclareMathOperator\cosec{cosec}		% 余割
+\DeclareMathOperator\sech{sech}			% 双曲線余接
+\DeclareMathOperator\cosech{cosech}		% 双曲線余割
+\DeclareMathOperator\arccosh{arccosh}	% 逆双曲線余弦
+\DeclareMathOperator\arcsinh{arcsinh}	% 逆双曲線正弦
 
-\DeclareMathOperator\tr{tr}
-\DeclareMathOperator\Ad{Ad}
+\DeclareMathOperator\tr{tr}				% 対角和
+\DeclareMathOperator\Ad{Ad}			% 群の随伴作用
+\DeclareMathOperator\Map{Map}			% 写像の空間
+\DeclareMathOperator\Mat{Mat}			% 行列の空間
+\DeclareMathOperator\Hom{Hom}			% 線型写像の空間
+\DeclareMathOperator\End{End}			% 自己準同型の空間
+\DeclareMathOperator\id{id}				% 恒等写像
+\DeclareMathOperator\ev{ev}				% 評価写像
+\DeclareMathOperator\Ker{Ker}			% 線型写像の核
+\renewcommand\Im{Im}					% 線型写像の像
 
 \begin{document}
 
@@ -58,7 +67,9 @@
 \include{20150520}
 \include{20150527}
 
-\part[線形代数学1]{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
+\part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
+
+%\setcounter{chapter}{0}
 
 \include{20150610}
 

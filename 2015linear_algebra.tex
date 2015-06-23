@@ -2,9 +2,9 @@
 
 % パッケージ類の読み込み
 
-\usepackage[dvipdfmx,hidelinks]{hyperref}			% ハイパーリンクと \namelink に使う
+\usepackage[dvipdfmx,hidelinks]{hyperref}		% ハイパーリンクと \namelink に使う
 \usepackage{pxjahyper}							% PDF にしたときしおりが文字化けするのを避ける
-\usepackage{otf}									% 丸囲みの①を出すのに使う
+\usepackage{otf}								% 丸囲みの①を出すのに使う
 \usepackage{title}								% タイトル等の見た目を調整する手製スタイルファイル
 \usepackage{comment}							% 複数行にわたるコメントアウト
 
@@ -13,7 +13,7 @@
 \usepackage[dvipdfmx]{graphicx}					% 外部画像の取り込みなど
 \usepackage{subfigure}							% 小さい図を並べるためのパッケージ
 \usepackage{ulem}								% 下つきの波線など、色々な下線を引くためのパッケージ
-\usepackage{tikz-cd}								% 可換図式を書くためのパッケージ
+\usepackage{tikz-cd}							% 可換図式を書くためのパッケージ
 
 \def\teachername{植野 義明}
 \def\TAname{穂坂 秀昭}
@@ -35,7 +35,7 @@
 \DeclareMathOperator\arcsinh{arcsinh}	% 逆双曲線正弦
 
 \DeclareMathOperator\tr{tr}				% 対角和
-\DeclareMathOperator\Ad{Ad}			% 群の随伴作用
+\DeclareMathOperator\Ad{Ad}				% 群の随伴作用
 \DeclareMathOperator\Map{Map}			% 写像の空間
 \DeclareMathOperator\Mat{Mat}			% 行列の空間
 \DeclareMathOperator\Hom{Hom}			% 線型写像の空間
@@ -43,6 +43,7 @@
 \DeclareMathOperator\id{id}				% 恒等写像
 \DeclareMathOperator\ev{ev}				% 評価写像
 \DeclareMathOperator\Ker{Ker}			% 線型写像の核
+\DeclareMathOperator\rank{rank}			% 線型写像の階数
 \renewcommand\Im{Im}					% 線型写像の像
 
 \begin{document}
@@ -69,7 +70,7 @@
 
 \part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
 
-%\setcounter{chapter}{0}
+\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
 \include{20150610}
 

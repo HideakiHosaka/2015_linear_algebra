@@ -1,0 +1,315 @@
+\chapter{ベクトル空間と線型写像の核と像}
+
+\lectureinfo{2015年6月17日 1限}
+
+\section{部分空間について}
+
+\subsection{ベクトルの張る部分空間}
+
+前回、部分空間が「原点を持つまっすぐな図形」だということを確認しました。今回はその作り方や、部分空間相互の関係について見ていきましょう。
+
+まず、ベクトルが何本か与えられたら、それが「張る」部分空間というものを定義できます。直感的には明らかなのですが、まずは証明をしましょう。
+
+% Rem: 「張る」というときに$1$次独立性は要求されない
+
+\paragraph{問1の解答} $V$を線型空間とする。
+
+\noindent (1) $W\subset V$を部分空間とする。このとき$W$は空でないから、何か$\bm{v} \in W$が取れる。すると$0\bm{v} = \bm{0}$である。$W$はスカラー倍で閉じているので、$\bm{0}\in W$が従う。
+
+\noindent (2) $\bm{a}\in V$として、$\mathbb{R}\bm{a} := \{C\bm{a} \mid C\in\mathbb{R}\}$とおく。すると
+\begin{itemize}
+\item $\bm{u}, \bm{v} \in \mathbb{R}\bm{a}$とする。このとき$\bm{u} = \alpha\bm{a}$, $\bm{v} = \beta\bm{a}$となる実数$\alpha, \beta\in\mathbb{R}$が取れる。よって$\bm{u} + \bm{v} = (\alpha + \beta)\bm{a}\in\mathbb{R}\bm{a}$となる。
+\item $\bm{u}\in \mathbb{R}\bm{a}$, $\alpha\in\mathbb{R}$とする。このとき$\bm{u} = \beta\bm{a}$となる実数$\beta\in\mathbb{R}$が取れる。すると$\alpha\bm{u} = \alpha\beta\bm{a}\in \mathbb{R}\bm{a}$となる。
+\end{itemize}
+よって$\mathbb{R}\bm{a}$は部分空間である。
+
+\noindent (3) $\bm{a}, \bm{b}\in V$として、$\mathbb{R}\bm{a} + \mathbb{R}\bm{b} := \{\alpha\bm{a} + \beta\bm{b}\in V \mid \alpha,\beta\in\mathbb{R} \}$とおく。
+\begin{itemize}
+\item $\bm{u}, \bm{v}\in\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$とする。このとき$\bm{u} = \alpha_1 \bm{a} + \beta_1 \bm{b}$, $\bm{v} = \alpha_2 \bm{a} + \beta_2 \bm{b}$と書ける。よって$\bm{u} + \bm{v} = (\alpha_1 + \alpha_2)\bm{a} + (\beta_1 + \beta_2)\bm{b}\in\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$となる。
+\item $\bm{u}\in\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$, $\gamma\in\mathbb{R}$とする。このとき$\bm{u} = \alpha\bm{a} + \beta\bm{b}$と書けるので$\gamma\bm{u} = \gamma(\alpha\bm{a} + \beta\bm{b}) = \gamma\alpha\bm{a} + \gamma\beta\bm{b}\in\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$を得る。
+\end{itemize}
+よって$\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$は部分空間である。
+
+\paragraph{ベクトルの張る部分空間} 今の問題で出てきた$\mathbb{R}\bm{a}$を、ベクトル$\bm{a}$が張る部分空間といいます。上では一応証明をつけましたが、絵で見れば「原点を通る$\bm{a}$方向の直線」が$\mathbb{R}\bm{a}$です。線型空間が「原点を持つまっすぐな空間」ということを思い出せば、これが部分空間になることは明らかでしょう。
+
+\begin{figure}[h!tbp]
+\centering
+\includegraphics[height = .2\textwidth]{20150617-fig-span.pdf}
+\begin{picture}(0,0)
+\put(-120.5, 25.8){\circle*{2}}
+\put(-120.5, 25.8){\vector(2,1.25){30}}
+\put(-119, 17){$\bm{0}$}
+\put(-93, 35){$\bm{a}$}
+\put(-20, 80){$\mathbb{R}\bm{a}$}
+\end{picture}
+\caption{ベクトルの張る部分空間}
+\end{figure}
+
+$\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$も状況は同じです。今度はベクトルが$2$本あって、$\bm{a}$と$\bm{b}$の$1$次結合で表せるベクトル全体を考えているわけです。そうすれば原点を通る平面\footnote{$\bm{a}$と$\bm{b}$が$1$次独立にならない場合でも、証明が破綻していないことに気を付けましょう。この場合はもちろん、張る部分空間は平面ではなく直線になります。}が張れることはほとんど明らかでしょう。
+
+\paragraph{「張る空間」の記号について} ここで、この$\mathbb{R}\bm{a}+\mathbb{R}\bm{b}$という記号の心積もりを一応説明しておきます。スカラー$\alpha$とベクトル$\bm{a}$に対し、$\bm{a}$の$\alpha$倍は$\alpha\bm{a}$と書きます。また実数全体の集合は$\mathbb{R}$で表されます。そこで「$\alpha\bm{a}$の$\alpha$を全てのスカラーの範囲で動かして、得られるベクトルをかき集める」という意味で$\mathbb{R}\bm{a}$という表記が用いられます。
+
+$\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$も同じです。$\mathbb{R}\bm{a}$と$\mathbb{R}\bm{b}$はどちらもベクトルの集合で、$\bm{u}\in\mathbb{R}\bm{a}$と$\bm{v}\in\mathbb{R}\bm{b}$に対して和$\bm{u} + \bm{v}$が考えられます。そして$\bm{u}\in\mathbb{R}\bm{a}$と$\bm{v}\in\mathbb{R}\bm{b}$とを全て動かしたときにできるベクトル$\bm{u} + \bm{v}$をかき集めるというのが、$\mathbb{R}\bm{a} + \mathbb{R}\bm{b}$という記号の意味です。
+
+この他にも一般に、集合と元、あるいは集合と集合とが足し算やスカラー倍の記号を介して繋げられることがあります。その場合は「それぞれの集合から元を取ってきて演算をした結果を、ありとあらゆる元の組合せについてかき集める」と思ってください。後で問2に現れる部分空間$W_1$, $W_2$に対する記号$W_1 + W_2$も、同じ意味です。
+
+\paragraph{$2$つの部分空間} さて、集合の部分集合が$2$つ与えられたらそれらの共通部分や和集合を考えることができます。それらが線型空間の部分空間だった場合、どのような性質を示すでしょうか？
+
+$V$を線型空間、$W_1, W_2\subset V$をその部分空間とします。このとき\textbf{共通部分$W_1 \cap W_2$は再び部分空間になります}。ここでも「原点を持つまっすぐな空間」が線型空間だったことを思い出しましょう。$W_1$と$W_2$は両方とも部分空間だから原点を持ち、したがって$W_1 \cap W_2$も原点を持ちます。また$W_1$と$W_2$はまっすぐなので、その交わり$W_1 \cap W_2$もまっすぐです。ですから$W_1 \cap W_2$は部分空間になりそうです。絵としては「$3$次元空間$\mathbb{R}^3$の中で、原点を通る平面$2$枚の交わりが直線になっている様子」を想像できればOKです。
+
+一方、\textbf{和集合$W_1\cup W_2$はほとんどの場合、部分空間になりません}。たとえば$W_1$と$W_2$が$1$次元だったら、その和集合$W_1\cup W_2$は交わる$2$本の直線でしかなく、その「間」がスカスカです。これでは真っ直ぐとは言えないでしょう。一般の場合も同じで、$W_1$の方向のベクトルと$W_2$の方向のベクトルを足し合わせた結果があさっての方向に飛んで行ってしまっては、$W_1\cup W_2$には入りません。加えて今の議論から「$W_1\cup W_2$が和集合になるには、$W_1\subset W_2$または$W_2\subset W_1$が必要」ということが推測できます。
+
+\begin{figure}[h!tbp]
+\centering
+\includegraphics[height = .3\textwidth]{20150617-fig-subspace.pdf}
+\begin{picture}(0,0)
+\put(-100.4, 50){\circle*{2}}
+\put(-100.4, 50){\dashbox(50,50)}
+\put(-100.4, 50){\vector(1, 0){50}}
+\put(-100.4, 50){\vector(0, 1){50}}
+\put(-100.4, 50){\vector(1, 1){50}}
+\put(-19, 41){$W_1$}
+\put(-118, 135){$W_2$}
+\put(-99, 40){$\bm{0}$}
+\put(-55, 42){$\bm{u}$}
+\put(-112, 97){$\bm{v}$}
+\put(-49, 98){$\bm{u} + \bm{v} \not\in W_1 \cup W_2$}
+\end{picture}
+\caption{和集合が部分空間にならない例}
+\end{figure}
+
+でも$W_1\cup W_2$が部分空間にならないとはいえ、その「間」をきちんと埋めれば、$W_1$と$W_2$を両方とも含む部分空間が得られそうです。つまり「ベクトルの張る部分空間」を一般化し「\textbf{$2$つの部分空間が張る部分空間}」を考えれば良いのです。それが$W_1 + W_2$です。
+
+こうしたイメージを踏まえた上で、きちんと証明をつけましょう。
+
+\paragraph{問2の解答} $V$を線型空間、$W_1, W_2$をその部分空間とする。
+
+\noindent (1) $W_1\cap W_2$が部分空間になることを、次のように確かめられる。
+\begin{itemize}
+\item $\bm{u}, \bm{v} \in W_1 \cap W_2$とする。このとき$\bm{u}, \bm{v}\in W_1$なので$\bm{u} + \bm{v} \in W_1$である。また$\bm{u}, \bm{v} \in W_2$なので$\bm{u} + \bm{v} \in W_2$である。よって$\bm{u} + \bm{v} \in W_1 \cap W_2$である。
+\item $\bm{u}\in W_1\cap W_2$, $\alpha\in\mathbb{R}$とする。このとき$\bm{u}\in W_1$より$\alpha\bm{u} \in W_1$である。また$\bm{u}\in W_2$より$\alpha\bm{u} \in W_2$である。よって$\alpha \bm{u}\in W_1\cap W_2$である。
+\end{itemize}
+
+\noindent (2) $W_1\cup W_2$は必ずしも線型空間ではない。反例を挙げる。
+
+$V = \mathbb{R}^2$とする。$W_1 = \mathbb{R}\bm{e}_1$, $W_2 = \mathbb{R}\bm{e}_2$\footnote{$\bm{e}_1 := {}^t(1,0)$, $\bm{e}_2 := {}^t(0,1)$です。}はいずれも$\mathbb{R}^2$の部分空間である。しかし$W_1 \cup W_2$は部分空間でない。実際$\bm{e}_1\in W_1 \subset W_1 \cup W_2$, $\bm{e}_2\in W_2 \subset W_1 \cup W_2$だが$\bm{e}_1 + \bm{e}_2 \not\in W_1\cup W_2$である。よって$W_1\cup W_2$は線型空間でない。
+
+\noindent (3) $W_1 + W_2$が部分空間になることを、次のように確かめられる。
+\begin{itemize}
+\item $\bm{u}, \bm{v}\in W_1 +  W_2$とする。このとき$\bm{u} = \alpha_1 \bm{a} + \beta_1 \bm{b}$, $\bm{v} = \alpha_2 \bm{a} + \beta_2 \bm{b}$と書ける。よって$\bm{u} + \bm{v} = (\alpha_1 + \alpha_2)\bm{a} + (\beta_1 + \beta_2)\bm{b}\in W_1 +  W_2$となる。
+\item $\bm{u}\in W_1 +  W_2$, $\gamma\in\mathbb{R}$とする。このとき$\bm{u} = \alpha\bm{a} + \beta\bm{b}$と書けるので$\gamma\bm{u} = \gamma(\alpha\bm{a} + \beta\bm{b}) = \gamma\alpha\bm{a} + \gamma\beta\bm{b}\in W_1 +  W_2$を得る。
+\end{itemize}
+
+\subsection{部分空間の例}
+
+部分空間の議論に慣れるため、目に見えない例を見てみます。問$3$で挙がっている空間が全て数列の空間$\Map(\mathbb{N}, \mathbb{R})$の部分集合であるこをと、定義通り確かめましょう。
+
+\paragraph{問3の解答} 実数列全体のなす線型空間を$V=\Map(\mathbb{N}, \mathbb{R})$と書く。
+
+\noindent (1) $0$に収束する数列の全体を$W$と書くと、$W$は部分空間である。実際
+\begin{itemize}
+\item $(a_n)_{n \geq 0}, (b_n)_{n \geq 0}\in W$とすると、$n\rightarrow\infty$のとき$a_n\rightarrow 0$, $b_n\rightarrow 0$なので$a_n + b_n \rightarrow 0 + 0 = 0$となる。よって$(a_n)_{n \geq 0} + (b_n)_{n \geq 0} = (a_n + b_n)_{n \geq 0}\in W$である。
+\item $(a_n)_{n \geq 0}\in W$, $\alpha\in\mathbb{R}$とすると、$n\rightarrow\infty$のとき$a_n \rightarrow 0$なので$\alpha a_n \rightarrow \alpha \cdot 0 = 0$である。よって$\alpha (a_n)_{n \geq 0} = (\alpha a_n)_{n \geq 0}\in W$となる。
+\end{itemize}
+これより$W$は加法とスカラー倍で閉じている。
+
+\noindent (2) 有界な数列の全体を$W$は部分空間であることを示す。数列$(a_n)_{n \geq 0}$が有界であることは「ある正の実数$M>0$が存在し、任意の$n\in\mathbb{N}$に対して$|a_n| < M$が成り立つ」と言える。
+\begin{itemize}
+\item $(a_n)_{n \geq 0}, (b_n)_{n \geq 0}\in W$とする。このとき正の実数$M_1, M_2 > 0$が存在して、任意の自然数$n \in \mathbb{N}$に対し$|a_n| < M_1$, $|b_n| < M_2$が成り立つようにできる。すると任意の$n\in\mathbb{N}$に対し、三角不等式より$|a_n + b_n| < |a_n| + |b_n| < M_1 + M_2$となる。よって数列$(a_n)_{n \geq 0} + (b_n)_{n \geq 0} = (a_n + b_n)_{n \geq 0}$は有界で、$W$の元となる。
+\item $(a_n)_{n \geq 0} \in W$, $\alpha\in\mathbb{R}$とする。このとき正の実数$M > 0$が存在して、任意の自然数$n\in\mathbb{N}$に対して$|a_n| < M$となる。すると$|\alpha a_n| = |\alpha| |a_n| < |\alpha|M$が成り立つ。よって$\alpha(a_n)_{n \geq 0} = (\alpha a_n)_{n \geq 0}$も有界で、$W$の元となる。
+\end{itemize}
+よって$W$は加法とスカラー倍で閉じている。
+
+\noindent (3) 有限個を除く全ての項が$0$である数列の全体を$W$と書くと、$W$は部分空間である。これを示すにあたり、数列$(a_n)_{n\geq 0}$について「有限個を除いて項が$0$」という条件は、「十分大きい自然数$N\in\mathbb{N}$が存在して、$n>N$ならば$a_n = 0$が成り立つ」と言い換えられることに気を付けよう。
+\begin{itemize}
+\item $(a_n)_{n \geq 0}, (b_n)_{n \geq 0}\in W$とする。このときある自然数$N_1, N_2\in\mathbb{N}$を取って、$n > N_1$ならば$a_n =0$, $n > N_2$ならば$b_n = 0$とできる。ここで$N := \max\{N_1, N_2\}$とおくと、$n > N$なら$n > N_1$, $n > N_2$の両方が同時に満たされるので、$a_n = b_n = 0$となる。これより$n > N$ならば$a_n + b_n = 0$で、$(a_n)_{n \geq 0} + (b_n)_{n \geq 0} = (a_n + b_n)_{n \geq 0}\in W$と言えた。
+\item $(a_n)_{n \geq 0}\in W$, $\alpha \in \mathbb{R}$とする。このときある自然数$N\in\mathbb{N}$を取ると、$n > N$ならば$a_n = 0$となるようにできる。すると$n > N$ならば$\alpha a_n = 0$である。よって$\alpha (a_n)_{n \geq 0} = (\alpha a_n)_{n \geq 0}\in W$である。
+\end{itemize}
+よって、$W$は加法とスカラー倍で閉じている。
+
+\section{線型写像の核と像}
+
+\subsection{線型写像の核}
+
+\paragraph{$\Ker$の定義}
+
+$V$と$W$を線型空間とし、$f\colon V\rightarrow W$を線型写像とします。このとき線型写像$f$の核(kernel)は
+\[
+\Ker f:=\{\bm{v}\in V\mid f(\bm{v})=\bm{0}\}
+\]
+と定義されます。つまり$f$によって$\bm{0}$ベクトルに潰される\footnote{「潰れる」という言葉は数学用語ではないですが、こう書くと雰囲気が分かりやすいと思います。また$\bm{v}\in\Ker f$のことを``$f$ kills $\bm{v}$''と表すこともよくあります。ちょっと物騒な言い方ですが、これもこれで言いたいことが伝わると思います。}$V$の元全体が$f$の核です。核が部分空間になることは、前回のプリント\pageref{subsec:kernel}ページでチェックしました。
+
+問6を解いて、核の性質を確かめてみましょう。
+
+\paragraph{問6の解答} $V, W$を線型空間、$\Psi\colon V\rightarrow W$を線型写像とする。
+
+\noindent (1) $\Psi(\bm{0}) = \Psi(\bm{0} - \bm{0}) = \Psi(\bm{0}) - \Psi(\bm{0}) = \bm{0}'$である。
+
+\noindent (2) $\Psi(\bm{u}) = \Psi(\bm{v})$ならば、$\Psi$の線型性を使って$\bm{0} = \Psi(\bm{u}) - \Psi(\bm{v}) = \Psi(\bm{u} - \bm{v})$を得る。よって$\bm{u} - \bm{v} \in \Ker\Psi$である。
+
+\noindent (3) $\bm{a}\in V$, $\bm{b} = \Psi(\bm{a})\in W$とする。このとき$\bm{v}\in V$が$\Psi(\bm{v}) = \bm{b}$を満たすとすると、$\Psi(\bm{v} - \bm{a}) = \Psi(\bm{v}) - \Psi(\bm{a}) = \bm{b} - \bm{b} = \bm{0}'$となる。よって$\bm{v} - \bm{a} \in \Ker\Psi$となるから、$\bm{v} = \bm{a} + (\bm{v} - \bm{a})$が求める分解を与える。
+
+\noindent (4) $\Psi(\bm{0}) = \bm{0}'$である。よって$\Psi$が単射なら$\Psi(\bm{v}) = \bm{0}'$なる$\bm{v}$は$\bm{0}$しかない。これより$\Ker\Psi=\{\bm{0}\}$である。
+
+逆に$\Ker\Psi = \{\bm{0}\}$とする。このとき$\bm{u}, \bm{v}\in V$が$\Psi(\bm{u}) = \Psi(\bm{v})$を満たしたとすると、(2)より$\bm{u} - \bm{v} = \Ker\Psi = \{\bm{0}\}$となる。よって$\bm{u} - \bm{v} = \bm{0}$だから$\bm{u} = \bm{v}$となり、$\Psi$の単射性が従う。
+
+\paragraph{線型写像の核と単射性}
+
+今の問6 (4) は非常に重要なことを言っています。そもそも一般に、全ての写像に対して「単射性」という性質が定義されていました。集合$X$から集合$Y$への写像$f\colon X\rightarrow Y$が単射であるとは「任意の$x, y\in X$について、$f(x) = f(y)$ならば$x = y$が成り立つ」ことでした。一般には、単射性を示すには定義通りに議論するしかありません。ところが問6 (4) は、\textbf{線型写像の場合は$\Ker$を調べれば単射性が分かる}と教えてくれるのです。さらに、この後の授業で
+\begin{itemize}
+\item 線型空間の次元
+\item 線型写像の核と像の次元を結びつける「次元公式」
+\end{itemize}
+を学ぶと、特別な場合に全射性と単射性が連動すること、あるいは単射性 / 全射性が成り立たないことを一瞬で見抜ける状況などが出てきます。そういう意味で$\Ker$は非常に役立つのです。
+
+さらに問6 (3) は、もっと強力なことを言っています。ふつう「写像$f$が単射でない」と言われても「どのように単射でないか」などは一言で言えません。たとえば$3$次関数$y = x^3 - x = x(x+1)(x-1)$を$x$軸に平行な直線$y = c$で切断すると、断面に現れる点は$1$個だったり$2$個だったり$3$個だったりと、まちまちです。ところが線型写像の場合、問6 (2), (3) で示したように
+\begin{itemize}
+\item $\bm{u}$と$\bm{v}$のズレ$\bm{u} - \bm{v}$が$\Ker f$に入っていたら、$f$による値は同じ
+\item $f(\bm{u}) = f(\bm{v})$のように$f$による値が一致したら、$\bm{u}$と$\bm{v}$のズレ$\bm{u} - \bm{v}$は必ず$\Ker f$に含まれる
+\end{itemize}
+と分かります。つまり\textbf{線型写像の単射性が破れる具合は、核で完全にコントロールされる}というわけです。
+
+たとえば線型写像$p_1\colon \mathbb{R}^3 \rightarrow \mathbb{R}$を第$1$成分への射影、つまり$p_1\bigl({}^t(x, y, z)\bigr) := x$と定めます\footnote{$p_1$は横ベクトル$(1, 0, 0)$を左から掛け算する写像なので、ここから直ちに線型写像であることが分かります。}。すると$p_1$はベクトルの$x$座標の値だけを見るので、$\Ker p_1$は平面$x = 0$、つまり$yz$平面だと分かります。そして$yz$平面に平行な平面$x = c$上では$p_1$の値が一定です。だから$c \in \mathbb{R}$を$1$つ決めるごとに、$p_1$の等位面$x = c$が定まります。
+\begin{figure}[h!tbp] %TODO: 図の描きなおし
+\centering
+\includegraphics[height = .3\textwidth]{20150617-fig-kernel.pdf}
+\end{figure}
+
+さっき「単射性の破れが$\Ker$でコントロールされる」といったのは、今の場合
+\begin{itemize}
+\item $\bm{u} - \bm{v}$が$yz$平面と平行だったら、$\bm{u}$と$\bm{v}$の$x$座標が同じ
+\item $\bm{u}$と$\bm{v}$の$x$座標が同じだったら、$\bm{u} - \bm{v}$は$yz$平面と平行
+\end{itemize}
+という意味になります。図で考えれば当たり前ですよね。でも、\textbf{この当たり前の状況が線型写像ではいつでも成り立っている}ということが大事です。
+
+さらに言ってしまえば、定義域の線型空間を「$\Ker$の方向」と「それ以外の方向」に分けて考えることができます。そうすると$\Ker$の方向には単射性が破れるわけですから、それ以外の方向を見れば単射になることが推察されます。そうした「空間をいくつかの方向に分ける」という話も、追々授業で行います。
+
+\subsection{線型写像の像}
+
+線型写像を扱うにあたり、核と対をなして重要な役割を果たすのが像と呼ばれるものです。核が線型写像の単射性を司ったのに対し、像の方は線型写像の全射性を司ります。
+
+\paragraph{$\Im$の定義}
+
+一般に写像$f\colon X\rightarrow Y$に対し、「$X$の元の$f$による行き先を全て集めた集合」を$f$の\textbf{像} (image) といい、$\Im f$と書きます。記号で書けば$\Im f := \{y \in Y \mid \exists x\in X \text{ s.t. } y = f(x)\}$です。線型写像も写像ですから、一般の場合と全く同じように像が定義されます。ただ線型写像の場合は
+\begin{itemize}
+\item 定義域と値域が共に線型空間
+\item 線型空間の和やスカラー倍に対し、線型写像は整合的に振る舞う
+\end{itemize}
+という良い条件があります。このことを反映し、\textbf{線型写像の像は値域の部分空間になります}。それを証明しておきましょう。$V, W$を線型空間とし、$f\colon V\rightarrow W$を線型写像とします。
+\begin{itemize}
+\item $\bm{w}_1, \bm{w}_2\in \Im f$とする。このとき像の定義から$f(\bm{v}_1) = w_1$, $f(\bm{v}_2) = w_2$となる$\bm{v}_1, \bm{v}_2\in V$が存在する。したがって$f$の線型性から$\bm{w}_1 + \bm{w}_2 = f(\bm{v}_1) + f(\bm{v}_2) = f(\bm{v}_1 + \bm{v}_2) \in \Im f$となる。
+\item $\bm{w}\in \Im f$, $\alpha\in\mathbb{R}$とする。このとき像の定義から、$f(\bm{v}) = \bm{w}$となる$\bm{v} \in V$が存在する。したがって$f$の線型性から$\alpha \bm{w} = \alpha f(\bm{v}) = f(\alpha \bm{v}) \in \Im f$となる。
+\end{itemize}
+これで$\Im f$が$W$の部分空間になることが示せました。
+
+$f$が行列$A$で表される場合には、$\Im f$は「$A$の各列のベクトルが張る空間」になります。これを考えると少し$\Im f$のイメージが分かり易くなります。ですが、このことは連立$1$次方程式の解の存在問題と関連させた方が話しやすいので、後回しにしたいと思います。今回は少し抽象的な議論に徹します。
+
+\paragraph{集合の包含と等号}
+
+問4と問5で「集合の等号」の話が出てくるので、念のために補足です。集合$A$と$B$について、$A=B$の定義は「$A\subset B$かつ$B\subset A$であること」です。したがって集合が等しいことを示すには、$\subset$方向および$\supset$方向の包含関係という、\textbf{異なる$2$つの命題を示す必要があります}。これに気を付けておいてください。
+
+\paragraph{問4の解答}
+
+写像$\Psi\colon \mathbb{R}[x]\rightarrow\mathbb{R}[x]$を$\Psi\bigl(f(x)\bigr) := (x - \alpha) f(x)$と定める。また、写像$\ev_{\alpha}\colon \mathbb{R}[x]\rightarrow\mathbb{R}$を$\ev_{\alpha}\bigl(f(x)\bigr) := f(\alpha)$で定める\footnote{この$\ev_{\alpha}$は問題文中の$\Phi$です。この記号の由来は、前回\pageref{footnote:evaluation_map}ページの脚注で説明しました。}。
+
+\noindent (1) 
+\begin{itemize}
+\item 任意の$f(x), g(x)\in\mathbb{R}[x]$に対し$\Psi\bigl(f(x) + g(x)\bigr) = (x - \alpha)\bigl(f(x) + g(x)\bigr) = (x - \alpha)f(x) + (x - \alpha)g(x) = \Psi\bigl(f(x)\bigr) + \Psi\bigl(g(x)\bigr)$である。
+\item 任意の$f(x), g(x)\in\mathbb{R}[x]$に対し、$\Psi\bigl(f(x) g(x)\bigr) = (x - \alpha)f(x)g(x) = g(x)(x - \alpha)f(x) = g(x)\Psi\bigl(f(x)\bigr)$となる。特に$g(x)$を定数にとって$g(x) = \alpha$とすれば、$\Psi\bigl(\alpha f(x)\bigr) = \alpha \Psi\bigl(f(x)\bigr)$となる。
+\end{itemize}
+これより$\Psi$は線型写像である\footnote{線型写像の条件は「\uline{実数}$\alpha\in\mathbb{R}$と多項式$f(x)\in\mathbb{R}[x]$に対し$\Psi\bigl(\alpha f(x)\bigr) = \alpha\Psi\bigl(f(x)\bigr)$」ですが、今はより強く「\uline{多項式}$g(x)\in\mathbb{R}[x]$と多項式$f(x)\in\mathbb{R}[x]$に対し、$\Psi\bigl(g(x)f(x)\bigr) = g(x)\Psi\bigl(f(x)\bigr)$」が成り立っています。このように$\Psi$は「多項式に対してもスカラー倍のように振る舞う」ので、これを称して「$\Psi$は\textbf{$\mathbb{R}[x]$線型}」と言ったりします。}。
+
+\noindent (2) $f(x) \in V$を任意に取る。このとき$\ev_{\alpha}\bigl(\Psi(f(x))\bigr) = \ev_{\alpha}\bigl((x - \alpha)f(x)\bigr) = 0 f(\alpha) = 0$である。
+
+\noindent (3) 今の(2)で、$\Im\Psi\subset\Ker\ev_{\alpha}$が示せた。そこで逆向きの包含関係$\Ker\ev_{\alpha} \subset \Im \Psi$を示せばよい。
+
+$f(x) \in \Ker \ev_{\alpha}$を任意に取る。このとき$f(\alpha) = 0$なので、因数定理から$f(x) = (x - \alpha)g(x)$となる多項式$g(x) \in \mathbb{R}[x]$が存在する。よって$f(x) = \Psi\bigl(g(x)\bigr) \in \Im \Psi$である。
+
+\paragraph{問5の解答} 写像$\Phi\colon \mathbb{R}[x] \rightarrow \mathbb{R}^2$を
+\[
+\Phi\bigl(f(x)\bigr) := 
+\begin{pmatrix}
+f(\alpha) \\
+f'(\alpha)
+\end{pmatrix}
+\]
+で定める。
+
+\noindent (1) $\Phi$の線型性が、次のように確かめられる。
+\begin{itemize}
+\item 任意の多項式$f(x), g(x) \in \mathbb{R}[x]$に対し
+\[
+\Phi\bigl(f(x) + g(x)\bigr) = 
+\begin{pmatrix}
+f(\alpha) + g(\alpha) \\
+f'(\alpha) + g'(\alpha)
+\end{pmatrix}
+=
+\begin{pmatrix}
+f(\alpha) \\
+f'(\alpha)
+\end{pmatrix}
++
+\begin{pmatrix}
+g(\alpha) \\
+g'(\alpha)
+\end{pmatrix}
+= \Phi\bigl(f(x)\bigr) + \Phi\bigl(g(x)\bigr)
+\]
+が成り立つ。
+\item 任意の多項式$f(x) \in \mathbb{R}[x]$と実数$\beta \in \mathbb{R}$に対し、
+\[
+\Phi\bigl(\beta f(x)\bigr) =
+\begin{pmatrix}
+\beta f(\alpha) \\
+\beta f'(\alpha) 
+\end{pmatrix}
+=
+\beta
+\begin{pmatrix}
+f(\alpha) \\
+f'(\alpha) 
+\end{pmatrix}
+= \beta\Phi\bigl(f(x)\bigr)
+\]
+が成り立つ。
+\end{itemize}
+
+\noindent (2) 線型写像$\Psi\colon\mathbb{R}[x]\rightarrow\mathbb{R}[x]$を$\Psi\bigl(f(x)\bigr) := (x - \alpha)^2 f(x)$で定める\footnote{この問題では直接使いませんが、$\Psi$は線型です。このことは問4 (1) と全く同様に示せます。}。すると任意の多項式$f(x) \in \mathbb{R}[x]$に対し、$\Psi\bigl(f(x)\bigr) = (x - \alpha)^2 f(x)$だから$\Psi\bigl(f(x)\bigr)' = 2(x - \alpha)f(x) + (x - \alpha)^2f'(x)$である。よって$\Phi\bigl(\Psi(f(x))\bigr) = 0$となるから、$\Im\Psi \subset \Ker\Phi$である。
+
+逆に$f(x) \in \Ker\Phi$とする。このとき$f(\alpha) = f'(\alpha) = 0$である。$f(\alpha) = 0$より、因数定理から$f(x) = (x - \alpha) g(x)$となる多項式$g(x) \in \mathbb{R}[x]$が取れる。そして$f'(x) = g(x) + (x - \alpha)g'(x)$の両辺に$x = \alpha$を代入することで、$0 = g(\alpha)$を得る。ゆえに再び因数定理により、$g(x) = (x - \alpha)h(x)$となる多項式$h(x)\in\mathbb{R}[x]$が取れる。これを用いると$f(x) = (x - \alpha)^2 h(x) \in \Im\Psi$が分かる。ゆえに$\Ker \Phi \subset \Im \Psi$である。
+
+以上より、$\Ker\Phi = \Im \Psi$である。
+
+\paragraph{多項式のTaylor展開}
+
+もしかしたら微分積分学の授業で習っているかもしれませんが、一般に実数$\alpha\in\mathbb{R}$を含む開区間で定義された「良い」函数\footnote{細かい条件を書くのが嫌だったので誤魔化しました。多項式、三角函数や指数函数、それにこれらの四則演算や合成で得られる函数は全て「良い」函数になります。また、「良い」函数の条件は「無限回微分可能」よりも強い条件になることを指摘しておきます。}$f$に対し
+\[
+f(x) = \sum_{k = 0}^{\infty} \frac{f^{(k)}(\alpha)}{k!} (x - a)^k = f(\alpha) + f'(\alpha)(x - \alpha) + \frac{f''(\alpha)}{2!}(x - \alpha)^2 + \cdots
+\]
+という式が成り立ちます。これを函数$f$の$x = a$における\textbf{Taylor展開}といいます。気分としては、与えられた函数を$0$次式、$1$次式、$2$次式、$\ldots$で順番に近似しているという感じです。たとえば右辺の第$1$項だけ見ると$y = f(\alpha)$という定数函数が得られます。もし「$x = \alpha$で$f$を定数で近似しろ」と言われたら、$f(a)$を選ぶ他ないでしょう。次の項まで見て$y = f(\alpha) + f'(\alpha)(x - \alpha)$という$1$次式を考えると、これは$y = f(x)$の点$x = \alpha$における接線に他なりません。$y = f(x)$を$x = \alpha$で$1$次式で近似するとしたら、もちろん接線を考えるのが自然です。こんな感じで右辺を第$n$項まで見ると、$f$を$x = \alpha$の周りで最もよく近似する多項式が得られます。そして、この近似を延々と高次の項まで繰り返すことで、いくらでも$f$を精度よく近似することができます。これがTaylor展開と呼ばれるものです。
+
+さてTaylor展開は「函数を多項式で近似する」という話でしたが、そもそも元々の函数が多項式だったらどうなるのでしょうか？多項式$f\in\mathbb{R}[x]$が$n$次式だったら、$f$は$(n+1)$回微分したら$0$になります。ですから今の式は
+
+\[
+f(x) = \sum_{k = 0}^{n} \frac{f^{(k)}(\alpha)}{k!} (x - \alpha)^k = f(\alpha) + f'(\alpha)(x - \alpha) + \frac{f''(\alpha)}{2!}(x - \alpha)^2 + \cdots + \frac{f^{(n)}(\alpha)}{n!}(x - \alpha)^n
+\]
+となり、有限項で打ち止めになります。こうして$x$の多項式を、$x - \alpha$の多項式として表す式が得られました\footnote{ちなみに多項式であれば、Taylor展開の証明は簡単です。$f(x)\in\mathbb{R}[x]$を$n$次式として、$f(x) = \sum_{k = 0}^n a_k (x - \alpha)^k$とおきます。この両辺を$m$回微分すれば、$\bigl\{(x - \alpha)^m\bigr\}^{(m)} = m!$より$f^{(m)}(x) = m!a_m + (x - \alpha)\times(\text{多項式})$という格好の式が得られます。これに$x = \alpha$を代入すれば$f^{(m)}(\alpha) = m! a_m$となり、$a_m$が求まります。}。
+
+これを見れば、問$5$の (2) は自然に解けると思います。というのも$f\in \Ker \Phi$になるための条件は$f(\alpha) = f'(\alpha) = 0$と同じです。そうするとTaylor展開の右辺は$(x - \alpha)^2$の項から始まります。かたや$f(x)$が$(x - \alpha)^2$で割り切れるなら、$f(x) = (x - \alpha)^2 g(x)$と表せます。そして$g(x)$の$x = \alpha$におけるTaylor展開に$(x - \alpha)^2$をかければ$f(x)$のTaylor展開が得られるので、$f(x)$のTaylor展開はやはり$(x - \alpha)^2$の項から始まることが分かります。これで$f(\alpha) = f'(\alpha) = 0$となることが見えます。このようにTaylor展開を通すと、$f$が$(x - \alpha)^2$で割り切れることと$f(\alpha) = f'(\alpha) = 0$とを綺麗に対応づけられます。これで写像$\Psi$に当たりがつくわけです。
+
+\paragraph{おまけ: 完全系列} さて問5では、次のような図式が得られています。
+\begin{center}
+\begin{tikzcd}
+\mathbb{R}[x] \arrow{r}{\Psi} & \mathbb{R}[x] \arrow{r}{\Phi} & \mathbb{R}^2
+\end{tikzcd}
+\end{center}
+そして、この図式の真ん中で$\Ker \Phi = \Im \Psi$が成り立っているのでした。このことを称して「図式が真ん中の$\mathbb{R}[x]$のところで\textbf{完全}である」といいます。
+
+\begin{center}
+\begin{tikzcd}
+0 \arrow{r}{} & \mathbb{R}[x] \arrow{r}{\Psi} & \mathbb{R}[x] \arrow{r}{\ev_{\alpha}} & \mathbb{R} \arrow{r} & 0 \\
+0 \arrow{r}{} & \mathbb{R}[x] \arrow{r}{\Psi} & \mathbb{R}[x] \arrow{r}{\Phi} & \mathbb{R}^2
+\end{tikzcd}
+\end{center}
+

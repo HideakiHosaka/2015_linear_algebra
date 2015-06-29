@@ -1,0 +1,542 @@
+\chapter{掃き出し法}
+
+\lectureinfo{2015年6月24日 1限}
+
+\section{掃き出し法}
+
+\subsection{連立$1$次方程式の解法再考}
+
+\paragraph{問1 (3) の解答} % 基本行列 1 つ目
+
+\begin{align*}
+\begin{cases}
+x + 2y &= 3 \\
+2x + 3y &= 4
+\end{cases}
+\xrightarrow[\text{$(-2)$倍を加える}]{\text{式2に式1の}}
+\begin{cases}
+x + 2y &= 3 \\
+0x - y &= -2
+\end{cases}
+\xrightarrow[\text{$2$倍を加える}]{\text{式1に式2の}}
+\begin{cases}
+x + 0y &= -1 \\
+0x - y &= -2
+\end{cases}
+\xrightarrow[\text{$(-1)$倍する}]{\text{式2を}}
+\begin{cases}
+x + 0y &= -1 \\
+0x + y &= 2
+\end{cases}
+\end{align*}
+
+\paragraph{係数行列の考え方}
+
+ここで、今の方程式の解き方を落ち着いて眺めると「実は$x$とか$y$とか書く必要なくて、単に係数だけ書き出せばいいんじゃないの？」という気がしてきます。実際その通りで、連立$1$次方程式を解くのに式全体を一々書く必要はありません。
+
+一般に、連立$1$次方程式$A\bm{x} = \bm{b}$に対し、$A$を\textbf{係数行列}といいます。また$A$と$\bm{b}$とを並べてできる行列$\tilde{A} := (A\ \bm{b})$を\textbf{拡大係数行列}と言います。ちょっとくどいですが、方程式を解く操作と拡大係数行列の変形とを並べて書き、「拡大係数行列だけ見ればよい」という事実を確認しましょう。
+
+\paragraph{問1 (2) の解答} 次のようにして、$x = -1$, $y = 2$が解と分かる\footnote{拡大係数行列に縦線を入れたのは、見易さのためだけです。別に書かなくても構いません。}。 % 基本行列 2 つ目
+\begin{align*}
+\begin{cases}
+x + 2y &= 3 \\
+3x + 4y &= 5 \\
+\end{cases} \xrightarrow[\text{$(-3)$倍を加える}]{\text{式2に式1の}}
+\begin{cases}
+x + 2y &= 3 \\
+0x - 2y &= -4 \\
+\end{cases} \xrightarrow[\text{$1$倍を加える}]{\text{式1に式2の}}
+\begin{cases}
+x + 0y &= -1 \\
+0x - 2y &= -4 \\
+\end{cases} \xrightarrow[\text{$(-1/2)$倍する}]{\text{式2を}}
+\begin{cases}
+x + 0y &= -1 \\
+0x + y &= 2 \\
+\end{cases}
+\\
+\biggl(
+\begin{array}{rr|r}
+1 & 2 & 3 \\
+3 & 4 & 5 \\
+\end{array}
+\biggr) \xrightarrow[\text{$(-3)$倍を加える}]{\text{$2$行目に$1$行目の}}
+\biggl(
+\begin{array}{rr|r}
+1 & 2 & 3 \\
+0 & -2 & -4 \\
+\end{array}
+\biggr)  \xrightarrow[\text{$1$倍を加える}]{\text{$1$行目に$2$行目の}}
+\biggl(
+\begin{array}{rr|r}
+1 & 0 & -1 \\
+0 & -2 & -4 \\
+\end{array}
+\biggr) \xrightarrow[\text{$(-1/2)$倍する}]{\text{$2$行目を}}
+\biggl(
+\begin{array}{rr|r}
+1 & 0 & -1 \\
+0 & 1 & 2 \\
+\end{array}
+\biggr)
+\end{align*}
+
+\paragraph{pivotting} %「掃き出す」の定義
+
+\paragraph{問4 (1) の解答}
+\begin{align*}
+\Biggl(
+\begin{array}{rrr|r}
+1 & -2 & -4 & 3 \\
+2 & -4 & -7 & 5 \\
+4 & -7 & -13 & 10
+\end{array}
+\Biggr) \xrightarrow[\text{$2,3$行目を掃き出す}]{\text{$(1,1)$成分を要に}}
+& \Biggl(
+\begin{array}{rrr|r}
+1 & -2 & -4 & 3 \\
+0 & 0 & 1 & -1 \\
+0 & 1 & 3 & -2
+\end{array}
+\Biggr) \xrightarrow[入れ替える]{\text{$2$行目と$3$行目を}}
+\Biggl(
+\begin{array}{rrr|r}
+1 & -2 & -4 & 3 \\
+0 & 1 & 3 & -2 \\
+0 & 0 & 1 & -1
+\end{array}
+\Biggr) \\ \xrightarrow[\text{$1$行目を掃き出す}]{\text{$(2,2)成分を要に$}}
+& \Biggl(
+\begin{array}{rrr|r}
+1 & 0 & 2 & -1 \\
+0 & 1 & 3 & -2 \\
+0 & 0 & 1 & -1
+\end{array}
+\Biggr) \xrightarrow[\text{他の行を掃き出す}]{\text{$(3,3)$成分を要に}}
+\Biggl(
+\begin{array}{rrr|r}
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 \\
+0 & 0 & 1 & -1
+\end{array}
+\Biggr)
+\end{align*}
+
+\paragraph{行基本変形}
+ここまで連立$1$次方程式を係数行列だけ見て解くにあたり、使っている操作は
+\begin{itemize}
+\item $2$つの行を入れ替える
+\item ある行に、別の行の定数倍を加える
+\item ある行を定数倍する
+\end{itemize}
+という操作の$3$つです。これらの$3$つを\textbf{行基本変形}といいます。
+
+\subsection{基本変形の行列による実現}
+
+さて、\textbf{行基本変形は実は行列の掛け算で実現できます}。それを問題で確認しましょう。ちょっとくどいですが「掃き出す操作」を行基本変形$1$つ$1$つに分解して、どのような行列の掛け算をすれば良いのか記してみます。
+
+\paragraph{問5 (3) の解答}
+\begin{align*}
+\Biggl(
+\begin{array}{rrrr}
+2 & 1 & -3 & -2 \\
+-3 & 2 & -1 & 2 \\
+-1 & 3 & -4 & 0
+\end{array}
+\Biggr)
+\xrightarrow[\text{\hbox to 10zw{\hfil $2$倍を加える \hfil}}]{\text{$1$行目に$3$行目の}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 2 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+2 & 1 & -3 & -2 \\
+-3 & 2 & -1 & 2 \\
+-1 & 3 & -4 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+-3 & 2 & -1 & 2 \\
+-1 & 3 & -4 & 0
+\end{array}
+\Biggr)\\
+\xrightarrow[\text{\hbox to 10zw{\hfil $(-1)$倍する \hfil}}]{\text{$3$行目を}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+-3 & 2 & -1 & 2 \\
+-1 & 3 & -4 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+-3 & 2 & -1 & 2 \\
+1 & -3 & 4 & 0
+\end{array}
+\Biggr)
+\\ 
+\xrightarrow[\text{\hbox to 10zw{\hfil $3$倍を加える \hfil}}]{\text{$2$行目に$3$行目の}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 3 \\
+0 & 0 & 1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+-3 & 2 & -1 & 2 \\
+1 & -3 & 4 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+0 & -7 & 11 & 2 \\
+1 & -3 & 4 & 0
+\end{array}
+\Biggr)
+\\
+\xrightarrow[\text{\hbox to 10zw{\hfil 入れ替える \hfil}}]{\text{$1$行目と$3$行目を}} & 
+\Biggl(
+\begin{array}{rrrr}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+0 & 7 & -11 & -2 \\
+0 & -7 & 11 & 2 \\
+1 & -3 & 4 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & -7 & 11 & 2 \\
+0 & 7 & -11 & -2
+\end{array}
+\Biggr)
+\\
+\xrightarrow[\text{\hbox to 10zw{\hfil $1$倍を加える \hfil}}]{\text{$3$行目に$2$行目の}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 1 & 1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & -7 & 11 & 2 \\
+0 & 7 & -11 & -2
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & -7 & 11 & 2 \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+\\
+\xrightarrow[\text{\hbox to 10zw{\hfil $(-1/7)$倍する \hfil}}]{\text{$2$行目を}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & -\frac{1}{7} & 0 \\
+0 & 0 & 1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & -7 & 11 & 2 \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & 1 & -\frac{11}{7} & -\frac{2}{7} \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+\\
+\xrightarrow[\text{\hbox to 10zw{\hfil $3$倍を加える \hfil}}]{\text{$1$行目に$2$行目の}} & 
+\Biggl(
+\begin{array}{rrr}
+1 & 3 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+1 & -3 & 4 & 0 \\
+0 & 1 & -\frac{11}{7} & -\frac{2}{7} \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+& &=
+\Biggl(
+\begin{array}{rrrr}
+1 & 0 & -\frac{5}{7} & -\frac{6}{7} \\
+0 & 1 & -\frac{11}{7} & -\frac{2}{7} \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+\end{align*}
+
+\paragraph{基本行列}
+
+\begin{align*}
+P_{i,j} &:= % i, j 行目の入れ替え
+\begin{pmatrix}
+1 & \\
+ & \ddots  &  \\
+ & & 1 \\
+ & & & 0 & & & & 1 \\
+ & & & & 1 &  \\
+ & & & & & \ddots &  \\
+ & & & & & & 1  \\
+ & & & 1 & & & & 0 \\
+ & & & & & & & & 1 \\
+ & & & & & & & & & \ddots \\
+ & & & & & & & & & & 1 
+\end{pmatrix}, \\
+M_i(c) &:= % i 行目の c 倍
+\begin{pmatrix}
+1 & \\
+& \ddots \\
+& & 1 \\
+& & & c \\
+& & & & 1 \\
+& & & & & \ddots \\
+& & & & & & 1
+\end{pmatrix}, 
+Q_{i,j}(c) := % i 行目に j 列目の c 倍を足す
+\begin{pmatrix}
+1 & \\
+& \ddots \\
+& & 1 &  & c \\
+& & & \ddots &  \\
+& & & & 1 \\
+& & & & & \ddots \\
+& & & & & & 1
+\end{pmatrix}
+\end{align*}
+
+\subsection{基本行列と逆行列}
+
+連立$1$次方程式の中でも特別な場合として、係数行列が正方行列である場合を考えましょう。つまり変数の個数とちょうど同じ本数の方程式がある場合を考えます。このとき方程式を解く操作は「係数行列に基本変形を施して、単位行列にする」ことと他なりません。そして基本変形は行列の積で表せますから、これは「係数行列の逆行列を考えていること」と同じになります。これを応用して、基本変形を用いて逆行列を求めることができます。
+
+\paragraph{行列のブロック分解}
+
+\paragraph{逆行列の計算法}
+
+基本変形を用いると、次のようにして逆行列を求めることができます。
+
+いま、$A$に基本行列$X_1, X_2, \ldots, X_k$をかけて単位行列になったとします。つまり$X_k X_{k-1} \cdots X_1 A = E$です。すると$A^{-1} = X_k X_{k-1} \cdots X_1$だと分かります。ここでこの式の一番右に単位行列を補って$A^{-1} = X_k X_{k-1} \cdots X_1 E$とします。「各$X_i$が行基本変形に対応していた」ことを思い出せば、右辺は「単位行列に対する基本変形」を行っているように見えます。つまり「\textbf{$A$を単位行列にしたのと同じ手順の行基本変形を単位行列に施すと、$A$の逆行列が得られる}」と言っているわけです。こうして逆行列が求まります。
+
+さらに基本変形で逆行列を求めるときに、一々「まず$A$を行基本変形で単位行列に変形して、その手順通りに単位行列にもう一度行基本変形を施す」なんてする必要はありません。\textbf{最初から$A$の右側に単位行列を並べ、行基本変形をしてしまえば良いのです}。実際、$A$と同じサイズの単位行列を並べた行列$(A \mid E)$に対して\footnote{ここでも縦線は、見易さのために入れているだけです。}、$A$を単位行列にするような基本変形をすれば
+\[
+X_k X_{k-1} \cdots X_1 (A \mid E) = (X_k X_{k-1} \cdots X_1 A \mid X_k X_{k-1} \cdots X_1 E) = (E \mid X_k X_{k-1} \cdots X_1)
+\]
+となります。\textbf{$A$が単位行列に変形されたのと同時に、元々右側にいた単位行列が$A^{-1}$に変形されるのです}。
+
+この方法が帰納することを確かめるため、$1$つ問題を解いてみましょう。
+
+\paragraph{問4 (2) の解答}
+\begin{align*}
+\Biggl(
+\begin{array}{rrr|rrr}
+1 & -2 & -9 & 1 & 0 & 0 \\
+-2 & 4 & 19 & 0 & 1 & 0 \\
+-2 & 5 & 25 & 0 & 0 & 1
+\end{array}
+\Biggr)
+\xrightarrow[]{}
+& \Biggl(
+\begin{array}{rrr|rrr}
+1 & -2 & -9 & 1 & 0 & 0 \\
+0 & 0 & 1 & 2 & 1 & 0 \\
+0 & 1 & 7 & 2 & 0 & 1
+\end{array}
+\Biggr)
+\\
+\xrightarrow[]{}
+& \Biggl(
+\begin{array}{rrr|rrr}
+1 & -2 & -9 & 1 & 0 & 0 \\
+0 & 1 & 7 & 2 & 0 & 1 \\
+0 & 0 & 1 & 2 & 1 & 0
+\end{array}
+\Biggr)
+\\
+\xrightarrow[]{}
+& \Biggl(
+\begin{array}{rrr|rrr}
+1 & 0 & 5 & 5 & 0 & 2 \\
+0 & 1 & 7 & 2 & 0 & 1 \\
+0 & 0 & 1 & 2 & 1 & 0
+\end{array}
+\Biggr)
+\\
+\xrightarrow[]{}
+& \Biggl(
+\begin{array}{rrr|rrr}
+1 & 0 & 0 & -5 & -5 & 2 \\
+0 & 1 & 0 & -12 & -7 & 1 \\
+0 & 0 & 1 & 2 & 1 & 0
+\end{array}
+\Biggr)
+\end{align*}
+
+こうして係数行列の逆行列が求まるので、これを拡大係数行列にかけて
+\[
+\Biggl(
+\begin{array}{rrr}
+-5 & -5 & 2 \\
+-12 & -7 & 1\\
+2 & 1 & 0
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrrr}
+1 & -2 & -9 & 5 \\
+-2 & 4 & 19 & -11 \\
+-2 & 5 & 25 & -14 
+\end{array}
+\Biggr)
+=
+\Biggl(
+\begin{array}{rrrr}
+1 & 0 & 0 & 2 \\
+0 & 1 & 0 & 3 \\
+0 & 0 & 1 & -1
+\end{array}
+\Biggr)
+\]
+のを得る\footnote{逆行列が得られたことは理論的には分かっているのですが、これが本当に逆行列になっていることは、一度は直接計算で確かめるべきです。}。答えは$x = 2$, $y = 3$, $z = -1$である。
+
+
+\paragraph{基本行列の逆行列}
+
+正方行列$A$に対し、その逆行列とは$AA^{-1} = A^{-1}A = E$となる行列のことでした。逆行列はいつでも存在するとは限らず、逆行列が存在するような正方行列$A$は\textbf{正則}であるといいます。$2$次正方行列の場合には、正則なことと$\det A \neq 0$とが同値であることを (大分昔になりますが) 「数理科学基礎 (線形代数学) 第5回」の配布プリント\pageref{paragraph:existence_of_inverse_matrix}ページにて直接証明しました。一般の場合も同様に行列式を用いて正則性の判定ができますが、高次の行列式を定義しないと、その手法は使えません。
+
+が、基本行列に関してはこんな一般論をゴタゴタ使わずとも、直に逆行列が計算できてしまいます。基本行列は「行基本変形」と対応します。そして\textbf{「基本変形を元に戻す操作」もまた基本変形です}。そこで基本変形を「どう戻せばいいか」を考えて、基本行列の逆行列に当たりが付きます。
+
+\[
+\begin{pmatrix}
+0 & & & & 1 \\
+& 1 & & \\
+& & \ddots & \\
+& & & 1 \\
+1 & & & & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & & & & 1 \\
+& 1 & & \\
+& & \ddots & \\
+& & & 1 \\
+1 & & & & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & & & & 1 \\
+& 1 & & \\
+& & \ddots & \\
+& & & 1 \\
+& & & & 1
+\end{pmatrix}
+\]
+
+\[
+\begin{pmatrix}
+1 & & c \\
+ & \ddots & \\
+ & & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & & -c \\
+ & \ddots & \\
+ & & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & & \\
+ & \ddots & \\
+ & & 1
+\end{pmatrix}
+\]
+
+\[
+\begin{pmatrix}
+1 & & \\
+ & \ddots & \\
+ & & 1 \\
+ & & & c \\
+ & & & & 1 \\
+ & & & & & \ddots \\
+ & & & & & & 1 \\
+\end{pmatrix}
+\begin{pmatrix}
+1 & & \\
+ & \ddots & \\
+ & & 1 \\
+ & & & \frac{1}{c} \\
+ & & & & 1 \\
+ & & & & & \ddots \\
+ & & & & & & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & & \\
+ & \ddots & \\
+ & & 1 \\
+ & & & 1 \\
+ & & & & 1 \\
+ & & & & & \ddots \\
+ & & & & & & 1 \\
+\end{pmatrix}
+\]
+
+\[
+P_{k,l}^2 = E, Q_{k, l}(c)Q_{k, l}(-c) = E, M_k(c)M_k\Bigl(\frac{1}{c}\Bigr) = E
+\]
+
+\paragraph{LU分解}
+
+\section{行列の像と階数}
+
+\subsection{行列が表す線型写像の像}
+
+
+
+\subsection{行列の階数と基本変形}
+

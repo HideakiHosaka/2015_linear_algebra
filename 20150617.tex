@@ -16,7 +16,7 @@
 \begin{itemize}
 \item 「$P$かつ$Q$を示す」というタイプの証明 (たとえば、部分空間の条件を全て確かめる問題) では、条件$P$と条件$Q$が両方とも示されているかどうか
 \item 「すべての$x$に対し$P(x)$が成り立つことを示す」というタイプの証明では、本当に$x$は何でも大丈夫か
-\item 「$P(x)$となる$x$が存在する」というタイプの証明では、$x$を具体的に証明できているか、あるいは$x$の存在を保証する定理を何か使っているか
+\item 「$P(x)$となる$x$が存在する」というタイプの証明では、$x$を具体的に構成できているか、あるいは$x$の存在を保証する定理を何か使っているか
 \item 「$P$かつ$P\Rightarrow Q$が成り立つので、$Q$が成り立つ」というタイプの証明では、何が$P$で何が$Q$なのか、なぜ$P\Rightarrow Q$が成り立つのか
 \end{itemize}
 に気を付けてください。これらが不明瞭だと、あっという間に議論がよく分からなくなってしまいます。もし記号論理学などの授業を取っている場合は、自分の証明が述語論理の形式に乗っかっているかを確かめると良いと思います。また簡単な判定法として「他人がこれを読んだら、意味が分かるかどうか」を想像してみることをお勧めします。
@@ -140,8 +140,8 @@ $V = \mathbb{R}^2$とする。$W_1 := \mathbb{R}\bm{e}_1$, $W_2 := \mathbb{R}\bm
 
 \noindent (3) $W_1 + W_2$が部分空間になることを、次のように確かめられる。
 \begin{itemize}
-\item $\bm{u}, \bm{v}\in W_1 +  W_2$とする。このとき$\bm{u} = \alpha_1 \bm{a}_1 + \beta_1 \bm{b}_1$, $\bm{v} = \alpha_2 \bm{a}_2 + \beta_2 \bm{b}_2$と書ける。よって$\bm{u} + \bm{v} = (\alpha_1 \bm{a}_1 + \alpha_2 \bm{a}_2) + (\beta_1 \bm{b}_1 + \beta_2 \bm{b}_2)$となる。ここで$W_1, W_2$は共に部分空間だから、$\alpha_1 \bm{a}_1 + \alpha_2 \bm{a}_2 \in W_1$, $\beta_1 \bm{b}_1 + \beta_2 \bm{b}_2 \in W_2$となる。よって$\bm{u} + \bm{v} \in W_1 +  W_2$となる。
-\item $\bm{u}\in W_1 +  W_2$, $\gamma\in\mathbb{R}$とする。このとき$\bm{u} = \alpha\bm{a} + \beta\bm{b}$ ($\bm{a} \in W_1$, $\bm{b} \in W_2$)と書ける。$W_1, W_2$は部分空間なので$\gamma\alpha\bm{a} \in W_1$, $\gamma\beta\bm{b} \in W_2$となる。よって$\gamma\bm{u} = \gamma(\alpha\bm{a} + \beta\bm{b}) = \gamma\alpha\bm{a} + \gamma\beta\bm{b}\in W_1 +  W_2$を得る。 \qed
+\item $\bm{u}, \bm{v}\in W_1 +  W_2$とする。このとき$\bm{u} = \bm{a}_1 + \bm{b}_1$, $\bm{v} = \bm{a}_2 + \bm{b}_2$ ($\bm{a}_1, \bm{a}_2 \in W_1$, $\bm{b}_1, \bm{b}_2\in W_2$) と書ける。よって$\bm{u} + \bm{v} = (\bm{a}_1 + \bm{a}_2) + (\bm{b}_1 + \bm{b}_2)$となる。ここで$W_1, W_2$は共に部分空間だから、$\bm{a}_1 + \bm{a}_2 \in W_1$, $\bm{b}_1 + \bm{b}_2 \in W_2$となる。よって$\bm{u} + \bm{v} \in W_1 +  W_2$となる。
+\item $\bm{u}\in W_1 +  W_2$, $\alpha\in\mathbb{R}$とする。このとき$\bm{u} = \bm{a} + \bm{b}$ ($\bm{a} \in W_1$, $\bm{b} \in W_2$)と書ける。$W_1, W_2$は部分空間なので$\alpha\bm{a} \in W_1$, $\alpha\bm{b} \in W_2$となる。よって$\alpha\bm{u} = \alpha(\bm{a} + \bm{b}) = \alpha\bm{a} + \alpha\bm{b}\in W_1 +  W_2$を得る。 \qed
 \end{itemize}
 
 \subsection{部分空間の例}
@@ -205,7 +205,7 @@ $V$と$W$を線型空間とし、$f\colon V\rightarrow W$を線型写像とし�
 
 \noindent (4) $\Psi(\bm{0}) = \bm{0}'$である。よって$\Psi$が単射なら$\Psi(\bm{v}) = \bm{0}'$なる$\bm{v}$は$\bm{0}$しかない。これより$\Ker\Psi=\{\bm{0}\}$である。
 
-逆に$\Ker\Psi = \{\bm{0}\}$とする。このとき$\bm{u}, \bm{v}\in V$が$\Psi(\bm{u}) = \Psi(\bm{v})$を満たしたとすると、(2)より$\bm{u} - \bm{v} = \Ker\Psi = \{\bm{0}\}$となる。よって$\bm{u} - \bm{v} = \bm{0}$だから$\bm{u} = \bm{v}$となり、$\Psi$の単射性が従う。 \qed
+逆に$\Ker\Psi = \{\bm{0}\}$とする。このとき$\bm{u}, \bm{v}\in V$が$\Psi(\bm{u}) = \Psi(\bm{v})$を満たしたとすると、(2)より$\bm{u} - \bm{v} \in \Ker\Psi = \{\bm{0}\}$となる。よって$\bm{u} - \bm{v} = \bm{0}$だから$\bm{u} = \bm{v}$となり、$\Psi$の単射性が従う。 \qed
 
 \paragraph{線型写像の核と単射性}
 
@@ -387,17 +387,17 @@ f(x) = \sum_{k = 0}^{n} \frac{f^{(k)}(\alpha)}{k!} (x - \alpha)^k = f(\alpha) + 
 
 \paragraph{おまけ: 完全列} 微妙に紙面が余ったので、ちょこっとだけ余分なことを書きます。この話は本当におまけなので、知らなくても1年生の線型代数の授業では何も困りません。
 
-さて問5では、次のような図式が得られています
+さて問4では、次のような図式が得られています
 \begin{center}
 \begin{tikzcd}
-\mathbb{R}[x] \arrow{r}{\Psi} & \mathbb{R}[x] \arrow{r}{\Phi} & \mathbb{R}^2
+\mathbb{R}[x] \arrow{r}{\Psi} & \mathbb{R}[x] \arrow{r}{\Phi} & \mathbb{R}
 \end{tikzcd}
 \end{center}
 そして、この図式の真ん中で$\Ker \Phi = \Im \Psi$が成り立っているのでした。このことを称して「図式が真ん中の$\mathbb{R}[x]$のところで\textbf{完全}である」といいます。
 
 さらに「$0$ベクトルだけを元に持つ線型空間」を$0$と書くと、線型空間$0$から線型空間$\mathbb{R}[x]$への線型写像は、$0$を$0$へ移すものしかありません。これを用いると$\Ker \Psi$が$0$ということは、線型写像$0\rightarrow\mathbb{R}[x]$の像と$\Ker \Psi$とが一致することと同じです。つまり$0\rightarrow \mathbb{R}[x]\xrightarrow[]{\Phi}\mathbb{R}[x]$が真ん中で完全なことが、単射性と同じ意味になります。
 
-また$\mathbb{R}$から$0$への線型写像は、全ての実数を$0$に送るものしかありません。この写像$\mathbb{R}\rightarrow 0$の核は$\mathbb{R}$全体ですから、$\ev_{\alpha}$の全射性\footnote{定数函数$a \in\mathbb{R}$に対し$\ev_{\alpha}(a) = a$なので、$\ev_{\alpha}$は全射です。}は、$\Ker \ev_{\alpha}$と$\mathbb{R}\rightarrow 0$の像が一致することと言えます。つまり$\mathbb{R}[x]\xrightarrow[]{\ev_{\alpha}}\mathbb{R}\rightarrow 0$は完全です。まとめると、\textbf{線型写像の単射性と全射性は、完全性を用いて表せます}。
+また$\mathbb{R}$から$0$への線型写像は、全ての実数を$0$に送るものしかありません。この写像$\mathbb{R}\rightarrow 0$の核は$\mathbb{R}$全体ですから、$\ev_{\alpha}$の全射性\footnote{定数函数$a \in\mathbb{R}$に対し$\ev_{\alpha}(a) = a$なので、$\ev_{\alpha}$は全射です。}は、$\Im \ev_{\alpha}$と$\mathbb{R}\rightarrow 0$の核が一致することと言えます。つまり$\mathbb{R}[x]\xrightarrow[]{\ev_{\alpha}}\mathbb{R}\rightarrow 0$は完全です。まとめると、\textbf{線型写像の単射性と全射性は、完全性を用いて表せます}。
 
 かくして、
 \begin{center}

@@ -1,0 +1,509 @@
+\chapter{線型空間の基底}
+\lectureinfo{2015年7月1日 1限}
+
+\section{証明のしかた}
+
+今回は証明問題が多かったせいか、解くのに苦しんでいる人がそこそこいたような気がします。そこで、$2$回くらい前のプリントで書いた内容と重複しますが、何点か役立つかもしれないアドバイスをお送りします。
+\begin{itemize}
+\item 大抵の場合、問題はいくつかの「示すべきこと」に分割できるはずです。たとえば今回の「基底であることを示せ」なら「$1$次独立であること」と「生成系であること」の両方を示せばよいわけです。また「$P$と$Q$が同値であることは「$P$ならば$Q$」と「$Q$ならば$P$」の$2$つに分割できます。こんな感じに\textbf{「何を示すべきか」をまずはっきりさせましょう}。これを間違えると、問題とは全くあさっての方向を向いた議論をする羽目になります。
+\item \textbf{定義にはきちんと従いましょう}。たとえば「与えられたベクトルの組が生成系であること」なら、生成系の定義に従って「全てのベクトルが、与えられたベクトルの組の$1$次結合で表せること」を示せばOKです。逆に定義に従わなかったら、何を言っているのかさっぱり分からなくなります。
+\item これは証明の仕方ではないですが、\textbf{書き上げた証明は自分で一度読んでみましょう}。読んで「あれ？」と思うところがあれば修正をしてください。自分で読んでも分からなければ、おそらく他の誰が読んでも理解できません。もし可能なら近くにいるお友達に読ませてみると、一段と「自分の証明の分かりにくい部分」がはっきりすると思います。
+\end{itemize}
+
+\section{基底と次元}
+
+今回はいよいよ「線型空間の基底」を定義します。基底を導入すると抽象的な線型空間と数ベクトル空間とを同一視できるようになり、行列に対する諸々の演算の意味が明らかになります。
+
+\subsection{ベクトルの$1$次独立性と線型空間の生成系}
+
+すぐ後で線型空間の基底は「$1$次独立な生成系」と定義されます。この定義を理解するためには「$1$次独立性」「生成系」という言葉を理科うする必要があるので、まずはその説明をします。ただ、みなさんの中には「それより何で基底が役立つのか先に知りたい」という人もいると思います。次の節を読んで後でここに戻るのも良いでしょう。
+
+\paragraph{$1$次独立性} 既にベクトルの$1$次独立性は何度も使っていますが、一応、復習をしておきましょう。
+
+$V$を線型空間、$\bm{v}_1, \ldots, \bm{v}_n \in V$とします。$\bm{v}_1, \ldots, \bm{v}_n$が\textbf{$1$次独立}であるとは$\alpha_1 \bm{v}_1 + \alpha_2 \bm{v}_2 + \cdots + \alpha_n \bm{v}_n = \bm{0}$となる$\bm{v}_1, \ldots, \bm{v}_n$の$1$次結合\footnote{$\alpha_1 \bm{v}_1 + \alpha_2 \bm{v}_2 + \cdots + \alpha_n \bm{v}_n$の形の式を「$\bm{v}_1, \ldots, \bm{v}_n$の\textbf{$1$次結合}」といいます。既に知っていると思いますが、念のため補足します。}が$\alpha_1 = \alpha_2 = \cdots = \alpha_n = 0$以外に存在しないことを言います。また$1$次独立でないことを\textbf{$1$次従属}といいます。
+
+直感的には$1$次独立性は「それぞれのベクトルが違う向きをしており、空間の張り方に無駄がないこと」と言えます。「張る空間」の記号を使えば、$1$次独立性は、任意の$1\leq i \leq n$に対し$\bm{v}_i \not\in \mathbb{R}\bm{v}_1 + \cdots + \hat{\mathbb{R}\bm{v}_i} + \cdots + \mathbb{R}\bm{v}_n$が成り立つ\footnote{ここで$\hat{\mathbb{R}\bm{v}_i}$と書いたのは「$\mathbb{R}\bm{v}_i$を除く」という意味です。一々$\mathbb{R}\bm{v}_1 +\cdots + \mathbb{R}\bm{v}_{i - 1} + \mathbb{R}\bm{v}_{i + 1} + \cdots + \mathbb{R}\bm{v}_n$と書くと長くて大変なので、しばしばこういう記法が用いられます。}ことと同値です。
+
+実際にいくつかの場合で、$1$次独立性を確認しましょう。ただし問10, 問11は連立$1$次方程式を解くだけですから、細かい解説は省略します。
+
+\paragraph{問10の解答} (1) $1$次従属 (2) $1$次独立
+
+\paragraph{問11の解答} (1) $1$次従属 (2) $1$次独立 (3) $1$次独立 (4) $1$次独立 (5) $1$次独立 (6) $1$次従属 (7) $1$次従属
+
+\paragraph{問11 (6) の補足} 後で説明する「線型空間の次元」の議論を使うと、(6) の答えに当たりをつけることができます。
+
+ここに出てくる$(1, 1, 2)$, $(3, 5, 8)$, $(13, 21, 34)$は、有名なFibonacci数列の一部分です。漸化式$a_{n + 2} = a_{n + 1} + a_n$を満たす数列で、初項と第$1$項\footnote{ここでは数列を「$0$番目」から数えました。}を共に$a_0 = a_1 = 1$とすると、$a_2$より先が$(2, 3, 5, 8, 13, 21, 34)$となります。
+
+ここで、Fibonacci数列と同じ漸化式を満たす数列全体の集合$V = \{(a_n)_{n \in \mathbb{N}} \in \mathbb{R}^{\mathbb{N}} \mid a_{n + 2} = a_{n + 1} + a_n\}$が線型空間になったことを思い出しましょう。この隣接$2$項間漸化式を満たす数列は最初の$2$項と$1$対$1$に対応するので、$\dim V = 2$です。一方で$(1, 1, 2)$, $(3, 5, 8)$, $(13, 21, 34)$はいずれも「$\text{第$1$成分} + \text{第$2$成分} = \text{第$3$成分}$」となっているので、後ろの項を付け加えて$V$の元を作れます。$2$次元線型空間$V$の中に$3$本の$1$次独立なベクトルを取ることはできないので、これで計算をしないでも、問題の答えが「$1$次従属」だと分かります。
+
+\paragraph{問17の解答}
+(1) $f(x) := a_0 + a_1 x + a_2 x^2 + a_3 x^3$とおき、$f$が閉区間$[0, 2\pi]$上で恒等的に$0$だったとする。このとき$f(0) = 0$より、$a_0 = 0$が従う。次に開区間$(0, 2\pi)$上で$f'(x) = a_1 + 2a_2 x + 3a_3 x^2 \equiv 0$なので、$x\rightarrow +0$の極限を取って$a_1 = 0$を得る。同様に$f''(x)$, $f'''(x)$の$x\rightarrow +0$における極限を順番に考えれば、$a_2 = 0$, $a_3 = 0$を得る。よって$1, x, x^2, x^3$は$1$次独立である。
+
+\noindent (2) $a + b\sin x + c \cos x \equiv 0$とおく。この両辺を$x$で微分すると$b\cos x - c\sin x \equiv 0$が得られる。これに$x = 0, 3\pi/2$を代入すれば、それぞれ$b = 0$と$c = 0$が得られる。これを元の$a + b\sin x + c \cos x \equiv 0$に代入すれば$a = 0$を得る。故に$\{1, \sin x, \cos x\}$は$1$次独立である。
+
+\noindent (3) $f(x) = a + be^x + ce^{2x} \equiv 0$とおく。このとき$f$とその$2$階までの微分に$0$を代入すると、
+\[
+0 = f(0) = a + b + c,\quad 0 = f'(0) = b + 2c,\quad 0 = f''(0) = b + 4c
+\]
+となる。後ろ$2$つの方程式を解くと$b = c = 0$が分かる。よって残りも$a = 0$となる。
+
+\noindent (4) $0 < \alpha < \pi$を固定する。$a \sin x + b \sin(x + \alpha) \equiv 0$とおく。このとき$x = 0$を両辺に代入すると$b\sin\alpha = 0$となる。$\alpha$の取り方から$\sin\alpha\neq 0$なので、$b = 0$となる。よって$a\sin x \equiv 0$となるので、両辺に$x = \pi/2$を代入して$a = 0$を得る。
+
+\noindent (5) $f(x) = a + b\sin x + c \cos x + d\sin 2x + e\cos 2x \equiv 0$とおく\footnote{$e$が自然対数の底を表す記号と重複しますが、誤解の余地は無いでしょう。}。微分を計算すると$f'(x) = b\cos x - c\sin x + 2d\cos 2x -2e\sin 2x \equiv 0$である。よって$0 = f'(0) = b + 2d$, $0  = f'(\pi) = -b + 2d$である。これを解いて$b = d = 0$を得るので、$f'(x) = -c\sin x - 2e\sin 2x$となる。これに$x = 3\pi/2$を代入すると$0 = f'(3\pi/2) = c$となる。続けて$x = \pi/4$を代入すれば$0 = f'(\pi/4) = -2e$となる。これで$b, c, d, e$が全て$0$だと分かったので、最後に元の$f(x)$の式に代入して$a = 0$を得る。
+
+\paragraph{生成系}
+
+$V$を線型空間、$\bm{v}_1, \bm{v}_2, \ldots, \bm{v}_n\in V$とします。$V$の全ての元が$\bm{v}_1, \bm{v}_2, \ldots, \bm{v}_n$の$1$次結合で表せるとき、$\bm{v}_1, \bm{v}_2, \ldots, \bm{v}_n$は$V$を\textbf{生成する}といいます。記号で書けば、$V = \mathbb{R}\bm{v}_1 + \mathbb{R}\bm{v}_2 + \cdots + \mathbb{R}\bm{v}_n$ということですね。
+
+これと$1$次独立性を合わせて、ようやく基底を定義する準備ができました。おまけ的になりますが、この節の最後に問4の解答を記しておきましょう。大体当たり前のことなのですが、証明の中で地味に使われます。
+
+\paragraph{問4の解答}
+
+$V$を線型空間、$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$をその要素の列とする。
+
+\noindent (1) $(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が$1$次独立とする。このとき$1\leq i_1 < i_2 < \cdots < i_k \leq n$とし、部分列$(\bm{f}_{i_1}, \bm{f}_{i_2}, \ldots, \bm{f}_{i_k})$を考える\footnote{「部分列」というときは、元の列からどんな間引き方をすることも許します。だから「最初の$n$個だけを取る」という議論では不十分です。この辺の言葉遣いは、微積分をするときに「収束する部分列」と言ったりするのと同じです。}と、これも$1$次独立となる。実際$\alpha_1 \bm{f}_{i_1} + \alpha_2 \bm{f}_{i_2} + \cdots  + \alpha_k \bm{f}_{i_k} = \bm{0}$とおくと、この両辺に$i_1, i_2, \ldots, i_k$に現れない$\alpha_j$たちを全て$0$倍して足しても、$0$である。そうすると元々の$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$の$1$次独立性から、$\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0$が従う。
+
+\noindent (2) $(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が$V$を生成したとする。このとき勝手な$\bm{v} \in V$を足した列$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n, \bm{v})$も$V$を生成する。実際、全てのベクトルは$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$の$1$次結合で表せる。その表式の両辺に$0\bm{v} = \bm{0}$を足した式を考えれば、$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n, \bm{v})$が$V$を生成することになる。\qed
+
+\paragraph{問4の別解} やっていること自体は同じなのですが、「ベクトルの張る線型空間」や「線型空間の和」の記号を使った証明もしてみます。
+
+\noindent (1) $(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が$1$次独立とする。このとき任意の$1\leq j \leq n$に対し、$\bm{f}_j \not\in \mathbb{R}\bm{f}_1 + \cdots + \hat{\mathbb{R}\bm{f}_j} + \cdots + \mathbb{R}\bm{f}_j$である。ここで$1\leq i_1 < i_2 < \cdots < i_k \leq n$とし、部分列$(\bm{f}_{i_1}, \bm{f}_{i_2}, \ldots, \bm{f}_{i_k})$を考える。すると任意の$1\leq l \leq k$に対し$\mathbb{R}\bm{f}_{i_1} + \cdots + \hat{\mathbb{R}\bm{f}_{i_l}} + \cdots + \mathbb{R}\bm{f}_{i_k}\subset\mathbb{R}\bm{f}_1 + \cdots + \hat{\mathbb{R}\bm{f}_{i_l}} + \cdots + \mathbb{R}_n$となるから、$\bm{f}_{i_l} \not\in \mathbb{R}\bm{f}_{i_1} + \cdots + \hat{\mathbb{R}\bm{f}_{i_l}} + \cdots + \mathbb{R}\bm{f}_{i_k}$でないといけない。これで$(\bm{f}_{i_1}, \bm{f}_{i_2}, \ldots, \bm{f}_{i_k})$の$1$次独立性が言えた。
+
+\noindent (2) $(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が$V$を生成したとする。このとき$\mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n = V$である。いま勝手に$\bm{v} \in V$を取ると、$\mathbb{R}\bm{v} \subset V$である。よって$V = \mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n \subset \mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n + \mathbb{R}\bm{v} \subset V$となり、$V = \mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n + \mathbb{R}\bm{v}$が従う。よって$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n, \bm{v})$も$V$を生成する。\qed
+
+\subsection{基底の定義}
+
+\paragraph{基底の定義}
+
+$V$を線型空間とし、$\bm{v}_1, \ldots, \bm{v}_n$を$V$の元とします。このとき$\bm{v}_1,\ldots,\bm{v}_n$たちが$1$次独立で、かつ$V$を生成するとき、$V$の元の列$(\bm{v}_1,\ldots,\bm{v}_n)$を$V$の\textbf{基底}といいます。また基底をなすベクトルの本数を$V$の\textbf{次元}といい、$\dim V$で表します。次元が正しく定まること、つまりどんな基底を持ってきても同じ本数のベクトルから構成されるという事実は、決して自明ではありません。ですがその証明は後回しにして、まずは次元の存在を認めた上で、基底の性質を調べましょう\footnote{念のため補足すると、議論が循環論法に陥らないようプリントを作っています。気になる人は先に\pageref{subsec:uniqueness_of_dimension}ページに行き、次元の一意性の証明を読んできてください。}。
+
+僕たちにとって最も身近な基底の例は、数ベクトル空間$\mathbb{R}^n$における「座標軸」の正の方向を向いた単位ベクトル
+\[
+\bm{e}_1 :=
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+\vdots \\
+0
+\end{pmatrix}, \quad
+\bm{e}_2 :=
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+\vdots \\
+0
+\end{pmatrix}, \quad \ldots, \quad
+\bm{e}_n :=
+\begin{pmatrix}
+0 \\
+0 \\
+\vdots \\
+0 \\
+1
+\end{pmatrix}
+\]
+の組$(\bm{e}_1, \ldots, \bm{e}_n)$です。この基底は\textbf{$\mathbb{R}^n$の標準基底}と呼ばれます。最初に、これがきちんと基底の条件を満たしていることを確認しましょう。
+
+\paragraph{問12の解答} 勝手な$\mathbb{R}^n$の元は
+\[
+\begin{pmatrix}
+\alpha_1 \\
+\alpha_2 \\
+\vdots \\
+\alpha_n
+\end{pmatrix}
+=
+\alpha_1 \bm{e}_1 + \alpha_2 \bm{e}_2 + \cdots + \alpha_n \bm{e}_n
+\]
+と書けるので、$\bm{e}_1,\ldots,\bm{e}_n$たちは$\mathbb{R}^n$を生成する。また
+\[
+\bm{0} = \alpha_1 \bm{e}_1 + \alpha_2 \bm{e}_2 + \cdots + \alpha_n \bm{e}_n
+=
+\begin{pmatrix}
+\alpha_1 \\
+\alpha_2 \\
+\vdots \\
+\alpha_n
+\end{pmatrix}
+\]
+とおくと、各成分が$0$であることから$\alpha_1 = \cdots = \alpha_n = 0$が従う。これより$\bm{e}_1,\ldots,\bm{e}_n$たちは$1$次独立である。以上で$(\bm{e}_1,\ldots,\bm{e}_n)$が$\mathbb{R}^n$の基底であり、$\dim \mathbb{R}^n = n$が言えた。\qed
+
+\paragraph{基底と座標}
+
+$\mathbb{R}^n$の標準基底の例では、$\mathbb{R}^n$のベクトルを$\bm{e}_1,\ldots,\bm{e}_n$で表したときの$\bm{e}_i$が、$i$番目の座標と全く同じでした。一般の場合でも全く状況は同じで、\textbf{基底を定めることと座標を入れることは同じ}です。そして\textbf{座標はどうあるべきか}を考えることによって、基底の定義に込められた意味が見えてきます。
+
+$V$を一般の線型空間とし、$(\bm{v}_1,\ldots,\bm{v}_n)$をその基底とします。数ベクトル空間の場合を真似して、僕たちは$\bm{x}\in V$が
+\[
+\bm{x} = x_1\bm{v}_1 + x_2\bm{v}_2 + \cdots + x_n\bm{v}_n
+\]
+を満たすときに「$\bm{x}$の座標は${}^t (x_1, x_2, \ldots, x_n)$である」と言いたいのです。このように言うためには、まず「全ての$V$の元に対して、きちんと座標が定まること」が不可欠です。ここで$(\bm{v}_1,\ldots,\bm{v}_n)$は基底だったから、$\bm{v}_1,\ldots,\bm{v}_n$たちは$V$を張ります。だから全ての$\bm{x} \in V$を、$\bm{v}_1,\ldots,\bm{v}_n$たちの$1$次結合で表せます。これでどんな$V$の元も、座標で表示できることが分かりました。
+
+ですが、これで十分ではありません。座標と呼ぶからには「異なる座標が同じ点を表してしまう」という事態があってはいけません。こちらの条件はどうでしょうか？いま$\bm{x} \in V$が
+\[
+\bm{x} = x_1\bm{v}_1 + x_2\bm{v}_2 + \cdots + x_n\bm{v}_n = x'_1 \bm{v}_1 + x'_2\bm{v}_2 + \cdots + x'_n \bm{v}_n
+\]
+と、基底$(\bm{v}_1,\ldots,\bm{v}_n)$を用いて$2$通りに表示されたとしましょう。すると第$2$式と第$3$式から
+\[
+(x_1 - x'_1)\bm{v}_1 + (x_2 - x'_2)\bm{v}_2 + \cdots + (x_n - x'_n)\bm{v}_n = \bm{0}
+\]
+を得ます。ここで$\bm{v}_1,\ldots,\bm{v}_n$は$1$次独立でしたから、$x_1 - x'_1 = x_2 - x'_2 = \cdots = x_n - x'_n = 0$を得ます。つまり全ての$\bm{x} \in V$に対し「$\bm{x}$を$\bm{v}_1,\ldots,\bm{v}_n$の$1$次結合で表す式を持ってきたら、それらは全く同じ表式である」と言っているわけです。これは座標の一意性に他なりません。
+
+かくして基底を決めることは、座標を入れることと全く同じであり
+\begin{itemize}
+\item 基底が$V$を生成することは、全ての$V$の元に座標を対応させるための条件
+\item 基底が$1$次独立であることは、座標がただ一通りに定まるための条件
+\end{itemize}
+だったのです。このことを用いると、$(\bm{v}_1, \ldots, \bm{v}_n)$が基底であるための条件が「全てのベクトルが$\bm{v}_1,\ldots,\bm{v}_n$の$1$次結合で、ただ$1$通りに表せること」とまとめられます。
+
+さらに「座標を入れる」という話は、線型写像の言葉を使うとすっきり書くことができます。
+
+% 基底を決めること = V -> R^n linear map を定めること
+% 基底の移動と座標変換が inverse であること
+% inverse な変換が打ち消し合うから、座標と基底のペアがベクトルを定めること
+
+\paragraph{問1の解答}
+
+$V$を線型空間とし、$(\bm{f}_1, \ldots, \bm{f}_n)$をその要素の列とする。このとき写像$\varphi\colon\mathbb{R}^n \rightarrow V$を、$\bm{x} = {}^t(x_1, x_2, \ldots, x_n)$に対し$\varphi(\bm{x}) := x_1\bm{f}_1 + x_2\bm{f}_2 + \cdots + x_n \bm{f}_n$で定める。
+
+\noindent (0) まず$\varphi$が線型写像であることを示しておく。
+\begin{itemize}
+\item $\bm{x} = {}^t(x_1, x_2, \ldots, x_n)$, $\bm{y} = {}^t(y_1, y_2, \ldots, y_n)$に対し
+\begin{align*}
+\varphi(\bm{x} + \bm{y}) &= \varphi\bigl({}^t(x_1 + y_1, x_2 + y_2, \ldots, x_n + y_n)\bigr)
+=(x_1 + y_1)\bm{f}_1 + (x_2 + y_2)\bm{f}_2 + \cdots + (x_n + y_n) \bm{f}_n \\
+&= (x_1 \bm{f}_1 + x_2 \bm{f}_2 + \cdots + x_n \bm{f}_n) + (y_1 \bm{f}_1 + y_2 \bm{f}_2 + \cdots + y_n \bm{f}_n)
+= \varphi(\bm{x}) + \varphi(\bm{y})
+\end{align*}
+\item $\bm{x} = {}^t(x_1, x_2, \ldots, x_n)$, $\alpha\in\mathbb{R}$に対し
+\begin{align*}
+\varphi(\alpha\bm{x})
+&= \varphi\bigl((\alpha x_1, \alpha x_2, \ldots, \alpha x_n)\bigr)
+= \alpha x_1 \bm{f}_1 + \alpha x_2 \bm{f}_2 + \cdots + \alpha x_n \bm{f}_n \\
+&= \alpha(x_1 \bm{f}_1 + x_2 \bm{f}_2 + \cdots + x_n \bm{f}_n) = \alpha \varphi(\bm{x})
+\end{align*}
+\end{itemize}
+
+\noindent (1) $(\bm{f}_1, \ldots, \bm{f}_n)$が$1$次独立であることは、$\varphi(\bm{x}) = \bm{0}$を満たす$\bm{x} = {}^t(x_1, x_2, \ldots, x_n)$が$\bm{x} = \bm{0}$以外に存在しないことと同値である。よって$(\bm{f}_1, \ldots, \bm{f}_n)$の$1$次独立性は$\Ker \varphi = \{\bm{0}\}$と同値である。そして$\Ker \varphi = \{\bm{0}\}$と$\varphi$の単射性が同値だったので、$(\bm{f}_1, \ldots, \bm{f}_n)$の$1$次独立性と$\varphi$の単射性が同値になる。
+
+\noindent (2) $(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$は$\Im \varphi$を生成する。一方$\varphi$の全射性は、$\Im \varphi = V$と同値である。よって$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が$V$を生成することと全射性が同値になる。 \qed
+
+\paragraph{座標による同一視}
+
+この問1から、特に「$\varphi$が全単射であることと、$(\bm{f}_1, \ldots, \bm{f}_n)$が基底をなすことが同値」と分かります。つまり\textbf{$V$の基底を取って来れば、それに応じて全単射な線型写像$\varphi\colon\mathbb{R}^n \rightarrow V$が付いてくる}というわけです。そして$\varphi$が全単射ということは$\mathbb{R}^n$の元と$V$の元との間に$1:1$の対応が付くということです。すなわち$\varphi$によって、$\mathbb{R}^n$の元と$V$の元とを同一視できます。しかも$\varphi$は線型写像ですから、任意の$\bm{x}, \bm{y}\in \mathbb{R}^n$と$\alpha \in \mathbb{R}$に対し$\varphi(\bm{x} + \bm{y}) = \varphi(\bm{x}) + \varphi(\bm{y})$, $\varphi(\alpha\bm{x}) = \alpha \varphi(\bm{x})$が成り立ちます。つまり「$\varphi$で$V$に送ってから足し算/スカラー倍をしても、先に$\mathbb{R}^n$の方で足し算/スカラー倍をして$\varphi$に送っても結果が同じ」です。だから今の「$\varphi$による$\mathbb{R}^n$と$V$の同一視」は、単に$1:1$の対応が付くというだけでなく、\textbf{加法とスカラー倍の構造まで込めて$\mathbb{R}^n$と$V$とを同一視できる}ということを言っているのです。基底を取ることによって、線型空間としての$\mathbb{R}^n$と$V$の構造は全く同じだと分かります。このことを称して「$\mathbb{R}^n$と$V$は\textbf{同型}である」とか「$\varphi$は線型空間の間の\textbf{同型写像}である」とかいいます。また$\mathbb{R}^n \simeq V$とか$\varphi\colon\mathbb{R}^n\xrightarrow{\sim}V$などと書いたりします\footnote{この辺は記号の亜種が色々あるのですが、大体$=$とか$\rightarrow$に$\sim$がくっついてたら「同型」と思って差支えありません。}。
+
+\paragraph{線型写像の行列表示}
+
+今度は、$2$つの線型空間$V, W$とその間の線型写像$f\colon V\rightarrow W$を考えましょう。そして$\dim V = n$, $\dim W = m$とします。基底を取ることで、$V$は$\mathbb{R}^n$と、$W$は$\mathbb{R}^m$とそれぞれ同型になります。その同型を与える写像を$\varphi\colon\mathbb{R}^n \rightarrow V$, $\psi\colon\mathbb{R}^m \rightarrow W$とします。そうすると、次のような図式ができます。
+\[
+\begin{tikzcd}
+V \arrow{r}{f} & W \\
+\mathbb{R}^n \arrow{u}{\varphi} & \mathbb{R}^m \arrow{u}{\psi}
+\end{tikzcd}
+\]
+ここで$\psi$は全単射ですから、逆写像$\psi^{-1}$が定義できます。そして$\psi$が線型写像であることを使うと、$\psi^{-1}$も線型写像であることが示せます。そこで右側にある縦の矢印の向きを反転させると
+\[
+\begin{tikzcd}
+V \arrow{r}{f} & W \arrow{d}{\psi^{-1}} \\
+\mathbb{R}^n \arrow{u}{\varphi} \arrow[dashed]{r} & \mathbb{R}^m
+\end{tikzcd}
+\]
+という図式が得られます。元々あったのは$f\colon V\rightarrow W$という線型写像でしたが、基底を用いて$V, W$を数ベクトル空間と同一視すると、$\psi^{-1} \circ f \circ \varphi$という、$\mathbb{R}^n$から$\mathbb{R}^m$への写像が得られます\footnote{図式の側では「既にある$3$本の矢印を合成して、点線部分の矢印が作れる」ということです。}。線型写像の合成は再び線型写像になりますから、$\psi^{-1} \circ f \circ \varphi\colon \mathbb{R}^n \rightarrow\mathbb{R}^m$は数ベクトル空間の間の線型写像です。つまりこれは、行列そのものです。そして\textbf{線型写像の合成と表現行列の積がぴったり対応します}。最初のあの「よく分からない行列の積の定義」は、線型写像の合成に合うようきめられていたのです。
+
+こんな感じで線型写像$f\colon V \rightarrow W$が与えられると、定義域と値域の両方を数ベクトル空間と同一視することで、$f$を行列と同一視することができます。この$f$のことを線型写像の\textbf{行列表示}といいます。「行列が線型写像」という話は既にしましたが、逆に「線型写像は行列で表せる」のです。ですから僕たちは行列に関する諸々の性質を調べましたが、それは「行列相手にしか適用できない話」ではなく「一般の線型写像に対しても適用できる話」をしていたのです\footnote{だから線型代数の話は抽象的な議論で進めることもできるし、基底の定義を済ませてから行列計算によるゴリ押しで進めることもできます。どっちか一方が大事なのではなく両者を対応付けて理解することが大事なのですが、話の順番やウェイトの置き方には色々バリエーションがあります。この辺が線型代数の教科書が巷にあふれる$1$つの原因のような気がします。好みは人によってまちまちだと思うので、皆さんも「自分にとって馴染みやすい理解のしかた」を探してみてください。}。
+
+\subsection{基底の構成と判定条件}
+
+さて、一般に線型空間の基底を作るにはどうすれば良いでしょうか？この問題に対する処方箋が、問5, 6, 7で与えられます。結果を信じるならば、問5は
+\begin{itemize}
+\item 最初に$\bm{0}$でないベクトルを取ると、そこに「$1$次独立性が保たれるように別のベクトルを適当に足す」という操作は、基底が出来上がるまで続けられる
+\item 最初に適当な生成系を取ると、「生成系であるという条件を保ったままベクトルを間引いていく」という操作は、基底が出来上がるまで続けられる
+\end{itemize}
+と言っているわけです。そして問6と問7を合わせると
+\begin{itemize}
+\item $1$次独立なベクトルの組について「生成系であること」と「これ以上$1$次独立なベクトルを足せないこと」は同値
+\item 生成系をなすベクトルの組について「$1$次独立であること」と「これ以上間引くと生成系にならないこと」は同値
+\end{itemize}
+だと分かります。ですから「$1$次独立なベクトルを集める」あるいは「生成系を構成するベクトルを減らす」という操作を「これ以上は無理」というところまで行うことで、基底が得られると分かります。特に線型空間$V$の部分空間$W\subset V$が与えられたとき「$W$の基底をまず作って、そこに$V$のベクトルを継ぎ足して$V$全体の基底を作る」という方法で$V$の基底が作れます。この手法は\textbf{基底の延長}と呼ばれ、しばしば活躍します。たとえば基底の延長を考えることで、部分空間$W\subset V$がいつも$\dim W \leq \dim V$を満たすことが分かります。
+
+それでは、問題を解きましょう。
+
+\paragraph{問5の解答} $V$を線型空間とし、$(\bm{f}_1, \ldots, \bm{f}_n)$をその要素の列とする。
+
+\noindent (1) $(\bm{f}_1, \ldots, \bm{f}_n)$が$1$次独立だが、$V$を生成しないとする。このとき$\mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n$は$V$の真部分集合なので、$\bm{f}_{n+1} \in V$で$\bm{f}_{n + 1}\not\in\mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n$を満たすものが取れる。このとき$(\bm{f}_1, \ldots, \bm{f}_n, \bm{f}_{n + 1})$は$1$次独立である。実際$\alpha_1\bm{f}_1 + \cdots + \alpha_n\bm{f}_n + \alpha_{n + 1}\bm{f}_{n + 1} = 0$とおくと、$\alpha_1\bm{f}_1 + \cdots + \alpha_n\bm{f}_n = -\alpha_{n + 1}\bm{f}_{n + 1}$である。もし$\alpha_{n + 1}\neq 0$なら$\bm{f}_{n + 1} = (\alpha_1\bm{f}_1 + \cdots + \alpha_n\bm{f}_n)/(-\alpha_{n + 1})$となってしまい、$\bm{f}_{n + 1}$の取り方に矛盾する。よって$\alpha_{n + 1} = 0$で$\alpha_1\bm{f}_1 + \cdots + \alpha_n\bm{f}_n = \bm{0}$が得られる。$\bm{f}_1, \ldots, \bm{f}_n$は元々$1$次独立だったので、結局$\alpha_1 = \cdots = \alpha_n = 0$となる。
+
+\noindent (2) $(\bm{f}_1, \ldots, \bm{f}_n)$が$V$を生成するが、$1$次独立でないとする。このとき$\alpha_1 \bm{f}_1 + \ldots + \alpha_n \bm{f}_n = \bm{0}$となる実数の組$(\alpha_1, \ldots, \alpha_n)$であって、少なくとも$1$つは$0$でないようなものが存在する。ここで、$\alpha_i \neq 0$となる$1\leq i$を$1$つ選ぶと、$\bm{f}_i$を取り除いた列$(\bm{f}_1, \ldots, \hat{\bm{f}_i}, \ldots, \bm{f}_n)$も$V$を生成する\footnote{ここで$\bm{f}_i$の上に$\hat{\,}$をつけて$\hat{\bm{f}_i}$と書いたのは「$\bm{f}_i$を取る」という意味です。さっきは足し算の中でこの記号を使いましたが、「特定の$1$つを取り除く」という言葉が意味をなす文脈では、所構わず使われます。}。なぜなら$\alpha_i \neq 0$より$\bm{f}_i$は$\bm{f}_i = -(\alpha_1 \bm{f}_1 + \cdots + \hat{\alpha_i \bm{f}_i} + \cdots + \alpha_n \bm{f}_n)/\alpha_i$を満たす。よって$\bm{f}_i$は$\bm{f}_1,\ldots,\hat{\bm{f}_i},\ldots,\bm{f}_n$の$1$次結合で書けてしまうから、$\bm{f}_1,\ldots,\bm{f}_i,\ldots,\bm{f}_n$の$1$次結合は$\bm{f}_i$を使わない形で書ける。\qed
+
+\paragraph{問6の解答} $V$を線型空間とし、$(\bm{f}_1, \ldots, \bm{f}_n)$をその要素の列とする。
+
+\noindent (1) $(\bm{f}_1, \ldots, \bm{f}_n)$が$1$次独立で、ここに$V$のどんな元を付け加えても$1$次独立にならないとする。このとき任意に$\bm{v}\in V$を取ると、$(\bm{f}_1, \ldots, \bm{f}_n, \bm{v})$は$1$次従属だから、$\alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n + \alpha_{n + 1} \bm{f}_{n + 1} = \bm{0}$となる実数の組$(\alpha_1, \ldots, \alpha_{n + 1})$で、少なくとも$1$つは$0$でないものが存在する。ここでもし$\alpha_{n + 1} = 0$だと$(\bm{f}_1, \ldots, \bm{f}_n)$の$1$次独立性に反するので、$\alpha_{n + 1} \neq 0$である。よって$\bm{v} = -(\alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n)/\alpha_{n + 1}$となる。これは$\bm{v} \in \mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n$に他ならない。$\bm{v}$は任意だったので、$\mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_n = V$である。つまり$(\bm{f}_1, \ldots, \bm{f}_n)$は$V$を生成する。
+
+\noindent (2) $(\bm{f}_1, \ldots, \bm{f}_n)$は生成系で、ここからどの元を取り去っても生成系にならないとする。このとき$\alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n = \bm{0}$とおく。もし$\alpha_i \neq 0$となる$i$が存在すれば、$\bm{f}_i = -(\alpha_1 \bm{f}_1 + \cdots + \hat{\alpha_i \bm{f}_i} + \cdots + \alpha_n \bm{f})/\alpha_i$となり、$\bm{f}_i$が他のベクトルの$1$次結合で表せてしまう。したがって$\bm{f}_i$を取り除いた列$(\bm{f}_1, \ldots, \hat{\bm{f}_i}, \ldots ,\bm{f}_n)$が$V$の生成系となり、矛盾する。よって全ての$i$について$\alpha_i = 0$が従うから、$(\bm{f}_1, \ldots, \bm{f}_n)$たちは$1$次独立である。\qed
+
+\paragraph{問7の解答} $V$を線型空間とし、その要素の列$(\bm{f}_1, \ldots, \bm{f}_n)$が$1$次独立な生成系とする。
+
+\noindent (1) $\bm{v} \in V$を$\bm{0}$でないベクトルとする。このとき$(\bm{f}_1, \ldots, \bm{f}_n)$は$V$の生成系だから、$\bm{v} = \alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n$と表せる。よって$(\bm{f}_1, \ldots, \bm{f}_n, \bm{v})$は$1$次独立でない。
+
+\noindent (2) $1\leq i \leq n$とする。このとき$\bm{f}_i = \alpha_1 \bm{f}_1 + \cdots + \hat{\alpha_i \bm{f}_i} + \cdots + \alpha_n \bm{f}_n$と表せたとすると、$(\bm{f}_1, \ldots, \bm{f}_n)$が$1$次独立であることに反する。よって$(\bm{f}_1, \ldots, \bm{f}_n)$の中からどの$\bm{f}_i$を引き抜いても、残りのベクトルの$1$次結合で$\bm{f}_i$を表すことはできない。したがって$(\bm{f}_1, \ldots, \bm{f}_n)$からベクトルを取り除いた部分列は、$V$を生成しえない。\qed
+
+
+\subsection{基底の順序と空間の向き}
+
+線型空間$V$に属するベクトルが何本か与えられたとき、それらが$1$次独立であるかどうかとか、あるいは$V$を張るかどうかとかは、ベクトルたちを並べる順番に全く依存しません。ほとんど当たり前ですが、一応証明しておきます。
+
+\paragraph{問2の解答} $V$を線型空間とし、$\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n \in V$とする。また$\bm{g}_1, \bm{g}_2, \ldots, \bm{g}_n$を$\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n$の並べ替えとし\footnote{この問題で考えられているのは「ありとあらゆる並べ替え方」です。ですから「順番を正反対にした場合」とか「$2$つだけ入れ替えた場合」だけを考えるのでは、議論が不十分です。事実としては「$2$つの入れ替れかえで大丈夫なら、どんな入れ替えでも大丈夫」ではあるのですが、このことは証明する必要があります。}、添字の対応を$\bm{g}_i = \bm{f}_{\sigma(i)}$および$\bm{f}_i = \bm{g}_{\tau(i)}$と表す。
+
+いま$\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n$たちが$1$次独立だったとする。このとき$a_1 \bm{g}_1 + \cdots + a_n \bm{g}_n = \bm{0}$とおくと
+\[
+\bm{0} = a_1 \bm{g}_1 + \cdots + a_n \bm{g}_n = a_1 \bm{f}_{\sigma(1)} + \cdots + a_n \bm{f}_{\sigma(n)}
+\]
+である。ここで$\sigma(1),\ldots,\sigma(n)$は$1,\ldots,n$を並べ替えに過ぎないから、第$3$式は項の順番を並び替えれば$\bm{f}_1, \ldots, \bm{f}_n$の$1$次結合になる。$\bm{f}_1, \ldots, \bm{f}_n$は$1$次独立だから、その係数についている$a_i$ ($1\leq i\leq n$) たちは全て$0$である。これで$\bm{g}_1, \ldots, \bm{g}_n$も$1$次独立だと言えた。
+
+また$\bm{f}_1, \ldots, \bm{f}_n$が$V$を生成したとする。このとき勝手な$\bm{x} \in V$を取ると、$\bm{x} = x_1 \bm{f}_1 + \cdots + x_n \bm{f}_n$と表せる。すると$\bm{f}_i$たちは$\bm{g}_j$たちのどれかなので、$\bm{x} = x_1 \bm{g}_{\tau(1)} + \cdots + x_n \bm{g}_{\tau(n)}$と書ける。$\bm{x}$は任意なので、結局全ての$\bm{x} \in V$が$\bm{g}_1, \ldots, \bm{g}_n$の$1$次結合で表せると言えた。 \qed
+
+\paragraph{基底の順序}
+
+ここで基底の定義を思い出しましょう。基底は「$1$次独立」な「生成系」であることでした。ベクトルの順番を並べ替えてもこれらの性質は成り立ちますので、結局のところ「基底は並べ替えても基底である」と分かります。では基底が与えられたとき、その順序は考慮すべきなのでしょうか？
+
+結論から先に言うと、基底は「同じベクトルから構成されていても、並び順が違えば別物である」と考えるべきです。というのも、基底には「座標を定める」という役割がありました。そして基底の順番を並び替えると、それに対応して座標の順番が入れ替わります。ですから「基底の並び順を区別しない」ということは「座標の並び順が入れ替わっても気にしない」という意味になってしまいます。これはさすがに変ですよね。ですから基底を考えるときは、並び順まで込めること、言い換えればベクトルの「組」ではなく「列」を考えるのだということを忘れないでください。
+
+\paragraph{空間の向き}
+実ベクトル空間の場合、基底は「空間の向き」を定めます。そして基底を並べる順序を変えると、向きが変わります。
+
+たとえば$2$次元平面$\mathbb{R}^2$では、普通「反時計回りが正の向き」という約束をします。これは$\mathbb{R}^2$の標準基底$\bm{e}_1$, $\bm{e}_2$に対し「$\bm{e}_1$の方向から$\bm{e}_2$の方向を眺める回り方」が正の向きだと言っているわけです。また$3$次元だと、座標系が「右手系か左手系か」という言い回しを良く使います。座標と基底は対応していますから、$\bm{e}_1, \bm{e}_2, \bm{e}_3$をこの順に並べたものが右手系、どれか$2$つの順序を入れ替えたものが左手系だと言っています。
+
+いま紹介したのは「$\mathbb{R}^2$, $\mathbb{R}^3$の標準基底」という特別な例なので、これだけで「一般の線型空間に対しても、基底の取り方で向きが定まる」という事実を理解するのは難しいと思います。厳密に定義するには行列式を使い「全ての基底を集めてできる集合を$2$つに分割する」という議論をしなければいけません。こうした話もおいおい紹介しますが、今は何となく「基底の並べ方が向きと関係する」と身近な具体例で感じておいてください。
+
+\paragraph{問14の解答}
+$\mathbb{C}$の$\mathbb{R}$上の基底として$(1, i)$が取れる。実際、任意の複素数$z\in\mathbb{C}$は$z = a + bi$と書けるので、$(1, i)$は$\mathbb{C}$を生成する。また$a + bi = 0$なら$a = b = 0$なので、$(1, i)$は$\mathbb{R}$上$1$次独立である。\qed
+
+
+\paragraph{複素平面の向き}
+
+基底の並べる順序を決めると、線型空間の「向き」が定まるという話をしました。単に抽象的な線型空間を相手にするだけなら、ここで話は終わってしまいます。ですが相手が複素平面$\mathbb{C}$だと話は別で、$\mathbb{C}$の中には$1, i$という自然な基底が最初からついてきています。そして$1$と$i$を「どちらを先に並べるか」といったら、$1$を先に並べる方が自然でしょう。こんなわけで、$\mathbb{C}$には「$\mathbb{R}$線型空間としての自然な向き」が最初から定まっています。この$\mathbb{C}$の向きを使うことで、複素数の数ベクトル空間$\mathbb{C}^n$にも最初から実線型空間としての自然な向きが入ります。
+
+\section{有名な線型空間における基底の例}
+
+さて、基底の抽象論から一旦離れ、具体的な基底の例を見てみましょう。特に線型空間の中でも、行列のなす線型空間や多項式のなす線型空間は、非常によく使われるものです。そこでこれらの空間を例にして、基底を見てみます。
+
+\subsection{行列のなす線型空間}
+
+\paragraph{問13の解答} まず$(m, n)$型行列全体の集合$\Mat_{m, n}(\mathbb{R})$が線型空間であることを示す。
+\begin{itemize}
+\item $\Mat_{m, n}(\mathbb{R})$には、加法が定義されている
+\begin{itemize}
+\item 加法は各成分毎に定義されており、実数の和は交換可能なので、行列の和も交換可能である
+\item ゼロ行列$O \in \Mat_{m, n}(\mathbb{R})$がある
+\item 任意の行列$A \in \Mat_{m, n}(\mathbb{R})$に対し、その成分を全て$(-1)$倍した行列$-A$が、$A + (-A) = (-A) + A = O$を満たす唯一の元である。
+\end{itemize}
+\item $\Mat_{m, n}(\mathbb{R})$には、スカラー倍が定義されている
+\begin{itemize}
+\item 任意の$A \in \Mat_{m, n}(\mathbb{R})$と$\alpha, \beta\in \mathbb{R}$に対し、$\alpha (\beta A) = (\alpha \beta)A$が成り立つ
+\item 任意の$A \in \Mat_{m, n}(\mathbb{R})$に対し、$1A = A$が成り立つ
+\end{itemize}
+\item 加法とスカラー倍について、分配法則が成り立つ。
+\begin{itemize}
+\item 任意の$A, B\in \Mat_{m, n}(\mathbb{R})$と$\alpha \in \mathbb{R}$に対し、$\alpha(A + B) = \alpha A + \alpha B$が成り立つ
+\item 任意の$A \in \Mat_{m, n}(\mathbb{R})$と$\alpha, \beta \in \mathbb{R}$に対し、$(\alpha + \beta)A = \alpha A + \beta A$が成り立つ
+\end{itemize}
+\end{itemize}
+次に、$\Mat_{m, n}(\mathbb{R})$が有限次元であることを示す。$(i, j)$成分だけが$1$で他の成分が全て$0$であるような行列を、$E_{ij}$と表す。このとき$E_{ij}$は$1$次独立である。実際
+\[
+O = \sum_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}} a_{ij} E_{ij} =
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}
+\]
+とおくと、全ての$a_{ij}$が$0$となる。また、勝手な行列$A = (a_{ij})_{\substack{1\leq i\leq m\\ 1\leq j\leq n}}$を取ると
+\[
+A = 
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}
+= \sum_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}} a_{ij} E_{ij}
+\]
+は$E_{ij}$たちの$1$次結合で表されている。よって$\{E_{ij}\mid 1\leq i \leq m, 1\leq j \leq n\}$の元を適当な順序で並べたものは、$\Mat_{m, n}(\mathbb{R})$を生成する。これで$\Mat_{m, n}(\mathbb{R})$が$mn$次元の線型空間であると分かった\footnote{この証明は、$\mathbb{R}^n$が$n$次元線型空間であることの証明と全く同じです。行列は成分が長方形の形に並んでいるものの、線型空間としての構造は、所詮$mn$個の数を成分毎に足したりスカラー倍するだけに過ぎません。だから線型空間としては$\Mat_{m, n}(\mathbb{R})\simeq\mathbb{R}^{mn}$です。}。\qed
+
+\paragraph{問16の解答} 
+
+(1) $n$次実対称行列全体の集合を$\Sym_n(\mathbb{R})$と書く\footnote{対称行列のことを``\uline{sym}metric matrix''といいます。$\Sym_n(\mathbb{R})$の記号はここから取りました。}と、これは$\Mat_n(\mathbb{R}) := \Mat_{n, n}(\mathbb{R})$の部分空間である\footnote{正方行列のサイズを指定するには$1$つの自然数で事足りるので、しばしば$\Mat_{n, n}(\mathbb{R})$のことを$\Mat_n(\mathbb{R})$と略記します。}。実際
+\begin{itemize}
+\item $A, B \in \Sym_n(\mathbb{R})$のとき、${}^t(A + B) = {}^t A + {}^t B = A + B$より$A + B \in \Sym_n(\mathbb{R})$
+\item $A \in \Sym_n(\mathbb{R})$, $\alpha \in \mathbb{R}$のとき、${}^t(\alpha A) = \alpha {}^t A = \alpha A$より$\alpha A\in\Sym_n(\mathbb{R})$
+\end{itemize}
+となっている。そして$\Mat_n(\mathbb{R})$は$n^2$次元の有限次元線型空間だから、その部分空間$\Sym_n(\mathbb{R})$も有限次元である。また一般の対称行列は
+\[
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{12} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{nn}
+\end{pmatrix}
+=
+\sum_{i = 1}^n a_{ii} E_{ii} + \sum_{1\leq i < j \leq n}(E_{ij} + E_{ji})
+\]
+の形に$1$通りに表せる。よって基底として$\{E_{ii}\mid 1\leq i \leq n\}\cup\{E_{ij} + E_{ji} \mid 1 \leq i < j \leq n \}$を適当な順に並べたものが取れる。これより$\Sym_n(\mathbb{R})$は$n + n(n - 1)/2 = n(n + 1)/2$次元だと分かる。
+
+\noindent (2) $n$次実交代行列全体の集合を$\Alt_n(\mathbb{R})$と書く\footnote{交代行列のことを``\uline{alt}ernating matrix''といいます。$\Alt_n(\mathbb{R})$の記号はここから取りました。}と、これは$\Mat_n(\mathbb{R})$の部分空間である。実際
+\begin{itemize}
+\item $A, B \in \Alt_n(\mathbb{R})$のとき、${}^t(A + B) = {}^t A + {}^t B = - A - B = -(A + B)$より$A + B \in \Sym_n(\mathbb{R})$
+\item $A \in \Alt_n(\mathbb{R})$, $\alpha \in \mathbb{R}$のとき、${}^t(\alpha A) = \alpha {}^t A = \alpha A$より$\alpha A\in\Alt_n(\mathbb{R})$
+\end{itemize}
+となっている。そして$\Mat_n(\mathbb{R})$は$n^2$次元の有限次元線型空間だから、その部分空間$\Alt_n(\mathbb{R})$も有限次元である。また、全ての交代行列は
+\[
+\begin{pmatrix}
+0 & a_{12} & \cdots & a_{1n} \\
+-a_{12} & 0 & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+-a_{1n} & -a_{2n} & \cdots & 0
+\end{pmatrix}
+=
+\sum_{1\leq i < j \leq n}(E_{ij} - E_{ji})
+\]
+の形に$1$通りに表せる。よって具体的な基底として$\{E_{ij} - E_{ji} \mid 1 \leq i < j \leq n \}$を適当な順に並べたものが取れる。よって$\Alt_n(\mathbb{R})$は$n(n - 1)/2$次元である。\qed
+
+\paragraph{直和分解}
+一般に、全ての$n$次正方行列は対称行列と交代行列の和に分解できます。実際
+\[
+X = \frac{X + {}^t X}{2} + \frac{X - {}^t X}{2}
+\]
+という式がいつでも成り立ち、この第$1$項は対称行列に、第$2$項は交代行列になっています。そしてこのような分解は一意的です。実際$X = S + A = S' + A'$を、どちらも$X$の対称行列と交代行列への分解とします。そうすると$S - S' = A' - A$が成り立ちます。この左辺は対称行列、右辺は交代行列なので、$A' - A = S - S' = {}^t(S - S') = {}^t(A' - A) = -A' - A$となります。これより$A' - A = O$となり、$A' = A$が従います。このことから$S - S' = O$となるので、$S = S'$となります。
+
+つまり今の状況では、線型空間$\Mat_n(\mathbb{R})$の元を、その部分空間$\Sym_n(\mathbb{R})$と$\Alt_n(\mathbb{R})$の和に一意的に分解できるようになっています。次元を勘定しても、$n^2 = n(n + 1)/2 + n(n - 1)/2$なのでつじつまが合います。この状況を指して「$\Mat_n(\mathbb{R})$は、$\Sym_n(\mathbb{R})$と$\Alt_n(\mathbb{R})$の直和である」といい、$\Mat_n(\mathbb{R}) = \Sym_n(\mathbb{R}) \oplus \Alt_n(\mathbb{R})$と書きます。
+
+基底を取ることで線型空間はいくつかの方向に分解できますが、この直和の話は「基底を取ることなく、空間を色々な方向に分けることを記述する」という雰囲気で使われます。必要になった段階で、改めて詳しく紹介します。
+
+\subsection{多項式の空間}
+
+多項式の空間$\mathbb{R}[x]$も、僕たちにとってなじみのある線型空間です。これの基底も調べてみましょう。
+
+\paragraph{問15の解答}
+自然数$n\in\mathbb{N}$に対し、$n$次以下の多項式全体のなす集合を$\mathbb{R}[x]_{\leq n}$とする。全ての多項式の集合$\mathbb{R}[x]$は線型空間である。そして
+\begin{itemize}
+\item $f(x), g(x) \in\mathbb{R}[x]$が$n$次以下なら、$f(x) + g(x)$も$n$次以下\footnote{ただし最高次の項が打ち消し合って、$f + g$の次数が下がることはあり得ます。ですから「$n$次多項式だけを集めた集合」だと、線型空間になりません。}
+\item $f(x) \in \mathbb{R}[x]$, $\alpha \in \mathbb{R}$なら、$\alpha f(x)$も$n$次以下
+\end{itemize}
+となっているので、$\mathbb{R}[x]_{\leq n}$は和とスカラー倍で閉じている。よって$\mathbb{R}[x]_{\leq n}$は$\mathbb{R}[x]$の部分空間である。
+
+$\mathbb{R}[x]_{\leq n}$の基底としては$(1, x, x^2, \ldots, x^n)$が取れる。実際多項式の定義から、全ての多項式は$1, x, x^2, \ldots, x^n$の$1$次結合でただ一通りに書ける\footnote{「ただ一通り」の部分が、$1$次独立性と対応しています。}。よって$\mathbb{R}[x]_{\leq n}$は$n + 1$次元である。\qed
+
+\paragraph{全ての多項式のなす線型空間}
+
+今の問15では次数を区切り、$\mathbb{R}[x]_{\leq n}$が$(n + 1)$次元線型空間であることを示しました。が、次数を区切らずとも、全ての多項式のなす線型空間$\mathbb{R}[x]$の基底として$(1, x, x^2, \ldots)$が取れることは同じです。実際、全ての多項式は$1, x, x^2, \ldots$の線型結合で、ただ$1$通りに表せます。
+
+ですが多項式の次数はいくらでも高くすることができますから、$1, x, x^2, \ldots$のうち有限個を持ってきても$\mathbb{R}[x]$を生成できないことは明らかでしょう。つまり$\mathbb{R}[x]$は、無限次元の線型空間になっています。他にも無限次元の線型空間は色々ありますが、$\mathbb{R}[x]$はその中でも最もなじみがあるものの$1$つです。
+
+\section{次元と線型写像}
+
+これまで余り深く考えずに「次元」という言葉を使ってきましたが、実はこんな問題が残っています。「基底の取り方を変えたら、実は本数が変わったりしないだろうか？」もし基底の取り方で本数が変わってしまうなら「線型空間の次元」という言葉は全く意味を失います。
+
+もちろん実際にはそんなことはないのですが、この事実はきちんと証明しなければいけません。
+
+\subsection{次元の一意性} \label{subsec:uniqueness_of_dimension}
+
+「線型空間の基底の本数」を次元と呼びたいのですから、次元の一意性を議論するには「$2$つの異なる基底がいつも同じ本数であるか」を調べる必要があります。$2$つの基底を比較して、その上で次元の一意性を証明しましょう。
+
+\paragraph{基底の変換行列}
+
+$V$を線型空間とし、$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_m)$と$(\bm{g}_1, \bm{g}_2, \ldots, \bm{g}_n)$が共に基底だったとします\footnote{まだ$m = n$かどうかは分かりません。注意しましょう。}。このとき各$\bm{f}_i$ ($1\leq i \leq m$) は基底$(\bm{g}_1, \bm{g}_2, \ldots, \bm{g}_n)$を用いて
+\[
+\bm{g}_i = a_{1i} \bm{f}_1 + a_{2i} \bm{f}_2 + \cdots + a_{ni} \bm{f}_n \quad (a_{1i}, a_{2i} \ldots, a_{ni} \in \mathbb{R})
+\]
+と一意的に表せます。これを$i = 1, 2, \ldots, n$と並べてみると
+\begin{align*}
+\bm{g}_1 &= a_{11} \bm{f}_1 + a_{21} \bm{f}_2 + \cdots + a_{m1} \bm{f}_m \\
+\bm{g}_2 &= a_{12} \bm{f}_1 + a_{22} \bm{f}_2 + \cdots + a_{m2} \bm{f}_m \\
+&\vdots \\
+\bm{g}_n &= a_{1m} \bm{f}_1 + a_{2m} \bm{f}_2 + \cdots + a_{mn} \bm{f}_m
+\end{align*}
+となります\footnote{係数の添字が、いつもの「行列を書くときの順番」と異なるので注意してください。普段僕たちは座標 (を並べた列ベクトル) に行列を当てていますが、ここでは座標ではなく基底の側に行列を当てるため、係数の並び方が変化します。}。連立$1$次方程式を行列で表したときのことを思い出すと、今の式も行列を使えばまとめて書けそうですね。実際、記号の濫用ですが「ベクトルを並べたベクトル」に対しても行列の掛け算を同様に定義すると
+\[
+\begin{pmatrix}
+\bm{g}_1 & \bm{g}_2 & \cdots & \bm{g}_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{f}_1 & \bm{f}_2 & \cdots & \bm{f}_m
+\end{pmatrix}
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn} \\
+\end{pmatrix}
+\]
+となっています。かくして、$2$つの基底の関係は
+$(\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n ) = (\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m ) A$
+と、行列$A$を用いて表せることがあります。この$A$を\textbf{基底の変換行列}といいます。
+
+\paragraph{次元の一意性}
+
+ここで、$(\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m )$から$(\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n )$への基底の変換行列と、その逆向きの$(\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n )$から$(\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m )$への基底の変換行列両方を考えます。つまり
+\[
+(\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n ) = (\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m )A, \quad
+(\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m ) = (\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n )B 
+\]
+とおきます。そうすると、基底を$2$度変換することで
+\[
+(\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m ) = (\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n )B
+= (\bm{f}_1 \  \bm{f}_2 \  \cdots \  \bm{f}_m )AB
+\]
+が従います。これは「基底$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$を基底$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$で表す式」です。が基底の定義から明らかに、その表し方は$\bm{f}_i = \bm{f}_i$しかありません。ですから$AB$は$m$次の単位行列$E_m$でないといけません。同様に、今度は基底$(\bm{g}_1 \  \bm{g}_2 \  \cdots \  \bm{g}_n )$から$2$度基底の変換を行うと、今度は$BA$が$n$次の単位行列$E_n$だと分かります。ここで$AB$, $BA$の対角和は等しいので、$m = \tr E_m = \tr AB = \tr BA = \tr E_n = n$が従います。これで$2$つの基底の本数が等しいと言えました。
+
+\subsection{次元と単射性/全射性}
+
+線型写像の場合、単射性と全射性がそれぞれ核と像の次元で判定できるという著しい性質があります。
+
+$\varphi\colon U\rightarrow V$を線型写像とします。まず$\varphi$の単射性と$\Ker \varphi = \{\bm{0}\}$とが同値でした。そして$\Ker\varphi = \{\bm{0}\}$と$\dim \Ker\varphi = 0$とが同値なので、結局$\varphi$の単射性は$\dim \Ker\varphi = 0$と言い換えられます。また$\varphi$の全射性の定義は$\Im \varphi = V$です。一般に$\Im \varphi\subset V$が成り立つから$\Im \varphi$の基底を延長して$V$の基底が作れるので、$\Im \varphi = V$が成り立つことは$\Im \varphi$の基底が$V$の基底にもなること、つまり$\dim \Im \varphi = \dim V$と同値です。
+
+そして実は「線型写像の核と像の次元」には関係が付くので、それを使うことで、単射性や全射性に関する色々な情報を引き出すことができます。実務上も非常に役立つので、ぜひメカニズムを理解してください。まずは問3の解答から見てみます。
+
+\paragraph{問3の解答}
+$U, V$を線型空間、$\varphi\colon U\rightarrow V$を線型写像、$\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n\in U$とする。
+
+\noindent (1) $\bigl(\varphi(\bm{f}_1), \varphi(\bm{f}_2), \ldots, \varphi(\bm{f}_n)\bigr)$が$1$次独立とする。このとき$\alpha_1 \bm{f}_1 + \alpha_2 \bm{f}_2 + \cdots + \alpha_n \bm{f}_n = \bm{0}$とおくと、両辺に$\varphi$を施して
+\[
+\bm{0} = \varphi(\alpha_1 \bm{f}_1 + \alpha_2 \bm{f}_2 + \cdots + \alpha_n \bm{f}_n) = \alpha_1 \varphi(\bm{f}_1) + \alpha_2 \varphi(\bm{f}_2) + \cdots + \alpha_n \varphi(\bm{f}_n)
+\]
+を得る。$\bigl(\varphi(\bm{f}_1), \varphi(\bm{f}_2), \ldots, \varphi(\bm{f}_n)\bigr)$の$1$次独立性から$\alpha_1 = \alpha_2 = \cdots = \alpha_n = 0$が従う。よって$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$も$1$次独立である。
+
+\noindent (2) $\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n$が$U$を生成したとする。任意に$\bm{v} \in \Im \varphi$を取ると、$\bm{v} = \varphi(\bm{x})$となる$\bm{x} \in U$が取れる。$\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n$は$U$を生成するので、$\bm{x} = \alpha_1 \bm{f}_1 + \alpha_2 \bm{f}_2 + \cdots + \alpha_n \bm{f}_n$と表せる。すると
+\[
+\bm{v} = \varphi(\bm{x}) = \varphi(\alpha_1 \bm{f}_1 + \alpha_2 \bm{f}_2 + \cdots + \alpha_n \bm{f}_n)
+= \alpha_1 \varphi(\bm{f}_1) + \alpha_2 \varphi(\bm{f}_2) + \cdots + \alpha_n \varphi(\bm{f}_n)
+\]
+となり、$\bm{v}$は$\varphi(\bm{f}_1), \varphi(\bm{f}_2), \ldots, \varphi(\bm{f}_n)$の$1$次結合で表せる。$\bm{v} \in \Im \varphi$は任意だったので、$\varphi(\bm{f}_1), \varphi(\bm{f}_2), \ldots, \varphi(\bm{f}_n)$は$\Im \varphi$を生成する。\qed
+
+\paragraph{問3の帰結} 問3の結果を使うと、線型写像の単射性/全射性を次元で判定する簡単な方法が得られます。いま、$\varphi\colon U\rightarrow V$を線型写像とします。そして$\dim U = n$, $\dim V= m$とし、$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$を$U$の基底とします。
+
+まず (1) を見ましょう。(1) は「$\Im \varphi$に$1$次独立なベクトルがあれば、少なくともそれと同じ数だけの$1$次独立なベクトルが$U$にある」と言っています。つまり$\dim \Im \varphi \leq \dim V$が成り立ちます。 
+
+(2) も同様です。$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$は$U$の基底なので、特に生成系です。したがって (2) の結果から、$\bigl(\varphi(\bm{f}_1), \varphi(\bm{f}_2), \ldots, \varphi(\bm{f}_n)\bigr)$は$\Im \varphi$を生成します。つまり$\Im \varphi$は高々$n$本のベクトルがあれば張れます。一方、基底は「最小本数の生成系」でしたから、ここまでの議論でやはり$\dim \Im \varphi \leq n = \dim U$が従います。つまり\textbf{線型写像の像の次元は、定義域の次元より大きくなりません}。特に$\dim U < \dim V$なら$\dim \Im \varphi < \dim V$となりますから、$\varphi$は全射にはなりえません。
+
+\paragraph{次元定理}
+
+次元については、さらに詳しい情報を得ることができます。いま$\varphi\colon U\rightarrow V$を線型写像とします。このとき常に$\dim \Ker \varphi + \dim \Im \varphi = \dim U$という式が成り立ちます。これを\textbf{次元定理}といいます。
+
+証明の雰囲気はこんな感じです。基底を上手く取ることで$U$を「$\Ker \varphi$の方向」と「それ以外の方向」とに分けることができます。すると線型写像$\varphi$の値が潰れる方向は必ず$\Ker \varphi$方向なので、それ以外の方向には$\varphi$は潰れません。したがって「それ以外の方向」を張る基底を$\varphi$で移すと、それが$\Im \varphi$の基底になります。
+
+この証明を細部まで詰めましょう。まず「基底の延長」を使います。$\Ker \varphi$は$U$の部分空間なので、$\Ker\varphi$の基底$(\bm{f}_1, \ldots, \bm{f}_k)$を延長して$U$全体の基底$(\bm{f}_1, \ldots, \bm{f}_k, \bm{f}_{k + 1}, \ldots, \bm{f}_n)$を作れます。そうすると$\bm{f}_{k + 1}, \ldots, \bm{f}_n$は$\Ker \varphi = \mathbb{R}\bm{f}_1 + \cdots + \mathbb{R}\bm{f}_k$に入らないので、$\varphi(\bm{f}_{k + 1}), \ldots, \varphi(\bm{f}_n)$はいずれも$\bm{0}$にはなりません。
+
+次に$\varphi(\bm{f}_{k + 1}), \ldots, \varphi(\bm{f}_n)$が$1$次独立なことを示します。$\alpha_1 \varphi(\bm{f}_{k + 1}) + \alpha_2 \varphi(\bm{f}_{k + 2}) + \cdots + \alpha_{n - k}\varphi(\bm{f}_n) = \bm{0}$とおくと$\varphi(\alpha_1 \bm{f}_{k + 1} + \alpha_2 \bm{f}_{k + 2} + \cdots + \alpha_{n - k}\bm{f}_{n}) = \bm{0}$となります。よって$\alpha_1 \bm{f}_{k + 1} + \alpha_2 \bm{f}_{k + 2} + \cdots + \alpha_{n - k}\bm{f}_{n} \in \Ker\varphi$ですが、$(\bm{f}_1, \ldots, \bm{f}_n)$が$\Ker\varphi$の基底だったので、$\alpha_1 \bm{f}_{k + 1} + \alpha_2 \bm{f}_{k + 2} + \cdots + \alpha_{n - k}\bm{f}_{n} = \bm{0}$が従います。よって$\bm{f}_{k + 1}, \ldots, \bm{f}_{n}$の$1$次独立性から$\alpha_1 = \cdots = \alpha_{n - k} = 0$となります。
+
+最後に$\varphi(\bm{f}_{k + 1}), \ldots, \varphi(\bm{f}_n)$が$\Im \varphi$を生成することを示します。任意に$\bm{v}\in \Im \varphi$を取ると、$\bm{v} = \varphi(\bm{u})$ $(\bm{u} \in U)$と書けます。そして$(\bm{f}_1, \ldots, \bm{f}_n)$が$U$の基底なので、$\bm{u} = \alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n$と書けます。ところが$\bm{f}_1, \ldots, \bm{f}_k \in \Ker\varphi$だから$\bm{v} = \varphi(\alpha_1 \bm{f}_1 + \cdots + \alpha_n \bm{f}_n) = \alpha_{k + 1} \varphi(\bm{f}_{k + 1}) + \cdots + \alpha_n \varphi(\bm{f}_n)$となります。よって$\bm{u}$は$\varphi(\bm{f}_{k + 1}), \ldots, \varphi(\bm{f}_n)$の$1$次結合で表せます。$\bm{u}$は任意だったので、これで$\varphi(\bm{f}_{k + 1}), \ldots, \varphi(\bm{f}_n)$が$\Im U$を生成することが言えました。
+
+これらをまとめると、$(\bm{f}_1, \ldots, \bm{f}_n)$の最初の$k$本が$\Ker \varphi$の基底で、残りの$k + 1$本に$\varphi$を施すと$\Im \varphi$の基底が得られることが分かります。よって次元の定義から、$\dim \Ker \varphi + \dim \Im \varphi = \dim U$となります。
+
+\paragraph{次元定理の帰結} この次元定理を使うと、写像の全射性や単射性について更なる情報が得られます。
+
+$\varphi\colon U\rightarrow V$を線型写像とします。次元定理から$\dim \Im \varphi = \dim U - \dim \Ker \varphi \leq \dim U$が従います。これはさっき、問$3$の帰結として述べたことです。また$\dim \Ker \varphi = \dim U - \dim \Im \varphi \geq \dim U - \dim V$なので、もし$\dim U > \dim V$であれば$\dim \Ker \varphi \geq 1$となります。つまり定義域の方が値域より大きければ、それだけで$\varphi$は単射ではあり得ないと分かってしまうのです。
+
+さらに極端なのが$\dim U = \dim V$の場合です。このとき$\dim \Ker \varphi + \dim \Im \varphi = \dim V$が成り立つので、$\dim \Ker \varphi = 0$と$\dim \Im \varphi = \dim V$とが同値になります。つまり$\varphi$が単射であることと全射であることは同値で、\textbf{単射性または全射性の一方が成り立つだけで、自動的に$\varphi$が全単射になります}。こんな感じで、次元定理は非常に使いでがあるのです\footnote{でも証明でみたとおり、この公式は「次元の足し算がたまたま良い式を満たす」という程度の話ではありません。重要なのは$f$の定義域が「$\Ker f$の方向」と「それ以外の方向」に分解でき、かつ「それ以外の方向が潰れずに$\Im f$に行く」という点です。つまり次元公式は「定義域の空間$V$を$2$つの部分空間に分解する公式がまずあって、その式で次元だけに着目することによって次元公式が得られる」と理解すべきものです (ちなみにこの例のように、式などを「空間の(正確には、空間の``圏''というものの)レベル」まで持ち上げて理解することを``categorification''と呼びます)。}。
+

@@ -1,0 +1,530 @@
+\chapter{線型写像と行列}
+\lectureinfo{2015年7月8日 1限}
+
+\section{いくつかの便利な補題}
+
+\subsection{正則行列と$1$次独立性/生成系}
+
+逆行列を持つ正方行列のことを正則行列と呼ぶのでした。行列に左右から正方行列をかけたとき、核や像がどう変わるかを見てみます。引き続き$A$を$(m, n)$型行列とします。僕たちはこれから、$m$次の正則行列$X$と$n$次の正則行列$Y$に対し、$XAY$の核や像が$A$の核や像と比べてどうズレるかを調べます。
+
+証明に入る前に、この問題を「線型写像」の立場からざっくり眺めてみましょう。行列$A$はベクトル$\bm{x} \in \mathbb{R}^n$に$A\bm{x} \in \mathbb{R}^m$を対応させる写像なので、$A\colon \mathbb{R}^n \rightarrow \mathbb{R}^m$と表せます。同じようにして$m$次正方行列$X$は$X\colon \mathbb{R}^m\rightarrow\mathbb{R}^m$という線型写像を、$n$次正方行列$Y$は$Y\colon \mathbb{R}^n\rightarrow\mathbb{R}^n$という写像を定めます。こう思えば、$\bm{x}$に$XAY\bm{x}$を対応させる写像は$\bm{x}\mapsto Y\bm{x} \mapsto AY\bm{x} \mapsto XAY\bm{x}$という合成写像だと分かります。これを図式で書くと
+\[
+\begin{tikzcd}
+\mathbb{R}^n \arrow{r}{Y} & \mathbb{R}^n \arrow{r}{A} & \mathbb{R}^m \arrow{r}{X} & \mathbb{R}^m
+\end{tikzcd}
+\]
+となります。元々の写像$A\colon \mathbb{R}^n\rightarrow\mathbb{R}^m$に、写像$Y$を右から、写像$X$を左からかませているわけです\footnote{写像の合成の向きに気を付けましょう。写像$XAY$は、ベクトルに「$Y$, $A$, $X$の順」で作用します。このように写像の合成を書く順序は、実際にベクトルに作用する順序と逆向きになります。}。
+
+そして$X$や$Y$は正則行列なので、全単射を定めています。特に$Y$は全射なので、$\bm{x}$が$\mathbb{R}^n$の全ての元を動き回るとき、$Y\bm{x}$も$\mathbb{R}^n$の全ての元を動きます。こう思えば、$\Im AY$と$\Im A$は同じになりそうですね。また$X$は単射なので、$X$が作用して$\bm{0}$になるベクトルは$\bm{0}$以外にありません。だから$\Ker XA$と$\Ker A$は同じになりそうです。
+
+また$X$が全射だとはいえ、一般には$\Im A$のベクトルを$X$で移して得られる$\Im XA$は、当然元の$\Im XA$とは異なります。でも$X$で潰れるベクトルがないので、$\dim \Im XA = \dim \Im A$は期待してよさそうです。また$\Ker A$のベクトルを$Y^{-1}$で動かすと$\Ker AY$になるので、一般には$\Ker AY \neq \Ker A$です。でも$Y$で潰れるベクトルはないので、$\dim \Ker AY = \dim \Ker A$も期待してよさそうです。
+
+こんなイメージを頭の中に置きながら、ちゃんと証明をしてみましょう。
+
+\paragraph{左からの正則行列の作用}
+
+まず$X$が$m$次正則行列のとき、$\Ker XA = \Ker A$です。実際$A\bm{x} = \bm{0}$ならば$XA\bm{x} = \bm{0}$は当たり前です。そして今は$X^{-1}$が存在するので、$XA\bm{x} = \bm{0}$が成り立てば両辺に左から$X^{-1}$をかけて、$A\bm{x} = X^{-1}\bm{0} = \bm{0}$を得ます。こうして$\Ker XA = \Ker A$が分かりました。
+
+% X は単射 だけで OK
+
+\paragraph{右からの正則行列の作用}
+
+次に$Y$が正則行列のとき、$\Im AY = \Im A$です。勝手に$\bm{y} \in \Im AY$を取ると$\bm{y} = AY\bm{x}$なる$\bm{x} \in \mathbb{R}^n$が存在します。この式を$\bm{y} = A(Y\bm{x})$と読めば、$\bm{y} \in \Im A$が従います。逆に$\bm{y} \in \Im A$を取ると、$\bm{y} = A\bm{x}$となる$\bm{x} \in  \mathbb{R}^n$が取れます。そうすると$Y^{-1}$の存在から、$\bm{y} = AY(Y^{-1}\bm{x})$と書けます。よって$\bm{y} \in \Im AY$です。これで$\Im A = \Im AY$が示せました。
+
+% Y は全射 だけで OK
+
+\paragraph{次元について} 今の状況で、$\Ker AY = \Ker A$や$\Im XA = \Im A$は成り立ちません。ですが$\dim \Ker AY = \dim \Ker A$や$\dim \Im XA = \dim \Im A$は成り立ちます。さらにまとめると$X, Y$が正則行列のとき、$\dim \Ker XAY = \dim \Ker A$, $\dim \Im XAY = \dim \Im A$です。なぜなら$\dim \Ker XAY = \dim \Ker AY = n - \dim \Im AY = n - \dim A = \dim \Ker A$。これより$\dim \Im XAY = n - \dim \Ker XAY = n - \dim \Ker A = \dim \Im A$となります。
+
+\paragraph{基本行列の作用}
+
+今の話を基本行列に当てはめてみましょう。基本行列には$P_{i, j}, Q_{i, j}(c), M_i(c)$という$3$系列がありましたが、どれも正則なことに変わりありません。そして基本行列を左からかけると行基本変形に、右からかけると列基本変形になるのでした。ですから
+\begin{itemize}
+\item $A$を行基本変形しても、$\Ker$は変化しない
+\item $A$を列基本変形しても、$\Im$は変化しない
+\end{itemize}
+と分かります。「行基本変形で$\Ker$は変化しない」というのは単に「行基本変形による掃き出しで方程式が解ける」というだけですから、既に知っていたことです。でも列基本変形で$\Im$が求まるというのは、新しい情報です\footnote{問題2のヒントに「与えられた列ベクトルを転置で行ベクトルにして、それを並べた行列を行基本変形すれば答えが求まる」と書いてあるのは、今述べた原理によるものです。${}^t(AX) = {}^t\! X\, {}^t\! A$なので「$A$に列基本変形をすること」は「$A$の転置に行基本変形をすること」と同じです。「列基本変形」の定義を回避して答えを出すために、転置で行基本変形に持ち込んだのだと思います。}。
+
+また$\Ker A$や$\Im A$を完全に求めることはできなくても、次元の情報を組み合わせて上手く解を作れることもあります。たとえば一般に$\Im XA \neq \Im A$なので、$A$を行基本変形したら$\Im A$は分からなくなってしまいます。でも$\dim XA = \dim A$までは分かるので、方程式$A\bm{x} = \bm{0}$を解いて$\Ker A$を求めれば、次元定理$\dim \Im A = n - \dim \Ker A$から$\Im A$の基底の本数が分かります。あとはたとえば$A$の見た目を利用するとかして、$A$の列ベクトルの中から$\dim \Im A$本の$1$次独立なベクトルを持ってくれば、それで$\Im A$の基底が得られたことになります。
+
+こんな風に「次元の情報」を使うことで、$\Ker A$や$\Im A$の基底が何本あるかを知ることができます。だから「$\Ker A$と$\Im A$を両方求める」という問題の場合、大体の場合「行基本変形で$\Ker A$を求め、その後列基本変形で$\Im A$を求める」という二度手間をする必要はあまりありません。さらに言えば、行基本変形と列基本変形を組み合わせても良いのです。どちらを併用しても$\Ker$と$\Im$の次元は保たれますから、単に基底の本数を求めるだけなら、行/列のやりやすい基本変形を両方使って大丈夫です。たとえば「行基本変形をしてたら、$2$つ同じ列ベクトルが出てきた」なんて場合は、列基本変形で重複する列ベクトルを消してから、行基本変形を進めたりできます。
+
+どういう手順で計算を進めるのが一番良いかは、問題によってまちまちですし、一発で最善策を見抜くことは難しいでしょう。でも最善策にたどり着けないとしても、手持ちの手法を上手く組み合わせることで、行き当たりばったりよりは大分マシな解き方ができるはずです。
+
+\subsection{$1$次独立性の判定法}
+
+今までも暗黙のうちに使っていますし、みなさんもきっと「当たり前だ」と思っているように思うのですが、$1$次独立性には便利な判定法があるので紹介します。それは「一部の成分だけを抜き出して$1$次独立だったら、元のベクトルの組も$1$次独立」ということです。たとえば
+\[
+\bm{v}_1 :=
+\begin{pmatrix}
+1 \\
+0 \\
+1
+\end{pmatrix}, \quad
+\bm{v}_2 :=
+\begin{pmatrix}
+0 \\
+1 \\
+1
+\end{pmatrix}
+\]
+というベクトルを考えます。このとき$\bm{v}_1$の$1, 2$行目は${}^t(1, 0)$、$\bm{v}_2$の$1, 2$行目は${}^t (0, 1)$なので、ここを見るだけで直ちに「$\alpha_1 \bm{v}_1 + \alpha \bm{v}_2 = \bm{0}$ならば$\alpha_1 = \alpha_2 = 0$」が分かります。今は一番分かり易い形を例として示しましたが、ベクトルがもう少しややこしい形でも、あるいは本数が増えても、$1$次独立性を示すには「一部の成分さえ見て示せれば十分」というわけです。たとえば$(2, 2)$行列の場合、$2$本の列ベクトルが$1$次独立なことと行列式が$0$でないことは同値です。こういうのを組み合わせると、ラクに$1$次独立性が示せます。
+
+証明はもちろん愚直にやってもできますが、ここでは「射影」というテクニックを使って示してみます。$1\leq j_1 < j_2 < \cdots < j_p \leq n$とし
+\begin{align*}
+\Proj_{j_1, j_2, \ldots, j_p} :=
+\bordermatrix{
+ & & \scalebox{0.8}{${j_1}^{\text{th}}$} &  & \scalebox{0.8}{${j_2}^{\text{th}}$} &  & \scalebox{0.8}{${j_p}^{\text{th}}$} \cr
+ & & 1 &  &  \cr
+ & &  &  & 1 \cr
+ & & & & & \ddots \cr
+ & & & & & & 1 &
+}
+\end{align*}
+とおきます。つまり各$1\leq i \leq p$に対し「$i$行目は$j_i$列目だけ$1$で、他は$0$」という条件で定まる行列が$\Proj_{j_1, j_2, \ldots, j_p}$です。これを$\mathbb{R}^n$のベクトルに当てると、$j_1, j_2, \ldots, j_p$番目の成分をちょうど抜き出せます。たとえば
+\[
+\Proj_{2, 3, 5}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+x_5
+\end{pmatrix}
+=
+\begin{pmatrix}
+x_2 \\
+x_3 \\
+x_5
+\end{pmatrix}
+\]
+となっていますね。
+
+これを使えば、証明はすぐ終わります。前回の問$3$で、線型写像$\varphi$に対し「$\varphi(\bm{f}_1), \ldots, \varphi(\bm{f}_n)$が$1$次独立なら、$\bm{f}_1, \ldots, \bm{f}_n$も$1$次独立である」という事実を示しています。これを$A_{j_1, j_2, \ldots, j_p}$に適用すれば、そのまま示すべきことが得られます。
+
+\subsection{列基本変形の定義と例}
+
+それでは早速、列基本変形を使ってみましょう。行基本変形を定義する文章中で、「行」を「列」に置き換えると、そのまま列基本変形の定義になります。すなわち
+\begin{itemize}
+\item $2$つの列を入れ替えること
+\item ある列に別の列の定数倍を加えること
+\item ある列に$0$でない定数をかけること
+\end{itemize}
+が、列基本変形です。そして行基本変形が「基本行列の左からの積」で実現できたのと同様に、列基本変形は「基本行列の右からの積」で実現できます。
+
+この辺の事情は、実際に手を動かして理解する方がよいでしょう。「列基本変形が像を保つ」という事実を使い、問2を列基本変形で解いてみます。計算を追いかけてみてください。
+
+\paragraph{問2の解答}
+\[
+A := 
+\begin{pmatrix}
+\bm{a}_1 & \bm{a}_2 & \bm{a}_3
+\end{pmatrix}
+=
+\Biggl(
+\begin{array}{rrr}
+-1 & 3 & 5 \\
+1 & -1 & 1 \\
+2 & 0 & 8
+\end{array}
+\Biggr)
+\]
+とおくと$W = \Im A$である。そこで
+\begin{align*}
+\Biggl(
+\begin{array}{rrr}
+-1 & 3 & 5 \\
+1 & -1 & 1 \\
+2 & 0 & 8
+\end{array}
+\Biggr)
+\xrightarrow[\text{$2$, $3$列目の掃き出し}]{\text{$(1,1)$成分を要に}}
+\Biggl(
+\begin{array}{rrr}
+-1 & 0 & 0 \\
+1 & 2 & 6 \\
+2 & 6 & 18
+\end{array}
+\Biggr)
+&= 
+\Biggl(
+\begin{array}{rrr}
+-1 & 3 & 5 \\
+1 & -1 & 1 \\
+2 & 0 & 8
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrr}
+1 & 3 & 5 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\Biggr) \\
+\xrightarrow[\text{\hbox to 9.5zw{\hfil $2$列目を$1/2$倍\hfil}}]{\text{\hbox to 9.5zw{\hfil $1$列目を$(-1)$倍\hfil}}}
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+-1 & 1 & 6 \\
+-2 & 3 & 18
+\end{array}
+\Biggr)
+&=
+\Biggl(
+\begin{array}{rrr}
+-1 & 0 & 0 \\
+1 & 2 & 6 \\
+2 & 6 & 18
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrr}
+-1 & 0 & 0 \\
+0 & \frac{1}{2} & 0 \\
+0 & 0 & 1
+\end{array}
+\Biggr) \\
+\xrightarrow[\text{\hbox to 11.5zw{\hfil $1$, $3$列目を掃き出し\hfil}}]{\text{\hbox to 11.5zw{\hfil $(2, 2)$成分を要に\hfil}}}
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 3 & 0
+\end{array}
+\Biggr)
+&=
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+-1 & 1 & 6 \\
+-2 & 3 & 18
+\end{array}
+\Biggr)
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+1 & 1 & -6 \\
+0 & 0 & 1
+\end{array}
+\Biggr)
+\end{align*}
+となる。これで$W = \Im A$の基底が${}^t(1, 0, 1)$と${}^t(0, 1, 3)$だと分かる。また、これらのベクトルの$\bm{0}$でない$1$次結合は、必ず第$1$成分または第$2$成分のいずれかが$0$でない。よって${}^t(0, 0, 1)$を加えると、$\mathbb{R}^3$の基底になる。 \qed
+
+\section{連立$1$次方程式再訪}
+
+% 行列のランクと像の次元
+% 行基本変形が Ker を保つこと
+% 列基本変形が Im を保つこと
+
+今回のお題は、再び連立$1$次方程式です。
+
+「またかよ」と思った人がいるかもしれませんが、前に掃き出し法を学んだときとは一つ違うことがあります。それは僕たちが「線型空間の次元」という道具を持っていることです。前回は掃き出し法の様々な使い方を知ることがメインテーマでしたが、今度は次元定理という強力な道具が加わるので、これを使っていっそうサクサクと解を求めにいくことができます。
+
+\subsection{線型代数の言葉による連立$1$次方程式の解釈}
+
+連立$1$次方程式
+\begin{align*}
+a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n &= b_1 \\
+a_{21} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n &= b_2 \\
+\vdots \\
+a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n &= b_m
+\end{align*}
+を、いつものように$A\bm{x} = \bm{b}$と表します。ここで$\bm{x} \in \mathbb{R}^n$, $\bm{b} \in \mathbb{R}^m$です。
+
+\paragraph{係数行列の表す線型写像}
+
+係数行列$A$は$(m, n)$型行列なので、$A\colon \mathbb{R}^n \rightarrow \mathbb{R}^m$という線型写像を定めます。この見方に立つと、$A\bm{x} = \bm{b}$を満たす$\bm{x}$を見つけるということは、$A$による$\bm{b}$の逆像$\{\bm{x} \in \mathbb{R}^n\mid A\bm{x} = \bm{b}\}$を全て求めることに他なりません。特に$\bm{b} = \bm{0}$の場合、方程式を解くことは$\Ker A$を求めることに他なりません。
+
+\paragraph{解のパラメータ}
+
+線型写像の場合、単射性の破れ方は核で支配されるのでした。もう一度復習しておくと、$\bm{x}$と$\bm{x}'$が共に解であれば、$\bm{x} - \bm{x}' \in \Ker A$です。実際$A\bm{x} = A\bm{x}' = \bm{b}$なら$A(\bm{x} - \bm{x}') = \bm{b} - \bm{b} = \bm{0}$です。また$\bm{x}$が解で$\bm{y} \in \Ker A$なら、$A(\bm{x} + \bm{y}) = \bm{b} + \bm{0} = \bm{b}$が成り立ちます。だから$A\bm{x} = \bm{b}$の解$\bm{x}_0 \in \mathbb{R}^n$を$1$つ見つけてしまえば、残りの解は全て$\bm{x}_0 + \bm{y}$ ($\bm{y} \in \Ker A$)と表せるし、逆にこの形以外の解は存在しません。
+
+そして全ての解が$t_1, t_2, \ldots, t_l \in \mathbb{R}$というパラメータで表されたとしましょう。このとき解を各$t_i$の項ごとに分離し、$\bm{x} = \bm{x}_0 + t_1\bm{x}_1 + \cdots + t_l \bm{x}_l$と表してみます。このとき全ての$t_i$を$0$とおくと、$\bm{x}_0$が解だと分かります。一方で$1$つの$t_i$だけを$1$とし他の$t_j$ ($j \neq i$)を$0$とおくと、$\bm{x}_0 + \bm{x}_i$も解です。$2$解の差は$\Ker A$に入りますから、$\bm{x}_i = (\bm{x}_0 + \bm{x}_i) - \bm{x}_0 \in \Ker A$となります。こうして全ての$\bm{x}_i$が$\Ker A$に入ると分かりました。また$2$解の差は常に$\Ker A$に入るので、$\bm{x}_1, \ldots, \bm{x}_l$は$\Ker A$を生成します。そしてパラメータ表示の一意性から、$(\bm{x}_1, \ldots, \bm{x}_l)$が$\Ker A$の基底だと分かります。
+
+逆に$\bm{x}_1, \ldots, \bm{x}_l$が$\Ker A$の基底なら、$\Ker A$のベクトルは$t_1\bm{x}_1 + \cdots + t_l \bm{x}_l$の形にただ$1$通りに表せます。よって全ての解は$\bm{x} = \bm{x}_0 + t_1\bm{x}_1 + \cdots + t_l \bm{x}_l$の形に、一意的に書けます。
+
+このように解のパラメータは、$\Ker A$の元を基底の$1$次結合で表すときの係数だったのです。だから解に現れるパラメータは、ちょうど$\dim \Ker A$個だと分かります。
+
+\paragraph{像の次元}
+
+$A$の列ベクトルのうち、$1$次独立なものの最大本数を$\rank A$というのでした。これは$\dim \Im A$と同じです。というのも$A = (\bm{a}_1\ \bm{a}_2\ \cdots\ \bm{a}_n)$とおくと、
+\[
+A
+\begin{pmatrix}
+x_1 \\
+\vdots \\
+x_n
+\end{pmatrix}
+= x_1 \bm{a}_1 + x_2 \bm{a}_2 + \cdots + x_n \bm{a}_n
+\]
+より$\Im A = \mathbb{R}\bm{a}_1 + \mathbb{R}\bm{a}_2 + \cdots + \mathbb{R}\bm{a}_n$でした。ここで前回の結果を思い出しましょう。もし$\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n$が$1$次独立でなければ、このうち上手く$1$本を削っても、$\Im A$の生成系が得られるのでした。そうして$1$次独立になるまで上手くベクトルを削り続けると、基底ができます。ここで$\rank A$の定義は「$1$次独立な$A$の列ベクトルの組の最大本数」であり、$A$の列ベクトルを上手く選ぶと$\Im A$の基底ができるのだから、$\rank A \geq \Im A$です。でも次元の性質から、$\Im A$の中に$\dim \Im A$本以上の$1$次独立なベクトルを取ってくることはできません。だから$(\dim \Im A + 1)$本以上からなる$A$の列ベクトルの組は、必ず$1$次従属になります。これで$\rank A = \Im A$が成り立つことが分かりました。
+
+\subsection{次元定理の利用例}
+
+実際に次元定理を使って、問3と問4を解いてみましょう。問3の (2) は「次元を考えるだけで解が分かる」という問題の典型例です。また問4では行基本変形と列基本変形のどちらを用いても解くことができます。なんとなく (1) では列基本変形、(2) では行基本変形を使うと解きやすい気がする\footnote{(1) は$1$行目の$2$列目だけに$1$があり、(2) は$1$列目にたくさん$1$があるから、こう思いました。これ以上の深い理由はありません。}ので、両方使ってみます。
+
+\paragraph{問3の解答}
+\noindent (2) $A := (1 \quad 1 \quad 1 \quad 1)$とおくと、$A$は線型写像$\mathbb{R}^4\rightarrow\mathbb{R}$を定める。このとき$W = \Ker A$である。$A \neq O$より$\dim \Im A = \rank A \geq 1$である。かたや$\Im A \subset\mathbb{R}$より$\dim \Im A \leq 1$なので、これで$\dim \Im A = 1$と分かる。よって次元定理から$\dim \Ker A = 4 - 1 = 3$が従う。
+
+これより$\Ker A$の基底を求めるには、$3$本の$1$次独立なベクトルを見つければ良い。$A$の形から、$1$次独立なベクトル$3$本として
+\[
+\bm{v}_1 :=
+\begin{pmatrix}
+-1 \\
+1 \\
+0 \\
+0
+\end{pmatrix}, \quad
+\bm{v}_2 :=
+\begin{pmatrix}
+-1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}, \quad
+\bm{v}_3 :=
+\begin{pmatrix}
+-1 \\
+0 \\
+0 \\
+1
+\end{pmatrix}
+\]
+が取れると分かる。
+
+\noindent (1)
+\[
+A := 
+\Biggl(
+\begin{array}{rrrr}
+1 & 1 & -1 & 1 \\
+-2 & -1 & 0 & 1 \\
+3 & 1 & 1 & -3
+\end{array}
+\Biggr)
+\]
+とおくと、$A$は線型写像$\mathbb{R}^4\rightarrow\mathbb{R}^3$を定める。このとき$W = \Ker A$である。行基本変形で$\Ker A$と$\rank A$は不変なので、掃き出しを行う。すると
+\[
+\Biggl(
+\begin{array}{rrrr}
+1 & 1 & -1 & 1 \\
+-2 & -1 & 0 & 1 \\
+3 & 1 & 1 & -3
+\end{array}
+\Biggr)
+\xrightarrow[]{}
+\Biggl(
+\begin{array}{rrrr}
+1 & 1 & -1 & 1 \\
+0 & 1 & -2 & 3 \\
+0 & -2 & 4 & -6
+\end{array}
+\Biggr)
+\xrightarrow[]{}
+\Biggl(
+\begin{array}{rrrr}
+1 & 0 & 1 & -2 \\
+0 & 1 & -2 & 3 \\
+0 & 0 & 0 & 0
+\end{array}
+\Biggr)
+\]
+となる。これより$\rank A = 2$が分かる。よって$\dim \Ker A = 4 - \dim \Im A = 2$である。あとは$\Ker A$の中に$2$本の$1$次独立なベクトルを探せばよいが、掃き出し後の表式から解は
+\[
+\begin{pmatrix}
+-z + 2w \\
+2z - 3w \\
+z \\
+w
+\end{pmatrix}
+=
+z
+\begin{pmatrix}
+-1 \\
+2 \\
+1 \\
+0
+\end{pmatrix}
++
+w
+\begin{pmatrix}
+2 \\
+-3 \\
+0 \\
+1
+\end{pmatrix}
+\]
+と表せる。よって
+\[
+\bm{v}_1 :=
+\begin{pmatrix}
+-1 \\
+2 \\
+1 \\
+0
+\end{pmatrix}, \quad
+\bm{v}_2 :=
+\begin{pmatrix}
+2 \\
+-3 \\
+0 \\
+1
+\end{pmatrix}
+\]
+が基底である。\qed
+
+\paragraph{問4の解答}
+(1) 与えられた行列を列基本変形すると
+\begin{align*}
+\Biggl(
+\begin{array}{rrr}
+2 & 1 & 4 \\
+4 & 3 & 10 \\
+2 & 3 & 8
+\end{array}
+\Biggr)
+\xrightarrow[\text{\hbox to 8zw{\hfil 入れ替え\hfil}}]{\text{\hbox to 8zw{\hfil $1$列目と$2$列目を\hfil}}}
+& \Biggl(
+\begin{array}{rrr}
+1 & 2 & 4 \\
+3 & 4 & 10 \\
+3 & 2 & 8
+\end{array}
+\Biggr)
+\xrightarrow[\text{\hbox to 10zw{\hfil $2$, $3$列目を掃き出し\hfil}}]{\text{\hbox to 10zw{\hfil $(1, 1)$成分を要に\hfil}}}
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+3 & -2 & -2 \\
+3 & -4 & -4
+\end{array}
+\Biggr) \\
+\xrightarrow[\text{\hbox to 8zw{\hfil $(-1/2)$倍\hfil}}]{\text{\hbox to 8zw{\hfil $2$列目を\hfil}}}
+& \Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+3 & 1 & -2 \\
+3 & 2 & -4
+\end{array}
+\Biggr)
+\xrightarrow[\text{\hbox to 10zw{\hfil $1$, $3$列目を掃き出し\hfil}}]{\text{\hbox to 10zw{\hfil $(2, 2)$成分を要に\hfil}}}
+\Biggl(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+-3 & 2 & 0
+\end{array}
+\Biggr)
+\end{align*}
+となる。これで$A$の基底は$\bigl({}^t(1, 0, -3), {}^t(0, 1, 2)\bigr)$で、$\dim \Im A = 2$と分かる。これより$\dim \Ker A = 3 - 2  = 1$と分かる。だから$\Ker A$に属する$\bm{0}$でないベクトルを$1$本見つければ、それが基底になる。たとえば$A$を眺めると${}^t(1, 2, -1) \in \Ker A$が分かる\footnote{これは、$1$行目を眺めて何となく「$1$列目と$2$列目の$2$倍を足したら$3$列目になりそうだなあ」と思ってたら答えが見つかりました。今回はうまく答えを見つけましたが、一般の場合は行基本変形による掃き出しで攻めるのが正攻法です。$\dim \Ker A = 1$と分かってるので、掃き出し法を途中まで行えば答えに当たりがつくはずです。}。
+
+\noindent (2) 与えられた行列を行基本変形すると
+\begin{align*}
+& \left(
+\begin{array}{rrrrr}
+1 & 1 & 3 & 0 & 0 \\
+1 & 2 & 5 & -2 & -5 \\
+1 & 1 & 3 & 1 & 2 \\
+2 & 0 & 2 & 4 & 10
+\end{array}
+\right)
+\xrightarrow[\text{\hbox to 10zw{\hfil $2$, $3$, $4$行目を掃き出し\hfil}}]{\text{\hbox to 10zw{\hfil $(1, 1)$成分を要に\hfil}}}
+\left(
+\begin{array}{rrrrr}
+1 & 1 & 3 & 0 & 0 \\
+0 & 1 & 2 & -2 & -5 \\
+0 & 0 & 0 & 1 & 2 \\
+0 & -2 & -4 & 4 & 10
+\end{array}
+\right) \\
+\xrightarrow[\text{\hbox to 10zw{\hfil $1$, $4$行目を掃き出し\hfil}}]{\text{\hbox to 10zw{\hfil $(2, 2)$成分を要に\hfil}}}
+& \left(
+\begin{array}{rrrrr}
+1 & 0 & 1 & 2 & 5 \\
+0 & 1 & 2 & -2 & -5 \\
+0 & 0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0 & 0
+\end{array}
+\right)
+\xrightarrow[\text{\hbox to 10zw{\hfil $(1, 2)$行目を掃き出し\hfil}}]{\text{\hbox to 10zw{\hfil $(3, 4)$成分を要に\hfil}}}
+\left(
+\begin{array}{rrrrr}
+1 & 0 & 1 & 0 & 1 \\
+0 & 1 & 2 & 0 & 1 \\
+0 & 0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0 & 0
+\end{array}
+\right)
+\end{align*}
+となる。これで$\Ker A$の基底が
+\[
+\bm{v}_1 :=
+\begin{pmatrix}
+-1 \\
+-2 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+\bm{v}_1 :=
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+-2 \\
+1
+\end{pmatrix}
+\]
+と求まる。$\dim \Ker A = 2$だから$\dim \Im A = 5 - 2 = 3$である。そこで$\Im A$を張る$3$本の列ベクトル、列基本変形で探す。
+\begin{align*}
+\left(
+\begin{array}{rrrrr}
+1 & 1 & 3 & 0 & 0 \\
+1 & 2 & 5 & -2 & -5 \\
+1 & 1 & 3 & 1 & 2 \\
+2 & 0 & 2 & 4 & 10
+\end{array}
+\right)
+\xrightarrow[\text{\hbox to 10zw{\hfil $5$列目に足す\hfil}}]{\text{\hbox to 10zw{\hfil $4$列目の$(-3)$倍を\hfil}}}
+\left(
+\begin{array}{rrrrr}
+1 & 1 & 3 & 0 & 0 \\
+1 & 2 & 5 & -2 & 1 \\
+1 & 1 & 3 & 1 & -1 \\
+2 & 0 & 2 & 4 & -2
+\end{array}
+\right)
+\xrightarrow[\text{\hbox to 9zw{\hfil $4$列目に足す\hfil}}]{\text{\hbox to 9zw{\hfil $5$列目の$2$倍を\hfil}}}
+\left(
+\begin{array}{rrrrr}
+1 & 1 & 3 & 0 & 0 \\
+1 & 2 & 5 & 0 & 1 \\
+1 & 1 & 3 & -1 & -1 \\
+2 & 0 & 2 & 0 & -2
+\end{array}
+\right)
+\end{align*}
+とすると、上$3$行を見ることで$1$, $4$, $5$列目のベクトルが$1$次独立だと分かる\footnote{もうちょっとだけ補足すると、$1$列目、$5$列目、$4$列目の順番にベクトルを並べると下三角行列ができます。ここまでくれば$1$次独立なことはほとんど明らかです。}。$\dim \Im A = 3$なので、これらが$\Im A$の基底をなす。
+
+\subsection{その他問題解答}
+
+\paragraph{問1の解答}
+
+(1) $y$は任意で$x = 1 + 2y$ (2) $y$は任意で$x = 2y$ (3) $z$は任意で$x = 2 + 3z$, $y = 1 + 2z$ (4) $x$は任意で$y = 2x$, $z = x$ (5) $(x, y, z) = (1, 2, 4)$ (6) $(x, y, z) = (\frac{1}{2}, \frac{1}{2}, \frac{1}{2})$ (7) $x$は任意で$y = x - 1$, $z = x - 3$ (8) $x, y$は任意で$z = 3 - x - y$ (9) $x$は任意で$y = z = -1 + x$ (10) $z$は任意で$x = -2 + 5z$, $y = -3 - 3z$ (11) $z$は任意で$x = 1 - 2z$, $y = 1 + 2z$
+
+\paragraph{問5の解答}
+
+行列の階数は基本変形で変わらない。
+

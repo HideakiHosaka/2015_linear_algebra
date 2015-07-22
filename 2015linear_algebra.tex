@@ -15,17 +15,20 @@
 \usepackage{ulem}								% 下つきの波線など、色々な下線を引くためのパッケージ
 \usepackage{tikz-cd}							% 可換図式を書くためのパッケージ
 
-\def\teachername{植野 義明}
-\def\TAname{穂坂 秀昭}
+% 種々の設定
 
-\def\lectureinfo#1{%
+\def\teachername{植野 義明}						% 教員の名前
+\def\TAname{穂坂 秀昭}							% TA の名前
+
+\def\lectureinfo#1{%							% 講義情報を出力するマクロ
 \begin{flushright}%
 担当教員: \teachername / TA: \TAname \\%
 講義日時: #1%
 \end{flushright}%
 }
 
-\setcounter{MaxMatrixCols}{12}
+\setcounter{MaxMatrixCols}{12}			% 行列の最大列数を 12 にする
+\allowdisplaybreaks						% 数式中での改ページ許可
 
 \def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}
 \def\bm{\boldsymbol}
@@ -76,7 +79,7 @@
 
 \part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
 
-%\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
+\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
 \include{20150610}
 \include{20150617}

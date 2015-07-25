@@ -13,7 +13,10 @@
 \usepackage[dvipdfmx]{graphicx}					% 外部画像の取り込みなど
 \usepackage{subfigure}							% 小さい図を並べるためのパッケージ
 \usepackage{ulem}								% 下つきの波線など、色々な下線を引くためのパッケージ
-\usepackage{tikz-cd}							% 可換図式を書くためのパッケージ
+\usepackage{tikz}								% 可換図式を書くためのパッケージ
+\usetikzlibrary{cd}								% 
+\usetikzlibrary{arrows}							% 可換図式の矢印のバリエーションを増やす
+\usepackage{mathtools}							% 
 
 % 種々の設定
 
@@ -41,6 +44,7 @@
 
 \DeclareMathOperator\tr{tr}				% 対角和
 \DeclareMathOperator\Ad{Ad}				% 群の随伴作用
+\DeclareMathOperator\ad{ad}				% Lie 環の随伴作用
 \DeclareMathOperator\Map{Map}			% 写像の空間
 \DeclareMathOperator\Mat{Mat}			% 行列の空間
 \DeclareMathOperator\Hom{Hom}			% 線型写像の空間
@@ -79,12 +83,13 @@
 
 \part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
 
-\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
+%\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
 \include{20150610}
 \include{20150617}
 \include{20150624}
 \include{20150701}
 \include{20150708}
+\include{20150715}
 
 \end{document}

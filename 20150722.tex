@@ -1,0 +1,105 @@
+\chapter{おまけ}
+\lectureinfo{2015年7月22日 1限}
+
+\section{線型空間の直和分解}
+
+\subsection{直和の定義}
+
+\subsection{準同型定理}
+
+\section{双線型写像と$2$次形式}
+
+\subsection{双線型写像}
+
+\paragraph{例1: 行列の積}
+
+$\Mat_n(\mathbb{R}) \times \Mat_n(\mathbb{R}) \rightarrow \Mat_n(\mathbb{R}); (X, Y) \mapsto XY$
+
+\paragraph{例2: Killing形式}
+
+\subsection{内積}
+
+\subsection{Hermite形式}
+
+\section{行列のなすLie環}
+
+\subsection{交換子}
+
+$2$つの$n$次正方行列$X, Y \in \Mat_2(\mathbb{R})$に対し$[X, Y] := XY - YX$を$X$と$Y$の\textbf{交換子}といいます。
+
+\paragraph{交換子の性質}
+
+\begin{itemize}
+\item 双線型性: $[\alpha X + \beta X', Y] = \alpha[X, Y] + \beta[X', Y]$, $[X, \alpha Y + \beta Y'] = \alpha [X, Y] + \beta [X, Y']$
+\item 交代性: $[Y, X] = -[X, Y]$
+\item Jacobi恒等式: $[X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0$
+\end{itemize}
+
+\paragraph{traceとの関係}
+
+\subsection{Lie環}
+
+\subsection{$\mathfrak{sl}_2$}
+
+\paragraph{定義}
+
+\paragraph{$\mathfrak{sl}_2(\mathbb{C})$とPauli行列}
+
+\[
+\sigma_x := 
+\frac{1}{2}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}, \quad
+\sigma_y := 
+\frac{1}{2}
+\begin{pmatrix}
+0 & -i \\
+i & 0 
+\end{pmatrix}, \quad
+\sigma_z := 
+\frac{1}{2}
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\]
+
+\subsection{随伴作用}
+
+\paragraph{問7の解答}
+
+\section{双対空間}
+
+\subsection{双対空間の定義}
+
+\paragraph{$\mathbb{R}^n$の双対空間}
+
+\subsection{双対基底}
+
+\paragraph{問10の解答}
+
+\subsection{$2$回双対}
+
+線型空間$V$から双対空間$V^*$を作ったのと同じようにして、今度は$V^*$の双対空間$V^{**} := (V^*)^*$を考えることができます。この$V^{**}$の構造を調べましょう。
+
+\paragraph{評価写像} $V^{**}$の元は「$V^{*}$の元に対して、実数$\mathbb{R}$を対応させる」という写像です。そして$V^{*}$は$V\rightarrow\mathbb{R}$という写像です。だから$\bm{v} \in V$を$1$つ固定すると、$f\mapsto f(\bm{v})$という方法で$\ev_{\bm{v}}:V^{*}\rightarrow \mathbb{R}$という写像が作れます。これを評価写像というのでした。$\ev_{\bm{v}}\in V^{**}$です。
+
+そして$\ev_{\bm{v}}$の$\bm{v}$を動かすことで、$\ev\colon V\rightarrow V^{**}$という写像ができます。これは線型写像になっています。実際
+\begin{itemize}
+\item $\ev_{\bm{v} + \bm{w}} = \ev_{\bm{v}} + \ev_{\bm{w}}$
+\item $\ev_{\alpha\bm{v}} = \alpha \ev_{\bm{v}}$
+\end{itemize}
+です。
+
+\paragraph{$V$と$V^{**}$の同型} この$\ev\colon V\rightarrow V^{**}$が同型になることを示しましょう。次元を考えれば、単射性だけ考えれば十分です。
+
+いま$\bm{v} \neq \bm{0} \in V$とすると、$\bm{v}$を延長することで$V$の基底$(\bm{f}_1 = \bm{v}, \bm{f}_2, \ldots, \bm{f}_n)$が作れます。この基底の双対基底$(\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n)$を取ると、$\bm{f}^{\vee}_1(\bm{v}) = 1 \neq 0$となります。よって$\varphi \in V^*$で$\varphi(\bm{v})\neq 0$となるものが存在します。
+
+この対偶を取ると「任意の$\varphi \in V^*$に対して$\varphi(\bm{v}) = 0$なら、$\bm{v} = \bm{0}$」となります。よって$\bm{v} \in V$が$\ev_{\bm{v}} = 0 \in V^{**}$を満たせば、任意の$\varphi \in V^*$に対し$\varphi(\bm{v}) = \ev_{\bm{v}}(\varphi) = 0$となるから、$\bm{v} = \bm{0}$です。よって$\ev$は単射です。
+
+\subsection{$\Hom$の分解}
+
+$V$, $W$が線型空間のとき、$W\times V^* \rightarrow \Hom(V, W); (\bm{w}, \varphi)\mapsto\bigl(\bm{v}\mapsto \varphi(\bm{v})\bm{w}\bigr)$という写像ができます。このような写像たちで$\Hom(V, W)$は生成されます。
+

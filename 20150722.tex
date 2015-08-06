@@ -1,50 +1,499 @@
 \chapter{おまけ}
 \lectureinfo{2015年7月22日 1限}
 
-\section{線型空間の直和分解}
+みなさんこんにちは。夏休み、いかがでしたか？
+
+S2ターム最後の授業で出された課題には、実は色々と面白いネタが潜んでいました。そこで夏休み明け初回のこのプリントでは、ちょっと発展的なお話をいくつか紹介したいと思います。
+
+\section{講評}
+
+(採点後に書きます)
+
+\section{線型空間の直和分解と準同型定理}
 
 \subsection{直和の定義}
 
+前回のプリントの再掲になりますが、直和の定義と性質を確認しておきましょう。$U$を線型空間とし、$V, W\subset U$をその部分空間とします。そして「任意の$\bm{u} \in U$が、$\bm{u} = \bm{v} + \bm{w}$ ($\bm{v} \in V, \bm{w}\in W$)の形にただ一通りに書ける」という条件が成り立つとき、$U$は$V$と$W$の\textbf{直和}である\footnote{正確には、ここで定義した直和は「内部直和」といいます。この他に「外部直和」というものがあって、慣れてくると内部直和と外部直和をどっちも「直和」と略すようになります。事実としては内部直和と外部直和は自然に同型になるので、そんな深く気にすることはありません。でも他の場所で「この場所は、僕の知ってる直和と違うな？」と思ったときは、どっちの直和なのかを考えてみてください。}といい、$U = V \oplus W$と書きます。
+
+直感的に言えば、これは「$U$を$V$方向と$W$方向に分ける」ことを表しています。ですから直和の条件は、次のようにも言い換えられます。
+\begin{itemize}
+\item $V$の基底と$W$の基底を連結すると、$U$全体の基底が得られる。
+\item $U = V + W$かつ$V\cap W = \{\bm{0}\}$が成り立つ。
+\item $V \cap W = \{\bm{0}\}$かつ$\dim V + \dim W = \dim U$が成り立つ。
+\end{itemize}
+$3$つ以上の空間の直和についても定義は同様です。記号の意味を確かめるため、問1から問3の答えを直和記号で書いてみましょう。	
+
+\paragraph{問1} $\Ker f = \mathbb{R}\,{}^t(1, -2, 1)$ \qed
+
+\paragraph{問2} (1) $\Ker f = \mathbb{R}\,{}^t(1, -3, 1)$ (2) $\Im f = \mathbb{R}\,{}^t(1, 0, 1) \oplus \mathbb{R}\,{}^t(0, 1, 2)$ \qed
+
+\paragraph{問3} (1) $\Ker f = \mathbb{R}\,{}^t(2, 2, -3, -3)$ (2) $\Im f = \mathbb{R}\,{}^t(1, 0, 0 ,1) \oplus \mathbb{R}\,{}^t(0, 1, 0 ,0) \oplus \mathbb{R}\,{}^t(0, 0, 1 ,2)$ \qed
+
 \subsection{準同型定理}
 
-\section{双線型写像と$2$次形式}
+$f\colon V\rightarrow W$を線型写像とします。このとき$f$の単射性は、$\Ker f$によって完全にコントロールされていたことを思い出しましょう。つまり
+\begin{itemize}
+\item $\bm{v}, \bm{w} \in V$のズレ$\bm{v} - \bm{w}$が$\Ker f$に入っていれば、$f(\bm{v}) = f(\bm{w})$となる
+\item $\bm{v}, \bm{w} \in V$が$f(\bm{v}) = f(\bm{w})$を満たせば、ズレ$\bm{v} - \bm{w}$は$\Ker f$に入る
+\end{itemize}
+のでした。$V$に$f$を当てると、$\Ker f$の方向が完全にぺちゃんこに潰れて、それ以外に潰れる方向はありません。こう考えると「潰れない方向は、そのまま$\Im f$と同じになるんじゃないか」という気がしてきます。
+
+そして、前に$\Ker f$の話をしたときは突っ込んだ議論ができませんでしたが、今は「直和」「基底」「同型」といったキーワードが使えます。ですから
+\begin{itemize}
+\item 「空間を$2$方向に分ける」とはどういうことか
+\item どうすれば、空間を$2$つの方向に分けられるか
+\item 線型空間が「同型」とは何か
+\end{itemize}
+を考えることができます。
+
+\paragraph{準同型定理} $f\colon V\rightarrow W$を線型空間とします。このとき$V$の部分空間$U \subset V$で、次の$2$条件を満たすものが取れます。
+\begin{itemize}
+\item $V = \Ker f \oplus U$
+\item $f$を$U$への制限し、値域を$W$から$\Im f$に取り換えて得られる線型写像$f|_{U} \colon U\rightarrow \Im f$は同型写像
+\end{itemize}
+大体、このような事実を「準同型定理」といいます\footnote{今ここで述べた主張は、世間一般で「準同型定理」と呼ばれるものより強い事実を指します。普通は「$V$を$\Ker f$方向につぶした空間$V/\Ker f$」というものを定義して、$V/\Ker f$と$\Im f$が同型になることを準同型定理と呼びます。線型空間より広いクラスの空間を考えると「$\Ker f$方向をつぶした後の空間」が簡単になるとは限らないため、$V$を$\Ker f$方向と$V/\Ker f$方向に綺麗に分離できるとは限りません。ですが線型空間の場合は構造がとても良いので、いつでも$V$を$\Ker f$方向と$V/\Ker f \simeq \Im f$方向とに分離できます。今述べた「準同型定理」は、こちらの強いバージョンの主張です。}。
+
+証明は簡単です。$\Ker f$の基底$(\bm{f}_1, \ldots, \bm{f}_l)$を取り、それを延長して$V$全体の基底$(\bm{f}_1, \ldots, \bm{f}_l, \bm{f}_{l + 1}, \ldots, \bm{f}_n)$を作りましょう。これで「基底の前$l$本が$\Ker f$を張る、後ろの$n - l$本がそれ以外の方向を張る」という状況が作れました。そこで$U := \mathbb{R}\bm{f}_{l + 1} + \cdots + \mathbb{R}\bm{f}_n$とおくと、基底の作り方から$U \cap \Ker f = \{\bm{0}\}$, $U + \Ker f = V$となります。つまり$V = \Ker f \oplus U$です。
+
+いま、$f$を$U$に制限した写像$f|_U$を考えます。部分空間$U$は$U\cap \Ker f = \{0\}$となるように作ったので、$\bm{u} \in U$が$f(\bm{u}) = \bm{0}$を満たすのは$\bm{u} = \bm{0}$のときに限ります。よって$\Ker f|_U = \{\bm{0}\}$です。また$\bm{w} \in \Im f$とすると、$\bm{w} = f(\bm{u})$となる$\bm{u} \in V$が取れます。ここで「$f$が$\Ker f$方向をつぶす」ことを思いだすと、$f(\bm{u}) = \bm{w}$を満たすような$\bm{u}$として$\Ker f$最初から方向が潰れているもの、つまり$\bm{u} \in W$となるものが取れそうです。実際にそれが可能なことを示しましょう。基底で$\bm{u} = \alpha_1 \bm{f}_1 + \ldots + \alpha_l \bm{f}_l + \alpha_{l + 1} \bm{f}_{l + 1} + \cdots + \alpha_{n} \bm{f}_n$と表示すると
+\begin{align*}
+\bm{w} = f(\bm{v}) &= f(\alpha_1 \bm{f}_1 + \ldots + \alpha_l \bm{f}_l + \alpha_{l + 1} \bm{f}_{l + 1} + \cdots + \alpha_{n} \bm{f}_n) \\
+&= \alpha_1 f(\bm{f}_1) + \ldots + \alpha_l f(\bm{f}_l) + \alpha_{l + 1} f(\bm{f}_{l + 1}) + \cdots + \alpha_{n} f(\bm{f}_n) \\
+&= \alpha_{l + 1} f(\bm{f}_{l + 1}) + \cdots + \alpha_{n} f(\bm{f}_n) \\
+&= f(\alpha_{l + 1} \bm{f}_{l + 1} + \cdots + \alpha_{n} \bm{f}_n)
+\end{align*}
+となります。よって$f$で$\bm{w}$に写る元として$\alpha_{l + 1} \bm{f}_{l + 1} + \cdots + \alpha_{n} \bm{f}_n \in U$が取れるので、$f|_U$の値域を$\Im f$に取り換えたものは全射です。これで$f_U\colon U \rightarrow \Im f$は同型だと言えました。
+
+\paragraph{問4と問5}
+$f, g\colon \Mat_2(\mathbb{R}) \rightarrow \Mat_2(\mathbb{R})$を、$f(X) := X + {}^t X$, $g(X) := X - {}^t X$と定める。このとき$f(X) = O$と$X = {}^t X$は同値なので、$\Ker f = \Alt_2(\mathbb{R})$である。一方
+\begin{itemize}
+\item 任意の$X \in \Mat_2(\mathbb{R})$に対し${}^t f(X) = {}^t(X + {}^t X) = {}^t X + X = f(X)$だから、$\Im f \subset \Sym_2(\mathbb{R})$
+\item $X \in \Sym_2(\mathbb{R})$に対し、$f(X/2) = (X + {}^t X)/2 = X$となるので、$\Sym_2(\mathbb{R}) \subset \Im f$
+\end{itemize}
+だから、$\Im f = \Sym_2(\mathbb{R})$である。よって準同型定理から$\Mat_2(\mathbb{R}) \simeq \Sym_2(\mathbb{R}) \oplus \Alt_2(\mathbb{R})$が従う。
+
+\section{双線型写像}
+
+今回の問9では、ほんのり「双線型写像」と呼ばれるものが姿をちらつかせます。これは一言でいうと「$2$変数の線型写像」のようなものです。内積をはじめとして、双線型写像は色々なところに顔を出すので、この機会にいくつか有名な例を見てみましょう。
 
 \subsection{双線型写像}
 
-\paragraph{例1: 行列の積}
+\paragraph{線型空間の直積} $V, W$を$2$つの線型空間とします。このとき$V$のベクトルと$W$のベクトルのペア全体のなす集合を$V \times W$と書き、$V$と$W$の\textbf{直積}といいます。つまり$V\times W = \{(\bm{v}, \bm{w})\mid \bm{v} \in V, \bm{w} \in W\}$です\footnote{直積は線型空間に限らず、一般に$2$つの集合に対して定義されます。ですが線型空間の直積の場合は
+\[
+(\bm{v}_1, \bm{w}_1) + (\bm{v}_2, \bm{w}_2) := (\bm{v}_1 + \bm{v}_2, \bm{w}_1, + \bm{w}_2), \quad
+\alpha(\bm{v}, \bm{w}) := (\alpha\bm{v}, \alpha\bm{w})
+\]
+によって和とスカラー倍を定義することで、$V\times W$も線型空間になります。}。
 
-$\Mat_n(\mathbb{R}) \times \Mat_n(\mathbb{R}) \rightarrow \Mat_n(\mathbb{R}); (X, Y) \mapsto XY$
+\paragraph{双線型写像の定義}
 
-\paragraph{例2: Killing形式}
+$U, V, W$を線型空間とします。このとき写像$f\colon U\times V \rightarrow W$で、$1$つ目の変数と$2$つ目の変数の両方について線型なものを\textbf{双線型写像}といいます。すなわち
+\[
+f(\alpha \bm{u}_1 + \beta \bm{u}_2, \bm{v}) = \alpha f(\bm{u}_1, \bm{v}) + \beta f(\bm{u}_2, \bm{v}), \quad
+f(\bm{u}, \alpha \bm{v}_1 + \beta \bm{v}_2) = \alpha f(\bm{u}, \bm{v}_1) + \beta f(\bm{u}, \bm{v}_2)
+\]
+を満たすものが双線型写像です。特に$U = V$かつ$W = \mathbb{R}$のとき、$\mathbb{R}$に値を取る双線型写像 $f\colon V\times V \rightarrow \mathbb{R}$のことを$V$上の\textbf{双線型形式}といいます。いくつか、典型的な例を見てみましょう。
 
-\subsection{内積}
+\paragraph{例1: 行列の積} 
+
+$(m, n)$型行列と$(n, l)$型行列の掛け算をする写像を$m\colon\Mat_{m, n}(\mathbb{R}) \times \Mat_{n, l}(\mathbb{R}) \rightarrow \Mat_{m, l}(\mathbb{R})$とします\footnote{「$(m, n)$型行列」の$m$と線型写像の$m$に同じ文字を使ってしまいましたが、たぶん混ざることはないと思います。}。つまり$m(X, Y) := XY$です。既に行列の積が分配法則などを満たすことを知っているので、任意の$(m, n)$型行列$X, X_1, X_2 \in \Mat_{m, n}(\mathbb{R})$、$Y, Y_1, Y_2 \in \Mat_{n, l}(\mathbb{R})$と実数$\alpha, \beta\in\mathbb{R}$に対し
+\begin{align*}
+\begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+m(\alpha X_1 + \beta X_2, Y) &=& (\alpha X_1 + \beta X_2)Y &=& \alpha X_1 Y + \beta X_2 Y &=& \alpha\, m(X_1, Y) + \beta\, m(X_2, Y) \\[0.3zw]
+m(X, \alpha Y_1 + \beta Y_2) &=& X (\alpha Y_1 + \beta Y_2) &=& \alpha X Y_1 + \beta X Y_2 &=& \alpha\, m(X, Y_1) + \beta\, m(X, Y_2)
+\end{array}
+\end{align*}
+が分かります。よって$m$は双線型写像です。
+
+\paragraph{例2: ベクトルの標準内積} $2$つの空間ベクトル$\bm{u}, \bm{v}\in \mathbb{R}^3$のペアに対する内積$\bm{u}\cdot\bm{v}$\footnote{内積は$\bm{u}\cdot\bm{v}$と書いたり$(\bm{u}, \bm{v})$と書いたりしますが、いま$(\bm{u}, \bm{v})$と書いてしまうとベクトルのペアを表す記号とごっちゃになってしまうので、$\bm{u}\cdot \bm{v}$で表しました。}が双線型であることは、既に皆さんは知っているはずです。一般に$n$次元になっても、$\bm{u}, \bm{v}\in \mathbb{R}^n$の\textbf{標準内積}$\bm{u}\cdot\bm{v}$を
+\[
+\bm{u}\cdot\bm{v} := {}^t\bm{u} \bm{v} =
+\begin{pmatrix}
+u_1 & u_2 & \cdots & u_n 
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n 
+\end{pmatrix}
+= u_1 v_1 + u_2 v_2 + \cdots + u_n v_n
+\]
+と定義します。この写像は、さっき調べた行列の積を表す写像$m$と行列の転置に分解すれば
+\[
+\begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+\mathbb{R}^n \times \mathbb{R}^n	& \xrightarrow{\text{\hbox to 3zw{\hfil${}^t \times \id$\hfil}}}	& \Mat_{1, n}(\mathbb{R}) \times \Mat_{n, 1}(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{\hfil$m$\hfil}}}	& \Mat_{1, 1}(\mathbb{R})  & = \mathbb{R} \\
+\rotatebox{90}{$\in$}	& 																				& \rotatebox{90}{$\in$}										& 													& \rotatebox{90}{$\in$} \\
+(\bm{u}, \bm{v})					& \xmapsto{\text{\hbox to 3zw{}}}									& ({}^t\bm{u}, \bm{v})										& \xrightarrow{\text{\hbox to 3zw{}}}				& {}^t\bm{u} \bm{v}
+\end{array}
+\]
+のように、双線型写像と線型写像の合成として表せます。よって全体としても双線型写像だと分かります。
+
+\paragraph{例3: ベクトルの標準内積の一般化} ベクトルの標準内積$(\bm{u}, \bm{v}) \mapsto {}^t\bm{u}\bm{v}$を少し一般化してみます。$n$次正方行列$A \in \Mat_n(\mathbb{R})$を取り、${}^t\bm{u}$と$\bm{v}$の間に$A$を挟んだ$(\bm{u}, \bm{v}) \mapsto {}^t\bm{u} A \bm{v}$という対応を考えます。これもやはり双線型形式です。$A = E$とした場合が、標準内積に対応します。「どういう$A$が内積っぽい性質を示すか」という問題は、きっと$A$タームの授業で扱われるはずです。
+
+\paragraph{例4: トレース形式} $(m, n)$型行列$X$と$(n, m)$型行列$Y$のペアに対し$\tr XY$を対応させる写像を考えます。この写像もまた、行列の掛け算の写像を用いると線型写像$\tr$と双線型写像$m$の合成として
+\begin{align*}
+\begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+\tr\circ m \colon	& \Mat_{m, n}(\mathbb{R}) \times \Mat_{n, m}(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{\hfil$m$\hfil}}}	& \Mat_m(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{$\hfil\tr$\hfil}}}	& \mathbb{R} \\
+					& \rotatebox{90}{$\in$} 									& 													& \rotatebox{90}{$\in$}	& 					& \rotatebox{90}{$\in$} \\
+					& (X, Y) 													& \xmapsto{\text{\hbox to 3zw{}}}					& XY					& \xmapsto{\text{\hbox to 3zw{}}}						& \tr XY
+\end{array}
+\end{align*}
+のように書けるので、双線型です。特に$m = n$のとき、この写像は$\Mat_n(\mathbb{R})$上の双線型形式を与えます。
+
+\subsection{内積とノルム}
+
+さて世の中には数多の双線型形式があって、それぞれの性質に応じて用いられる場面は変わってきます。そこで重要な典型例として、僕たちが良く知っている「ベクトルの内積」に焦点を当ててみます。「どういう双線型形式が内積っぽく振る舞うか」を考えてみましょう。
+
+\paragraph{双線型形式の性質} $V$上の対称双線型形式$f$に関する性質を、次のように定義します。
+\begin{itemize}
+\item 任意の$\bm{v}, \bm{w} \in V$に対し$f(\bm{v}, \bm{w}) = (\bm{w}, \bm{v})$であるとき、$f$は\textbf{対称}であるといいます。
+\item 任意の$\bm{v} \in V$に対し$f(\bm{v}, \bm{v}) \geq 0$が成り立つとき、$f$は\textbf{半正定値}であるといいます。
+\item $f$が半正定値で、かつ$f(\bm{v}, \bm{v}) = 0$となる$\bm{v} \in V$が$\bm{v} = \bm{0}$しかないとき、$f$は\textbf{正定値}であるといいます。
+\end{itemize}
+そして$V$上の\textbf{正定値な対称双線型形式を$V$の内積といいます}。Aタームの授業で追々見ていくことになりますが、実はこれらの性質が内積を内積たらしめている本質です。さっき挙げた例などをベースに、内積っぽいものを見てみましょう。
+
+\paragraph{例5: $\mathbb{R}^n$の標準内積}
+
+$\mathbb{R}^n$の標準内積は、その名前の指す通り内積になっています。実際${}^t\bm{u}\bm{v} = {}^t\bm{v}\bm{u}$なので、標準内積は対称な双線型形式です。さらに$\bm{v} = {}^t(v_1, v_2, \ldots, v_n)$に対し
+\[
+\bm{v} \cdot \bm{v} = 
+{}^t\bm{v} \bm{v} = 
+\begin{pmatrix}
+v_1 & v_2 & \cdots & v_n
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n
+\end{pmatrix}
+= v_1^2 + v_2^2 + \cdots + v_n^2 \geq 0
+\]
+で、この値が$0$になるのは$\bm{v} = \bm{0}$のときに限ります。よって標準内積は正定値でもあります。
+
+\paragraph{例6: 行列の内積} トレース形式に行列の転置をかませて
+\begin{align*}
+\begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+\Mat_{m, n}(\mathbb{R}) \times \Mat_{m, n}(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{\hfil${}^t \times \id$\hfil}}}	& \Mat_{n, m}(\mathbb{R}) \times \Mat_{m, n}(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{\hfil$m$\hfil}}}	& \Mat_n(\mathbb{R})	& \xrightarrow{\text{\hbox to 3zw{\hfil$\tr$\hfil}}}	& \mathbb{R} \\
+\rotatebox{90}{$\in$}									& 																	& \rotatebox{90}{$\in$}										& 													& \rotatebox{90}{$\in$}	&		 												& \rotatebox{90}{$\in$} \\
+(A, B)													& \xmapsto{\text{\hbox to 3zw{}}}						& ({}^tA, B)												& \xmapsto{\text{\hbox to 3zw{}}}			& {}^tA B				& \xmapsto{\text{\hbox to 3zw{}}}			& \tr({}^t\!A B)
+\end{array}
+\end{align*}
+という双線型形式を考えます。これを成分で書き下してみましょう。$A = (a_{ij})$, $B = (b_{ij}) \in \Mat_{m, n}(\mathbb{R})$とすると
+\begin{align*}
+& {}^t\!A B 
+=
+\begin{pmatrix}
+a_{11} & a_{21} & \cdots & a_{m1} \\
+a_{12} & a_{22} & \cdots & a_{m2} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{mn}
+\end{pmatrix}
+\begin{pmatrix}
+b_{11} & b_{12} & \cdots & b_{1n} \\
+b_{21} & b_{22} & \cdots & b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+b_{m1} & b_{m2} & \cdots & b_{mn}
+\end{pmatrix} \\
+&=
+\begin{pmatrix}
+a_{11}b_{11} + a_{21}b_{21} + \cdots + a_{m1}b_{m1} & * & \cdots & * \\
+* & a_{12}b_{12} + a_{22}b_{22} + \cdots + a_{m2}b_{m2} & \cdots & * \\
+\vdots & \vdots & \ddots & \vdots \\
+* & * & \cdots & a_{1n}b_{1n} + a_{2n}b_{2n} + \cdots + a_{mn}b_{mn}
+\end{pmatrix}
+\end{align*}
+です\footnote{この後トレースを取るので、非対角成分の計算は不要です。どうでもいい成分を$*$で表しました。}。よって
+\[
+\tr {}^t\!A B
+= (a_{11}b_{11} + a_{21}b_{21} + \cdots + a_{m1}b_{m1}) + \cdots + (a_{1n}b_{1n} + a_{2n}b_{2n} + \cdots + a_{mn}b_{mn})
+= \sum_{i = 1}^{m} \sum_{j = 1}^n a_{ij}b_{ij}
+\]
+となります。この内積は「対応する成分同士を掛け算して足し合わせる」という計算をしていますから、$\mathbb{R}^n$の標準内積を行列バージョンに拡張したものだと思うことができます。実際この式で$n = 1$とすれば、$\mathbb{R}^m$の標準内積が再現されますね。そして標準内積の時と同様、特に$A = B$とすると
+\[
+\tr {}^t\!A A = (a_{11}^2 + a_{21}^2 + \cdots + a_{m1}^2) + \cdots + (a_{1n}^2 + a_{2n}^2 + \cdots + a_{mn}^2) \geq 0
+\]
+で、等号成立は$A = O$のときに限ります。こうして行列の空間$\Mat_{m, n}(\mathbb{R})$に、標準内積と呼ぶべきものを定義できました。
+
+\paragraph{ノルムと距離} 線型空間$V$上に内積$(, )$が与えられたとします。このとき任意の$\bm{v} \in V$に対し$(\bm{v}, \bm{v}) \geq 0$が成り立つので、$\|\bm{v}\| := \sqrt{(\bm{v}, \bm{v})}$が定義できます。これを$\bm{v}$の\textbf{ノルム}といいます。ノルムは
+\begin{itemize}
+\item 任意の$\bm{v} \in V$に対し$\|\bm{v}\|\geq 0$で、かつ$\|\bm{v}\| = 0$となる$\bm{v}$は$\bm{v} = \bm{0}$に限る
+\item 任意の$\bm{v} \in V$と$\alpha\in\mathbb{R}$に対し、$\|\alpha\bm{v}\| = |\alpha|\|\bm{v}\|$が成り立つ
+\item 任意の$\bm{u}, \bm{v} \in V$に対し、$\|\bm{u} + \bm{v}\| \leq \|\bm{u}\| + \|\bm{v}\|$が成り立つ
+\end{itemize}
+という性質を満たします\footnote{内積とは関係なく、一般に今の$3$条件を満たす写像$\|\ \|\colon V\rightarrow\mathbb{R}_{\geq 0}$はノルムと呼ばれます。}。さらにノルムがあると、$\bm{u}, \bm{v} \in V$に対し$d(\bm{u}, \bm{v}) := \|\bm{u} - \bm{v}\|$によって$V$上の\textbf{距離}が定義できます。この$d$を距離というのは
+\begin{itemize}
+\item 任意の$\bm{u}, \bm{v} \in V$に対して$d(\bm{u}, \bm{v}) \geq 0$
+\item 任意の$\bm{u}, \bm{v} \in V$に対して$d(\bm{u}, \bm{v}) = 0$ならば$\bm{u} = \bm{v}$
+\item 任意の$\bm{u}, \bm{v} \in V$に対して$d(\bm{u}, \bm{v}) = d(\bm{v}, \bm{u})$
+\item 任意の$\bm{u}, \bm{v}, \bm{w} \in V$に対して$d(\bm{u}, \bm{v}) \leq d(\bm{u}, \bm{w}) +d(\bm{w}, \bm{v})$ (三角不等式)
+\end{itemize}
+という、いかにも距離と呼ぶにふさわしい性質が成り立つからです。確かめてみてください。
+
+ちなみに内積に限らずとも、今挙げたような意味での「距離」が備わった空間を\textbf{距離空間}といいます\footnote{距離空間は線型空間である必要はありまえん。たとえば$\mathbb{R}^2$内の原点を中心とする半径$1$の開円板なども、距離空間の例です。}。またノルムの定義された線型空間を\textbf{ノルム空間}といいます\footnote{いまは内積を出発点にしてしまいましたが、「計量線型空間にはなり得ないノルム空間」の存在が知られています。}。したがって
+\[
+\text{計量線型空間} \Longrightarrow
+\text{ノルム空間} \Longrightarrow
+\text{距離空間}
+\]
+という関係が成り立ちます。
 
 \subsection{Hermite形式}
 
+この授業では複素数をスカラーとする行列や線型空間の話があまり登場していませんが、実務上重要なので、少し補足をしておきます。
+
+$\mathbb{R}^n$の標準内積を真似ることで、複素数を変数とする$2$本の$n$次元数ベクトル$\bm{u}, \bm{v} \in \mathbb{C}^n$に対しても、$(\bm{u}, \bm{v})\mapsto {}^t\bm{u} \bm{v}$という双線型形式を考えることができます。ですがこの双線型形式は、ある意味振る舞いが良くありません\footnote{以下で述べるように、ここで「振る舞いが良くない」と言っているのはあくまで「複素線型空間上でノルムを作りたいなら、双線型形式ではダメだよね」というだけの話です。双線型形式は双線型形式で、別の場面で役立ちます。たとえば$\mathfrak{sl}_2(\mathbb{C})$上のトレース形式に適当な定数をかけるとKilling形式というものになり、Lie環の理論で非常に重要な役割を果たします。}。
+
+そもそも$\mathbb{R}^n$の内積がもたらすご利益は何だったかというと「ノルムを経由して長さや距離が定義できる」ということでした。一方、たとえば$\mathbb{C}^2$の場合に${}^t\bm{u} \bm{u}$を計算すると
+\[
+{}^t\bm{u} \bm{u} = 
+\begin{pmatrix}
+u_1 & u_2
+\end{pmatrix}
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}
+= u_1^2 + u_2^2 \in \mathbb{C}
+\]
+はただの複素数でしかなく、「長さ」のようなものを表していません。ところがここで、ベクトルの片方に複素共役をつけて${}^t\bm{u}\overline{\bm{v}}$を考える\footnote{$\bm{v}\in\mathbb{C}^n$の各成分毎に複素共役を取ってできるベクトルを$\overline{\bm{v}}$と表します。}と、$\bm{u} = \bm{v}$のとき
+\[
+{}^t\bm{u}\overline{\bm{u}}
+=
+\begin{pmatrix}
+u_1 & u_2
+\end{pmatrix}
+\begin{pmatrix}
+\overline{u_1} \\
+\overline{u_2}
+\end{pmatrix}
+= |u_1|^2 + |u_2|^2 \in \mathbb{R}_{\geq 0}
+\]
+となり、めでたく非負の実数が出てきます。そして$f(\bm{u}, \bm{v}) := {}^t\bm{u}\overline{\bm{v}}$と書くと、$f$は
+\begin{itemize}
+\item $f(\alpha \bm{u}_1 + \beta \bm{u}_2, \bm{v}) = \alpha f(\bm{u}_1, \bm{v}) + \beta f(\bm{u}_2, \bm{v}) $
+\item $f(\bm{v}, \bm{u}) = \overline{f(\bm{u}, \bm{v})}$
+\item 任意の$\bm{u} \in \mathbb{C}^n$に対し、$f(\bm{u}, \bm{u}) \in \mathbb{R}_{\geq 0}$
+\item $f(\bm{u}, \bm{u}) = 0$ならば$\bm{u} = \bm{0}$
+\end{itemize}
+という式を満たします。これを実ベクトル空間の内積と見比べると、
+\begin{itemize}
+\item 正定値という性質は保たれている
+\item 双線型性と対称性が若干崩れ、式に複素共役が交わる
+\end{itemize}
+ということが分かります。双線型性や対称性を若干犠牲にしたことと引き換えに、正定値性が得られたわけです。このような式を満たす$f$を\textbf{Hermite形式}といいます\footnote{Hermiteの読みは「エルミート」です。フランス人なので、頭文字の`H'を発音しません。}。複素線型空間$V$上にHermite形式$(, )$が与えられると、実線型空間の時と同様$\|\bm{v}\| := \sqrt{(\bm{v}, \bm{v})}$によって$\bm{v} \in V$のノルムが定義できます。
+
+\subsection{ノルムの応用: 行列の指数函数}
+
+せっかくノルムを定義したので、一つ使い道を紹介しましょう。それは\textbf{行列の指数函数}というものです。
+
+普通の数に対する指数函数$e^x = \exp x$は\footnote{$e^x$と$\exp x$は全く同じ意味です。$x$の部分に長い式が来る場合、$e$の肩に載せると見辛くなるので、$\exp$という記法が用いられます。}、Taylor展開を用いて
+\[
+e^x = \sum_{k = 0}^{\infty} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+\]
+と表示できます。この$x$に行列を代入できないでしょうか？
+
+一つの戦略としては「代入する行列を制限する」という手があります。$e^x$の$x$のところに巾零行列\footnote{何乗かしたら$O$になる行列のことです。}を代入すると、右辺は有限項で終わってしまうので、定義通りに計算ができます。
+
+もう一つの戦略としては「収束を検討する」というものです。数列の収束を拡張して、「行列の列」の収束を「各成分が収束すること」と定めれば、行列の列の極限を考えることができます。それを使って指数函数$e^x$を行列に拡張します。この時に活躍するのが、行列のノルムです。
+
+\paragraph{行列の収束とトレースノルム}
+
+いま$n$次正方行列の列$(A_k)_{k = 0}^{\infty}$と$A$について、$A_n \rightarrow A$ ($n\rightarrow\infty$) を「$A_n$の各成分が、$n \rightarrow \infty$で同じ場所にある$A$の成分に収束すること」と定めました。実はこの条件は、トレースノルムを使うと$\|A_n - A\| \rightarrow 0$と簡単に書けてしまいます。このことを証明しましょう。$A_k = \bigl(a^{(k)}_{ij}\bigr)$, $A = (a_{ij})$と書きます。
+
+まず$A_k \rightarrow A$とします。このとき全ての$1 \leq i, j \leq n$に対し$|a^{(k)}_{ij} - a_{ij}| \rightarrow 0$が成り立つので、
+\begin{align*}
+\lim_{k \rightarrow \infty} \|A_k - A\|
+&= \lim_{k \rightarrow \infty} \sum_{i, j = 0}^n |a^{(k)}_{ij} - a_{ij}|^2 
+= \sum_{i, j = 0}^n \lim_{k \rightarrow \infty} |a^{(k)}_{ij} - a_{ij}|^2 
+= 0
+\end{align*}
+となります。逆に$\|A_k - A\| \rightarrow 0$とすると、任意の$1\leq p, q\leq n$に対し
+\begin{align*}
+0
+\leq \bigl| a^{(k)}_{pq} - a_{pq} \bigr|^2
+\leq \sum_{i, j = 0}^n \bigl| a^{(k)}_{ij} - a_{ij} \bigr|^2
+= \|A_k - A\|
+\rightarrow 0 \quad (k \rightarrow \infty)
+\end{align*}
+となるから、各成分毎の収束が言えます。こんな感じで、行列の収束の話がノルムの計算に帰着できるのです。
+
+また、ノルムの列$\bigl(\|A_k\|\bigr)_{k = 0}^{\infty}$がCauchy列なら、$(A_k)_{k = 0}^{\infty}$が収束すると言えます。今の評価と同様にして、任意の自然数$m, m'\in\mathbb{N}$に対し$|A^{(m)}_{ij} - A^{(m')}_{ij}| \leq \|A_m - A_{m'}\|$が示せます。つまり全ての成分について「第$m$番目と第$m'$番目の項の差がノルム$\|A_m - A_{m'}\|$で抑えられる」というわけです。よってノルムの列$\bigl(\|A_k\|\bigr)_{k = 0}^{\infty}$がCauchy列になっていたら、$(A_k)_{k = 0}^{\infty}$もCauchy列となり、収束します。
+
+
+\paragraph{トレースノルムの満たす不等式}
+
+トレースノルムについて$\|AB\| \leq \|A\| \|B\|$が成り立つことを示しましょう。${}^t\!A = (\bm{a}_1 \ \cdots \ \bm{a}_n)$, $B = (\bm{b}_1, \ldots, \bm{b}_n)$とすると、
+\[
+AB =
+\begin{pmatrix}
+{}^t\bm{a}_1 \\
+{}^t\bm{a}_2 \\
+\vdots \\
+{}^t\bm{a}_n
+\end{pmatrix}
+\begin{pmatrix}
+\bm{b}_1 & \bm{b}_2 & \cdots & \bm{b}_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{a}_1 \cdot \bm{b}_1 & \bm{a}_1 \cdot \bm{b}_2 & \cdots & \bm{a}_1 \cdot \bm{b}_n \\
+\bm{a}_2 \cdot \bm{b}_1 & \bm{a}_2 \cdot \bm{b}_2 & \cdots & \bm{a}_2 \cdot \bm{b}_n \\
+\vdots & \vdots & \ddots & \vdots \\
+\bm{a}_n \cdot \bm{b}_1 &  \bm{a}_n \cdot \bm{b}_2 & \cdots & \bm{a}_n \cdot \bm{b}_n
+\end{pmatrix}
+\]
+なので、Cauchy--Schwarzの不等式$|\bm{a}\cdot\bm{b}| \leq \|\bm{a}\| \|\bm{b}\| $を使うと
+\begin{align*}
+\|AB\|
+&= \sum_{i, j = 1}^n |\bm{a}_i \cdot \bm{b}_j|^2
+\leq \sum_{i, j = 1}^n \|\bm{a}_i\|^2 \|\bm{b}_j\|^2
+= \Biggl(\sum_{i = 1}^n \|\bm{a}_i\|^2 \Biggr) \Biggl( \sum_{j = 1}^n \|\bm{b}_j\|^2 \Biggr)
+= \|A\| \|B\|
+\end{align*}
+となります。
+
+\paragraph{指数函数が収束すること}
+
+ここまで来れば、あとは簡単です。ノルムが三角不等式と$\|AB\| \leq \|A\| \|B\|$を満たすことから、$m \geq l \geq 0$に対し
+\begin{align*}
+\Biggl\|\sum_{k = 0}^m \frac{A^k}{k!} - \sum_{k = 0}^l \frac{A^k}{k!} \Biggr\|
+= \Biggl\|\sum_{k = l + 1}^m \frac{A^k}{k!} \Biggr\|
+\leq \sum_{k = l + 1}^m \biggl\|\frac{A^k}{k!} \biggr\|
+\leq \sum_{k = l + 1}^m \frac{\|A^k\|}{k!}
+\leq \sum_{k = l + 1}^m \frac{\|A\|^k}{k!}
+\end{align*}
+となります。ここで指数函数$e^x$をTaylor展開して得られる級数の収束半径が$\infty$だったことを思い出しましょう。収束列であることとCauchy列であることは同値なので、数列$\bigl(\sum_{k = 0}^m \frac{\|A\|^k}{k!}\bigr)_{m = 0}^{\infty}$はCauchy列になっています。よってノルムの列$\bigl(\|\sum_{k = 0}^m \frac{A^k}{k!}\|\bigr)_{m = 0}^{\infty}$もCauchy列になるので、$\sum_{k = 0}^{\infty} A^k / k!$の収束が言えました。$e^x$の収束半径が$\infty$なので、全ての行列$A$に対して収束が言えます。これで行列の指数函数を定義できました。
+
 \section{行列のなすLie環}
+
+今回の問7には「交換子」と呼ばれるものが登場します。問7では行列の交換子だけを計算しますが、実は行列に限らず、交換子は世の中の色々な場面で登場することが知られています。その性質を、少し突っ込んで調べましょう。
+
+なお、以下の話では具体例としてちょくちょく量子力学が顔を出します。別に「量子力学を知らなければ線型代数が理解できない」というわけではないですが、これを機に量子力学と線型代数を関連付けて勉強するのも良いでしょう。たとえば、駒場キャンパスにいらっしゃる総合文化研究科の清水明先生が書かれた『新版 量子論の基礎』(サイエンス社) は手頃で良い本だと思います。このプリントに出てくる量子力学の話は、ほとんどこの本に書いてあります。
 
 \subsection{交換子}
 
-$2$つの$n$次正方行列$X, Y \in \Mat_2(\mathbb{R})$に対し$[X, Y] := XY - YX$を$X$と$Y$の\textbf{交換子}といいます。
+$V$を線型空間とし、$X, Y \in \End(V)$を$V$上の線型変換とします。このとき$[X, Y] := XY - YX$を$X$と$Y$の\textbf{交換子}といいます。
+
+最も典型的な例は、行列の交換子です。たとえばS1タームの終わりの方に、一度演習問題で
+\[
+H := 
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}, \quad
+E := 
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}, \quad
+F := 
+\begin{pmatrix}
+0 & 0 \\
+1 & 0
+\end{pmatrix}
+\]
+の交換子を調べる問題が登場しました\footnote{\pageref{paragraph:commutator}ページにあるので、思い出してみてください。}。また$X$や$Y$は行列で書かれている必要もありません。たとえば実数値の無限回微分可能な函数全体の集合$V = C^{\infty}(\mathbb{R})$の上で、$X$は微分$\frac{d}{dx}$、$Y$は$x$をかける線型写像だとします。このとき$f \in C^{\infty}(\mathbb{R})$に対し
+\[
+[X, Y]f(x) = XY f(x) - YX f(x) = \frac{d}{dx} \bigl(x f(x)\bigr) - x\Bigl(\frac{d}{dx} f(x)\Bigr) = f(x) + x f'(x) - x f'(x) =  f(x)
+\]
+が成り立ちます。
 
 \paragraph{交換子の性質}
 
+交換子は次の性質を満たします。
 \begin{itemize}
-\item 双線型性: $[\alpha X + \beta X', Y] = \alpha[X, Y] + \beta[X', Y]$, $[X, \alpha Y + \beta Y'] = \alpha [X, Y] + \beta [X, Y']$
+\item 双線型性: $[\alpha X_1 + \beta X_2, Y] = \alpha[X_1, Y] + \beta[X_2, Y]$, $[X, \alpha Y_1 + \beta Y_2] = \alpha [X, Y_1] + \beta [X, Y_2]$
 \item 交代性: $[Y, X] = -[X, Y]$
-\item Jacobi恒等式: $[X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0$
+\item Jacobi恒等式: $\bigl[X, [Y, Z]\bigr] + \bigl[Y, [Z, X]\bigr] + \bigl[Z, [X, Y]\bigr] = 0$
 \end{itemize}
-
-\paragraph{traceとの関係}
+これは定義式$[X, Y] = XY - YX$を逐一代入して計算するだけで証明ができます。試してみてください。
 
 \subsection{Lie環}
 
-\subsection{$\mathfrak{sl}_2$}
+さて、いまは行列などの掛け算を使って交換子$[, ]$を定義しました。ですが色々計算をしてみると、時と場合によっては\textbf{交換子の性質だけを使って議論を進められたりします}。そこで一般に線型空間$\mathfrak{g}$\footnote{`$\mathfrak{g}'$は、アルファベット`g'のフラクトゥール体です。Lie環の研究の創始者である数学者Sophus LieがLie環を表すのにフラクトゥール体を使ったことが、今では数学者の間で標準的な習わしになっています。}の上でJacobi恒等式を満たす交代双線型写像$[, ]\colon \mathfrak{g}\times\mathfrak{g}\rightarrow\mathfrak{g}$が定義されているとき、$\mathfrak{g}$を\textbf{Lie環}といいます。$n$次正方行列の集合$\Mat_n(\mathbb{R})$はLie環の一例です。
+
+\paragraph{なぜLie環を考えるのか？}
+
+僕たちはなぜ、わざわざLie環などという対象を定義し、その性質を調べるのでしょうか？
+
+答え方には色々ありますが、一つの理由としては\textbf{Lie環に現れる関係式が、色々なところで登場する}という事実が挙げられます。たとえば複素数を成分とする$2$次正方行列
+\[
+\sigma_x := 
+\frac{1}{2}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}, \quad
+\sigma_y := 
+\frac{1}{2}
+\begin{pmatrix}
+0 & -i \\
+i & 0 
+\end{pmatrix}, \quad
+\sigma_z := 
+\frac{1}{2}
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\in \Mat_2(\mathbb{C})
+\]
+は$[\sigma_x, \sigma_y] = i\sigma_z, [\sigma_y, \sigma_z] = i\sigma_x, [\sigma_z, \sigma_x] = i\sigma_y$という式を満たします。一方で$3$変数の函数に対する微分作用素$L_x, L_y, L_z$を
+\[
+L_x := y\frac{\partial}{\partial z} - z\frac{\partial}{\partial y}, 
+L_y := z\frac{\partial}{\partial x} - x\frac{\partial}{\partial x}, 
+L_z := x\frac{\partial}{\partial y} - y\frac{\partial}{\partial z}
+\]
+で定めると、これらもまた$[L_x, L_y] = L_z, [L_y, L_z] = L_z, [L_z, L_x] = L_y$という関係式を満たします。これは$\sigma_x, \sigma_y, \sigma_z$の交換関係と大体同じです\footnote{$\sigma'_x := -i\sigma_x$, $\sigma'_y := -i\sigma_y$, $\sigma'_z := -i\sigma_z$とおくと、本当に$L_x$, $L_y$, $L_z$の交換関係と同じ式を満たすようになります。}。
+
+また量子力学の勉強をしていると、必ず$[\hat{x}, \hat{p}] = 1$という式が登場します\footnote{この式を\textbf{正準交換関係}といいます。量子力学の授業だと普通$[\hat{x}, \hat{p}] = i\hbar$という形で出てきますが、右辺が$1$でも$i\hbar$でもLie環を考えるにあたっては大差ないので、数学では$[x, p] = 1$としてしまうことが多いです。}。たとえば交換子の例として微分作用素$X = \frac{d}{dx}$と$x$倍作用素$Y$を挙げましたが、これらは$[X, Y] = 1$を満たしていました。この$X$と$Y$は、正準交換関係を満たす演算子の\textbf{Schr\"odinger表現}といいます。他にも正準交換関係を満たす演算子は色々ありますが、とにかく$[\hat{x}, \hat{p}] = 1$を満たすことが大事なのです。
+
+このように「同じ交換関係式が、時と場所を変えて色々な状況で出現する」という実態を知ると「一々個別に調べるのは面倒だから、交換関係だけに注目して、その性質を調べ上げてしまえ」という発想に至るのは自然なことでしょう。こうして「特定の交換関係だけ」を抽出したものがLie環で、その交換関係を満たす行列や演算子のことを「Lie環の表現」といいます。
+
+\paragraph{Lie環の由緒}
+
+さらに言うと、Lie環の役割を一段と良く理解するには「なぜLie環の交換関係が色々なところに登場するか」を知らないといけません。そのキーワードが「Lie群」と「対称性」です。
+
+たとえば水素原子を考えると、原子核は陽子$1$個だけからなります。陽子の作る電場は、原点を通るあらゆる軸に対する回転対称性を持ちます。回転対称性以外にも対称性には色々な種類がありますが、数学では対称性を表すのに「群」という言葉を使います。Lie群はその中でも特別な群であり、Lie群の対称性を「無限小」のレベルで見ようとするとLie環が登場します。いよいよLie環が重要そうな気がしてきますね\footnote{なおLie環の対称性は、いつもLie群に付随して現れるわけではありません。Lie環の対称性が単独で現れる状況もあります。}。
+
+ですがLie群とLie環の対応を述べるには、行列の指数函数の性質を詳しく調べなければいけません。事実としては、全ての行列$X, Y \in \Mat_n(\mathbb{R})$に対し
+\[
+e^{tX} e^{tY} e^{-tX} e^{-tY} = \exp\Bigl( t^2 [X, Y] + (\text{$t^3$より高次の項})\Bigr)
+\]
+が成り立つことが、Lie環の交換子$[, ]$が重要な理由です。でもこの書き方では「何で$e^{tX} e^{tY} e^{-tX} e^{-tY}$という式が出てくるのか」を説明できていません。これを理解するには少し「群論」というものを勉強する必要があります。行列式の話をする時に少し群論が出てくると思いますので、Lie群とLie環の対応を述べるのはその機会に譲りたいと思います。
+
+\paragraph{随伴写像と随伴表現} さて交換子$[, ]$は双線型なので、片側については線型になります。よって$X \in \Mat_n(\mathbb{R})$に対し$\ad_X(Y) := [X, Y]$と定義すれば、$\ad_X \colon \Mat_n(\mathbb{R}) \rightarrow \Mat_n(\mathbb{R})$という線型写像が得られます。これを\textbf{随伴写像}といいます。
+
+交換子がJacobi恒等式を満たすことから、$\ad_X$について次が成り立ちます。
+\begin{itemize}
+\item $\ad_X\bigl([Y, Z]\bigr) = [\ad_X(Y), Z] + [X, \ad_Y(Z)]$
+\item $\ad_{[X, Y]} (Z) = [\ad_X, \ad_Y] (Z)$
+\end{itemize}
+そして$\ad_X \in \End(\mathfrak{g})$の$X \in \mathfrak{g}$を動かすことで、$\ad\colon \mathfrak{g} \rightarrow \End(\mathfrak{g})$という写像が得られます。$\mathfrak{g}$は線型空間なので、$\End(\mathfrak{g})$もまたLie環です。そして今の$2$つ目の式$\ad_{[X, Y]} = [\ad_X, \ad_Y]$は、写像$\ad$がLie環の構造と整合的であることを表しています。
+\[
+\begin{tikzcd}
+\mathfrak{g} \times \mathfrak{g} \arrow{r}{\ad\times\ad} \arrow{d}[swap]{[,]} & \End(\mathfrak{g}) \times \End(\mathfrak{g}) \arrow{d}{[,]} \\
+\mathfrak{g} \arrow{r}{\ad} & \End(\mathfrak{g})
+\end{tikzcd}
+\]
+
+\paragraph{traceとの関係} 任意の行列$X, Y \in \Mat_n(\mathbb{R})$に対し$\tr XY = \tr YX$が成り立ちます。よって$\tr \ad_X(Y) = \tr [X, Y] = 0$となるので、$\Im \ad_X \subset \Ker \tr$が成り立ちます。
+
+\paragraph{問7の解答}
+
+\subsection{Lie環$\mathfrak{sl}_n$}
+
+ここまで出てきた具体的なLie環は$\Mat_n(\mathbb{R})$しかありませんが、これ以外にも$\mathfrak{sl}_n$という重要なLie環があるので、それを紹介します。中でも$\mathfrak{sl}_2$は、Lie環の理論を展開する上でも、あるいは量子力学等への応用を考えるにしても、非常に重要な役割を果たします。
 
 \paragraph{定義}
 
+一般に$\tr\colon \Mat_n(\mathbb{R}) \rightarrow \mathbb{R}$の核を$\mathfrak{sl}_n(\mathbb{R})$と書きます\footnote{この$\mathfrak{sl}$も、slのフラクトゥール体です。}。任意の$X, Y \in \Mat_n(\mathbb{R})$に対して$\tr XY = \tr YX$なので、特に$X, Y\in\mathfrak{sl}_2(\mathbb{R})$に対しても$[X, Y] \in \mathfrak{sl}_2(\mathbb{R})$が成り立ちます。$\mathfrak{sl}_n(\mathbb{R})$は$[, ]$で閉じており、Lie環になります。
+
 \paragraph{$\mathfrak{sl}_2(\mathbb{C})$とPauli行列}
 
+ここで数の範囲を広げて、複素係数の行列で$\mathfrak{sl}_n(\mathbb{C})$を考えます。既に$E, H, F$という基底が$\mathfrak{sl}_2(\mathbb{C})$に取れることを知っていますが、複素係数の場合は特に
 \[
 \sigma_x := 
 \frac{1}{2}
@@ -65,41 +514,160 @@ i & 0
 0 & -1
 \end{pmatrix}
 \]
+という別の基底が取れます。これらの行列を\textbf{Pauli行列}といいます。
 
-\subsection{随伴作用}
-
-\paragraph{問7の解答}
+Pauli行列の特徴的な点は、Hermite行列であること\footnote{複素数を成分とする行列$X$が$\overline{{}^tX} = X$を満たすとき、$X$を\textbf{Hermite行列}といいます。}です。Hermite行列はいつも「固有値」と呼ばれるものが実数になります。そして量子力学では
+\begin{itemize}
+\item 物理系の状態は、複素線型空間のベクトルで表される
+\item 物理量はHermite行列で表される
+\item ある状態における物理量の観測値は、物理量を表すHermite行列の固有値のどれかから確率的に選択される
+\end{itemize}
+という事情があります。なので$\mathfrak{sl}_2(\mathbb{C})$の基底としては$(E, H, F)$の方が便利でも、物理量を考えるときは$(\sigma_x, \sigma_y, \sigma_z)$が好まれたりします。たとえば電子の持つスピンの観測値は、そのまま$\sigma_x, \sigma_y, \sigma_z$の固有値になることが知られています。
 
 \section{双対空間}
 
+一般に線型空間$V$があると、もれなく「$V$の双対空間」と呼ばれる線型空間$V^*$が定義できます。$V^*$のことを知っていると線型代数の理解が一段と深まりますし、また相対論を勉強する時に出てくる「共変/反変テンソル」というものを理解するのにも役立ちます。慣れないとこんがらがりそうですが、双対空間を考えてみることは、抽象論の良い訓練になるでしょう。
+
 \subsection{双対空間の定義}
 
-\paragraph{$\mathbb{R}^n$の双対空間}
+線型空間$V, W$があったとき、$V$から$W$への線型写像全体の集合$\Hom(V, W)$も再び線型空間になるのでした。ここで特に$W = \mathbb{R}$のとき、$V^* := \Hom(V, \mathbb{R})$と書き、$V$の\textbf{双対 (そうつい) 空間}といいます。
+
+\paragraph{$\mathbb{R}^n$の双対空間} 一番簡単な$\mathbb{R}^2$の場合に、双対空間$(\mathbb{R}^2)^*$は何かを考えてみましょう。今の場合、$\mathbb{R}^2$から$\mathbb{R}$への線型写像は$(1, 2)$型行列、つまり行ベクトルと同じです。よって$\Hom(\mathbb{R}^2, \mathbb{R}) = \Mat_{1, 2}(\mathbb{R})$です。$\mathbb{R}^n$の場合でも全く話は同じで、列ベクトル全体のなす数ベクトル空間$\mathbb{R}^n$の双対空間$(\mathbb{R}^n)^*$は、同じ長さの行ベクトル全体がなす空間です。
 
 \subsection{双対基底}
 
-\paragraph{問10の解答}
+線型空間$V$に基底$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$が与えられると、それに応じて自然に$V^*$の基底$(\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n)$が定義されます。この作り方を今から説明します。
+
+まず$V$を定義域とする線型写像は、基底の行先を決めればただ一通りに決まります。そこで$\bm{f}^{\vee}_i\colon V \rightarrow\mathbb{R}$を
+\begin{align*}
+\bm{f}^{\vee}_i(\bm{f}_j) := \delta_{ij} =
+\begin{cases}
+1 & (i = j) \\
+0 & (i \neq j)
+\end{cases}
+\end{align*}
+と定めます。これから示すように、$(\bm{f}^{\vee}_1, \ldots, \bm{f}^{\vee}_n)$は$V^*$の基底になります。これを$(\bm{f}_1, \ldots, \bm{f}_n)$の\textbf{双対基底}といいます。まず具体例を見てみましょう。
+
+\paragraph{$\mathbb{R}^n$の場合} $\mathbb{R}^n$の標準基底が相手の場合、双対基底も非常に分かり易いものになります。
+\[
+\bm{e}^{\vee}_i (\bm{e}_j)
+=
+\bordermatrix{
+& & & & \scalebox{0.8}{$i^{\text{th}}$} \cr
+& 0 & \cdots & 0 & 1 & 0 & \cdots & 0
+}
+\begin{pmatrix}
+0 \\
+\vdots \\
+1 \\
+\vdots \\
+0
+\end{pmatrix}
+= \delta_{ij}
+\]
+が成り立つので、$(\bm{e}_1, \ldots, \bm{e}_n)$の双対基底$(\bm{e}^{\vee}_1, \ldots, \bm{e}^{\vee}_n)$は、各$\bm{e}_i$を行列だと思って転置することで得られます。この例では、双対基底がちゃんと双対空間の基底をなしていることがほとんど明らかです	。
+
+\paragraph{双対基底が基底になること} さっき定義した$\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n$は$1$次独立です。実際$\alpha_1 \bm{f}^{\vee}_1 + \alpha_2 \bm{f}^{\vee}_2 + \cdots + \alpha_n \bm{f}^{\vee}_n = 0 \in V^*$とおく\footnote{全てのベクトルに$0$を対応させる写像は、線型写像です。これを\textbf{零写像}といい、$0$で表します。}と、この写像に何を代入しても値は$0$です。そこで$\bm{f}_j$ ($j = 1, 2, \ldots, n$) を代入すると
+\[
+0 = \sum_{i = 1}^n \alpha_i \bm{f}^{\vee}_i (\bm{f}_j) = \sum_{i = 1}^n \alpha_i \delta_{ij} = \alpha_j
+\]
+となるので、$\alpha_1 = \alpha_2 = \cdots = \alpha_n = 0$となります。これで$1$次独立性がいえました。
+
+また、全ての$f \in V^*$は$\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n$の$1$次結合で書けます。実際$f \in V^*$に対し、$f' := f(\bm{f}_1)\bm{f}^{\vee}_1 + f(\bm{f}_2)\bm{f}^{\vee}_2 + \cdots + f(\bm{f}_n)\bm{f}^{\vee}_n$とおくと、各$\bm{f}_j$ ($j = 1, 2, \ldots, n$) を$f'$に代入して
+\[
+f'(\bm{f}_j) = \sum_{i = 1}^n f(\bm{f}_i)\bm{f}^{\vee}_i(\bm{f}_j) = \sum_{i = 1}^n f(\bm{f}_i) \delta_{ij} = f(\bm{f}_j)
+\]
+が得られます。すなわち基底$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$の全ての行先が$f$と$f'$とで同じなので、写像として$f = f'$が従います。これで$V^*$が$f \in V^*$は$\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n$で生成されることが示せました。以上より$(\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n)$は$V$の基底です。
+
+このことより、特に$\dim V^* = \dim V$が従います。また一般の線型空間$V$は「標準的」と呼ぶべき基底を持つとは限りませんが、$V$の基底を決めたなら、それに応じて$V^*$に双対基底という自然な基底が定まります。言い方を変えれば「$V$に座標を入れたら、それに応じて$V^*$に自然な座標の入れ方が決まる」と言えます。
+
+% 共変性と反変性
+
+\paragraph{問10の解答} 双対基底の本数を数えれば$\dim V^* = \dim V$が従う。
 
 \subsection{$2$回双対}
 
-線型空間$V$から双対空間$V^*$を作ったのと同じようにして、今度は$V^*$の双対空間$V^{**} := (V^*)^*$を考えることができます。この$V^{**}$の構造を調べましょう。
+線型空間$V$から双対空間$V^*$を作ったのと同じようにして、今度は$V^*$の双対空間$V^{**} := (V^*)^*$を考えることができます。$\mathbb{R}^n$の場合を想像すると、双対$*$を取ることは行列としての転置と同じでした。ですから$*$を$2$回取ったら、元に戻りそうな気がします。そこで一般の場合に、この$V^{**}$の構造を調べましょう。
 
-\paragraph{評価写像} $V^{**}$の元は「$V^{*}$の元に対して、実数$\mathbb{R}$を対応させる」という写像です。そして$V^{*}$は$V\rightarrow\mathbb{R}$という写像です。だから$\bm{v} \in V$を$1$つ固定すると、$f\mapsto f(\bm{v})$という方法で$\ev_{\bm{v}}:V^{*}\rightarrow \mathbb{R}$という写像が作れます。これを評価写像というのでした。$\ev_{\bm{v}}\in V^{**}$です。
+\paragraph{評価写像} $V^{**}$の元は「$V^{*}$の元に対して、実数$\mathbb{R}$を対応させる」という写像です。そして$V^{*}$は$V\rightarrow\mathbb{R}$という写像です。だから$\bm{v} \in V$を$1$つ固定すると、$\varphi\mapsto \varphi(\bm{v})$という方法で$\ev_{\bm{v}}:V^{*}\rightarrow \mathbb{R}$という写像が作れます。これを\textbf{評価写像}というのでした。\pageref{paragraph:evaluation_map}ページでは多項式に対する評価写像を考えましたが、$V^*$の元に対する評価写像についても全く同様に、$\ev_{\bm{v}}$の線型性が示せます。よって$\ev_{\bm{v}}\in V^{**}$です。
 
-そして$\ev_{\bm{v}}$の$\bm{v}$を動かすことで、$\ev\colon V\rightarrow V^{**}$という写像ができます。これは線型写像になっています。実際
+そして$\ev_{\bm{v}}$の$\bm{v}$を動かすことで、$\ev\colon V\rightarrow V^{**}; \bm{v}\mapsto \ev_{\bm{v}}$という写像ができます。これも線型写像になっています。実際、任意の$\varphi \in V^*$に対し
 \begin{itemize}
-\item $\ev_{\bm{v} + \bm{w}} = \ev_{\bm{v}} + \ev_{\bm{w}}$
-\item $\ev_{\alpha\bm{v}} = \alpha \ev_{\bm{v}}$
+\item $\ev_{\bm{v} + \bm{w}}(\varphi) = \varphi(\bm{v} + \bm{w}) = \varphi(\bm{v}) + \varphi(\bm{w}) = (\ev_{\bm{v}} + \ev_{\bm{w}})(\varphi)$
+\item $\ev_{\alpha\bm{v}}(\varphi) = \varphi(\alpha\bm{v}) = \alpha \varphi(\bm{v}) = \alpha \ev_{\bm{v}}(\varphi)$
 \end{itemize}
-です。
+なので、$\ev_{\bm{v} + \bm{w}} = \ev_{\bm{v}} + \ev_{\bm{w}}$かつ$\ev_{\alpha\bm{v}} = \alpha \ev_{\bm{v}}$です。
 
-\paragraph{$V$と$V^{**}$の同型} この$\ev\colon V\rightarrow V^{**}$が同型になることを示しましょう。次元を考えれば、単射性だけ考えれば十分です。
+\paragraph{$V$と$V^{**}$の同型} この$\ev\colon V\rightarrow V^{**}$が同型になることを示しましょう。$\dim V^{**} = \dim V^* = \dim V$なので、単射性だけ示せば自動的に全射性が従います。
 
-いま$\bm{v} \neq \bm{0} \in V$とすると、$\bm{v}$を延長することで$V$の基底$(\bm{f}_1 = \bm{v}, \bm{f}_2, \ldots, \bm{f}_n)$が作れます。この基底の双対基底$(\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n)$を取ると、$\bm{f}^{\vee}_1(\bm{v}) = 1 \neq 0$となります。よって$\varphi \in V^*$で$\varphi(\bm{v})\neq 0$となるものが存在します。
+いま$\bm{v} \neq \bm{0} \in V$とすると、$\bm{v}$を延長することで$V$の基底$(\bm{f}_1 := \bm{v}, \bm{f}_2, \ldots, \bm{f}_n)$が作れます。この基底の双対基底$(\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n)$を取ると、$\bm{f}^{\vee}_1(\bm{v}) = 1 \neq 0$となります。よって$\varphi \in V^*$で$\varphi(\bm{v})\neq 0$となるものが存在します。
 
-この対偶を取ると「任意の$\varphi \in V^*$に対して$\varphi(\bm{v}) = 0$なら、$\bm{v} = \bm{0}$」となります。よって$\bm{v} \in V$が$\ev_{\bm{v}} = 0 \in V^{**}$を満たせば、任意の$\varphi \in V^*$に対し$\varphi(\bm{v}) = \ev_{\bm{v}}(\varphi) = 0$となるから、$\bm{v} = \bm{0}$です。よって$\ev$は単射です。
+この対偶を取ると「任意の$\varphi \in V^*$に対して$\varphi(\bm{v}) = 0$なら、$\bm{v} = \bm{0}$」となります。よって$\bm{v} \in V$が$\ev_{\bm{v}} = 0 \in V^{**}$を満たせば、任意の$\varphi \in V^*$に対し$\varphi(\bm{v}) = \ev_{\bm{v}}(\varphi) = 0$となるから、$\bm{v} = \bm{0}$です。よって$\ev$は単射です\footnote{ここの証明は$\dim V = \infty$でも大体有効です。無限次元の場合に破綻するのは「単射ならば全射」の部分だけであって、$\ev\colon V\rightarrow V^{**}$が単射なことはいつでも正しいです。}。
+
+だから双対空間を考えると$V \rightarrow V^* \rightarrow V^{**} \rightarrow V^{***} \rightarrow \cdots$というように、いくらでも線型空間を作ることはできるのですが、結局は$1$つおきに同型になってしまうのです。また今は$V$から$V^*$を作りましたが、$V^{*}$から$V$と同型な$V^{**}$を作れることを考えると「$V$と$V^*$の立場は対等なのではないか」という気がしてきます。そこで$\bm{v} \in V$と$f \in V^*$に対し、$f(\bm{v})$のことを$\langle \bm{v}, f \rangle$と内積のように書くことがあります。また「函数」という言葉を使うと対等性が崩れるので、$\langle \bm{v}, f \rangle$のことを「標準的なペアリング」と言ったりもします。
 
 \subsection{$\Hom$の分解}
 
-$V$, $W$が線型空間のとき、$W\times V^* \rightarrow \Hom(V, W); (\bm{w}, \varphi)\mapsto\bigl(\bm{v}\mapsto \varphi(\bm{v})\bm{w}\bigr)$という写像ができます。このような写像たちで$\Hom(V, W)$は生成されます。
+$V$, $W$が線型空間のとき、$V^*$の元と$W$の元を組み合わせることで$V$から$W$への線型写像を作ることができます。
+
+いきなり抽象論をやる前に、数ベクトル空間の例を見てみましょう。既に見たとおり、$(\mathbb{R}^n)^*$は$n$次元の横ベクトルのなす線型空間でした。また$\mathbb{R}^m$は$m$次元の縦ベクトルの掛け算でした。すると$\mathbb{R}^m$の縦ベクトルは$(m, 1)$型行列、$(\mathbb{R}^n)^*$の横ベクトルは$(1, n)$型行列と同一視できるので、これらを掛け算して$(m, n)$型行列が作れます:
+\[
+\bm{e}_i\bm{e}^{\vee}_j =
+\bordermatrix{
+& \cr
+& 0 \cr
+& \vdots \cr
+& 0 \cr
+\scalebox{0.8}{$i^{\text{th}}$} & 1 \cr
+& 0 \cr
+& \vdots \cr
+& 0
+}
+\bordermatrix{
+& & & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& 0 & \cdots & 0 & 1 & 0 & \cdots & 0
+}
+=
+\bordermatrix{
+								 &	& \scalebox{0.8}{$j^{\text{th}}$} \cr
+ \cr
+\scalebox{0.8}{$i^{\text{th}}$}	& & 1 & \ & \  \cr
+& \cr
+& \cr
+}
+= E_{ij}
+\]
+そして$E_{ij}$に$\bm{e}_k$を当てると$E_{ij}\bm{e}_k = \delta_{jk}\bm{e}_i$となりますが、この式は$\bm{e}_i\bm{e}^{\vee}_j(\bm{e}_k)$と同じです。図式にすると
+\begin{align*}
+\begin{array}{c@{\,}@{\,}c@{\,}c@{\,}c@{\,}c}
+\mathbb{R}^m \times (\mathbb{R}^n)^*	& \xrightarrow{\text{\hbox to 3zw{\hfil\hfil}}}	& \Hom(\mathbb{R}^n, \mathbb{R}^m)	& = & \Mat_{m, n}(\mathbb{R}) \\
+\rotatebox{90}{$\in$}					& 				& \rotatebox{90}{$\in$}				&   & \rotatebox{90}{$\in$} \\
+(\bm{e}_i, \bm{e}^{\vee}_j)				& \xmapsto{\text{\hbox to 3zw{}}}		& \bm{e}_i \bm{e}^{\vee}_j			& = & E_{ij}
+\end{array}
+\end{align*}
+という感じです。一般の場合にも同じことができます。$V, W$が線型空間で$\bm{w} \in W$と$\varphi \in V^*$とします。このとき写像$\bm{w}\otimes\varphi\colon V \rightarrow W$を\footnote{本当は、記号$\otimes$は「テンソル積」と呼ばれるものを表すのですが、今は$\bm{w}\otimes\varphi$を「まとめて一つの記号」だと思って差支えありません。}
+\[
+(\bm{w}\otimes\varphi)(\bm{v}) := \varphi(\bm{v})\bm{w}
+\]
+で定義できます。これも図式にすると
+\begin{align*}
+\begin{array}{c@{\,}@{\,}c@{\,}c@{\,}c@{\,}c}
+W \times (V)^*			& \xrightarrow{\text{\hbox to 3zw{\hfil\hfil}}}	& \Hom(V, W) \\
+\rotatebox{90}{$\in$}	& 												& \rotatebox{90}{$\in$} \\
+(\bm{w}, \varphi)		& \xmapsto{\text{\hbox to 3zw{}}}				& \bm{w} \otimes \varphi
+\end{array}
+\end{align*}
+となります。
+
+そして$\Hom(V, W)$の元は、$\bm{w}\otimes\varphi$の形の元の$1$次結合で表すことができます。たとえば$V = \mathbb{R}^n$, $W = \mathbb{R}^m$の場合、$\bm{e}_i\otimes \bm{e}^{\vee}_j = E_{ij}$の$1$次結合によって、どんな行列も作れますね。これと同じことが抽象的な線型空間についても成り立つのです。
+
+\section{Aセメスターの展望}
+
+最後に、Aセメスターに何をやるはずかについて、簡単に述べておきます。
+
+\paragraph{行列式}
+
+\paragraph{計量線型空間}
+
+\paragraph{行列の固有値と対角化}
 

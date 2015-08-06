@@ -33,8 +33,8 @@
 \setcounter{MaxMatrixCols}{12}			% 行列の最大列数を 12 にする
 \allowdisplaybreaks						% 数式中での改ページ許可
 
-\def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}
-\def\bm{\boldsymbol}
+\def\qed{\hfill\raisebox{-1pt}{\scalebox{0.9}[1.4]{$\blacksquare$}}}	% 証明の終わりに書く記号
+\def\bm{\boldsymbol}													% ベクトルを太字にする
 
 \DeclareMathOperator\cosec{cosec}		% 余割
 \DeclareMathOperator\sech{sech}			% 双曲線余接
@@ -83,7 +83,7 @@
 
 \part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
 
-\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
+%\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
 \include{20150610}
 \include{20150617}
@@ -92,5 +92,10 @@
 \include{20150708}
 \include{20150715}
 \include{20150722}
+
+%\renewcommand{\prepartname}{A}					% 部の prefix を "A" へ
+%\setcounter{part}{0}
+
+%\part{線型代数学\CID{7556}}\label{part3}
 
 \end{document}

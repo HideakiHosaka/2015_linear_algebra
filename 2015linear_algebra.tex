@@ -25,7 +25,7 @@
 
 \def\lectureinfo#1{%							% 講義情報を出力するマクロ
 \begin{flushright}%
-担当教員: \teachername / TA: \TAname \\%
+担当教員: \teachername\ / TA: \TAname \\%
 講義日時: #1%
 \end{flushright}%
 }
@@ -58,6 +58,7 @@
 \DeclareMathOperator\Sym{Sym}			% 対称行列
 \DeclareMathOperator\Alt{Alt}			% 交代行列
 \DeclareMathOperator\Proj{Proj}			% 射影行列
+\DeclareMathOperator\sgn{sgn}			% 置換の符号
 
 \begin{document}
 
@@ -81,7 +82,7 @@
 \include{20150520}
 \include{20150527}
 
-\part{線形代数学\CID{7555}}\label{part2}	% \CID{7555} は丸囲みの①
+\part{線形代数学\CID{7555}}\label{part2}		% \CID{7555} は丸囲みの①
 
 %\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
@@ -93,9 +94,16 @@
 \include{20150715}
 \include{20150722}
 
-%\renewcommand{\prepartname}{A}					% 部の prefix を "A" へ
-%\setcounter{part}{0}
+\renewcommand{\prepartname}{A}					% 部の prefix を "A" へ
+\renewcommand{\thepart}{}						% A セメスターに番号はないので一旦消す
+\renewcommand{\postpartname}{セメスター}		% 部の suffix を "セメスター" へ
 
-%\part{線型代数学\CID{7556}}\label{part3}
+\part{線形代数学\CID{7556}}\label{part3}		% \CID{7556} は丸囲みの②
+
+\renewcommand{\thepart}{\arabic{part}}			% \nameref で必要なので \thepart を元に戻す
+
+\include{20150916}
+
+% \include{suppl}								% おまけ: 必要になったとき呼び出す
 
 \end{document}

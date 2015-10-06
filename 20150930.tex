@@ -1,0 +1,467 @@
+\chapter{行列式の余因子展開}
+\lectureinfo{2015年9月30日 1限}
+
+\section{行列式に関する公式の復習}
+
+\subsection{交代性と多重線型性}
+
+% 交代性・多重線型性と体積
+
+\paragraph{体積との関係}
+
+\subsection{行列式の特徴づけ}
+
+% Weierstrass--Kronecker
+
+\subsection{$3$次元ベクトルの外積}
+
+$3$次元空間$\mathbb{R}^3$の中の$3$本のベクトル$\bm{a} = {}^t(a_1, a_2, a_3), \bm{b} = {}^t(b_1, b_2, b_3), \bm{c} = {}^t(c_1, c_2, c_3)$を並べた行列の行列式は、$3$列目に関する余因子展開をすることで
+\begin{align*}
+\det
+\begin{pmatrix}
+\bm{a} & \bm{b} & \bm{c} 
+\end{pmatrix}
+&=
+\det
+\begin{pmatrix}
+a_1 & b_1 & c_1 \\
+a_2 & b_2 & c_2 \\
+a_3 & b_3 & c_3
+\end{pmatrix}
+= 
+c_1 \det
+\begin{pmatrix}
+a_2 & b_2 \\
+a_3 & b_3
+\end{pmatrix}
+- c_2 \det
+\begin{pmatrix}
+a_1 & b_1 \\
+a_3 & b_3
+\end{pmatrix}
++ c_3 \det
+\begin{pmatrix}
+a_1 & b_1 \\
+a_2 & b_2 \\
+\end{pmatrix}
+\\
+&=
+c_1 \det
+\begin{pmatrix}
+a_2 & b_2 \\
+a_3 & b_3
+\end{pmatrix}
++ c_2 \det
+\begin{pmatrix}
+a_3 & b_3 \\
+a_1 & b_1
+\end{pmatrix}
++ c_3 \det
+\begin{pmatrix}
+a_1 & b_1 \\
+a_2 & b_2 \\
+\end{pmatrix}
+\end{align*}
+となります。そこでベクトル$\bm{a} \times \bm{b}$を
+\[
+\bm{a} \times \bm{b}
+:= 
+{}^t\biggl(
+\det
+\begin{pmatrix}
+a_2 & b_2 \\
+a_3 & b_3
+\end{pmatrix}, 
+\det
+\begin{pmatrix}
+a_3 & b_3 \\
+a_1 & b_1
+\end{pmatrix}, 
+\det
+\begin{pmatrix}
+a_1 & b_1 \\
+a_2 & b_2 \\
+\end{pmatrix}
+\biggr)
+\]
+と定めると、$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$が成り立ちます。このベクトル$\bm{a} \times \bm{b}$のことを、$\bm{a}$と$\bm{b}$の\textbf{外積}といいます。
+
+過去に「$\bm{a}$と$\bm{b}$の両方に垂直なベクトル」を作る方法として一度$\bm{a} \times \bm{b}$を紹介したことがありますが、むしろ外積の定義で本質的なのは$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$という式です。行列式の交代性を使うと、$\bm{c} = \bm{a}$, $\bm{c} = \bm{b}$とおいたとき、ただちに
+\[
+(\bm{a} \times \bm{b}) \cdot \bm{a} = \det(\bm{a} \ \bm{b} \ \bm{a}) = 0, 
+(\bm{a} \times \bm{b}) \cdot \bm{b} = \det(\bm{a} \ \bm{b} \ \bm{b}) = 0
+\]
+が分かります。これが$\bm{a} \times \bm{b}$の計算で、$\bm{a}$と$\bm{b}$の両方と垂直なベクトルを作れる理由です。
+
+行列式の公式を使うと、他にも外積の公式を導けます。まず交代性を使うと$\det(\bm{a} \ \bm{b} \ \bm{c}) = - \det(\bm{b} \ \bm{a} \ \bm{c})$となるので、$\bm{a} \times \bm{b} = - \bm{b} \times \bm{a}$が分かります。次に多重線型性を使うと
+\begin{align*}
+\det\bigl(\bm{a} + \bm{a}'  \ \bm{b} \ \bm{c}\bigr) &= \det(\bm{a} \ \bm{b} \ \bm{c}) + \det(\bm{a}' \ \bm{b} \ \bm{c}) \\
+\det(\alpha \bm{a} \ \bm{b} \ \bm{c}) &= \alpha \det(\bm{a} \ \bm{b} \ \bm{c})
+\end{align*}
+となるから、$(\bm{a} + \bm{a}') \times \bm{b} = \bm{a} \times \bm{b} + \bm{a}' \times \bm{b}$および$(\alpha \bm{a} \times \bm{b}) = \alpha (\bm{a} \times \bm{b})$が成り立つことも分かります。
+
+最後に$|\bm{a} \times \bm{b}|$を考えてみます。$\det(\bm{a} \ \bm{b} \ \bm{c})$は$\bm{a}, \bm{b}, \bm{c}$の張る平行$6$面体の体積でした。そして$\bm{a}, \bm{b}$の張る面の面積を$S$、その面の法線方向と$\bm{c}$のなす角を$[0, \pi/2]$の範囲で測ったものを$\varphi$とすると、
+\[
+|\bm{a} \times \bm{b}| |\bm{c}| \cos \varphi = (\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c}) = (\text{平行$6$面体の体積}) = S|\bm{c}| \cos \varphi
+\]
+となるので、$|\bm{a} \times \bm{b}| = S$です。つまり外積は、$\bm{a}, \bm{b}$が張る平行四辺形の面積に一致します。$\bm{a}$と$\bm{b}$のなす角を$\theta$とすれば、$|\bm{a} \times \bm{b}| = |\bm{a}||\bm{b}|\sin\theta$です。
+
+かくして外積$\bm{a}, \bm{b}$は
+\begin{itemize}
+\item 大きさが$\bm{a}, \bm{b}$の張る平行四辺形の面積
+\item $\bm{a}, \bm{b}$の両方と垂直な向き
+\item $\bm{a}, \bm{b}, \bm{a} \times \bm{b}$が右手系
+\end{itemize}
+という条件で特徴づけられるベクトルだということも分かりました。
+
+\section{群と群作用}
+
+\subsection{置換の性質}
+
+\subsection{群の公理}
+
+% S_n, GL_n, SO(2) とかの例
+
+\subsection{対称性とは何か}
+
+\subsection{群作用}
+
+% S_n の多項式環への作用
+
+% GL の自然表現
+
+\section{おまけ: A2ターム期末試験の解説}
+
+「A2タームの期末試験の解説がほしい」というリクエストをいただいたので、解答を作りました。復習に役立ててください。なお配点がどうなっているのかはそもそも知らないので、書いていません。
+
+\subsection{問1}
+
+(2) は中々難しいと思います。$|z| = 1$となる複素数は$\cos\theta + i \sin\theta$と表せますが、$\theta$をパラメータに取っておくと$\cos \theta$と$\sin \theta$の両方を同時が有理数になるタイミングは見えてきません。ここで三角函数の入った積分を置換積分で解くときに、たまに使う公式を思い出します。$t := \tan \theta/2$とおくと
+\[
+\cos \theta = \frac{1 - t^2}{1 + t^2}, \sin \theta = \frac{2t}{1 + t^2}
+\]
+が成り立つのを、覚えていますか？この式は大変都合の良いことに、$t$の有理式です。したがって$t$が有理数であれば、$\cos \theta$と$\sin \theta$が両方とも有理式になることが分かります。そうすれば後は、$t$が有理数になるような$\theta$が無限個存在することを示すだけです。
+
+\paragraph{解答}
+\noindent (1) $(a + bi)\overline{(a + bi)} = a^2 + b^2$を使うと (a) 2, (b) 5, (c) 13 と分かる。
+
+\noindent (2) $(1 - t^2)^2 + (2t)^2 = (1 + t^2)^2$の両辺を$1 + t^2$で割ると
+\[
+\biggl(\frac{1 - t^2}{1 + t^2}\biggr)^2 + \biggl(\frac{2t}{1 + t^2}\biggr)^2 = 1
+\]
+となる。よって実数$t$に対し
+\[
+z(t) := \frac{1 - t^2}{1 + t^2} + \frac{2t}{1 + t^2}i
+\]
+と定めると、$t$の値が何であっても$|z(t)| = 1$である。式の形から、$t$が有理数なら$z(t)$の実部、虚部は共に有理数である。そして
+\[
+\mathrm{Re} z(t) = \frac{2}{1 + t^2} - 1
+\]
+は$t$について単調減少で、$\mathrm{Re} z(0) = 1$, $\mathrm{Re} z(1) = 0$である。したがって閉区間$[0, 1]$の点$t$に$z(t)$を対応させる写像は単射である。これと$[0, 1]$に有理数が無数に存在することから、求める結果を得る。\qed
+
+\subsection{問2}
+
+この問題については、特に注釈は要らないでしょう。地道に計算するだけです。
+
+\noindent (1) 
+$\overrightarrow{\mathrm{AB}} = {}^t(\sqrt{2} - 1 ,\sqrt{3} - \sqrt{2} ,1 - \sqrt{3})$, $\overrightarrow{\mathrm{AC}} = {}^t(\sqrt{3} - 1, 1 - \sqrt{2}, \sqrt{2} - \sqrt{3})$なので
+\begin{align*}
+\cos\angle\mathrm{BAC} = \frac{\overrightarrow{\mathrm{AB}}\cdot \overrightarrow{\mathrm{AC}}}{\bigl|\overrightarrow{\mathrm{AB}}\bigr|\bigl|\overrightarrow{\mathrm{AC}}\bigr|}
+&= \frac{(\sqrt{2} - 1)(\sqrt{3} - 1) + (\sqrt{3} - \sqrt{2})(1 - \sqrt{2}) + (1 - \sqrt{3})(\sqrt{2} - \sqrt{3})}{(\sqrt{2} - 1)^2 + (\sqrt{3} - \sqrt{2})^2 + (1 - \sqrt{3})^2} \\
+&= \frac{(\sqrt{2} - 1)^2 + (1 - \sqrt{3})(\sqrt{2} - \sqrt{3})}{12 - 2(\sqrt{2} + \sqrt{3} + \sqrt{6})}
+= \frac{6 - \sqrt{2} - \sqrt{3} - \sqrt{6}}{12 - 2(\sqrt{2} + \sqrt{3} + \sqrt{6})} \\
+&= \frac{1}{2}
+\end{align*}
+となる。よって$\angle\mathrm{BAC} = \pi/3$である。
+
+\noindent (2) $\alpha \bm{a} + \beta (\bm{a} + \bm{b}) = \bm{0}$とおく。このとき$(\alpha + \beta)\bm{a} + \beta \bm{b} = \bm{0}$なので、$\bm{a}, \bm{b}$の$1$次独立性から$\alpha + \beta = 0, \beta = 0$が従う。これを解くと$\alpha = \beta = 0$となる。よって$\bm{a}, \bm{a} + \bm{b}$は$1$次独立である。
+
+\noindent (3) $2\bm{a} + t(\bm{b} - 2\bm{a}) = \bm{a} + s(\bm{a} + 3\bm{b})$のとき、$(1 - 2t - s)\bm{a} + (t - 3s)\bm{b} = \bm{0}$となる。よって$\bm{a}, \bm{b}$の$1$次独立性から$2t + s = 1$, $t - 3s = 0$という連立方程式を得る。これを解いて$s = 1/7, t = 3/7$を得る。 \qed
+
+\subsection{問3} ただの計算問題です。(2) は下三角同士の積が再び下三角行列になることを覚えていると、対角線より上の計算を端折れます。
+
+\paragraph{解答}
+
+\begin{align*}
+\frac{1}{2}
+\begin{pmatrix}
+1 & 4 & 7 \\
+2 & 5 & 8 \\
+3 & 6 & 9
+\end{pmatrix}
+- \frac{1}{2}
+\begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{pmatrix}
+&=
+\begin{pmatrix}
+0 & 1 & 2 \\
+-1 & 0 & 1 \\
+-2 & -1 & 0
+\end{pmatrix} \\
+\begin{pmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+1 & 2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+1 & -2 & 1
+\end{pmatrix}
+&=
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+-1 & 2 & 1
+\end{pmatrix} \\
+\begin{pmatrix}
+\sqrt{2} & -1 & 1 \\
+\sqrt{2} & 1 & -1 \\
+0 & \sqrt{2} & \sqrt{2}
+\end{pmatrix}
+\begin{pmatrix}
+\sqrt{2} & \sqrt{2} & 0 \\
+-1 & 1 & \sqrt{2} \\
+1 & -1 & \sqrt{2}
+\end{pmatrix}
+&= 
+\begin{pmatrix}
+4 & 0 & 0 \\
+0 & 4 & 0 \\
+0 & 0 & 4
+\end{pmatrix}
+\end{align*}
+\qed
+
+\subsection{問4}
+
+拡大係数行列に未知数$a$が入り込んでいるのがややこしいところです。$a$の値によって、係数行列や拡大係数行列の$\rank$が変わってきます。
+
+なるべく手間をかけたくないので、式中に$a$を残したまま、できる限り行基本変形を進めてみましょう。その際\textbf{aの入った式で割り算をしないこと}が大事です。たとえば$a - 1$が$0$だろうがそれ以外だろうが、「ある行の$a - 1$倍を別の行に足す」という操作はできます。しかし$a - 1 = 0$のときは「$a - 1$で割る」という操作をすると破綻が生じてしまいます。
+
+\paragraph{解答} まず、拡大係数行列を次のように行基本変形する
+\begin{align*}
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+a & 1 & 1 & 1 & 1 \\
+1 & a & 3 - a & 1 & 3 \\
+2 & 2 & a & 2 & 0
+\end{pmatrix}
+\xrightarrow[\text{\hbox to 10zw{\hfil $1$列目を掃き出す \hfil}}]{\text{\hbox to 10zw{\hfil $(1, 1)$成分を要に \hfil}}} & 
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 - a & 1 - a & 1 - a & 1 - a \\
+0 & a - 1 & 2 - a & 0 & 2 \\
+0 & 0 & a - 2 & 0 & -2
+\end{pmatrix} \\
+\xrightarrow[\text{\hbox to 10zw{\hfil 加える \hfil}}]{\text{$2$行目を$3$行目に}} & 
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 - a & 1 - a & 1 - a & 1 - a \\
+0 & 0 & 3 - 2a & 1 - a & 3 - a \\
+0 & 0 & a - 2 & 0 & -2
+\end{pmatrix} \\
+\xrightarrow[\text{\hbox to 10zw{\hfil $2$倍を加える \hfil}}]{\text{$3$行目に$4$行目の}} & 
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 - a & 1 - a & 1 - a & 1 - a \\
+0 & 0 & -1 & 1 - a & -1 - a \\
+0 & 0 & a - 2 & 0 & -2
+\end{pmatrix} \\
+\xrightarrow[\text{\hbox to 10zw{\hfil $a - 2$倍を加える \hfil}}]{\text{$4$行目に$3$行目の}} & 
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 - a & 1 - a & 1 - a & 1 - a \\
+0 & 0 & -1 & 1 - a & - 1 - a \\
+0 & 0 & 0 & (1 - a)(a - 2) & -a(a - 1)
+\end{pmatrix} \\
+\end{align*}
+この式より、係数行列の$\rank$が$a = 1, 2$とそれ以外で変化しそうだと分かる。
+\begin{itemize}
+\item $a = 1$のとき、拡大係数行列は
+\[
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & 0 & - 2 \\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+となる。よって係数行列と拡大係数行列の$\rank$は共に$2$である。
+\item $a = 2$のとき、拡大係数行列は
+\[
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & -1 & -1 & -1 & -1 \\
+0 & 0 & -1 & -1 & -3 \\
+0 & 0 & 0 & 0 & -1
+\end{pmatrix}
+\]
+となる。$(2, 2)$成分と$(3, 3)$成分を要にして$2$列目と$3$列目を掃き出してから、符号を調整すると
+\[
+\begin{pmatrix}
+1 & 0 & 0 & * & * \\
+0 & 1 & 0 & * & * \\
+0 & 0 & 1 & * & * \\
+0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+の形に変形できる。よって係数行列の$\rank$は$3$で、拡大係数行列の$\rank$は$4$である。
+\item それ以外の場合$a - 1, a - 2 \neq 0$なので、$2$行目を$1 - a$で割り、$4$行目を$(1 - a)(a - 2)$で割ってよい。
+\[
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 1 & a - 1 & 1 + a \\
+0 & 0 & 0 & 1 & a/(2 - a)
+\end{pmatrix}
+\]
+この後$(1, 1)$成分から$(4, 4)$成分までを順番に要として$1$列目から$4$列目を掃き出せば
+\begin{align*}
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 1 & a - 1 & 1 + a \\
+0 & 0 & 0 & 1 & a/(a - 2)
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 2 - a & -a \\
+0 & 0 & 1 & a - 1 & 1 + a \\
+0 & 0 & 0 & 1 & a/(a - 2)
+\end{pmatrix}\\
+\rightarrow
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & -2/(a - 2) \\
+0 & 0 & 0 & 1 & a/(a - 2)
+\end{pmatrix}
+\end{align*}
+となる。よって係数行列の$\rank$は$4$である。拡大係数行列の$\rank$は係数行列の$\rank$以上で、かつ行数以下である。よって拡大係数行列の$\rank$もまた$4$になる。
+\end{itemize}
+
+\noindent (2), (3) 行列が解を持つための必要十分条件は、係数行列と拡大係数行列の$\rank$が一致することであった。したがって解が存在するための条件は$a \neq 2$である。また解がただ$1$つ存在するための必要十分条件は、係数行列が正方行列で、かつ係数行列の$\rank$が行列のサイズと一致することである。よって$a \neq 1, 2$のとき、解はただ$1$つに定まる。
+
+$a \neq 1, 2$のとき、解は上で計算した通り
+\[
+x = y = 0, z = -\frac{2}{a - 2}, w = \frac{a}{a - 2}
+\]
+である。また$a = 1$のときは、行基本変形後の拡大係数行列を見れば、$x, y$は任意で
+\[
+z = 2, w = - 1 - x - y
+\]
+が解だと分かる。\qed
+
+\subsection{問5}
+\noindent (1)
+\[
+\begin{pmatrix}
+\bm{u}_1 & \bm{u}_2 & \bm{u}_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 & 1 \\
+2 & 1 & 0 \\
+0 & 1 & -1
+\end{pmatrix}
+\]
+の逆行列を求めるには、右側に単位行列を並べて、左側の行列が単位行列になるよう行基本変形を行えば良い。
+\begin{align*}
+\left(
+\begin{array}{rrr|rrr}
+1 & 0 & 1 & 1 & 0 & 0 \\
+2 & 1 & 0 & 0 & 1 & 0 \\
+0 & 1 & -1 & 0 & 0 & 1
+\end{array}
+\right)
+&\rightarrow
+\left(
+\begin{array}{rrr|rrr}
+1 & 0 & 1 & 1 & 0 & 0 \\
+0 & 1 & -2 & -2 & 1 & 0 \\
+0 & 1 & -1 & 0 & 0 & 1
+\end{array}
+\right) \\
+&\rightarrow
+\left(
+\begin{array}{rrr|rrr}
+1 & 0 & 1 & 1 & 0 & 0 \\
+0 & 1 & -2 & -2 & 1 & 2 \\
+0 & 0 & 1 & 2 & -1 & 1
+\end{array}
+\right) \\
+&\rightarrow
+\left(
+\begin{array}{rrr|rrr}
+1 & 0 & 0 & -1 & 1 & -1 \\
+0 & 1 & 0 & 2 & -1 & 2 \\
+0 & 0 & 1 & 2 & -1 & 1
+\end{array} \right)
+\end{align*}
+
+\noindent (2) $T$の表現行列を$A$と書くと
+\[
+A =
+\begin{pmatrix}
+1 & 1 & 1 \\
+1 & 2 & 0 \\
+0 & 1 & -1
+\end{pmatrix}
+\]
+である。
+
+\noindent (3) $A$を行基本変形すると
+\[
+\begin{pmatrix}
+1 & 1 & 1 \\
+1 & 2 & 0 \\
+0 & 1 & -1
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+1 & 1 & 1 \\
+0 & 1 & -1 \\
+0 & 1 & -1
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+1 & 0 & 2 \\
+0 & 1 & -1 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+となる。よって$A\bm{x} = 0$の解は
+\[
+\bm{x} = 
+\begin{pmatrix}
+-2z \\
+z \\
+z
+\end{pmatrix}
+=
+z
+\begin{pmatrix}
+-2 \\
+1 \\
+1
+\end{pmatrix}
+\]
+と書ける。よって基底として$-2 \bm{u}_1 + \bm{u}_2 + \bm{u}_3$が取れる。
+
+\noindent (4) $\dim \Im T = 3 - \dim \Ker T = 2$である。よって$A$の列ベクトルのうち一次独立な$2$本を取れば、それが基底になる。
+\[
+\det
+\begin{pmatrix}
+1 & 1 \\
+1 & 2
+\end{pmatrix}
+= 2 - 1 = 1 \neq 0
+\]
+より、最初の$2$本が$1$次独立である。よって基底として$\bm{u}_1 + \bm{u}_2$, $\bm{u}_1 + 2\bm{u}_2 + \bm{u}_3$が取れる。
+
+

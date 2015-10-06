@@ -1,59 +1,1628 @@
 \chapter{行列式の性質}
-\lectureinfo{2015年9月16日 1限}
+\lectureinfo{2015年9月23日 1限}
 
-\section{置換の詳しい性質}
+今回の演習問題は「行列式の計算」がメインです。愚直に計算すればどの問題も解けはしますが、単に解くだけではなく「手際のよい解き方」を考えることがポイントです。少し時間をかけて、公式の証明と計算例を眺めてみましょう。
 
-\subsection{置換の積と逆置換}
+\section{置換について}
+
+前回、置換に関する基礎的な事柄を述べました。しかしその際一つ大事なことを言い忘れたので、まずはその補足をします。その後で、置換の符号を計算するのに役立つ公式を$2$つ紹介します。
+
+\subsection{置換の積の記法について}
+前回話し忘れた大事なことは「\textbf{置換の積の順序には流儀がある}」ということです。
+
+前回のプリントの中で「$2$つの置換$\sigma, \tau \in \mathfrak{S}_n$の積を$\sigma\tau := \sigma \circ \tau$で定義する」と書きましたが、授業では「$\sigma\tau := \tau \circ \sigma$」で定義していました。見れば分かる通り、掛け算の順序が逆になっています。
+
+どうしてこんなことになったのかというと、$\sigma\tau$を「$\tau \circ \sigma$で定義する流儀」と「$\sigma \circ \tau$で定義する流儀」の$2$つが世の中に存在するからです。そして流儀が$2$つあることの理由は、一方の表記が絶対的に優れているわけではなく、一長一短だからです。たとえば写像の合成を考えるだけなら、$\sigma\tau := \sigma \circ \tau$としておいた方が明らかに見やすいです。でも$\sigma \tau := \tau \circ \sigma$とした方が式が見やすくなる場面も後々出てくるのです。どちらが良いという単純な話ではありません。本によっても流儀はまちまちです。たとえば佐武一郎『線型代数学』(裳華房) では$\sigma\tau := \sigma \circ \tau$が、足助太郎『線型代数学』(東京大学出版会) では$\sigma \tau := \tau \circ \sigma$が採用されています。
+
+先生に確認したところ「きちんと定義がされていれば、どちらの流儀を使っても良い」とおっしゃっていたので、もし授業と違う流儀を採用する場合は、そのことを明示してください。また、このプリントでは授業と同じ流儀に合わせることにします\footnote{といっても、日頃の癖で書き間違えてしまう可能性は十分ありえます。間違いに気づいたら教えてください。}。
 
 \subsection{サイクル分解}
 
+巡回置換に対しては、符号が簡単に計算できます。なぜなら集合$\{1, 2, \ldots, n\}$から相異なる数$a_1, a_2, \ldots, a_l$を取るとき
+\[
+(a_1 \ a_2 \ \cdots \ a_l) = (a_{l - 1} \ a_l) (a_{l - 2} \  a_{l - 1}) \cdots (a_1 \  a_2)
+\]
+という関係式があるからです。$l$個の数を入れ替える巡回置換は$l - 1$個の互換の積で書けるので、その符号は$(-1)^{l - 1}$となります。特に\textbf{巡回置換の符号は、長さだけで決まり}、中に入っている数に依存しません。
+
+この事実は、一般の$\sigma \in \mathfrak{S}_n$の符号の求めるのにも使えます。というのも、\textbf{全ての置換は巡回置換の積に表せる}からです。いま$\sigma \in \mathfrak{S}_n$を$1$に何回も施すことを考えます。すると$1 \mapsto \sigma(1) \mapsto \sigma^2(1) := \sigma\bigl(\sigma(1)\bigr) \mapsto \cdots$というようにどんどん数が変わりますが、所詮は$\{1, 2, \ldots, n\}$という有限集合の中を動き回るだけなので、いつか$1$に戻ってきます。$\sigma^k(1) = 1$となる最小の正の整数$k$を取ると、$1, \sigma(1), \sigma^2(1), \ldots$に対する$\sigma$の振る舞いは、巡回置換$(1 \ \sigma(1) \ \sigma^2(1) \ \cdots)$と変わらないわけです。次に、$1, \sigma(1), \sigma^2(1), \ldots$に現れない$\{1, 2 ,\ldots, n\}$の元があったら、それを$a_2$として、再び$a_2, \sigma(a_2), \sigma^2(a_2), \ldots$という列を考えます。この列もやはり有限回で元に戻るので、巡回置換が得られます。しかもこの列の中には$1, \sigma(1), \sigma^2(1), \ldots$は一度も登場しません。このように
+\begin{itemize}
+\item ある数から出発し、$\sigma$を施して得られる列からなる巡回置換を作る
+\item 巡回置換を作った後に余っている数があったら、そのうちどれかを起点に取り直す
+\end{itemize}
+という操作を繰り返すことによって、$\sigma$は巡回置換の積に書き表せるのです。たとえば
+\[
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+3 & 5 & 4 & 1 & 2
+\end{pmatrix}
+= (1 \ 3 \ 4)(2 \ 5)
+\]
+という感じです。そして一つ一つの巡回置換の符号は既に計算したので、あとは全てをかけることで全体の符号が得られます。
+
 \subsection{転倒数と符号}
 
-\subsection{置換の左移動}
+$\sigma \in \mathfrak{S}_n$に対し、「$1 \leq i < j \leq n$かつ$\sigma(i) > \sigma(j)$」を満たす$(i, j)$の組み合わせの個数を$\sigma$の\textbf{転倒数}といい、$\inv(\sigma)$で表します。たとえば$n = 4$で
+\[
+\sigma = 
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+5 & 2 & 4 & 1 & 3
+\end{pmatrix}
+\]
+なら、$i < j$かつ$\sigma(i) > \sigma(j)$となる組合せは、$(i, j) = (1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (3, 4), (3, 5)$の$7$つです。よって$\inv(\sigma) = 7$という感じです。
 
-\section{群と群作用}
+実は符号と転倒数に関して、$\sgn(\sigma) = (-1)^{\inv(\sigma)}$という公式が成り立ちます。言い方を変えると、置換の符号が転倒数の偶奇に対応すると言っているのです。この事実を確かめましょう。
 
-\subsection{群の公理}
+\paragraph{Rothe図}
 
-% S_n, GL_n, SO(2) とかの例
+置換の転倒数を見るときに便利な表現を紹介します。それは\textbf{Rothe図}と呼ばれるもの (を少しいじったもの) です\footnote{ここに描いた図では、それぞれの点から真っ直ぐな線が左および上に出ています。ふつうのRothe図ではこの向きを逆にし、線を右および下に生やします。どっちでも情報量は同じですが、後でこの図を変形する都合上、ここでは左と上にしました。}。定義をいきなり書くより絵で見た方が早いので、今の
+\[
+\sigma = 
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+5 & 2 & 4 & 1 & 3
+\end{pmatrix}
+\]
+を例にして図を描いてみます。
 
-\subsection{対称性とは何か}
+\begin{figure}[h!tbp]
+\centering
+\begin{picture}(120, 120)
+\put(10, 110){\line(0, -1){100}}
+\put(10, 110){\line(1, 0){100}}
+\put(10, 10){\dashbox(20, 100){}}
+\put(10, 10){\dashbox(40, 100){}}
+\put(10, 10){\dashbox(60, 100){}}
+\put(10, 10){\dashbox(80, 100){}}
+\put(10, 10){\dashbox(100, 100){}}
+\put(10, 10){\dashbox(100, 20){}}
+\put(10, 10){\dashbox(100, 40){}}
+\put(10, 10){\dashbox(100, 60){}}
+\put(10, 10){\dashbox(100, 80){}}
+\put(10, 10){\dashbox(100, 100){}}
+\put(100, 100){\circle*{3}}
+\put(100, 100){\line(-1, 0){90}}
+\put(100, 100){\line(0, 1){10}}
+\put(40, 80){\circle*{3}}
+\put(40, 80){\line(-1, 0){30}}
+\put(40, 80){\line(0, 1){30}}
+\put(80, 60){\circle*{3}}
+\put(80, 60){\line(-1, 0){70}}
+\put(80, 60){\line(0, 1){50}}
+\put(20, 40){\circle*{3}}
+\put(20, 40){\line(-1, 0){10}}
+\put(20, 40){\line(0, 1){70}}
+\put(60, 20){\circle*{3}}
+\put(60, 20){\line(-1, 0){50}}
+\put(60, 20){\line(0, 1){90}}
+\put(0, 17){$5$}
+\put(0, 37){$4$}
+\put(0, 57){$3$}
+\put(0, 77){$2$}
+\put(0, 97){$1$}
+\put(17, 115){$1$}
+\put(37, 115){$2$}
+\put(57, 115){$3$}
+\put(77, 115){$4$}
+\put(97, 115){$5$}
+\end{picture}
+\end{figure}
 
-\subsection{群作用}
+この図を見れば、大体やっていることは分かるはずです。
+\begin{enumerate}
+\item サイズが$n\times n$の正方形の格子を用意する
+\item 各$1 \leq i \leq n$に対し、$\bigl(i, \sigma(i)\bigr)$の位置にある正方形の中心に点を打つ
+\item それぞれの点から、左と上の方向にまっすぐな線を引く
+\end{enumerate}
+という方法で図を作っています。これがRothe図です。
 
-% S_n の多項式環への作用
+Rothe図が便利なのは、転倒数を「線の交点の個数」として読み取れるからです。Rothe図では$i < j$のとき、「$\sigma(i) > \sigma(j)$」と「縦の$i$から出た線が縦の$j$から出た線とクロスする」ことが同値になるように線を引いています。だから$i < j$かつ$\sigma(i) > \sigma(j)$を満たす$(i, j)$のペアとRothe図の交点が$1:1$に対応します。
 
-% GL の自然表現
+\paragraph{転倒数と符号の関係}
+
+そしてRothe図を変形することによって、どうして転倒数が符号と関係するのかが分かります。Rothe図の中で、線の交点を「あみだくじの横棒」に置き換えます。Rothe図をこう変形して「右または上の方向へ進むあみだくじ」と読むのです。
+
+\begin{figure}[h!tbp]
+\centering
+\begin{picture}(120, 120)
+\put(10, 107){\line(0, -1){95}}
+\put(13, 110){\line(1, 0){95}}
+\put(10, 10){\dashbox(20, 80){}}
+\put(30, 10){\dashbox(20, 100){}}
+\put(30, 10){\dashbox(40, 100){}}
+\put(30, 10){\dashbox(60, 100){}}
+\put(30, 10){\dashbox(80, 100){}}
+\put(10, 10){\dashbox(100, 20){}}
+\put(10, 10){\dashbox(100, 40){}}
+\put(10, 10){\dashbox(100, 60){}}
+\put(10, 10){\dashbox(100, 80){}}
+\put(30, 10){\dashbox(80, 100){}}
+\put(100, 100){\circle*{3}}
+\put(100, 100){\line(-1, 0){10}}
+\put(100, 100){\line(0, 1){10}}
+\put(40, 80){\circle*{3}}
+\put(40, 80){\line(-1, 0){10}}
+\put(40, 80){\line(0, 1){10}}
+\put(80, 60){\circle*{3}}
+\put(80, 60){\line(-1, 0){10}}
+\put(50, 60){\line(-1, 0){20}}
+\put(80, 60){\line(0, 1){30}}
+\put(20, 40){\circle*{3}}
+\put(20, 40){\line(-1, 0){10}}
+\put(20, 40){\line(0, 1){10}}
+\put(60, 20){\circle*{3}}
+\put(60, 20){\line(-1, 0){50}}
+\put(60, 20){\line(0, 1){30}}
+\put(60, 70){\line(0, 1){20}}
+\put(10, 100){\line(1, 0){5}}
+\put(25, 100){\line(1, 0){5}}
+\put(20, 90){\line(0, 1){5}}
+\put(20, 105){\line(0, 1){5}}
+\put(15, 100){\line(1, 1){5}}
+\put(20, 95){\line(1, 1){5}}
+\put(17.5, 102.5){\line(1, -1){5}}
+\put(30, 100){\line(1, 0){5}}
+\put(45, 100){\line(1, 0){5}}
+\put(40, 90){\line(0, 1){5}}
+\put(40, 105){\line(0, 1){5}}
+\put(35, 100){\line(1, 1){5}}
+\put(40, 95){\line(1, 1){5}}
+\put(37.5, 102.5){\line(1, -1){5}}
+\put(50, 100){\line(1, 0){5}}
+\put(65, 100){\line(1, 0){5}}
+\put(60, 90){\line(0, 1){5}}
+\put(60, 105){\line(0, 1){5}}
+\put(55, 100){\line(1, 1){5}}
+\put(60, 95){\line(1, 1){5}}
+\put(57.5, 102.5){\line(1, -1){5}}
+\put(70, 100){\line(1, 0){5}}
+\put(85, 100){\line(1, 0){5}}
+\put(80, 90){\line(0, 1){5}}
+\put(80, 105){\line(0, 1){5}}
+\put(75, 100){\line(1, 1){5}}
+\put(80, 95){\line(1, 1){5}}
+\put(77.5, 102.5){\line(1, -1){5}}
+\put(10, 80){\line(1, 0){5}}
+\put(25, 80){\line(1, 0){5}}
+\put(20, 70){\line(0, 1){5}}
+\put(20, 85){\line(0, 1){5}}
+\put(15, 80){\line(1, 1){5}}
+\put(20, 75){\line(1, 1){5}}
+\put(17.5, 82.5){\line(1, -1){5}}
+\put(10, 60){\line(1, 0){5}}
+\put(25, 60){\line(1, 0){5}}
+\put(20, 50){\line(0, 1){5}}
+\put(20, 65){\line(0, 1){5}}
+\put(15, 60){\line(1, 1){5}}
+\put(20, 55){\line(1, 1){5}}
+\put(17.5, 62.5){\line(1, -1){5}}
+\put(50, 60){\line(1, 0){5}}
+\put(65, 60){\line(1, 0){5}}
+\put(60, 50){\line(0, 1){5}}
+\put(60, 65){\line(0, 1){5}}
+\put(55, 60){\line(1, 1){5}}
+\put(60, 55){\line(1, 1){5}}
+\put(57.5, 62.5){\line(1, -1){5}}
+\put(0, 17){$5$}
+\put(0, 37){$4$}
+\put(0, 57){$3$}
+\put(0, 77){$2$}
+\put(0, 97){$1$}
+\put(17, 115){$1$}
+\put(37, 115){$2$}
+\put(57, 115){$3$}
+\put(77, 115){$4$}
+\put(97, 115){$5$}
+\put(125, 58){$\longrightarrow$}
+\end{picture}
+\hfil
+\begin{picture}(120, 120)
+\put(10, 107){\line(0, -1){95}}
+\put(13, 110){\line(1, 0){95}}
+\put(10, 100){\line(1, 1){10}}
+\put(10, 80){\line(1, 1){30}}
+\put(10, 60){\line(1, 1){50}}
+\put(10, 40){\line(1, 1){70}}
+\put(10, 20){\line(1, 1){90}}
+\put(15, 105){\line(1, -1){10}}
+\put(35, 105){\line(1, -1){10}}
+\put(55, 105){\line(1, -1){10}}
+\put(75, 105){\line(1, -1){10}}
+\put(15, 85){\line(1, -1){10}}
+\put(15, 65){\line(1, -1){10}}
+\put(45, 75){\line(1, -1){10}}
+\put(0, 17){$5$}
+\put(0, 37){$4$}
+\put(0, 57){$3$}
+\put(0, 77){$2$}
+\put(0, 97){$1$}
+\put(17, 115){$1$}
+\put(37, 115){$2$}
+\put(57, 115){$3$}
+\put(77, 115){$4$}
+\put(97, 115){$5$}
+\put(125, 58){$\longrightarrow$}
+\end{picture}
+\hfil
+\begin{picture}(120, 120)
+\put(10, 10){\line(0, 1){100}}
+\put(115, 10){\line(0, 1){100}}
+\put(10, 20){\line(1, 0){105}}
+\put(10, 40){\line(1, 0){105}}
+\put(10, 60){\line(1, 0){105}}
+\put(10, 80){\line(1, 0){105}}
+\put(10, 100){\line(1, 0){105}}
+\put(25, 40){\line(0, 1){20}}
+\put(40, 60){\line(0, 1){20}}
+\put(55, 20){\line(0, 1){20}}
+\put(55, 80){\line(0, 1){20}}
+\put(70, 60){\line(0, 1){20}}
+\put(85, 40){\line(0, 1){20}}
+\put(100, 20){\line(0, 1){20}}
+\put(0, 17){$5$}
+\put(0, 37){$4$}
+\put(0, 57){$3$}
+\put(0, 77){$2$}
+\put(0, 97){$1$}
+\put(119, 17){$5$}
+\put(119, 37){$4$}
+\put(119, 57){$3$}
+\put(119, 77){$2$}
+\put(119, 97){$1$}
+\end{picture}
+\end{figure}
+
+ここに現れたあみだくじをたどると、元々Rothe図の交点だったところでは「左から来たら右へ行く」「下から来たら上へ行く」ようになっています。そして元々のRothe図で、左の$i$から出た線は上の$\sigma(i)$のところに辿りつくのでした。ですからこのあみだくじは、$\sigma$を実現するあみだくじに他なりません。
+
+この対応によって$\sigma$は、Rothe図における交点の個数と同じ個数の隣接互換の積で表せることが分かりました。これが$\sgn(\sigma) = (-1)^{\inv(\sigma)}$の理由です。ちなみにRothe図を使うこの方法では「置換をできるだけ少ない個数の隣接互換の積で表すやり方」が得られることが知られています。
+
+実際に今の公式を使って問題を解いてみましょう。転倒数を使うと、置換の符号判定が大分楽になります。
+
+\paragraph{「偶順列と奇順列」の言葉遣い} 紛らわしい話で申し訳ないのですが、「順列」というときと「置換」というときとでは指すものが違っています。たとえば順列$(321)$と書いたときは
+\[
+\begin{pmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{pmatrix}
+\]
+を考えていますが、巡回置換$(321)$と書いたときは
+\[
+\begin{pmatrix}
+1 & 2 & 3 \\
+3 & 1 & 2
+\end{pmatrix}
+\]
+を表しています。見た目が同じ記号でも文脈で表すものが違うので、気を付けてください。
+
+\paragraph{問1の解答} 転倒数を数えれば (1) 奇 (2) 偶 (3) 奇 (4) 偶 と分かる。 \qed
+
+\paragraph{問5の解答} 転倒数を数えれば (1) 奇 (2) 偶 (3) 偶 (4) 奇 と分かる。 \qed
+
+\paragraph{問7の解答} (1) $a_{12}a_{23}a_{31}a_{44}$は巡回置換$\sigma = (123)$に対応する項なので、符号は$\sgn(\sigma) = +1$
+(2) $a_{14}a_{23}a_{32}a_{41}$は$\sigma = (14)(23)$に対応する項なので、符号は$\sgn(\sigma) = +1$ \qed
 
 \section{行列式の交代性と多重線型性}
 
-% Weierstrass--Kronecker
+行列式には様々な公式があります。その中でも、行列式を特徴づける最も重要な性質は「交代性」および「多重線型性」と呼ばれる性質です。最初に「転置をとっても行列式が変わらないこと」を示してから、まずはこの$2$つの性質の証明を目標にします。
+
+証明にあたっては「$\sigma \in \mathfrak{S}_n$にわたる和」に対する式変形を繰り返すことになります。慣れるまでは多少戸惑うかもしれないので、最初のうちは丁寧めに証明をつけておきます。$1$ステップずつじっくり追いかけてください。
+
+\subsection{行と列の入れ替えに関する対称性}
+
+これから先に出てくる公式は、行と列の両方について成り立つものばかりです。行と列のことを一々別個に証明をしていては面倒なので、先に\textbf{行列式は転置しても変わらない}という事実を示しておきましょう。これさえ知っておけば、例えば行に関する公式を転置によって列に関する公式に読み替えることができるようになります。なぜなら転置によって行は列に、列は行に変わるからです。
+
+$n$次正方行列$A \in \Mat_n(\mathbb{R})$を成分で$A = (a_{ij})_{1 \leq i, j \leq n}$と表示しておきましょう。このとき$A$を転置した行列${}^t\!A$の$(i, j)$成分は$a_{ji}$です。よって
+\begin{align*}
+\det {}^t\!A
+&= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} a_{\sigma(2)2} \cdots a_{\sigma(n)n}
+\end{align*}
+が成り立ちます。ここで$\sigma(1), \sigma(2), \ldots, \sigma(n)$が$1, 2, \ldots n$の並び替えであることを思い出すと、$a_{\sigma(1)1} a_{\sigma(2)2} \cdots a_{\sigma(n)n}$の掛け算の順番を入れ替えて$a_{1*} a_{2*} \cdots a_{n*}$の恰好にすることができます\footnote{たまに行列の成分として普通の数ではなく、非可換な数、つまり$ab \neq ba$を満たす数を考えることがあります。たとえば四元数 (クォータニオン) と呼ばれる数がこれに当たります。このような場合はもちろん、掛け算の順番を入れ替えられません。ですが今ここで考えている数は実数ないし複素数ですから、掛け算の順序を気にする必要はありません。}。さらに元々の式に出てくる$a_{\sigma(i)i}$という成分は「$2$つ目の添字に$\sigma$を施すと$1$つ目の添字になる」という性質を持っています。このことから
+\[
+a_{\sigma(1)1} a_{\sigma(2)2} \cdots a_{\sigma(n)n} = a_{1\sigma^{-1}(1)} a_{2\sigma^{-1}(2)} \cdots a_{n\sigma^{-1}(n)}
+\]
+であると分かります。この議論によって
+\begin{align*}
+\det {}^t\!A
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{1\sigma^{-1}(1)} a_{2\sigma^{-1}(2)} \cdots a_{n\sigma^{-1}(n)}
+\end{align*}
+が分かりました。
+
+この式は「$\sum$の添字が$\sigma$、成分の右下に現れるのは$\sigma^{-1}$」なので、$\det$の定義式とは微妙に違っています。でも心配は要りません。$\sigma$が$\mathfrak{S}_n$の元を全て動くとき、$\sigma^{-1}$もまた$\mathfrak{S}_n$の元を動くからです。また$\sigma^{-1}$と$\sigma$の符号は同じです。そこで$\sigma^{-1}$を$\tau$と表すと
+\begin{align*}
+\det {}^t\!A
+&= \sum_{\tau \in \mathfrak{S}_n} \sgn(\tau) a_{1\tau(1)} a_{2\tau(2)} \cdots a_{n\tau(n)} = \det A
+\end{align*}
+となります。
+
+\paragraph{問8} 証明そのものは上の議論で終わっていますが、$3$次の行列式なら直接計算して確かめることもできます。やってみてください。
 
 \subsection{交代性}
 
+行列式には「$2$つの行 / 列を入れ替えると$(-1)$倍される」という性質があります。たとえば$2$次だと
+\[
+\det
+\begin{pmatrix}
+b & a \\
+d & c
+\end{pmatrix}
+= bc - ad = - (ad - bc)
+= -\det
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\]
+となっていますね。この性質を行列式の\textbf{交代性}といいます。$2$次に限らず一般の次数でも行列式の交代性が成り立つことを示します。
+
+行列$A$の$k$列目と$l$列目を入れ替えた行列を$A'$とし、$A$を成分と列ベクトルで表しましょう。すなわち
+\begin{align*}
+A &= (a_{ij})_{1 \leq i, j \leq n} =
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_l & \cdots & \bm{a}_n
+\end{pmatrix} \\
+A' &= (a'_{ij})_{1 \leq i, j \leq n} =
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_l & \cdots & \bm{a}_n
+\end{pmatrix}
+\end{align*}
+とおきます。このとき$A = (a_{ij}), A' = (a'_{ij})$と書くことにすると
+\begin{align*}
+a'_{ij} =
+\begin{cases}
+a_{ij} & (j \neq k, l)\\
+a_{il} & (j = k) \\
+a_{ik} & (j = l)
+\end{cases}
+\end{align*}
+なので
+\begin{align*}
+\det A'
+&= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a'_{\sigma(1)1} \cdots a'_{\sigma(k)k} \cdots a'_{\sigma(l)l} \cdots a'_{\sigma(n)n}
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots \uwave{a_{\sigma(k)l}} \cdots \uwave{a_{\sigma(l)k}} \cdots a_{\sigma(n)n}
+\end{align*}
+となります。$k$番目と$l$番目の項だけが規則から外れているので気を付けてください。この$2$つの項を並び替えると
+\[
+\det A'
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots \uwave{a_{\sigma(l)k}} \cdots \uwave{a_{\sigma(k)l}} \cdots a_{\sigma(n)n} \\
+\]
+となります。$k$番目と$l$番目の因子の添字を見ると、$2$文字目は他と揃いましたが、$1$文字目がまだ規則から外れています。ここで$\sigma$に左から互換$(k\ l)$をかけた置換$(k\ l) \sigma$を考えると、$i \neq k, l$なら$(k\ l)(i) = i$となるので\footnote{丸括弧が並んで微妙に見辛いですが、$1$つ目の$(k\ l)$は互換で、$2$つ目の$(i)$は「写像に$i$を代入する」という意味です。}
+\begin{align*}
+\bigl( (k\  l)\sigma\bigr)(i)
+=
+\begin{cases}
+\sigma(i) & (i \neq k, l) \\
+\sigma(l) & (i = k) \\
+\sigma(k) & (i = l) \\
+\end{cases}
+\end{align*}
+が成り立ちます。これを使うと、さっきの$\det A'$の式を
+\[
+\det A'
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{((k\ l) \sigma)(1)1} \cdots \uwave{a'_{((k\ l) \sigma)(k)k}} \cdots \uwave{a'_{((k\ l) \sigma)(l)l}} \cdots a'_{((k\ l) \sigma)(n)n} \\
+\]
+と変形することができます。$k$番目と$l$番目まで込めて\textbf{添字が全て規則通りに並んだ}ことに注目してください。もう少しで行列式の定義式がひねり出せそうです。ここでさらに$\sgn(\sigma) = - \sgn\bigl((k\ l) \sigma\bigr)$に気を付けると
+\[
+\det A'
+= - \sum_{\sigma \in \mathfrak{S}_n} \sgn\bigl((k\ l) \sigma\bigr) a_{((k\ l) \sigma)(1)1} \cdots \uwave{a'_{((k\ l) \sigma)(k)k}} \cdots \uwave{a'_{((k\ l) \sigma)(l)l}} \cdots a'_{((k\ l) \sigma)(n)n} \\
+\]
+が得られます。これで行列式の定義式とほとんど同じになりました。あと一息です。
+
+最後に$\sigma$は$\mathfrak{S}_n$の全ての元を動くとき、$(k\ l) \sigma$もまた$\mathfrak{S}_n$の元を全て動くことに気を付けましょう。したがって$(k\ l) \sigma = \tau$と書くことにすれば
+\begin{align*}
+\det A'
+&= -\sum_{\tau \in \mathfrak{S}_n} \sgn(\tau) a_{\tau(1)1} \cdots a'_{\tau(k)k} \cdots a'_{\tau(l)l} \cdots a'_{\tau(n)n}
+= - \det A
+\end{align*}
+となります。
+
+\paragraph{同じ列をもつ行列式}
+
+交代性からすぐに従う帰結の一つに、\textbf{行列式に同じ列があったら値は$0$}という事実があります。実際$A$の$i$列目と$j$列目が同じベクトル$\bm{a}$だったとしましょう。
+\[
+A = \bordermatrix{
+& & \scalebox{0.8}{$i^{\text{th}}$} & & \scalebox{0.8}{$j^\text{th}$} \cr
+& \cdots & \bm{a} & \cdots & \bm{a} & \cdots
+}
+\]
+このとき
+\begin{itemize}
+\item $A$の$i$列目と$j$列目を入れ替えると、行列式の値は$-1$倍される
+\item $A$の$i$列目と$j$列目は元々同じベクトルなので、入れ替えても$A$のまま
+\end{itemize}
+なので、$\det A = - \det A$が従います。これより$\det A = 0$です。交代性がこの形で役立つことはよくあるので、覚えておきましょう。もちろん、$2$つの行が同じである行列についても、行列式は$0$になります。
+
+
 \subsection{多重線型性}
 
-\section{行列式のさらなる性質}
+次に示すのは、多重線型性と呼ばれる性質です。$n$次正方行列は$n$本の列ベクトルの集まりと同じなので、$\det$は$n$本の列ベクトルに数を対応させる写像$\det\colon \mathbb{R}^n \times \mathbb{R}^n \times \cdots \times \mathbb{R}^n\rightarrow \mathbb{R}$と思うことができます。このとき\textbf{$\det$は$1$つ$1$つのベクトルについて線型}です。すなわち、全ての$1 \leq j \leq n$に対して
+\begin{align*}
+\det
+\bordermatrix{
+& & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& \bm{a}_1 & \cdots & \bm{a}_j + \bm{b} & \cdots \bm{a}_n
+}
+&=
+\det \bordermatrix{
+& & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& \bm{a}_1 & \cdots & \bm{a}_j & \cdots & \bm{a}_n
+}
++ \det \bordermatrix{
+& & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& \bm{a}_1 & \cdots & \bm{b} & \cdots & \bm{a}_n
+} \\
+\det
+\bordermatrix{
+& & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& \bm{a}_1 & \cdots & \alpha \bm{a}_j & \cdots & \bm{a}_n
+}
+&=
+\alpha \det \bordermatrix{
+& & & \scalebox{0.8}{$j^{\text{th}}$} \cr
+& \bm{a}_1 & \cdots & \bm{a}_j & \cdots & \bm{a}_n
+}
+\end{align*}
+が成り立つのです。この「一つ一つについて線型」という性質を\textbf{多重線型性}といいます。これも証明しましょう。
+
+\paragraph{列ベクトルの和} まず和に関する振る舞いを確認します。$n$次正方行列$A$を成分および列ベクトルで
+\begin{align*}
+A = (a_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix} \\
+A' = (a'_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_l + \bm{b} & \cdots & \bm{a}_k
+\end{pmatrix}
+\end{align*}
+と表しておきます。$A$の$l$列目を$\bm{a}_l$から$\bm{a}_l + \bm{b}$に置き換えた行列が$A'$です。このとき$\det$が行と列の入れ替えで対称なことより
+\[
+\det A' = \det {}^t\!A'
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a'_{\sigma(1)1} \cdots a'_{\sigma(i)i} \cdots a'_{\sigma(n)n}
+\]
+が得られます。そして$A$と$A'$は$l$列目に$\bm{b} = {}^t(b_1, b_2, \ldots, b_n)$の差があるだけなので
+\begin{align*}
+a'_{ij} = 
+\begin{cases}
+a_{ij} & (j \neq l) \\
+a_{il} + b_i & (j = l)
+\end{cases}
+\end{align*}
+が成り立ちます。これを今の式に代入すると
+\begin{align*}
+\det A'
+&= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots (a_{\sigma(l)l} + b_{\sigma(l)}) \cdots a_{\sigma(n)n} \\
+&= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots a_{\sigma(l)l} \cdots a_{\sigma(n)n}
++ \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots b_{\sigma(l)} \cdots a_{\sigma(n)n} \\
+&= \det
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix}
++ \det
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{b} & \cdots & \bm{a}_k
+\end{pmatrix}
+\end{align*}
+が得られます。同じことが行ベクトルでも成り立ちます。
+
+\paragraph{列ベクトルの定数倍} 次に、列ベクトルを定数倍したらどうなるか調べてみましょう。
+\begin{align*}
+A = (a_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix} \\
+A' = (a'_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \alpha \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix}
+\end{align*}
+とおきます。$A$の$l$列目を$\alpha$倍した行列が$A'$です。このとき$l$列目だけ$a'_{il} = \alpha a_{il}$で、他の列については$a'_{ij} = a_{ij}$が成り立っています。よって
+\begin{align*}
+\det A'
+&= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a'_{\sigma(1)1} \cdots a'_{\sigma(l)l} \cdots a'_{\sigma(n)n}
+= \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots \bigl(\alpha a_{\sigma(l)l}\bigr) \cdots a_{\sigma(n)n} \\
+&= \alpha \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1)1} \cdots a_{\sigma(l)l} \cdots a_{\sigma(n)n}
+= \alpha \det A
+\end{align*}
+となります。行ベクトルについても同じです。
+
+\section{行列式の計算公式とその応用}
+
+ここまでで行列式が転置に関して変わらないことと、交代性・多重線型性という性質を示しました。これでどんな行列も、ある程度計算できるようになります。ただ、これ以外にも
+\begin{itemize}
+\item ある行に別の行の定数倍を足しても、$\det$の値は変わらないこと
+\item ブロック三角行列の行列式公式
+\item 余因子展開公式
+\item $\det AB = \det A \det B$
+\end{itemize}
+という便利な計算公式があります。行列式の計算にあたっては、これらの公式を的確に組み合わせることがキモです。また行列式を使うと、正則性の判定ができたり、逆行列の計算ができるようになったりもします。ちょっと長くなりますが、そうした便利な公式たちを片っ端から示しておきましょう。
 
 \subsection{基本変形に対する振る舞い}
 
-\paragraph{$2$つの行を入れ替える}
+行列に対する「基本変形」という操作を思い出しましょう。連立$1$次方程式を解く時に使う、係数行列に対する
+\begin{itemize}
+\item ある行を定数倍する
+\item $2$つの行を入れ替える
+\item ある行の定数倍を別の行に加える
+\end{itemize}
+という$3$つの操作を行基本変形というのでした。また「行」を「列」で置き換えると、列基本変形になります。
 
-\paragraph{ある行/列の定数倍}
+列基本変形によって行列式の値がどう変わるのかを調べましょう。といっても最初の$2$つは交代性と多重線型性そのものです。最後の$1$つだけ示しましょう。
 
-\paragraph{ある行/列の定数倍を別の行/列に加える}
+行列$A$, $A'$を
+\begin{align*}
+A = (a_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix} \\
+A' = (a'_{ij})_{1 \leq i, j \leq n}
+&= \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_l + \alpha \bm{a}_k & \cdots & \bm{a}_k
+\end{pmatrix}
+\end{align*}
+で定めます。$A$の$k$列目を$\alpha$倍して$l$列目に加えた行列が$A'$です。このとき多重線型性より
+\begin{align*}
+\det A'
+= \det \begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_l & \cdots & \bm{a}_k
+\end{pmatrix}
++ \alpha \det 
+\begin{pmatrix}
+\bm{a}_1 & \cdots & \bm{a}_k & \cdots & \bm{a}_k & \cdots & \bm{a}_k
+\end{pmatrix}\end{align*}
+が従います。そして右辺第$2$項の行列式には同じ列があるので、交代性から値は$0$です。これで$\det A' = \det A$が言えました。行についても同様です。
+
+この公式は非常に強力です。というのも「ある行を別の行に足しても行列式が変わらない」ということは、ある成分を要に\textbf{行を掃き出しても行列式が変わらない}と言っているわけです。掃き出しをすると行列の中に$0$がたくさん出てくるので、余因子展開をするときの計算が非常に楽になります。
+
+\subsection{ブロック三角行列の行列式}
+正方行列$A$が、ブロック分けによって
+\[
+A = 
+\begin{pmatrix}
+B & O \\
+C & D
+\end{pmatrix}
+\]
+と分けられ、かつ$B$, $D$が共に正方行列となっているとき、$A$を\textbf{ブロック下三角行列}といいます。$B$, $D$は正方行列でさえあればよく、サイズが違っても構いません。このとき$\det A = \det B \det D$という公式が成り立ちます。これを示します。
+
+$B = (b_{ij})_{1 \leq i, j \leq p}$が$p$次、$D = (d_{ij})_{1 \leq i, j \leq q}$が$q$次の正方行列としましょう。そして$A = (a_{ij})_{1 \leq i, j \leq p + q}$とおきます。このとき$1 \leq i, j \leq p$なら$a_{ij} = b_{ij}$で、$1 \leq i, j \leq q$なら$a_{p + i, p + j} = d_{ij}$です。さて定義に従えば
+\[
+\det A =
+\sum_{\sigma \in \mathfrak{S}_{p + q}} a_{1\sigma(1)} \cdots a_{p\sigma(p)} a_{p + 1, \sigma(p + 1)} \cdots a_{p + q, \sigma(p + q)}
+\]
+です。ところが$A$の右上$p\times q$ブロックの成分は全て$0$です。したがって$\sigma(1), \ldots, \sigma(p)$の中に$1$個でも$p + 1$以上の数が出てきたら、その$\sigma$に対応する項は$0$です。よって$\det A$に寄与する項の$\sigma$は、$\sigma(1), \ldots, \sigma(p)$の値が全て$p$以下です。元々$\sigma$は$1, 2, \ldots, p+q$の並び替えですが、ここで効いてくる$\sigma$は$1, 2, \ldots, p$を$1, 2, \ldots, p$のどれかに並び替えないといけないのです。このことから、$\sigma$は$p + 1, \ldots, p + q$を$p + 1, \ldots, p + q$のどれかに並び替えることも従います。そこで$\mathfrak{S}_n$の元のうち、$1, \ldots, p$を$1, \ldots, p$の中で、$p + 1, \ldots, p + q$を$p + 1, \ldots, p + q$の中で並べ替える置換を集めた部分集合
+\begin{align*}
+\mathfrak{S}_p \times \mathfrak{S}_q
+:= \Biggl\{ \sigma \in \mathfrak{S}_n \mid \sigma(i) \in
+\begin{cases}
+\{1, 2 ,\ldots, p\} & (1 \leq i \leq p) \\
+\{p + 1, p + 2 ,\ldots, p + q\} & (p + 1 \leq i \leq p +q)
+\end{cases}
+\Biggr\}
+\end{align*}
+を考えます。このような置換は$\{1, 2, \ldots, p\}$の置換と$\{p + 1, p + 2, \ldots, p + q\}$の置換のペアで一意的に表せるので、$\mathfrak{S}_p \times \mathfrak{S}_q$という記号を使っています。
+
+さて、ここまでの考察で
+\[
+\det A =
+\sum_{\sigma \in \mathfrak{S}_p \times \mathfrak{S}_q} a_{1\sigma(1)} \cdots a_{p\sigma(p)} a_{p + 1, \sigma(p + 1)} \cdots a_{p + q, \sigma(p + q)}
+\]
+が言えました。ここで$\mathfrak{S}_p \times \mathfrak{S}_q$の元は、$\{1, 2, \ldots, p\}$の置換と$\{p + 1, p + 2, \ldots, p + q\}$の置換のペアで一意的に表せます。$\tau \in \mathfrak{S}_p$と$\rho \in \mathfrak{S}_q$のペアに対応する$\mathfrak{S}_{p + q}$の元を$\tau \times \rho$と書くこと\footnote{ここで$\rho \in \mathfrak{S}_q$は$\{1, 2, \ldots, q\}$の置換ですが、$\tau\in\mathfrak{S}_p$とペアにして$\tau \times \rho \in \mathfrak{S}_{p + q}$を考えるときは、$\rho$を「$p + k$を$p + \rho(k)$にずらす置換」と読み替えることにします。あみだくじで言えば、「$\tau$を表すあみだくじ」と「$\rho$を表すあみだくじ」を横に並べたものが$\tau \times \rho$です。}にすれば
+\[
+\det A =
+\sum_{\tau \in \mathfrak{S}_p} \sum_{\rho \in \mathfrak{S}_q} a_{1(\tau \times \rho)(1)} \cdots a_{p(\tau \times \rho)(p)} a_{p + 1, (\tau \times \rho)(p + 1)} \cdots a_{p + q, (\tau \times \rho)(p + q)}
+\]
+と書けます。そして$(\tau \times \rho)(i) = \tau(i)$と$(\tau \times \rho)(p + i) = p + \rho(i)$に注目すれば
+\begin{align*}
+\det A
+&= \sum_{\tau \in \mathfrak{S}_p} \sum_{\rho \in \mathfrak{S}_q} a_{1\tau(1)} \cdots a_{p\tau(p)} a_{p + 1, p + \rho(1)} \cdots a_{p + q, p + \rho(q)}
+= \sum_{\tau \in \mathfrak{S}_p} a_{1\tau(1)} \cdots a_{p\tau(p)} \sum_{\rho \in \mathfrak{S}_q} a_{p + 1, p + \rho(1)} \cdots a_{p + q, p + \rho(q)}
+\end{align*}
+となるが、$1 \leq i, j \leq p$のとき$a_{ij} = b_{ij}$、$1 \leq i, j \leq q$のとき$a_{p + i, p + j} = d_{ij}$なので、
+\[
+\det A = 
+\sum_{\tau \in \mathfrak{S}_p} b_{1\tau(1)} \cdots b_{p\tau(p)} \sum_{\rho \in \mathfrak{S}_q} d_{1, \rho(1)} \cdots d_{q, \rho(q)}
+= \det B \det D
+\]
+が得られます。
+
+ブロック上三角行列の場合は、転置と組み合わせて
+\[
+\det
+\begin{pmatrix}
+B & C \\
+O & D
+\end{pmatrix}
+=
+\det{}^t
+\begin{pmatrix}
+B & C \\
+O & D
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+{}^t\!B & {}^tO \\
+{}^tC & {}^tD
+\end{pmatrix}
+= \det {}^t\!B \det {}^tD
+= \det B \det D
+\]
+が分かります。また、ブロックが何段かある場合でも
+\[
+\det
+\begin{pmatrix}
+A_1 & * & * \\
+O & A_2 & * \\
+O & O & A_3
+\end{pmatrix}
+= \det A_1 \det A_2 \det A_3
+\]
+が成り立ちます。実際、今示した$2$段の場合の公式を繰り返し使えば
+\[
+\det
+\left(
+\begin{array}{c|cc}
+A_1 & * & * \\ \hline
+O & A_2 & * \\
+O & O & A_3
+\end{array}
+\right)
+= \det A_1 
+\det
+\begin{pmatrix}
+A_2 & * \\
+O & A_3
+\end{pmatrix}
+= \det A_1 \det A_2 \det A_3
+\]
+となるからです。$4$段以上でも同様なのは明らかでしょう。
+
+\paragraph{問3の解答} 次のようにブロック分解すれば分かる。
+\[
+\det
+\left(
+\begin{array}{cc|c}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\ \hline
+0 & 0 & a_{33}
+\end{array}
+\right)
+= a_{33} \det
+\begin{pmatrix}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{pmatrix}, 
+\det
+\left(
+\begin{array}{cc|cc}
+a_{11} & a_{12} & a_{13} & a_{14} \\
+a_{21} & a_{22} & a_{23} & a_{24} \\ \hline
+0 & 0 & a_{33} & a_{34} \\
+0 & 0 & a_{43} & a_{44}
+\end{array}
+\right)
+= \det
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+\det
+\begin{pmatrix}
+a_{33} & a_{34} \\
+a_{43} & a_{44}
+\end{pmatrix}
+\]
+\qed
 
 \subsection{余因子展開}
 
 \paragraph{余因子とは}
 
-\paragraph{1行目/1列目に対する余因子展開公式}
+$A$を$n$次正方行列、$1 \leq i, j \leq n$とします。このとき$A$から$i$行目と$j$列目を取り去ってできる行列$\tilde{A}_{ij}$の行列式$\det \tilde{A}_{ij}$に$(-1)^{i + j}$をかけた$\Delta_{ij} := (-1)^{i + j}\det \tilde{A}_{ij}$を$A$の\textbf{$(i, j)$余因子}といいます。余因子を使うことで、高次の行列式の計算に帰着させることができます。
 
-\subsection{正則性の判定条件}
+余因子展開を考えるにあたり、一番基本的なのは
+\[
+\det
+\begin{pmatrix}
+a_{11} & 0 & \cdots & 0 \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}
+= a_{11} \det
+\begin{pmatrix}
+a_{22} & \cdots & a_{2n} \\
+\vdots & \ddots & \vdots \\
+a_{n2} & \cdots & a_{nn}
+\end{pmatrix}
+\]
+という事実です。ブロック三角行列の展開公式から直ちに従うこの公式を、これから幾度となく使います。
 
-\subsection{行と列の入れ替えに関する対称性}
+\paragraph{1列目に対する余因子展開公式}
 
-\subsection{乗法性}
+まずは$1$列目に関する余因子展開公式を示しましょう。それは$n$次正方行列$A$に対する
+\[
+\det A = \sum_{i = 1}^n a_{i1} \Delta_{i1}
+\]
+という公式です。たとえば$3$次なら
+\begin{align*}
+\det A 
+&= a_{11} a_{22} a_{33} - a_{12} a_{21} a_{33} - a_{11} a_{23} a_{32} + a_{12} a_{23} a_{31} + a_{13} a_{21} a_{32} - a_{13} a_{22} a_{31} \\
+&= a_{11} \det
+\begin{pmatrix}
+a_{22} & a_{23} \\
+a_{32} & a_{33}
+\end{pmatrix}
+- a_{21} \det
+\begin{pmatrix}
+a_{12} & a_{13} \\
+a_{32} & a_{33}
+\end{pmatrix}
++ a_{31} \det
+\begin{pmatrix}
+a_{12} & a_{13} \\
+a_{22} & a_{23}
+\end{pmatrix}
+\end{align*}
+といった感じです。これが一般の$n$で正しいことを証明しましょう。
 
-\subsection{Cramerの公式}
+いつものように、$A$を成分と列ベクトルとで$A = (a_{ij})_{1 \leq i, j \leq n} = \begin{pmatrix} \bm{a}_1 & \bm{a}_2 & \cdots & \bm{a}_n \end{pmatrix}$と表します。このとき$\bm{a}_1 = a_{11} \bm{e}_1 + a_{12} \bm{e}_2 + \cdots + a_{1n} \bm{e}_n$だから、多重線型性より
+\begin{align*}
+\det A &= a_{11} \det
+\begin{pmatrix}
+\bm{e}_1 & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
++
+a_{21} \det
+\begin{pmatrix}
+\bm{e}_2 & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
++ \cdots +
+a_{n1} \det
+\begin{pmatrix}
+\bm{e}_n & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix} \\
+&= \sum_{i = 1}^n a_{i1} \det 
+\begin{pmatrix}
+\bm{e}_i & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
+\end{align*}
+と表せます。ここで出てくる行列$\begin{pmatrix} \bm{e}_i & \bm{a}_{2} & \cdots & \bm{a}_n \end{pmatrix}$の$1$列目を見ると、$i$行目のみに$1$があり、他の行の成分は全て$0$です。よって$(i, 1)$成分を要にして$2$列目以降を掃き出すことで
+\begin{align*}
+\det \begin{pmatrix}
+\bm{e}_i & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
+&= \det \begin{pmatrix}
+0 & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & \ddots & \vdots &  \\
+0 & a_{i - 1, 2} & \cdots & a_{i - 1, n} \\
+1 & a_{i, 2} & \cdots & a_{i, n} \\
+0 & a_{i + 1, 2} & \cdots & a_{i + 1, n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & a_{n, 2} & \cdots & a_{n, n} \\
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+0 & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & \ddots & \vdots &  \\
+0 & a_{i - 1, 2} & \cdots & a_{i - 1, n} \\
+1 & 0 & \cdots & 0 \\
+0 & a_{i + 1, 2} & \cdots & a_{i + 1, n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & a_{n, 2} & \cdots & a_{n, n} \\
+\end{pmatrix}
+\end{align*}
+となります。この右辺の行列で、$i$行目を$i - 1$行目と入れ替え、$i - 1$行目を$i - 2$行目と入れ替え……という操作を順番に行うと、行ベクトル$(1, 0, \ldots, 0)$を一番上の行まで持ってくることができます。この操作は$i - 1$回行われ、その都度$(-1)$がかかるので、結局
+\begin{align*}
+\det \begin{pmatrix}
+\bm{e}_i & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
+&= (-1)^{i - 1}
+\det \begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & \ddots & \vdots &  \\
+0 & a_{i - 1, 2} & \cdots & a_{i - 1, n} \\
+0 & a_{i + 1, 2} & \cdots & a_{i + 1, n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & a_{n, 2} & \cdots & a_{n, n} \\
+\end{pmatrix}
+= (-1)^{i + 1}
+\det \begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & a_{12} & \cdots & a_{1n} \\
+\vdots & \vdots & \ddots & \vdots &  \\
+0 & a_{i - 1, 2} & \cdots & a_{i - 1, n} \\
+0 & a_{i + 1, 2} & \cdots & a_{i + 1, n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & a_{n, 2} & \cdots & a_{n, n} \\
+\end{pmatrix} \\
+&= \Delta_{i1}
+\end{align*}
+が得られました。よって
+\[
+\det A = 
+\sum_{i = 1}^n a_{i1} \det 
+\begin{pmatrix}
+\bm{e}_i & \bm{a}_{2} & \cdots & \bm{a}_n
+\end{pmatrix}
+= 
+\sum_{i = 1}^n a_{i1} \Delta_{i1}
+\]
+となります。
+
+\paragraph{一般の余因子展開公式}
+
+今の議論が分かってしまえば、後の話は簡単です。$j$列目に関して余因子展開をするときは
+\begin{enumerate}
+\item $\bm{a}_j$を$\bm{a}_j = a_{1j} \bm{e}_1 + a_{2j} \bm{e}_2 + \cdots + a_{nj} \bm{e}_n$と書き直した上で、行列式を多重線型性でバラし
+\item $\bm{e}_i$を含む行列式の$i$行目を、$(i, j)$成分を要にして掃き出し
+\item $i$行目を$1$行目に、$j$列目を$1$列目に動かす
+\end{enumerate}
+というステップで、$j$列目に関する余因子展開公式
+\[
+\det A = \sum_{i = 1}^n a_{ij}\Delta_{ij}
+\]
+の証明ができます。全く同様に、$i$行目に関する余因子展開公式
+\[
+\det A = \sum_{j = 1}^n a_{ij}\Delta_{ij}
+\]
+も得られます。証明で唯一気を付けるべきは、$3$番目のステップで$i$行目を$1$行目に、$j$列目を$1$列目に持っていくとき「$(-1)$が何個くっつくか」を正しく数えることです。$\pm$の符号が交互に並ぶことは簡単に分かりますが、\textbf{最初の項が$\pm$のどっちから始まるのか慎重に数えないと全体の符号を間違えます}。余因子展開は$a_{ij}$に「$A$の$i$行目と$j$列目を取り除いた行列の行列式と$(-1)^{i + j}$をかけたもの」を足し合わせる公式です。符号を正しく覚えてください。
+
+\subsection{正則性の判定条件と乗法性}
+
+次に$\det AB = \det A \det B$という公式を示します。この公式には色々な証明がありますが、ここでは正則性の判定条件と絡め
+\begin{enumerate}
+\item 非正則な行列$A$が$\det A = 0$を満たすこと
+\item $A, B$の少なくとも一方が非正則なときに$\det AB = \det A \det B$が正しいこと
+\item $A, B$が正則で、かつ一方が基本行列のときに$\det AB = \det A \det B$が正しいこと
+\item 正則行列$A$は$\det A \neq 0$を満たすこと
+\end{enumerate}
+という順番で証明をしていきます。
+
+\paragraph{正則性の言い換え}
+
+$n$次正方行列$A$については、単射性と全射性が同値だったことを思い出しましょう。したがって$n$次正方行列$A$が正則であることは、$n$本の列ベクトルたちが$1$次独立なことと同値です。
+
+\paragraph{正則でない行列の行列式} まず、非正則行列の行列式が$0$になることを示します。いま$A = \begin{pmatrix} \bm{a}_1 & \bm{a}_2 & \cdots & \bm{a}_n \end{pmatrix}$が正則でないとしましょう。このとき$\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n$は$1$次従属なので、$\alpha_1 \bm{a}_1 + \alpha_2 \bm{a}_2 + \cdots + \alpha_n \bm{a}_n = \bm{0}$を見たすスカラーの組$(\alpha_1, \alpha_2, \ldots, \alpha_n)$で、$(0, 0, \ldots, 0)$以外のものが存在します。このとき$\alpha_i \neq 0$なる$i$を$1$つ取ると
+\[
+\bm{a}_i + \sum_{j \neq i} \frac{\alpha_j}{\alpha_i} \bm{a}_j = \bm{0}
+\]
+が成り立ちます。したがって全ての$j \neq i$について$j$列目の$\frac{\alpha_j}{\alpha_i}\bm{a}_j$倍を$i$列目に足せば
+\begin{align*}
+\det \begin{pmatrix} \bm{a}_1 & \cdots & \bm{a}_i & \cdots & \bm{a}_n \end{pmatrix}
+&= \det \begin{pmatrix} \bm{a}_1 & \cdots & \bm{a}_i + \sum_{j \neq i} \frac{\alpha_j}{\alpha_i} \bm{a}_j & \cdots & \bm{a}_n \end{pmatrix}
+= \det \begin{pmatrix} \bm{a}_1 & \cdots & \bm{0} & \cdots & \bm{a}_n \end{pmatrix} = 0
+\end{align*}
+となります。
+
+また、正方行列$A$が正則でなければ、どんな正方行列$B$を右からかけても$AB$は正則になりません。もし$AB$が正則なら$I = AB(AB)^{-1} = A\bigl(B(AB)^{-1}\bigr)$となり、$A$が非正則であることに矛盾するからです。ですから$A$が正則でなければ、$\det AB = \det A \det B$という式は両辺とも$0$で成り立ちます。$B$が非正則な場合も同様です。
+
+\paragraph{正則行列が基本行列の積で書けること}
+
+次に$A, B$が同じサイズの正則行列であるときに、$\det AB = \det A \det B$が成り立つことを示しましょう。それには、正則行列が基本行列の積で書けるという事実を思い出す必要があります。
+
+いま$A$が正則行列だったとします。このとき逆行列$A^{-1}$が存在するので、連立$1$次方程式$A\bm{x} = \bm{0}$の解は$\bm{x} = \bm{0}$ただ一つです。一方、連立$1$次方程式$A\bm{x} = \bm{0}$は掃き出し法で解くことができます。解がただ一つ存在する方程式なので、係数行列$A$に適切な基本変形を施すことで、$A$を単位行列まで変形できます。これは$A^{-1}$が基本行列の積で書けることに他なりません。そして基本行列の逆行列もまた基本行列ですから、$A$自身も基本行列の積で表されます。
+
+\paragraph{乗法性の証明}
+
+今の事実を使って、乗法性を示しましょう。全ての正則行列は基本行列の積で書けるから、我々は$A$が基本行列だと仮定して$\det AB = \det A \det B$を示せば十分です。
+
+まず$A$が「$B$の$i$行目を$c$倍する」基本変形だったとしましょう。このとき
+\[
+B = 
+\begin{pmatrix}
+1 & \\
+& \ddots \\
+& & 1 \\
+& & & c \\
+& & & & 1 \\
+& & & & & \ddots \\
+& & & & & & 1
+\end{pmatrix}
+\]
+なので、$\det B = c$です。一方行列式の多重線型性から、$B$の$i$行目を$\alpha$倍した行列$AB$の行列式は$\det AB = c\det B$を満たしています。これで$\det AB = \det A \det B$が確認できました。
+
+次に$A$が「$2$つの行を入れ替える」基本変形だったとしましょう。このとき$A$は
+\[
+A =
+\begin{pmatrix}
+1 & \\
+& \ddots  &  \\
+& & 1 \\
+& & & 0 & & & & 1 \\
+& & & & 1 &  \\
+& & & & & \ddots &  \\
+& & & & & & 1  \\
+& & & 1 & & & & 0 \\
+& & & & & & & & 1 \\
+& & & & & & & & & \ddots \\
+& & & & & & & & & & 1 
+\end{pmatrix}
+\]
+という格好です。$A$の$2$つの行を入れ替えると単位行列になるので、$\det A = - \det I = -1$と分かります。一方$AB$は、$B$の$2$つの行を入れ替えた行列ですから、やはり$\det AB = - \det B$を満たします。よってここでも$\det AB = \det A \det B$が確かめられました。
+
+最後に「ある行の$c$倍を別の行に足す」という基本変形を考えます。このとき$A$は
+\[
+A =
+\begin{pmatrix}
+1 & \\
+& \ddots \\
+& & 1 &  & c \\
+& & & \ddots &  \\
+& & & & 1 \\
+& & & & & \ddots \\
+& & & & & & 1
+\end{pmatrix}
+\]
+という行列です。$c$と同じ列にある$1$を要に掃き出しをすれば$A$を単位行列に変形できるので、$\det A = \det I = 1$です。また$AB$は$B$のある行に別の行の定数倍を足した行列なので、$\det AB = \det B$です。この場合も確かに$\det AB = \det A \det B$です。
+
+以上、場合分けによっていずれの場合も$\det AB = \det A \det B$が正しいことを示せました。
+
+\paragraph{正則な行列の行列式}
+
+乗法性を使うことで、正則行列の行列式が決して$0$にならないことが示せます。$A$が仮に$n$次の正則行列だったとすると、逆行列$A^{-1}$が存在し、$I = AA^{-1}$を満たします。この両辺で$\det$を取ると、乗法性から$1 = \det I = \det AA^{-1} = \det A \det A^{-1}$となります。もし$\det A$が$0$なら、何をかけても$1$にならないので矛盾が起きます。よって$\det A \neq 0$です。
+
+また、今の計算から$\det A^{-1} = 1 / \det A$という式も得られました。この式もよく使います。
+
+\paragraph{問11の解答} 三角行列なので$\det A = 1$と$\det B = 3$はすぐ求まる。あとは乗法性から$\det AB = \det A \det B = 3$, $\det B^{-1} = 1 / \det B = 1/3$と求まる。 \qed
+
+\paragraph{問12の解答}
+$\det AB = \det A \det B$と$\det A^{-1} = 1 / \det A$より、直ちに$\det AB = \det BA$, $\det (ABA^{-1}B^{-1}) = 1$が従う。\qed
+
+\subsection{余因子行列とCramerの公式}
+
+\paragraph{余因子行列と逆行列}
+
+もう一度余因子展開の公式を眺めてみましょう。$n$次正方行列$A = (a_{ij})_{1 \leq i, j \leq n}$の行列式$\det A$$をi$行目に関して余因子展開すると
+\[
+\det A = \sum_{j = 1}^n a_{ij} \Delta_{ij}
+\]
+となるのでした。この式の右辺をよーく眺めると、行列の積の形をしています:
+\[
+\det A = 
+\begin{pmatrix}
+a_{i1} & a_{i2} & \cdots & a_{in}
+\end{pmatrix}
+\begin{pmatrix}
+\Delta_{i1} \\
+\Delta_{i2} \\
+\vdots \\
+\Delta_{in}
+\end{pmatrix}
+\]
+これは全ての$i$について正しい式です。そこで行列$\adj A$を
+\[
+\adj A := 
+\begin{pmatrix}
+\Delta_{11} & \Delta_{21} & \cdots & \Delta_{n1} \\
+\Delta_{12} & \Delta_{22} & \cdots & \Delta_{n2} \\
+\vdots & \vdots & \ddots & \vdots \\
+\Delta_{1n} & \Delta_{2n} & \cdots & \Delta_{nn}
+\end{pmatrix}
+\]
+で定めると\footnote{添字の番号付けに気を付けてください。$\adj A$は$(i, j)$成分が$\Delta_{ji}$です。}、積$A\adj A$の$i$番目の対角成分は
+\[
+(A \adj A)_{ii} = \sum_{j = 1}^n a_{ij} \Delta_{ij} = \det A
+\]
+となります。そして$i \neq j$のとき、$A \adj A$の$(i, j)$成分は
+\[
+(A \adj A)_{ij} = \sum_{k = 1}^n a_{ik} \Delta_{jk}
+\]
+となります。ここで余因子展開公式を逆向きに使うと、右辺の値は「$A$の$j$行目を$i$行目で置き換えた行列$A'$の行列式」だと分かります。ところが$A'$は$i$行目と$j$行目が一致しているので、$\det A' = 0$です。かくして$A \adj A$の非対角成分は全て$0$だと分かります。
+
+以上より
+\[
+A \adj A = 
+\begin{pmatrix}
+\det A \\
+ & \det A \\
+ & & \ddots \\
+ & & & \det A
+\end{pmatrix}
+= (\det A) I
+\]
+と分かりました。この「$(i, j)$成分に$A$の$(j, i)$余因子$\Delta_{ji}$を置いてできる行列」を$A$の\textbf{余因子行列}といい、$\adj A$で表します\footnote{この名前には注意すべき点があり、東大数理科学研究科にいらっしゃる足助太郎先生のwebサイトに解説が載っています: \url{http://www.ms.u-tokyo.ac.jp/~asuke/linear_algebra/corrections.html} これによれば、$(i, j)$成分に$A$の$(j, i)$余因子$\Delta_{ji}$を置いてできる行列を
+\begin{itemize}
+\item 英語では\uline{adj}ugate matrix
+\item 日本語では余因子行列
+\end{itemize}
+と呼ぶことが多いです。しかし
+\begin{itemize}
+\item 余因子は英語で``cofactor''
+\item 英語では``cofactor matrix''は``adjugate matrix''の転置を表す
+\end{itemize}
+ので、日本語の「余因子行列」は英語の直訳になっていません。ここではよく使われる記号に合わせて$\adj A$を採用しましたが、英語の文献を読むときは気を付けてください。}。既に$A$が正則なことと$\det A \neq 0$が同値なことを示していますから、この式から
+\[
+A \frac{1}{\det A} \adj A = I
+\]
+が分かります。$(1/ \det A) \adj A$は右から$A$にかけると単位行列になります。同様にして$(1 / \det A) \adj A$を左から$A$にかけると、列に関する余因子展開を用いることで、$(\adj A) A = (\det A) I$を示せます。よって$(1 / \det A)\adj A$は左右どちらから$A$にかけても単位行列になるので、$A$の逆行列です。これで$A^{-1}$を具体的に書き下す公式が得られました。
+
+\paragraph{Cramerの公式}
+
+余因子行列を使うと、$A$が正則行列の場合に、連立$1$次方程式$A\bm{x} = \bm{b}$の解を書き下す公式が得られます。この場合$A$の逆行列が存在するので$\bm{x} = A^{-1} \bm{b}$が唯一の解となります。しかも僕たちは$A^{-1}$を求める公式を知っているので、これを代入すれば解の表式が得られるという算段です。
+
+$A^{-1} = (1 / \det A) \adj A$なので、$(\adj A)\bm{b}$を計算しましょう。$\bm{b} = {}^t(b_1, b_2, \ldots, b_n)$とすれば、ベクトル$(\adj A)\bm{b}$の第$j$成分は
+\[
+\bigl((\adj A) \bm{b}\bigr)_j = \sum_{k = 1}^n \Delta_{kj} b_k
+\]
+です。ここで列に関する余因子展開公式を逆に使えば
+\[
+\bigl((\adj A) \bm{b}\bigr)_j = \sum_{k = 1}^n \Delta_{kj} b_k
+= \det 
+\begin{pmatrix}
+a_{11} & \cdots & a_{1, j - 1} & b_1 & a_{1, j + 1} & \cdots & a_{1n} \\
+a_{21} & \cdots & a_{2, j - 1} & b_2 & a_{2, j + 1} & \cdots & a_{2n} \\
+\vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+a_{n1} & \cdots & a_{n, j - 1} & b_n & a_{n, j + 1} & \cdots & a_{nn} \\
+\end{pmatrix}
+\]
+となります。$A$の$j$列目を$\bm{b}$で置き換えて得られる行列を$A'_j$と表すと、この式は$\det A'_j$に他なりません。したがって連立$1$次方程式$A\bm{x} = \bm{b}$の解は
+\[
+\bm{x} = A^{-1} \bm{b} = \frac{1}{\det A} (\adj A) \bm{b} =
+\frac{1}{\det A}
+\begin{pmatrix}
+\det A'_1 \\
+\det A'_2 \\
+\vdots \\
+\det A'_n
+\end{pmatrix}
+\]
+となります。これを\textbf{Cramerの公式}といいます。行列式が$0$でないときは、いつでもこの方法で解を求めることができます\footnote{ただし、Cramerの公式はいつでも使えるものの、計算にはあまり向きません。見ての通り式中に$\det$が$n + 1$個現れるので、愚直に計算すると$n + 1$次の行列式を$n + 1$個計算しなければいけません。普通の人が計算するのは$n = 3$くらいが限界でしょう。行列が特別な形をしている等の事情がない限り、実際の計算に使うのはお勧めしません。}。
+
+\section{行列式の計算例}
+
+めでたく公式を証明し終わったので、色々な計算をしてみましょう。公式の使いどころを感じてください。
+
+\subsection{Vandermonde行列式とSchur多項式}
+
+\paragraph{Vandermonde行列式}
+いきなりですが
+\[
+\det
+\begin{pmatrix}
+1 & x_1 & x_1^2 & \cdots & x_1^{n - 1} \\
+1 & x_2 & x_2^2 & \cdots & x_2^{n - 1} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & x_n & x_n^2 & \cdots & x_n^{n - 1} \\
+\end{pmatrix}
+=
+\prod_{1 \leq i < j \leq n}(x_j - x_i)
+\]
+という公式が知られています。この左辺の行列式を\textbf{Vandermonde行列式}というのでした。前回$n = 3$の場合にVandermonde行列式が差積と一致することを示しましたが、今回は一般の$n$で証明します。
+
+Vandermonde行列式の値を$V(x_1, x_2, \ldots, x_n)$と書くことにします。この行列の$(i, j)$成分は$x_i^{j -1}$なので、
+\[
+V(x_1, x_2, \ldots, x_n) =
+\sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) x_{\sigma(1)}^{0} x_{\sigma(2)}^{1} \cdots x_{\sigma(n)}^{n - 1}
+\]
+です。このことから、$V(x_1, x_2, \ldots, x_n)$は$x_1, x_2, \ldots, x_n$の多項式だと分かります。さらに$\sum$で足される各項は、$\sigma$が何であるかに関わらず、次数は$0 + 1 + \cdots + n - 1 = \frac{n(n - 1)}{2}$です。よって$V(x_1, x_2, \ldots, x_n)$は斉次$\frac{n(n - 1)}{2}$式だと分かりました。
+
+さて行列式には「同じ行があったら値が$0$」という公式がありました。よって$i \neq j$のとき$x_i = x_j$おけば、$V(x_1, x_2, \ldots, x_n) = 0$となります。したがって$i \neq j$となる全ての$(i, j)$の組合せについて、多項式$V(x_1, x_2, \ldots, x_n)$は$x_i - x_j$で割り切れます。このことから結局
+\[
+V(x_1, x_2, \ldots, x_n) = c(x_1, x_2, \ldots, x_n) \prod_{1\leq i < j\leq n} (x_j - x_i)
+\]
+という形に書けると分かります。ここで$V(x_1, x_2, \ldots, x_n)$と$\prod_{1\leq i < j\leq n} (x_j - x_i)$が共に斉次多項式なので、商$c(x_1, x_2, \ldots, x_n)$も斉次多項式だと分かります。そして両辺の次数を比較すると
+\begin{align*}
+\frac{n(n - 1)}{2} = \deg V(x_1, x_2, \ldots, x_n) = \deg c(x_1, x_2, \ldots, x_n) + \deg \prod_{1 \leq i < j \leq n} (x_j - x_i)
+= \deg c(x_1, x_2, \ldots, x_n) + \frac{n(n - 1)}{2}
+\end{align*}
+なので、$\deg c(x_1, x_2, \ldots, x_n) = 0$です。つまり$c$は定数でなければいけないと分かります。
+
+あとは$x_2 x_3^2 \cdots x_n^{n -1}$の係数を比較すれば$c$が求まります。両辺とも$x_2 x_3^2 \cdots x_n^{n - 1}$の係数が$+1$なので、$c = 1$が得られます。これでVandermonde行列式が差積そのものであると示せました。
+
+この議論は実はすごく役立つことが知られています。応用例として、問題を解いてみましょう。
+
+\paragraph{問15 (5), (6) の解答} (5) はVandermonde行列式そのもので$(b - a)(c - a)(c - b)$である。(6) もVandermonde行列式と同様に、行列式の定義を考えれば、$a, b, c$の$4$次斉次多項式になることが分かる。そして$a = b$, $a = c$, $b = c$とおけば値が$0$になるから、$\det$の値は$(b - a)(c - a)(c - b)$で割り切れて
+\[
+\det
+\begin{pmatrix}
+1 & a & a^3 \\
+1 & b & b^3 \\
+1 & c & c^3
+\end{pmatrix}
+= (b - a)(c - a)(c - b)f(a, b, c)
+\]
+と書ける。
+
+この式の両辺で$a$と$b$を入れ替えると、左辺の$\det$は$1$行目と$2$行目が入れ替わるので$-1$倍される。一方$(b - a)(c - a)(c - b)$もまた$-1$倍される。よって$f(a, b, c) = f(b, a, c)$でないといけない。同様に$b$と$c$、$a$と$c$を入れ替えても、$f$の値は変化しない。これより$f$は$a, b, c$の対称多項式だと分かる。$f$の次数は$4 - 3 = 1$だから、$f(a, b, c) = \alpha (a + b + c)$と書ける。
+\[
+\det
+\begin{pmatrix}
+1 & a & a^3 \\
+1 & b & b^3 \\
+1 & c & c^3
+\end{pmatrix}
+= \alpha (b - a)(c - a)(c - b)(a + b + c)
+\]
+残る$\alpha$を決定するには、係数比較をすれば良い。左辺からは$bc^3$という項が出る。右辺から$bc^3$という項が出てくるには、$\alpha = +1$でないといけない。これで答えが求まった。 \qed
+
+\paragraph{問9 (2), (3) と問10 (1) の解答}
+
+Vandermonde行列式を使うと、問9 (2) は$(2 - 1)(3 - 1)(3 - 2) = 2$、問10 (1) は$(2 - 1)(3 - 1)(3 - 2)(4 - 1)(4 - 2)(4 - 3) = 12$と求まる。また問9 (3) は問15 (6) の結果を使えば$(2 - 1)(3 - 1)(3 - 2)(1 + 2 + 3) = 12$と分かる。 \qed
+
+\paragraph{問15 (3), (4) の解答} どちらの行列式も、結果は$a, b, c$の多項式である。そしてどちらの行列式も、$a = b$とおくと$2$行目と$3$行目が一致するので値は$0$になる。したがって$(b - a)$で割り切れる。全く同様にして$(c - a)$と$(c - b)$でも割り切れることが分かるので
+\[
+\det
+\begin{pmatrix}
+1 & b + c & a^2 \\
+1 & c + a & b^2 \\
+1 & a + b & c^2
+\end{pmatrix}
+= \alpha (b - a)(c - a)(c - b), 
+\det
+\begin{pmatrix}
+1 & a + b & ab \\
+1 & b + c & bc \\
+1 & c + a & ca
+\end{pmatrix}
+= \beta (b - a)(c - a)(c - b)
+\]
+と書ける。どちらの行列式も結果は$a, b, c$の$3$次斉次式なので、$\alpha, \beta$はただの数である。あとは行列式を定義通り展開することを考えると、$\sigma = \id$に対応する項が$+a c^2$という項を含むことが分かる。これと係数が合うためには、$\alpha = \beta = -1$でないといけない。すなわち
+\[
+\det
+\begin{pmatrix}
+1 & b + c & a^2 \\
+1 & c + a & b^2 \\
+1 & a + b & c^2
+\end{pmatrix}
+= 
+\det
+\begin{pmatrix}
+1 & a + b & ab \\
+1 & b + c & bc \\
+1 & c + a & ca
+\end{pmatrix}
+= - (b - a)(c - a)(c - b)
+= (a - b)(a - c)(b - c)
+\]
+である。\qed
+
+\paragraph{Schur多項式} Vandermonde行列式をちょっといじって、長さ$n$の自然数の列$\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n)$に対し
+\[
+a_{\alpha}(x_1, x_2, \ldots, x_n) :=
+\det
+\begin{pmatrix}
+x_1^{\alpha_1} & x_1^{\alpha_2} & x_1^{\alpha_3} & \cdots & x_1^{\alpha_n} \\
+x_2^{\alpha_1} & x_2^{\alpha_2} & x_2^{\alpha_3} & \cdots & x_2^{\alpha_n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+x_n^{\alpha_1} & x_n^{\alpha_2} & x_n^{\alpha_3} & \cdots & x_n^{\alpha_n} \\
+\end{pmatrix}
+\]
+という形の行列式を考えてみましょう。$\delta_n := (n - 1, n - 2, \ldots, 1, 0)$とおくと、$\alpha = \delta_n$のときが、さっき計算したVandermonde行列式 (の$\pm1$倍) です。$\alpha_1, \alpha_2, \ldots, \alpha_n$の中に同じ数があると$\det$の値が$0$になってしまうので、$\alpha_i$たちは全て相異なるとしておきます。また列の並び替えをしても、$(-1)$倍が何個かかかるだけなので、最初から$\alpha_1 > \alpha_2 > \cdots > \alpha_n$と仮定してしまいます。
+
+さてVandermonde行列式が差積であることを示すとき、行列式の交代性から「$x_i = x_j$なら$\det$の値が$0$になる」ことを利用しました。いまの場合でも、全く同じことが言えます。$a_{\alpha}(x_1, x_2, \ldots, x_n)$は差積で割り切れ、$a_{\alpha} / a_{\delta_n}$は斉次多項式になるのです。さらに$a_{\alpha}$の中で$x_i$と$x_j$を入れ替えたら、$2$つの行が入れ替わるので符号が$-1$倍されます。よって任意の置換$\sigma \in \mathfrak{S}_n$に対し$\sigma a_{\alpha}(x_1, x_2, \ldots, x_n) = \sgn(\sigma) a_{\alpha}(x_1, x_2, \ldots, x_n)$が成り立ちます。かくして
+\[
+\sigma \biggl(\frac{a_{\alpha}(x_1, x_2, \ldots, x_n)}{a_{\delta_n}(x_1, x_2, \ldots, x_n)}\biggr)
+= \frac{\sigma a_{\alpha}(x_1, x_2, \ldots, x_n)}{\sigma a_{\delta_n}(x_1, x_2, \ldots, x_n)}
+= \frac{\sgn(\sigma) a_{\alpha}(x_1, x_2, \ldots, x_n)}{\sgn(\sigma) a_{\delta_n}(x_1, x_2, \ldots, x_n)}
+= \frac{a_{\alpha}(x_1, x_2, \ldots, x_n)}{a_{\delta_n}(x_1, x_2, \ldots, x_n)}
+\]
+となるので、多項式$a_{\alpha} / a_{\delta_n}$はどんな置換$\sigma \in \mathfrak{S}_n$で$x_1, x_2, \ldots, x_n$を入れ替えても不変、すなわち対称式だとが分かります。こうして僕たちは、対称多項式を系統的に作り出す方法を手に入れました。
+
+ちなみにこの方法で多項式を作る場合、諸々の都合で$\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n)$のことを$(\lambda_1 + n - 1, \lambda_2 + n -2, \ldots, \lambda_n)$と書くことが多いです。最初に$\alpha_n > \alpha_{n - 1} > \cdots > \alpha_1$と仮定したので、$\alpha_k \geq k - 1$が常に成り立ちます。そのため$\lambda_k := \alpha_k - k + 1$とおけば、$\lambda_k \geq 0$となります。そして$\alpha_{k + 1} > \alpha_k$より、$\lambda_{k + 1} \geq \lambda_k$です。こうして自然数の狭義単調減少列$\alpha$と、自然数の広義単調減少列$\lambda$を対応付けることができました。そして$\lambda$に対し
+\[
+s_{\lambda}(x_1, x_2, \ldots, x_n)
+:= \frac{a_{\lambda + \delta_n}(x_1, x_2, \ldots, x_n)}{a_{\delta_n}(x_1, x_2 ,\ldots, x_n)}
+\]
+と書き、これを\textbf{Schur多項式}といいます。Schur多項式は非常に面白い性質や計算公式をたくさん持っており、対称多項式の理論で中心的な役割を果たしています。今でもSchur多項式から派生した様々な多項式や函数が、研究対象となっています。興味がある人は
+\begin{itemize}
+\item 岡田聡一『古典群の表現論と組合せ論 (下)』(培風館)
+\item I. G. Macdonald, ``Symmetric functions and Hall polynomials, 2nd ed.,'' Oxford University Press
+\end{itemize}
+などを読んでみてください。
+
+\subsection{複素数の行列による実現}
+問13, 14はそのまま定義通り計算すればできる問題です。が、普通に計算してみた人は「どうも複素数と似てるっぽい」ことに気づいたのではないでしょうか？それは正しいです。
+
+$2$次正方行列$J$を
+\[
+J:=
+\begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}
+\]
+とおきます。このとき$J^2 = -I$が成り立つので、
+\begin{itemize}
+\item $(aI + bJ) + (cI + dJ) = (a + c)I + (b + d)J$
+\item $(aI + bJ)(cI + dJ) = (ac -bd) I + (ad + bd)J$
+\end{itemize}
+という式が従います。これは\textbf{複素数の計算公式と全く同じ}です。すなわち$aI + bJ \leftrightarrow a + bi$という対応によって、集合
+\[
+\Biggl\{
+\begin{pmatrix}
+x & -y \\
+y & x
+\end{pmatrix}
+\mid x, y \in \mathbb{R}
+\Biggr\}
+\]
+と複素数全体の集合$\mathbb{C}$とが$1:1$に対応し、しかもこの対応の下では足し算・掛け算という演算までもがぴったり対応づくのです。また、行列式を計算すると$\det (aI + bJ) = a^2 + b^2$と分かります。これは複素数の側で見れば、絶対値の$2$乗$|a + bi|^2$ですね。この対応さえ見破ってしまえば、計算はサクサク進むはずです。
+
+ちなみに、行列の側で出てくる成分は実数だけです。ですから今の対応は、\textbf{行列を使って複素数を構成する方法}を与えることにもなっています。
+
+\paragraph{問14} 直接計算すれば$\det XY = (ac - bd)^2 + (ad + bc)^2$と$\det X \det Y = (a^2 + b^2)(c^2 + d^2)$が求まる。展開すれば、これらが等しいことが分かる。 \qed
+
+\paragraph{問13} (1) は問14で得られる$(ac - bd)^2 + (ad + bd)^2 = (a^2 + b^2)(c^2 + d^2)$という式に$c = a$, $b = d$を代入すれば得られる。(2) も手間がかかるが
+\[
+A^3 = (x^3 -3xy^2)^2 I + (3x^2 y - y^3)J
+\]
+を頑張って計算した上で、$\det A^3 = (\det A)^3$の式に代入すればよい。 \qed
+
+\subsection{計算問題の解答}
+
+残った計算問題の答えを、まとめて書いておきます。今回問題となったほとんどの行列式は、工夫をすると簡単に計算できるので、どう公式を使ったのかも合わせて記します。参考にしてください。また、ここに書いてあるものが唯一の答えではないので、もっと手際のよい計算方法があるかもしれません。みなさん各自で考えてみてください。
+
+\paragraph{問2の解答} (1) $2$行目を$3$行目から引き、その後$1$行目を$2$行目から引いて、交代性を使う。
+\[
+\det
+\begin{pmatrix}
+7 & 8 & 9 \\
+8 & 9 & 10 \\
+9 & 10 & 11 
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+7 & 8 & 9 \\
+8 & 9 & 10 \\
+1 & 1 & 1 
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+7 & 8 & 9 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}
+= 0
+\]
+(2) $2$行目と$3$行目を$1$行目に足すと、多重線型性で$a + b + c$がくくり出せる。
+\[
+\det
+\begin{pmatrix}
+a & c & b \\
+b & a & c \\
+c & b & a
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+a + b + c & a + b + c & a + b + c \\
+b & a & c \\
+c & b & b 
+\end{pmatrix}
+= (a + b + c) \det
+\begin{pmatrix}
+1 & 1 & 1 \\
+b & a & c \\
+c & b & a
+\end{pmatrix}
+\]
+さらに$(1, 1)$成分を要に$1$行目を掃き出すと
+\begin{align*}
+\det
+\begin{pmatrix}
+a & c & b \\
+b & a & c \\
+c & b & a
+\end{pmatrix}
+&= 
+(a + b + c) \det
+\begin{pmatrix}
+1 & 1 & 1 \\
+b & a & c \\
+c & b & a
+\end{pmatrix}
+=
+(a + b + c) \det
+\begin{pmatrix}
+1 & 0 & 0 \\
+b & a - b & c - b \\
+c & b - c & a - c
+\end{pmatrix} \\
+&= (a + b + c)(a^2 + b^2 + c^2 - ab - bc - ca)
+\end{align*}
+となる。 \qed
+
+\paragraph{問4の解答} いずれも左上の$1\times 1$ブロックと右下の$2 \times 2$ブロックに分けて計算すればすぐ解ける。答えは (1) 18 (2) 82 (3) 8 となる。 \qed
+
+\paragraph{問6の解答}　(2) 0 と (3) $\cos^2 \theta$ はそのまま計算すれば良い。(4) は$1$行目で余因子展開すれば$112$と求まる。(1) と (5) は掃き出しを使えば
+\[
+\det \begin{pmatrix}
+98 & 99 \\
+99 & 100
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+98 & 99 \\
+1 & 1
+\end{pmatrix}
+= -1, 
+\det \begin{pmatrix}
+2 & 1 & 1 \\
+1 & 2 & 1 \\
+1 & 1 & 1
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 1 & 1
+\end{pmatrix}
+= 1
+\]
+と求まる。(6) は、まず多重線型性で$2, 3$列目の$r$と$3$列目の$\sin\theta$をくくりだすとよい。
+\begin{align*}
+\det \begin{pmatrix}
+\sin\theta \cos\varphi & r \cos\theta \cos\varphi & -r\sin\theta\sin\varphi \\
+\sin\theta \sin\varphi & r \cos\theta \sin\varphi & r\sin\theta\cos\varphi \\
+\cos\theta & -r\sin\theta & 0
+\end{pmatrix}
+= r^2 \sin\theta
+\det \begin{pmatrix}
+\sin\theta \cos\varphi & \cos\theta \cos\varphi & -\sin\varphi \\
+\sin\theta \sin\varphi & \cos\theta \sin\varphi & \cos\varphi \\
+\cos\theta & -\sin\theta & 0
+\end{pmatrix}
+\end{align*}
+これを$3$列目について余因子展開すると
+\begin{align*}
+&=
+r^2 \sin\theta \biggl\{
+(-\sin\varphi) \det
+\begin{pmatrix}
+\sin\theta \sin\varphi & \cos\theta \sin\varphi\\
+\cos\theta & -\sin\theta
+\end{pmatrix}
+- \cos \varphi \det
+\begin{pmatrix}
+\sin\theta \cos\varphi & \cos\theta \cos\varphi \\
+\cos\theta & -\sin\theta
+\end{pmatrix}
+\biggr\} \\
+&= r^2\sin\theta (\sin^2 \varphi + \cos^2 \varphi)
+= r^2\sin\theta
+\end{align*}
+となる。 \qed
+
+\paragraph{極座標変換のJacobi行列式}
+
+この問6 (6) に出てきた行列は、いかにも意味ありげな行列です。実際この行列は、$3$次元の極座標
+\begin{align*}
+\begin{cases}
+x = r \sin\theta \cos\varphi \\
+y = r \sin\theta \sin\varphi \\
+z = r \cos\theta
+\end{cases}
+\end{align*}
+の\textbf{Jacobi行列}という名前がついており、空間内での$3$重積分を極座標に変数変換して解く時に使います。今は名前だけ知っておいてください。
+
+\paragraph{問9} (5) の答えは$360$。先に掃き出しても何も考えずに余因子展開しても、手間は大差ないかもしれない。(2), (3)はVandermonde行列式の応用で片付ける。それ以外の計算は次の通り。
+
+\noindent (1) $(1, 1)$成分を要にして$1$列目を掃き出す。
+\begin{align*}
+\det \begin{pmatrix}
+1 & 2 & 3 \\
+1 & 1 & 1 \\
+3 & 2 & 1
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+1 & 2 & 3 \\
+0 & -1 & -2 \\
+0 & -4 & -8
+\end{pmatrix}
+= 0
+\end{align*}
+
+\noindent (4) $1$行目を$3$行目から引いてから、$3$行目に関する余因子展開を使う。
+\[
+\det \begin{pmatrix}
+-1 & 3 & -7 \\
+3 & -6 & 6 \\
+-1 & 3 & -5
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+-1 & 3 & -7 \\
+3 & -6 & 6 \\
+0 & 0 & 2
+\end{pmatrix}
+= (-1)^{3 + 3}\, 2
+\det \begin{pmatrix}
+-1 & 3 \\
+3 & -6
+\end{pmatrix}
+= -6
+\]
+\qed
+
+\paragraph{問10の解答}
+
+(2) $1$列目を$2$列目から、$3$列目を$4$列目から引き、交代性を使う。
+\[
+\det
+\begin{pmatrix}
+1 & 2 & 3 & 4 \\
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12 \\
+13 & 14 & 15 & 16
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+1 & 1 & 3 & 1 \\
+5 & 1 & 7 & 1 \\
+9 & 1 & 11 & 1 \\
+13 & 1 & 15 & 1
+\end{pmatrix}
+=0
+\]
+
+\noindent (3) $2, 3, 4$行目から$1$行目を引き、$4$列目に関する余因子展開を使う。
+\[
+\det
+\begin{pmatrix}
+1 & 2 & 3 & 4 \\
+2 & 2 & 3 & 4 \\
+3 & 3 & 3 & 4 \\
+4 & 4 & 3 & 4
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+1 & 2 & 3 & 4 \\
+1 & 0 & 0 & 0 \\
+2 & 1 & 0 & 0 \\
+3 & 2 & 1 & 0
+\end{pmatrix}
+= (-1)^{4 + 1} 4
+\det
+\begin{pmatrix}
+1 & 0 & 0\\
+2 & 1 & 0\\
+3 & 2 & 1
+\end{pmatrix}
+= -4
+\]
+
+\noindent (4) $(1, 1)$成分を要に$1$列目を掃き出す。
+\[
+\det
+\begin{pmatrix}
+1 & 1 & 1 & 1 \\
+1 & 2 & 2 & 2 \\
+1 & 2 & 3 & 3 \\
+1 & 2 & 3 & 4
+\end{pmatrix}
+= \det
+\begin{pmatrix}
+1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 1 \\
+0 & 1 & 2 & 2 \\
+0 & 1 & 2 & 3
+\end{pmatrix}
+= 
+\det
+\begin{pmatrix}
+1 & 1 & 1 \\
+1 & 2 & 2 \\
+1 & 2 & 3
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+1 & 1 & 1 \\
+0 & 1 & 1 \\
+0 & 1 & 2
+\end{pmatrix}
+= 1
+\]
+
+\noindent (5) $1$行目と$4$行目、$2$行目と$3$行目を入れ替えれば$1$と分かる。
+
+\noindent (6) このまま余因子展開するのはしんどいので、$(2, 2)$成分の$1$を要にして$2$行目を掃き出してみる。その後、多重線型性で$3$列目から$3$を、$3$行目から$12$をくくりだすと
+\begin{align*}
+&\det
+\begin{pmatrix}
+6 & 12 & 7 & 9 \\
+15 & 1 & 14 & 4 \\
+10 & 8 & 11 & 5 \\
+3 & 13 & 2 & 16
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+-174 & 12 & -161 & -39 \\
+0 & 1 & 0 & 0 \\
+-110 & 8 & -101 & -27 \\
+-192 & 13 & -180 & -36
+\end{pmatrix}
+= (-1)^{2 + 2}
+\det
+\begin{pmatrix}
+-174 & -161 & -39 \\
+-110 & -101 & -27 \\
+-192 & -180 & -36
+\end{pmatrix} \\
+&= - \det
+\begin{pmatrix}
+174 & 161 & 39 \\
+110 & 101 & 27 \\
+192 & 180 & 36
+\end{pmatrix}
+= -3 \times 12
+\det
+\begin{pmatrix}
+174 & 161 & 13 \\
+110 & 101 & 9 \\
+16 & 15 & 1
+\end{pmatrix}
+\end{align*}
+となる。ここまで来れば$1$列目と$2$列目の差がぴったり$3$列目と一致することが見える。$1$列目から$2$列目を引いて
+\[
+\det
+\begin{pmatrix}
+174 & 161 & 13 \\
+110 & 101 & 9 \\
+16 & 15 & 1
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+13 & 161 & 13 \\
+9 & 101 & 9 \\
+1 & 15 & 1
+\end{pmatrix}
+=0
+\]
+を得る。\qed
+
+\paragraph{問15の解答} (3) から (6) は全てVandermonde行列式と類似の議論で片付く。
+
+\noindent (1) 掃き出しと多重線型性を使う。
+\begin{align*}
+\det
+\begin{pmatrix}
+1 & 1 & 1 \\
+1 & a & a \\
+1 & a & b
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+1 & 1 & 1 \\
+0 & a - 1 & a - 1 \\
+0 & a - 1 & b - 1
+\end{pmatrix}
+=
+(a - 1) \det
+\begin{pmatrix}
+1 & 1 \\
+a - 1 & b - 1
+\end{pmatrix}
+=
+(a - 1)(b - a)
+\end{align*}
+\noindent (2) 掃き出すと三角行列の行列式に帰着される。
+\[
+\det
+\begin{pmatrix}
+a & b & c \\
+-a & 1 & c \\
+-a & -b & 1
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+a & b & c \\
+0 & 1 + b & 2c \\
+0 & 0 & 1 + c
+\end{pmatrix}
+= a(1 + b)(1 + c)
+\]
+\qed
+
 

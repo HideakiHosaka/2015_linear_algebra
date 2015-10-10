@@ -61,6 +61,8 @@
 \DeclareMathOperator\sgn{sgn}			% 置換の符号
 \DeclareMathOperator\adj{adj}			% adjugate 行列
 \DeclareMathOperator\inv{inv}			% 置換の転倒数
+\DeclareMathOperator\Aut{Aut}			% 自己同型
+\DeclareMathOperator\vol{vol}			% 体積
 
 \begin{document}
 
@@ -103,11 +105,12 @@
 \part{線形代数学\CID{7556}}\label{part3}		% \CID{7556} は丸囲みの②
 
 \renewcommand{\thepart}{\arabic{part}}			% \nameref で必要なので \thepart を元に戻す
-\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
+%\setcounter{chapter}{0}						% TODO: 後で chapter カウンタを part カウンタに従属させる
 
 \include{20150916}
 \include{20150923}
 \include{20150930}
+%\include{20151007}
 
 % \include{suppl}								% おまけ: 必要になったとき呼び出す
 

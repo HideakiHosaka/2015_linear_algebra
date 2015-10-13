@@ -1,7 +1,7 @@
 \chapter{行列式の余因子展開}
 \lectureinfo{2015年9月30日 1限}
 
-今回のお題は余因子です。もう主要な命題の証明は大体済んでしまったので、計算方法やを確認しましょう。また行列式の重要な応用例として、$3$次元空間$\mathbb{R}^3$におけるベクトルの外積を説明します。
+今回のお題は余因子です。もう主要な命題の証明は大体済んでしまったので計算方法を軽く確認してから、その後行列式の重要な応用例として、$3$次元空間$\mathbb{R}^3$におけるベクトルの外積を説明します。また、おまけに期末試験の解説を載せました。
 
 \section{余因子と余因子展開}
 
@@ -41,7 +41,7 @@ g & h & i
 \right)
 \]
 は別のものです。何故かこれらを混同している人がいましたが、区別してください。
-\item 余因子行列の$(i, j)$成分は$\Delta_{j, i}$です。$(i, j)$成分に$(j, i)$余因子が来るので、間違えないでください。
+\item 余因子行列の$(i, j)$成分は$\Delta_{ji}$です。$(i, j)$成分に\uline{$(j, i)$余因子}が来るので、間違えないでください。
 \item 逆行列の計算を間違える人がそこそこいました。\textbf{逆行列の計算が正しいかどうかは検算できる}ので、検算を怠らないでください。
 \end{itemize}
 
@@ -176,7 +176,7 @@ d & -b \\
 \[
 \begin{pmatrix}
 1 & -1 & 0 \\
-0 & 1 & 1 \\
+0 & 1 & -1 \\
 0 & 0 & 1
 \end{pmatrix}, \quad
 \begin{pmatrix}
@@ -187,8 +187,8 @@ d & -b \\
 \frac{1}{abc}
 \begin{pmatrix}
 bc & c & 1 \\
-0 & b & -1 \\
-0 & 0 & c
+0 & ac & a \\
+0 & 0 & ab
 \end{pmatrix}
 \]
 \qed
@@ -197,7 +197,7 @@ bc & c & 1 \\
 
 Cramerの公式は、連立$1$次方程式$A \bm{x} = \bm{b}$の係数行列が正則行列であるときに、その唯一の解を書き下す公式です。$A$の$j$列目を$\bm{b}$で置き換えた行列を$A_j$と書くと、
 \[
-\bm{x} = A^{-1} \bm{b} = \frac{1}{\det A} {}^t
+\bm{x} = A^{-1} \bm{b} = \frac{1}{\det A} {}^t\!
 \begin{pmatrix}
 \det A_1 & \det A_2 & \cdots & \det A_n
 \end{pmatrix}
@@ -288,15 +288,15 @@ y = \frac{1}{-19999} \det
 (3) $(x, y, z) = (3, 2, 1)$ 
 (4) $(x, y, z) = (14/3, -13/3, 29/3)$ \qed
 
-\section{行列式の応用}
+\section{行列式の幾何学的応用}
+
+これまで行列式の色々な公式を示しはしたものの、行列式が持つ図形的な意味は述べていませんでした。そこで今回、行列式が「体積」という図形的意味を持つことを調べてみたいと思います。これによって、$3$次元空間$\mathbb{R}^3$におけるベクトルの外積の意味も、的確に捉えられるようになります。
 
 \subsection{行列式の特徴づけ}
 
-前回、行列式の重要な性質は「交代性と多重線型性である」と述べました。なぜこれらが重要なのかというと、「交代性と多重線型性を共に満たす写像は、$\det$の定数倍しかない」ことが証明できるからです。
+前回、行列式の重要な性質は「交代性と多重線型性である」と述べました。なぜこれらが重要なのかというと、\textbf{交代性と多重線型性を共に満たす写像は、$\det$の定数倍しかない}ことが証明できるからです。
 
-% Weierstrass--Kronecker
-
-$F\colon \mathbb{R}^n \times \mathbb{R}^n \times \cdots \mathbb{R}^n \rightarrow \mathbb{R}$が、交代性と多重線型性を満たすとしましょう。このとき多重線型性から
+$n$本の$n$次元ベクトルに数を対応させる写像$F\colon \mathbb{R}^n \times \mathbb{R}^n \times \cdots \mathbb{R}^n \rightarrow \mathbb{R}$が交代性と多重線型性を満たすとしましょう。このとき多重線型性から
 \begin{align*}
 F(\bm{a}_1, \bm{a}_2, \bm{a}_3 \ldots, \bm{a}_n)
 &= F\Biggl( \sum_{i_1 = 1}^n a_{i_1 1}\bm{e}_{i_1} , \sum_{i_2 = 1}^n a_{i_2 2}\bm{e}_{i_2}, \sum_{i_3 = 1}^n a_{i_3 3}\bm{e}_{i_3}, \ldots, \sum_{i_n = 1}^n a_{i_n n}\bm{e}_{i_n}\Biggr) \\
@@ -314,7 +314,7 @@ F(\bm{a}_1, \bm{a}_2, \bm{a}_3, \ldots, \bm{a}_n) = \sum_{\substack{1 \leq i_1, 
 \[
 F(\bm{a}_1, \bm{a}_2, \bm{a}_3 \ldots, \bm{a}_n) = \sum_{\sigma \in \mathfrak{S}_n} a_{\sigma(1) 1} \cdots a_{\sigma(n) n} F(\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)})
 \]
-と書き直せます。この$\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}$は$\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n$を並び替えたものです。そこで$\sigma$を互換の積で$\sigma = (p_1 \ q_1)(p_2 \ q_2) \cdots (p_l \ q_l)$と書いておけば、$\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n$という列の$p_1$番目と$q_1$番目、$p_2$番目と$q_2$番目、$\ldots$を順番に並び替えれば$\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}$になります。したがって
+と書き直せます。この$\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}$は$\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n$を並び替えたものです。そこで$\sigma$を互換の積で$\sigma = (p_1 \ q_1)(p_2 \ q_2) \cdots (p_l \ q_l)$と書いておけば、$\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n$という列の$p_1$番目と$q_1$番目、$p_2$番目と$q_2$番目、$\ldots$を順番に並び替えれば$\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}$になります。したがって$F$の交代性から
 \[
 F(\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}) = \sgn(\sigma) F(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n)
 \]
@@ -322,7 +322,7 @@ F(\bm{e}_{\sigma(1)}, \bm{e}_{\sigma(n)}, \cdots, \bm{e}_{\sigma(n)}) = \sgn(\si
 \[
 F(\bm{a}_1, \bm{a}_2, \bm{a}_3 \ldots, \bm{a}_n) = \sum_{\sigma \in \mathfrak{S}_n} a_{\sigma(1) 1} \cdots a_{\sigma(n) n} \sgn(\sigma) F(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n) = (\det A) F(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n)
 \]
-を得ます。確かに交代性と多重線型性がある写像は、$\det$の定数倍しかありません。
+を得ます。確かに交代性と多重線型性がある写像は、$\det$の定数倍です。そしてその比例定数は$(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n)$における写像の値と一致します。
 
 \paragraph{$\det$の乗法性の別証明} これを使うと、実は$\det$の乗法性が簡単に示します。$A\in \Mat_n(\mathbb{R})$を$n$次正方行列とします。このとき列ベクトルの並びで表された$n$次正方行列$B = (\bm{b}_1 \ \bm{b}_2 \ \cdots \ \bm{b}_n)$に対し
 \[
@@ -332,7 +332,7 @@ F(B) = F(\bm{b}_1, \bm{b}_2, \ldots, \bm{b}_n) :=
 \]
 という写像を考えてみます。行列の積が線型なことと$\det$の多重線型性を合わせると、$F$が多重線型性を持つと分かります。また$\bm{b}_i$と$\bm{b}_j$を入れ替えると$\det$の中で$A\bm{b}_i$と$A\bm{b}_j$が入れ替わるので、$F$は交代性も持ちます。故に$F(B) = (\det B) F(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n)$と分かります。そして$F(\bm{e}_1, \bm{e}_2, \ldots, \bm{e}_n) = \det A$なので、$\det AB = \det A \det B$が言えました。
 
-\subsection{行列式と体積}
+\subsection{行列式と面積・体積の関係}
 
 前々回、$2$次の正方行列について\textbf{行列式の値は$2$本の列ベクトルが張る平行四辺形の符号付き面積と等しい}ことを示しました。同じことが$3$次元の場合にも成り立つことを調べましょう。
 
@@ -359,7 +359,7 @@ F(B) = F(\bm{b}_1, \bm{b}_2, \ldots, \bm{b}_n) :=
 \end{picture}
 \end{figure}
 
-絵で見れば、両方の面積が同じことは明らかですよね。平行四辺形の$1$つの辺を固定して、高さが変形しないように変形しているわけですから。$\alpha$が入った$\det(\bm{u} \ \bm{v} + \alpha \bm{u})$式でも状況は同じです。$\alpha$の値によって平行四辺形がどれだけひしゃげるかが変わるものの、底辺と高さが変わらないようことに変わりはありません。
+絵で見れば、両方の面積が同じことは明らかですよね。平行四辺形の$1$つの辺を固定して、高さが変形しないように変形しているわけですから。$\alpha$が入った$\det(\bm{u} \ \bm{v} + \alpha \bm{u})$という式でも状況は同じです。$\alpha$の値によって平行四辺形がどれだけひしゃげるかが変わるものの、底辺と高さが変わらないようことに変わりはありません。
 
 \paragraph{交代性・多重線型性の面積的意味}
 
@@ -414,6 +414,8 @@ F(B) = F(\bm{b}_1, \bm{b}_2, \ldots, \bm{b}_n) :=
 \put(-189, 78){$l_2$}
 \put(-189, 31){$l_1$}
 \put(-173,35){$\bm{e}$}
+\put(-105, 29){$S_1$}
+\put(-110, 81){$S_2$}
 \end{picture}
 \hfil
 \includegraphics[width = 6truecm, trim = 0 60 0 70, clip]{20150930-fig5.pdf}
@@ -427,6 +429,7 @@ F(B) = F(\bm{b}_1, \bm{b}_2, \ldots, \bm{b}_n) :=
 \put(-187, 74.7){\vector(0, -1){12}}
 \put(-187, 31.8){\vector(0, 1){12}}
 \put(-200, 50){$l_1 - l_2$}
+\put(-95, 51){$S$}
 \end{picture}
 \end{figure}
 
@@ -452,9 +455,9 @@ F(B) = F(\bm{b}_1, \bm{b}_2, \ldots, \bm{b}_n) :=
 \end{picture}
 \end{figure}
 
-この体積は、作り方から交代性を満たします。右手系をなすベクトルのうち$2$本を入れ替えると、左手系になり、またその逆も成り立つからです。また、$\vol(\bm{u}, \bm{v}, \bm{w})$は$\bm{u}$について線型です。実際$\bm{v}, \bm{w}$の両方に垂直な単位ベクトル$\bm{e}$を取り、$\bm{v}$, $\bm{w}$の張る平行四辺形の面積を$A$とすれば、$\vol(\bm{u}, \bm{v}, \bm{w}) = (\bm{u} \cdot \bm{e}) A$です。この式は$\bm{u}$について線型です。そして交代性から$\vol(\bm{u}, \bm{v}, \bm{w}) = - \vol(\bm{v}, \bm{u}, \bm{w}) = -\vol(\bm{w}, \bm{v}, \bm{u})$だから、$\bm{v}$や$\bm{w}$に対する線型性も従います。
+この$\vol$は、作り方から交代性を満たします。右手系をなすベクトルのうち$2$本を入れ替えると左手系になり、またその逆も成り立つからです。また、$\vol(\bm{u}, \bm{v}, \bm{w})$は$\bm{u}$について線型です。実際$\bm{v}, \bm{w}$の両方に垂直な単位ベクトル$\bm{e}$を取り、$\bm{v}$, $\bm{w}$の張る平行四辺形の面積を$A$とすれば、$\vol(\bm{u}, \bm{v}, \bm{w}) = (\bm{u} \cdot \bm{e}) A$です。この式は$\bm{u}$について線型です。そして交代性から$\vol(\bm{u}, \bm{v}, \bm{w}) = - \vol(\bm{v}, \bm{u}, \bm{w}) = -\vol(\bm{w}, \bm{v}, \bm{u})$だから、$\bm{v}$や$\bm{w}$に対する線型性も従います。
 
-これで$\vol(\bm{u}, \bm{v}, \bm{w})$が交代性と多重線型性の両方を満たすことが言えました。このような性質を持つ函数は$\vol(\bm{u}, \bm{v}, \bm{w}) = \det(\bm{u}\ \bm{v}\ \bm{w}) \vol(\bm{e}_1, \bm{e}_2, \bm{e}_3)$と書けるのでした。そして$\bm{e}_1, \bm{e}_2, \bm{e}_3$の張る平行$6$面体の体積は$1$ですから、$\vol(\bm{u}, \bm{v}, \bm{w}) = \det(\bm{u}\ \bm{v}\ \bm{w})$です。より一般に、$n$次元であっても$\vol = \det$という式が正しいことを示せます。\textbf{体積は交代性と多重線型性を満たすべき}という考察だけから、$\vol = \det$が導かれるのです。
+これで$\vol(\bm{u}, \bm{v}, \bm{w})$が交代性と多重線型性の両方を満たすことが言えました。さっき見た通り、交代多重線型性を持つ函数は$\vol(\bm{u}, \bm{v}, \bm{w}) = \det(\bm{u}\ \bm{v}\ \bm{w}) \vol(\bm{e}_1, \bm{e}_2, \bm{e}_3)$と書けます。そして$\bm{e}_1, \bm{e}_2, \bm{e}_3$の張る平行$6$面体 ($1$辺の長さ$1$の立方体) の体積は$1$ですから、$\vol(\bm{u}, \bm{v}, \bm{w}) = \det(\bm{u}\ \bm{v}\ \bm{w})$です。より一般に、$n$次元であっても$\vol = \det$という式が正しいことを示せます。\textbf{体積は交代性と多重線型性を満たすべき}という考察だけから、$\vol = \det$が導かれるのです。
 
 \subsection{$3$次元ベクトルの外積}
 
@@ -527,24 +530,27 @@ a_2 & b_2 \\
 \end{pmatrix}
 \biggr)
 \]
-と定めると、$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$が成り立ちます\footnote{$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$という式は、よく\textbf{スカラー三重積の公式}と呼ばれます。たとえば電磁気学やベクトル解析の授業などでは、必ず登場すると思います。外積を成分で定義すると$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$が証明できるので「公式」という名前がついています。}。このベクトル$\bm{a} \times \bm{b}$のことを、$\bm{a}$と$\bm{b}$の\textbf{外積}といいます。行列式の交代性を使うと$\det(\bm{a} \ \bm{b} \ \bm{c}) = - \det(\bm{b} \ \bm{a} \ \bm{c})$となるので、$\bm{a} \times \bm{b} = - \bm{b} \times \bm{a}$が分かります。外積は順番をひっくり返せないので、注意してください。
+と定めると、$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$が成り立ちます\footnote{$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$という式は、よく\textbf{スカラー三重積の公式}と呼ばれます。たとえば電磁気学やベクトル解析の授業などでは、必ず登場すると思います。外積を成分で定義すると$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$が証明できるので「公式」という名前がついています。}。このベクトル$\bm{a} \times \bm{b}$のことを、$\bm{a}$と$\bm{b}$の\textbf{外積}といいます。行列式の交代性を使うと$\det(\bm{a} \ \bm{b} \ \bm{c}) = - \det(\bm{b} \ \bm{a} \ \bm{c})$となるので、$\bm{a} \times \bm{b} = - \bm{b} \times \bm{a}$が分かります。\textbf{外積は順番をひっくり返せない}ので、注意してください。
 
 \paragraph{外積の特徴づけ}
 
 $\mathbb{R}^3$のベクトルは向きと大きさで決定されます。そこで外積の向きと大きさを調べてみましょう。
 
-過去に「$\bm{a}$と$\bm{b}$の両方に垂直なベクトル」を作る方法として一度$\bm{a} \times \bm{b}$を紹介したことがありますが、むしろ外積の定義で本質的なのはスカラー三重積の公式$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$です。行列式の交代性を使うと、$\bm{c} = \bm{a}$, $\bm{c} = \bm{b}$とおいたとき、ただちに
+過去に一度「$\bm{a}$と$\bm{b}$の両方に垂直なベクトル」を作る方法として$\bm{a} \times \bm{b}$を紹介したことがありますが、むしろ外積の定義で本質的なのはスカラー三重積の公式$(\bm{a} \times \bm{b}) \cdot \bm{c} = \det(\bm{a} \ \bm{b} \ \bm{c})$です。行列式の交代性を使うと、$\bm{c} = \bm{a}$, $\bm{c} = \bm{b}$とおいたとき、ただちに
 \[
 (\bm{a} \times \bm{b}) \cdot \bm{a} = \det(\bm{a} \ \bm{b} \ \bm{a}) = 0, 
 (\bm{a} \times \bm{b}) \cdot \bm{b} = \det(\bm{a} \ \bm{b} \ \bm{b}) = 0
 \]
 が分かります。これが$\bm{a} \times \bm{b}$の計算で、$\bm{a}$と$\bm{b}$の両方と垂直なベクトルを作れる理由です。
 
-次に大きさ$|\bm{a} \times \bm{b}|$を考えてみます。$\bm{a}$と$\bm{b}$が平行なら$\bm{a} \times \bm{b} = \bm{0}$なので、そうではないと仮定します。$\bm{a}, \bm{b}, \bm{c}$が$1$次独立になるような$\bm{c} \in \mathbb{R}^3$を取ります。$|\det(\bm{a} \ \bm{b} \ \bm{c})| = |(\bm{a} \times \bm{b}) \cdot \bm{c}|$は$\bm{a}, \bm{b}, \bm{c}$の張る平行$6$面体の体積でした。かたや$\bm{a}, \bm{b}$の張る面の面積を$S$、その面の法線方向と$\bm{c}$のなす角を$[0, \pi/2]$の範囲で測ったものを$\varphi$とすると、平行$6$面体の体積は$S |\bm{c} \cdot \bm{e}| = S|\bm{c}| \cos\varphi$とも表せます。これより
+次に大きさ$|\bm{a} \times \bm{b}|$を考えてみます。$\bm{a}$と$\bm{b}$が平行なら$\bm{a} \times \bm{b} = \bm{0}$なので、そうではないと仮定します。$\bm{a}, \bm{b}, \bm{c}$が$1$次独立になるような$\bm{c} \in \mathbb{R}^3$を取ります。このとき$|\bm{c}| \neq 0$で、$|\det(\bm{a} \ \bm{b} \ \bm{c})| = |(\bm{a} \times \bm{b}) \cdot \bm{c}|$は$\bm{a}, \bm{b}, \bm{c}$の張る平行$6$面体の体積でした。かたや$\bm{a}, \bm{b}$の張る面を$S$、その面の法線方向と$\bm{c}$のなす角を$[0, \pi/2)$の範囲で測ったものを$\varphi$とすると、$S$から測った平行$6$面体の高さは$|\bm{c}|\cos\varphi$です。$\bm{c}$の取り方から$\cos \varphi \neq 0$にもなります。よって
 \[
-S|\bm{c}| \cos\varphi = |\bm{a} \times \bm{b} \cdot \bm{c}| = |\bm{a} \times \bm{b}| |\bm{c}| \cos \varphi
+|\bm{a} \times \bm{b}|
+= \frac{|(\bm{a} \times \bm{b}) \cdot \bm{c}|}{|\bm{c}| \cos\varphi}
+= \frac{|\det(\bm{a} \ \bm{b} \ \bm{c})|}{|\bm{c}| \cos\varphi}
+= \frac{|\vol(\bm{a} \ \bm{b} \ \bm{c})|}{|\bm{c}| \cos\varphi}
 \]
-です。そして$\bm{c}$は$\bm{e}$と垂直にならないよう取っておいたので、$\cos \varphi \neq 0$です。$|\bm{c}| \neq 0$と合わせることで$|\bm{a} \times \bm{b}| = S$が従います。つまり外積は、$\bm{a}, \bm{b}$が張る平行四辺形の面積に一致します。$\bm{a}$と$\bm{b}$のなす角を$\theta$とすれば、$|\bm{a} \times \bm{b}| = |\bm{a}||\bm{b}|\sin\theta$です\footnote{$\bm{a} \cdot \bm{b} = |a||b|\cos\theta$と$\sin \theta = \sqrt{1 - \cos^2\theta}$を使ってゴリゴリ計算しても$|\bm{a} \times \bm{b}|$は求まります。ですが「体積は行列式である」という事実とスカラー三重積の公式を組み合わせれば、大した計算をせずとも綺麗に答えが求まるので、こちらの方法で説明してみました。}。
+が従います。これは体積を高さで割ったものなので、外積の大きさは$\bm{a}, \bm{b}$が張る平行四辺形の面積に一致します。$\bm{a}$と$\bm{b}$のなす角を$\theta$とすれば、$|\bm{a} \times \bm{b}| = |\bm{a}||\bm{b}|\sin\theta$です\footnote{$\bm{a} \cdot \bm{b} = |a||b|\cos\theta$と$\sin \theta = \sqrt{1 - \cos^2\theta}$を使ってゴリゴリ計算しても$|\bm{a} \times \bm{b}|$は求まります。ですが「体積は行列式である」という事実とスカラー三重積の公式を組み合わせれば、大した計算をせずとも綺麗に答えが求まるので、こちらの方法で説明してみました。}。
 
 \begin{figure}[h!tbp]
 \centering
@@ -568,31 +574,38 @@ S|\bm{c}| \cos\varphi = |\bm{a} \times \bm{b} \cdot \bm{c}| = |\bm{a} \times \bm
 \det\bigl(\bm{a} + \bm{a}'  \ \bm{b} \ \bm{c}\bigr) &= \det(\bm{a} \ \bm{b} \ \bm{c}) + \det(\bm{a}' \ \bm{b} \ \bm{c}) \\
 \det(\alpha \bm{a} \ \bm{b} \ \bm{c}) &= \alpha \det(\bm{a} \ \bm{b} \ \bm{c})
 \end{align*}
-となるから、$\bigl((\bm{a} + \bm{a}') \times \bm{b}\bigr) \cdot \bm{c} = \bigl(\bm{a} \times \bm{b} + \bm{a}' \times \bm{b}\bigr) \cdot \bm{c}$および$\bigl((\alpha \bm{a}) \times \bm{b}\bigr) \cdot \bm{c} = \bigl(\alpha (\bm{a} \times \bm{b})\bigr) \cdot \bm{c}$が成り立ちます。特に$\bm{c}$として標準基底をなす$\bm{e}_1, \bm{e}_2, \bm{e}_3$を取れば、$(\bm{a} + \bm{a}') \times \bm{b}$と$\bm{a} \times \bm{b} + \bm{a}' \times \bm{b}$、$(\alpha \bm{a}) \times \bm{b}$と$\alpha(\bm{a} \times \bm{b})$のそれぞれについて、$x, y, z$成分が一致することが確認できます。これより$(\bm{a} + \bm{a}') \times \bm{b} = \bm{a} \times \bm{b} + \bm{a}' \times \bm{b}$と$(\alpha \bm{a}) \times \bm{b} = \alpha \bm{a} \times \bm{b}$が従います。また
+となるから、$\bigl((\bm{a} + \bm{a}') \times \bm{b}\bigr) \cdot \bm{c} = (\bm{a} \times \bm{b} + \bm{a}' \times \bm{b}) \cdot \bm{c}$および$\bigl((\alpha \bm{a}) \times \bm{b}\bigr) \cdot \bm{c} = \bigl(\alpha (\bm{a} \times \bm{b})\bigr) \cdot \bm{c}$が成り立ちます。特に$\bm{c}$として標準基底をなす$\bm{e}_1, \bm{e}_2, \bm{e}_3$を取れば、$(\bm{a} + \bm{a}') \times \bm{b}$と$\bm{a} \times \bm{b} + \bm{a}' \times \bm{b}$、$(\alpha \bm{a}) \times \bm{b}$と$\alpha(\bm{a} \times \bm{b})$のそれぞれについて、$x, y, z$成分が一致することが確認できます。これより$(\bm{a} + \bm{a}') \times \bm{b} = \bm{a} \times \bm{b} + \bm{a}' \times \bm{b}$と$(\alpha \bm{a}) \times \bm{b} = \alpha \bm{a} \times \bm{b}$が従います。また$\bm{a}, \bm{b}$が$1$次独立なら$|\bm{a}|, |\bm{b}| \neq 0$かつ$\theta \neq 0, \pi$なので、$\bm{a} \times \bm{b} \neq \bm{0}$だから
 \[
-\det (\bm{a} \ \bm{b} \ \bm{a} \times \bm{b}) = (\bm{a} \times \bm{b})\cdot (\bm{a} \times \bm{b}) = |\bm{a} \times \bm{b}|^2 = |\bm{a}|^2 |\bm{b}|^2 \sin^2 \theta
+\det (\bm{a} \ \bm{b} \ \bm{a} \times \bm{b}) = (\bm{a} \times \bm{b})\cdot (\bm{a} \times \bm{b}) = |\bm{a} \times \bm{b}|^2 = |\bm{a}|^2 |\bm{b}|^2 \sin^2 \theta > 0
 \]
-です。$\bm{a}, \bm{b}$が$1$次独立なら$|\bm{a}|, |\bm{b}| \neq 0$かつ$\theta \neq 0, \pi$なので$\bm{a} \times \bm{b} \neq \bm{0}$です。よって$\bm{a}, \bm{b}$が$1$次独立なとき、$\bm{a}, \bm{b}, \bm{a} \times \bm{b}$をこの順に並べると右手系\footnote{この部分では「$\det > 0$だから右手系」という書き方をしていますが、実は逆です。$1$次独立な$3$本のベクトル$\bm{a}, \bm{b}, \bm{c}$が右手系であることを、$\det(\bm{a} \ \bm{b} \ \bm{c}) > 0$で定義します。こうすると「右手の法則にしたがう」という曖昧な言い方を回避してきちんと定義ができ、さらに「右手系と左手系がきちんと区別されること」「右手系と左手系以外の○○系がないこと」などが示せます。将来「内積」の話をする際、一緒に「空間の向き」のことを紹介します。}をなします。これで$\bm{a} \times \bm{b}$の向きが完全に決定されました。
+が従います。よって$\bm{a}, \bm{b}$が$1$次独立なとき、$\bm{a}, \bm{b}, \bm{a} \times \bm{b}$をこの順に並べると右手系\footnote{この部分では「$\det > 0$だから右手系」という書き方をしていますが、実は逆です。$1$次独立な$3$本のベクトル$\bm{a}, \bm{b}, \bm{c}$が右手系であることを、$\det(\bm{a} \ \bm{b} \ \bm{c}) > 0$で定義します。こうすると「右手の法則にしたがう」という曖昧な言い方を回避してきちんと定義ができ、さらに「右手系と左手系がきちんと区別されること」「右手系と左手系以外の○○系がないこと」などが示せます。将来「内積」の話をする際、一緒に「空間の向き」のことを紹介します。}をなします。これで$\bm{a} \times \bm{b}$の向きが完全に決定されました。
 
 かくして外積$\bm{a}, \bm{b}$は
 \begin{itemize}
 \item 大きさが$\bm{a}, \bm{b}$の張る平行四辺形の面積
-\item $\bm{a}, \bm{b}$の両方と垂直な向き
-\item $\bm{a}, \bm{b}, \bm{a} \times \bm{b}$が右手系
+\item $\bm{a}, \bm{b}$の両方と垂直で、$\bm{a}, \bm{b}, \bm{a} \times \bm{b}$が右手系となる向き
 \end{itemize}
 という条件で特徴づけられるベクトルだということも分かりました。
 
-\section{おまけ: A2ターム期末試験の解説}
+\paragraph{$n$次元空間$\mathbb{R}^n$における外積}
 
-「A2タームの期末試験の解説がほしい」というリクエストをいただいたので、解答と解説を作りました。復習に役立ててください。なお配点がどうなっているのかはそもそも知らないので、書いていません。
+今の話を一般化すれば、$n \geq 4$のときも$\mathbb{R}^n$においてもベクトルの外積を考えることができます。ただし$3$次元での外積の作り方を見れば分かるように、外積は
+\[
+\det(\bm{a}_1 \  \bm{a}_2 \  \cdots \ \bm{a}_{n - 1} \  \bm{b}) = (\bm{a}_1 \times \bm{a}_2 \times \cdots \times \bm{a}_{n - 1}) \cdot  \bm{b}
+\]
+という式で定義されるべきものです。$\mathbb{R}^3$の$2$本のベクトルに対して外積が定義できたのは$\dim \mathbb{R}^3 - 1 = 2$だからであって、$n$次元の場合は$n - 1$本のベクトルの組に対して外積が計算されます。
+
+\section{おまけ: S2ターム期末試験の解説}
+
+「S2タームの期末試験の解説がほしい」というリクエストをいただいたので、解答と解説を作りました。復習に役立ててください。なお配点がどうなっているのかはそもそも知らないので、書いていません。
 
 \subsection{問1}
 
-(2) は中々難しいと思います。$|z| = 1$となる複素数は$\cos\theta + i \sin\theta$と表せますが、$\theta$をパラメータに取った状態では$\cos \theta$と$\sin \theta$の両方を同時が有理数になるタイミングは見えてきません。ここで三角函数の入った積分を置換積分で解くときに、たまに使う公式を思い出します。$t := \tan (\theta/2)$とおくと
+(2) は中々難しいと思います。$|z| = 1$となる複素数は$\cos\theta + i \sin\theta$と表せますが、$\theta$をパラメータに取った状態では$\cos \theta$と$\sin \theta$の両方が同時に有理数になるタイミングは見えてきません。ここで三角函数の入った積分を置換積分で解くときに、たまに使う公式を思い出します。$t := \tan (\theta/2)$とおくと
 \[
 \cos \theta = \frac{1 - t^2}{1 + t^2}, \quad \sin \theta = \frac{2t}{1 + t^2}
 \]
-が成り立つのを、覚えていますか？この式は大変都合の良いことに、$t$の有理式です。したがって$t$が有理数であれば、$\cos \theta$と$\sin \theta$が両方とも有理式になることが分かります。そうすれば後は、$t$が有理数になるような$\theta$が無限個存在することを示すだけです。
+が成り立つのを、覚えていますか？この式は大変都合の良いことに、$t$の有理式です。したがって$t$が有理数であれば、$\cos \theta$と$\sin \theta$が両方とも有理数になることが分かります。そうすれば後は、$t$が有理数になるような$\theta$が無限個存在することを示すだけです。
 
 \paragraph{解答}
 \noindent (1) $(a + bi)\overline{(a + bi)} = a^2 + b^2$を使うと (a) 2, (b) 5, (c) 13 と分かる。
@@ -609,7 +622,7 @@ z(t) := \frac{1 - t^2}{1 + t^2} + \frac{2t}{1 + t^2}i
 \[
 \mathrm{Re}\, z(t) = \frac{2}{1 + t^2} - 1
 \]
-は$t$について単調減少で、$\mathrm{Re}\, z(0) = 1$, $\mathrm{Re}\, z(1) = 0$である。したがって閉区間$[0, 1]$の点$t$に$z(t)$を対応させる写像は単射である。これと$[0, 1]$に有理数が無数に存在することから、求める結果を得る。\qed
+は$t$について単調減少で、$\mathrm{Re}\, z(0) = 1$, $\mathrm{Re}\, z(1) = 0$である。したがって閉区間$[0, 1]$の点$t$に$z(t)$を対応させる写像は単射である。これと閉区間$[0, 1]$に有理数が無数に存在することから、求める結果を得る。\qed
 
 \subsection{問2}
 
@@ -635,8 +648,9 @@ $\overrightarrow{\mathrm{\,AB\,}} = {}^t(\sqrt{2} - 1 ,\sqrt{3} - \sqrt{2} ,1 - 
 \subsection{問3} ただの計算問題です。下三角同士の積が再び下三角行列になることを覚えていると、(2) では対角線より上の計算を端折れます。
 
 \paragraph{解答}
-
-\begin{align*}
+\begin{itemize}
+\item[(1)]
+\[
 \frac{1}{2}
 \begin{pmatrix}
 1 & 4 & 7 \\
@@ -649,12 +663,15 @@ $\overrightarrow{\mathrm{\,AB\,}} = {}^t(\sqrt{2} - 1 ,\sqrt{3} - \sqrt{2} ,1 - 
 4 & 5 & 6 \\
 7 & 8 & 9
 \end{pmatrix}
-&=
+=
 \begin{pmatrix}
 0 & 1 & 2 \\
 -1 & 0 & 1 \\
 -2 & -1 & 0
-\end{pmatrix} \\
+\end{pmatrix}
+\]
+\item[(2)]
+\[
 \begin{pmatrix}
 1 & 0 & 0 \\
 1 & 1 & 0 \\
@@ -665,12 +682,15 @@ $\overrightarrow{\mathrm{\,AB\,}} = {}^t(\sqrt{2} - 1 ,\sqrt{3} - \sqrt{2} ,1 - 
 -1 & 1 & 0 \\
 1 & -2 & 1
 \end{pmatrix}
-&=
+=
 \begin{pmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
 -1 & 2 & 1
-\end{pmatrix} \\
+\end{pmatrix}
+\]
+\item[(3)]
+\[
 \begin{pmatrix}
 \sqrt{2} & -1 & 1 \\
 \sqrt{2} & 1 & -1 \\
@@ -681,13 +701,14 @@ $\overrightarrow{\mathrm{\,AB\,}} = {}^t(\sqrt{2} - 1 ,\sqrt{3} - \sqrt{2} ,1 - 
 -1 & 1 & \sqrt{2} \\
 1 & -1 & \sqrt{2}
 \end{pmatrix}
-&= 
+= 
 \begin{pmatrix}
 4 & 0 & 0 \\
 0 & 4 & 0 \\
 0 & 0 & 4
 \end{pmatrix}
-\end{align*}
+\]
+\end{itemize}
 \qed
 
 \subsection{問4}
@@ -737,7 +758,7 @@ a & 1 & 1 & 1 & 1 \\
 \begin{itemize}
 \item $a = 1$のとき、拡大係数行列は
 \[
-\left(\begin{array}{cccc|c}
+\left(\begin{array}{rrrr|r}
 1 & 1 & 1 & 1 & 1 \\
 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & -1 & 0 & - 2 \\
@@ -747,19 +768,19 @@ a & 1 & 1 & 1 & 1 \\
 となる。よって係数行列と拡大係数行列の$\rank$は共に$2$である。
 \item $a = 2$のとき、拡大係数行列は
 \[
-\left(\begin{array}{cccc|c}
+\left(\begin{array}{rrrr|r}
 1 & 1 & 1 & 1 & 1 \\
 0 & -1 & -1 & -1 & -1 \\
 0 & 0 & -1 & -1 & -3 \\
 0 & 0 & 0 & 0 & -1
 \end{array}\right)
 \]
-となる。$(2, 2)$成分と$(3, 3)$成分を要にして$2$列目と$3$列目を掃き出してから、符号を調整すると
+となる。$(2, 2)$成分、$(3, 3)$成分と$(4, 5)$成分を要にして$2$列目、$3$列目と$5$列目とをそれぞれ掃き出してから、符号を調整すると
 \[
 \left(\begin{array}{cccc|c}
-1 & 0 & 0 & * & * \\
-0 & 1 & 0 & * & * \\
-0 & 0 & 1 & * & * \\
+1 & 0 & 0 & * & 0 \\
+0 & 1 & 0 & * & 0 \\
+0 & 0 & 1 & * & 0 \\
 0 & 0 & 0 & 0 & 1
 \end{array}\right)
 \]
@@ -805,24 +826,30 @@ $a \neq 1, 2$のとき、解は上で計算した通り
 \[
 x = y = 0, z = -\frac{2}{a - 2}, w = \frac{a}{a - 2}
 \]
-である。また$a = 1$のときは、行基本変形後の拡大係数行列を見れば、$x, y$は任意で
+である。また$a = 1$のときは、行基本変形後の拡大係数行列を見れば、解は$x, y$をパラメータとして
 \[
 z = 2, w = - 1 - x - y
 \]
-が解だと分かる。\qed
+と書ける。\qed
 
 \subsection{問5}
+
+表現行列の意味を確かめる問題です。落ち着いて定義通りに計算すれば、解けるはずです。
+
+\paragraph{解答}
+
 \noindent (1)
 \[
 \begin{pmatrix}
 \bm{u}_1 & \bm{u}_2 & \bm{u}_3
 \end{pmatrix}
 =
-\begin{pmatrix}
+\left(\begin{array}{rrr}
 1 & 0 & 1 \\
 2 & 1 & 0 \\
 0 & 1 & -1
-\end{pmatrix}
+\end{array}
+\right)
 \]
 の逆行列を求めるには、右側に単位行列を並べて、左側の行列が単位行列になるよう行基本変形を行えば良い。
 \begin{align*}
@@ -858,7 +885,7 @@ z = 2, w = - 1 - x - y
 \end{array} \right)
 \end{align*}
 
-\noindent (2) $T$の表現行列を$A$と書くと
+\noindent (2) 基底$(\bm{u}_1, \bm{u}_2, \bm{u}_3)$に関する$T$の表現行列を$A$と書くと、$T(\bm{u}_1) = \bm{u}_1 + \bm{u}_2$, $T(\bm{u}_2) = \bm{u}_1 + \bm{u}_2 + \bm{u}_3$と$T(\bm{u}_3) = \bm{u}_1 - \bm{u}_3$より
 \[
 A =
 \begin{pmatrix}
@@ -905,9 +932,9 @@ z
 1
 \end{pmatrix}
 \]
-と書ける。よって基底として$-2 \bm{u}_1 + \bm{u}_2 + \bm{u}_3$が取れる。
+と書ける。$T$の言葉で書きなおすと$T(-2\bm{u}_1 + \bm{u}_2 + \bm{u}_3) = 0$だから、$\Ker T$の$\Im T$の基底として$-2 \bm{u}_1 + \bm{u}_2 + \bm{u}_3$が取れる。
 
-\noindent (4) $\dim \Im T = 3 - \dim \Ker T = 2$である。よって$A$の列ベクトルのうち一次独立な$2$本を取れば、それが基底になる。
+\noindent (4) $\dim \Im T = 3 - \dim \Ker T = 2$である。よって$A$の列ベクトルのうち一次独立な$2$本を取り、それに対応する$\bm{u}_1, \bm{u}_2, \bm{u}_3$の$1$次結合を作れば、$\Im T$の基底が得られる。
 \[
 \det
 \begin{pmatrix}
@@ -916,6 +943,6 @@ z
 \end{pmatrix}
 = 2 - 1 = 1 \neq 0
 \]
-より、最初の$2$本が$1$次独立である。よって基底として$\bm{u}_1 + \bm{u}_2$, $\bm{u}_1 + 2\bm{u}_2 + \bm{u}_3$が取れる。
+より、最初の$2$本が$1$次独立である。よって基底として$\bm{u}_1 + \bm{u}_2$, $\bm{u}_1 + 2\bm{u}_2 + \bm{u}_3$が取れる。 \qed
 
 

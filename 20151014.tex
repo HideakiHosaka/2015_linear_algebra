@@ -1,0 +1,406 @@
+\chapter{直交行列と正規直交基底}
+\lectureinfo{2015年10月14日 1限}
+
+今回の問題は、主に$\mathbb{R}^3$におけるベクトルの外積の使い方の確認と言ってよいでしょう。また外積の応用として、直交行列と呼ばれる種類の行列を導入します。
+
+\section{問題の解答}
+先に問2以外の問題の解答を書いてしまいましょう。大体の問題は、これまでの空間ベクトルの知識で解けます。また三角形の面積を求める問題は、$\mathbb{R}^3$のベクトルの外積が平行四辺形の面積を表すことを思い出せば解けます。
+
+\paragraph{問1の解答} 空間内の$3$点$A, B, C$を$A(1, 1, 2)$, $B(3, 4, 8)$, $C(9, 6, 5)$で定める。このとき
+\[
+\overrightarrow{\,AB\,} = 
+\begin{pmatrix}
+2 \\
+3 \\
+6
+\end{pmatrix}, \quad
+\overrightarrow{\,AC\,}
+=
+\begin{pmatrix}
+8 \\
+5 \\
+3
+\end{pmatrix}
+\]
+である。
+
+\noindent (1)
+\[
+AB = \sqrt{ 2^2 + 3^2 + 6^2 } = 7
+\]
+
+\noindent (2) 直線$AB$は、パラメータで表示すると
+\[
+\begin{pmatrix}
+x \\
+y \\
+z
+\end{pmatrix}
+=
+\overrightarrow{\,OA\,} + t\overrightarrow{\,AB\,}
+=
+\begin{pmatrix}
+1 \\
+1 \\
+2
+\end{pmatrix}
++ t
+\begin{pmatrix}
+2 \\
+3 \\
+6
+\end{pmatrix}
+\]
+と書ける。よって方程式で表すと
+\[
+\frac{x - 1}{2} = \frac{y - 1}{3} = \frac{z - 2}{6}
+\]
+となる。
+
+\noindent (3)
+\[
+\cos \angle BAC
+= \frac{\overrightarrow{\,AB\,}\cdot\overrightarrow{\,AC\,}}{|\overrightarrow{\,AB\,}| |\overrightarrow{\,AC\,}|}
+= \frac{2\cdot 8 + 3 \cdot 5 + 6 \cdot 3}{\sqrt{2^2 + 3^2 + 6^2}\sqrt{8^2 + 5^2 + 3^2}}
+= \frac{49}{7 \cdot \sqrt{98}} = \frac{1}{\sqrt{2}}
+\]
+となる。よって$\angle BAC = \pi/4$である。
+
+\noindent (4)
+\[
+\overrightarrow{\,AB\,}\times \overrightarrow{\,AC\,}
+=
+\begin{pmatrix}
+-21 \\
+42 \\
+-14
+\end{pmatrix}
+= 
+7
+\begin{pmatrix}
+-3 \\
+6 \\
+-2
+\end{pmatrix}
+\]
+である。よって求める面積は$7\sqrt{(-3)^2 + 6^2 + (-2)^2}/2 = 49 / 2$である。
+
+\noindent (5) 求める平面は、法線ベクトルが$\overrightarrow{\,AB\,}\times\overrightarrow{\,AC\,} = {}^t(-3, 6, 2)$なので$3x - 6y + 2z = c$と書ける。そして点$A$を通ることから
+\[
+3x - 6y + 2z = 1
+\]
+となる。 \qed
+
+\paragraph{問3の解答}
+\begin{align*}
+\triangle ABC 
+&= \frac{1}{2}|\overrightarrow{\,AB\,} \times \overrightarrow{\,AC\,}|
+= \frac{1}{2} \biggl|
+\begin{pmatrix}
+b_1 - a_1 \\
+b_2 - a_2 \\
+0
+\end{pmatrix}
+\times
+\begin{pmatrix}
+c_1 - a_1 \\
+c_2 - a_2 \\
+0
+\end{pmatrix} \biggr|\\
+&= \frac{1}{2} \biggl| \det
+\begin{pmatrix}
+b_1 - a_1 & c_1 - a_1 \\
+b_2 - a_2 & c_2 - a_2
+\end{pmatrix} \\
+&=
+\det \begin{pmatrix}
+a_1 & b_1 \\
+a_2 & b_2
+\end{pmatrix}
++
+\det \begin{pmatrix}
+b_1 & c_1 \\
+b_2 & c_2
+\end{pmatrix}
++
+\det \begin{pmatrix}
+c_1 & a_1 \\
+c_2 & a_2
+\end{pmatrix} \biggr|
+\end{align*}
+である。 \qed
+
+\paragraph{問4の解答}
+
+\noindent (1)
+$A(a, 0, 0)$, $B(0, b, 0)$, $C(0, 0, c)$に対し
+\[
+\overrightarrow{\, AB\, } \times \overrightarrow{\, AC\, }
+=
+\begin{pmatrix}
+-a \\
+b \\
+0
+\end{pmatrix}
+\times
+\begin{pmatrix}
+-a \\
+0 \\
+c
+\end{pmatrix}
+=
+\begin{pmatrix}
+bc \\
+ca \\
+ab
+\end{pmatrix}
+\]
+である。よって
+\[
+\triangle ABC = \frac{1}{2}|\overrightarrow{\,AB\,}\times\overrightarrow{\,AC\,}| = \frac{1}{2}\sqrt{a^2 b^2 + b^2 c^2 + c^2 a^2}
+\]
+となる。
+
+\noindent (2) $3$点$A$, $B$, $C$を通る平面の方程式は$\frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1$である。この平面と原点との距離は、点と平面の距離の公式より
+\[
+\frac{1}{\sqrt{\frac{1}{a^2} + \frac{1}{b^2} + \frac{1}{c^2}}}
+\]
+と求まる。\qed
+
+\section{直交行列と正規直交基底}
+
+今回の問2では「直交行列」という特別な行列が登場します。追々見るように、直交行列は「ベクトルの内積」と親和性が高い行列です。今回はその性質を調べるのに先立って「直交行列はどんな行列か」を特徴付けてみたいと思います。
+
+\subsection{$n$次元空間$\mathbb{R}^n$における内積と距離}
+
+この後$n$次元空間での内積を使うので、先に内積の話をちょこっとしておきましょう。
+
+$\mathbb{R}^3$におけるベクトルに対しては、内積
+\[
+\begin{pmatrix}
+a_1 \\
+a_2 \\
+a_3
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+a_3
+\end{pmatrix}
+:= a_1 b_1 + a_2 b_2 + a_3 b_3
+\]
+が定義されていました。これを一般化して、$\mathbb{R}^n$におけるベクトルの\textbf{標準内積}\footnote{後で「標準的ではない内積」も色々使うので、この内積は特に「標準内積」と呼ばれます。}を
+\[
+\begin{pmatrix}
+a_1 \\
+a_2 \\
+\vdots \\
+a_n
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_n
+\end{pmatrix}
+:= a_1 b_1 + a_2 b_2 + \cdots + a_n b_n
+\]
+で定めます。この内積を使うことで、$\mathbb{R}^n$におけるベクトルの長さや直交関係を議論することが可能になります。
+
+こういう書き方をすると「ちょっと待て、$4$次元以上の空間は人間には見えないのに、どうして長さとかが分かるんだ」というツッコミが入ると思います。その疑問は全くその通りで、実際、普通の数学者は$4$次元を直接見ているわけではありません\footnote{ごく稀に例外もあります。フィールズ賞を受賞した幾何学者William Thurstonは「頑張れば$3$次元空間$\mathbb{R}^3$に収まらない立体も見える」と言っていて、実際にどうやって見るかを論文に書いています。大学の中からアクセスすれば読めるので、興味のある人は見てみてください。Thurstonも僕たちと同じ$3$次元空間$\mathbb{R}^3$に生きていた人ではありますが、Thurstonなら$4$次元が見えていてもおかしくないなと、個人的には思います。William Thurston, ``How to see 3-manifolds'', Classical and Quantum Gravity, \underline{15}, 2545-2571.\\ \url{http://iopscience.iop.org/article/10.1088/0264-9381/15/9/004/meta}}。ただ、いま定義した「$n$次元の内積」が「$3$次元の内積」とほとんど同じような性質を示すので、$3$次元の話をうまく一般化できるのです。
+
+たとえば$3$次元の場合、$\bm{a} = {}^t(a_1, a_2, a_3)$の長さは内積を使って$|\bm{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2} = \sqrt{\bm{a} \cdot \bm{a}}$と表せました。このときベクトルの長さに関して
+\begin{itemize}
+\item 任意のベクトル$\bm{a}$に対し、$|\bm{a}| \geq 0$である
+\item $|\bm{a}| = 0$と$\bm{a} = \bm{0}$が同値になる
+\item 三角不等式$|\bm{a} + \bm{b}| \leq |\bm{a}| + |\bm{b}|$を満たす
+\end{itemize}
+という性質が成り立ちます。これがベクトルの長さを「長さ」と呼ぶにふさわしい理由です。
+
+ここで発想を逆転させます。$4$次元以上の場合、図形はもはや人間には見えません。そこで$|\bm{a}| := \sqrt{\bm{a} \cdot \bm{a}}$という式を内積の定義にしてしまうのです。こうすれば、図形として見えなくてもとりあえず計算はできます。そして計算だけによって、いま定義した「長さ」について
+\begin{itemize}
+\item 任意のベクトル$\bm{a}$に対し、$|\bm{a}| \geq 0$である
+\item $|\bm{a}| = 0$と$\bm{a} = \bm{0}$が同値になる
+\item 三角不等式$|\bm{a} + \bm{b}| \leq |\bm{a}| + |\bm{b}|$を満たす
+\end{itemize}
+という性質が示せてしまうのです。この事実をもって「$|\bm{a}|$は、$n$次元空間におけるベクトル$\bm{a} \in \mathbb{R}^n$の長さを表すと言って良いだろう」と考えるわけです。
+
+ベクトルの直交関係についても、同じように考えます。$3$次元の場合、ベクトル$\bm{a}$と$\bm{b}$が直交することは$\bm{a} \cdot \bm{b} = 0$と同値でした。そこで$n$次元の場合には話を逆転させ、$\bm{a} \cdot \bm{b} = 0$という式をもって「$\bm{a}$と$\bm{b}$が直交すること」を定義します。そうすれば例えば「$\bm{a}$と$\bm{b}$が直交するとき、$|\bm{a} + \bm{b}| = \sqrt{|\bm{a}|^2 + |\bm{b}|^2}$が成り立つこと」などが証明できます。いま定義した「直交」は、普段僕たちが$3$次元の空間で使う直交の概念と同じような性質を示すのです。
+
+そして$n$次元での議論に慣れてくると、黒板や紙の上に「$n$次元空間の絵」を描くようになってきます。$n$が$4$以上のときに$n$次元空間の絵を平面に描けるわけはないので、こういう絵は事実としては「デタラメ」です。ですがさっき述べたように、僕たちの直感と合致するような「長さ」や「直交」という概念は、$4$次元以上の空間に対しても定義できます。そして平面に描かれたデタラメな絵であっても、「長さ」や「直交」といった概念の特徴を上手く抽出したものであれば、数学を理解するのに大いに役立つのです。
+
+そんなわけで、僕たちはこれから「$n$次元空間における内積」を扱いますが、「見えない」と言って怖がる必要はありません。大体$3$次元と同じだろうと思って使っていれば、何とかなります。
+
+\subsection{直交行列}
+
+一般に$n$次正方行列$A$であって、$A^{-1} = {}^t\!A$を満たす行列を\textbf{直交行列}といいます。名前の通り、この行列は「ベクトルの直交」と関係しています。そのことを確かめてみましょう。
+
+$n$次正方行列$A$を、列ベクトルを並べて$A = (\bm{a}_1 \ \bm{a}_2 \ \cdots \ \bm{a}_n)$と書いておきます。このとき
+\[
+{}^t\!A A = 
+\begin{pmatrix}
+{}^t \bm{a}_1 \\
+{}^t \bm{a}_2 \\
+\vdots \\
+{}^t \bm{a}_n \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{a}_1 &
+\bm{a}_2 &
+\cdots &
+\bm{a}_n
+\end{pmatrix}
+= 
+\begin{pmatrix}
+\bm{a}_1 \cdot \bm{a}_1 & \bm{a}_1 \cdot \bm{a}_2 & \cdots & \bm{a}_1 \cdot \bm{a}_n \\
+\bm{a}_2 \cdot \bm{a}_1 & \bm{a}_2 \cdot \bm{a}_2 & \cdots & \bm{a}_2 \cdot \bm{a}_n \\
+\vdots & \vdots & \ddots & \vdots \\
+\bm{a}_n \cdot \bm{a}_1 & \bm{a}_n \cdot \bm{a}_2 & \cdots & \bm{a}_n \cdot \bm{a}_n
+\end{pmatrix}
+\]
+です。ここで$A$が直交行列なら、${}^t\!A = A^{-1}$なので${}^t\!A A = A^{-1} A = I$です。すなわち
+\[
+\begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{a}_1 \cdot \bm{a}_1 & \bm{a}_1 \cdot \bm{a}_2 & \cdots & \bm{a}_1 \cdot \bm{a}_n \\
+\bm{a}_2 \cdot \bm{a}_1 & \bm{a}_2 \cdot \bm{a}_2 & \cdots & \bm{a}_2 \cdot \bm{a}_n \\
+\vdots & \vdots & \ddots & \vdots \\
+\bm{a}_n \cdot \bm{a}_1 & \bm{a}_n \cdot \bm{a}_2 & \cdots & \bm{a}_n \cdot \bm{a}_n
+\end{pmatrix}
+\]
+となります。この両辺の成分を比較することによって
+\begin{align*}
+\bm{a}_i \cdot \bm{a}_j =\delta_{ij} = 
+\begin{cases}
+1 \\
+0
+\end{cases}
+\end{align*}
+が得られます。つまりベクトルの組$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$は
+\begin{itemize}
+\item 相異なる$2$つのベクトルが直交し
+\item それぞれのベクトルは長さが$1$である
+\end{itemize}
+という性質を持ちます。
+
+逆にベクトルの組$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$が$\bm{a}_i \cdot \bm{a}_j =\delta_{ij}$を満たしているとき
+\[
+\begin{pmatrix}
+\bm{a}_1 \cdot \bm{a}_1 & \bm{a}_1 \cdot \bm{a}_2 & \cdots & \bm{a}_1 \cdot \bm{a}_n \\
+\bm{a}_2 \cdot \bm{a}_1 & \bm{a}_2 \cdot \bm{a}_2 & \cdots & \bm{a}_2 \cdot \bm{a}_n \\
+\vdots & \vdots & \ddots & \vdots \\
+\bm{a}_n \cdot \bm{a}_1 & \bm{a}_n \cdot \bm{a}_2 & \cdots & \bm{a}_n \cdot \bm{a}_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\]
+となるので、$A$は直交行列です。こうして$A$が直交行列であることと「$A$の各列ベクトルが長さ$1$で、互いに直交すること」が同値だと分かりました。
+
+\subsection{正規直交基底}
+
+さて$n$次元空間$\mathbb{R}^n$のベクトルの組$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$が$\bm{a}_i \cdot \bm{a}_j =\delta_{ij}$を満たしているとき、実は$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$は$\mathbb{R}^n$の基底になっています。たとえば$\mathbb{R}^3$の場合を考えてみましょう。$A = (\bm{a}_1 \ \bm{a}_2 \ \bm{a}_3)$が直交行列であることは、$\bm{a}_1, \bm{a}_2, \bm{a}_3$が$1$辺の長さ$1$の立方体を張ることと同じです。どう見ても$(\bm{a}_1, \bm{a}_2, \bm{a}_3)$は$\mathbb{R}^3$の基底ですね。
+
+一般の次元の場合にも、$\bm{a}_i \cdot \bm{a}_j =\delta_{ij}$を満たす組$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$が基底になることは簡単に示せます。実際$\alpha_1 \bm{a}_1 + \alpha_2 \bm{a}_2 + \cdots + \alpha_n \bm{a}_n = \bm{0}$とおくと、この両辺と$\bm{a}_i$との内積を取れば$\alpha_i = 0$が従います。こうして$\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n$が$1$次独立になることが分かりました。ちょうど次元と同じ本数の$1$次独立なベクトルがあるので、$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$は$\mathbb{R}^n$の基底になります。そこで、$\bm{a}_i \cdot \bm{a}_j = \delta_{ij}$を満たすベクトルの組$(\bm{a}_1, \bm{a}_2, \ldots, \bm{a}_n)$を$\mathbb{R}^n$の\textbf{正規直交基底}といいます。単なる基底ではなく、全てのベクトルの長さが$1$なので「正規」、相異なるベクトルが直交するので「直交」という形容詞がついています。ここまでの話をまとめると、$A$が直交行列であることと、$A$の列ベクトルたちが正規直交基底をなすことが同値だと分かりました。
+
+ここまで来れば、問$2$を解くのは簡単です。行列の成分をいじって直交行列を作るという問題は、正規直交基底を作るという問題に読み替えられるからです。特に$3$次正方行列の場合はベクトルの外積を使えば、最後の$1$本のベクトルが求まります。
+
+\paragraph{問2の解答}
+\[
+A =
+\begin{pmatrix}
+\bm{a}_1 & \bm{a}_2 & \bm{a}_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{2}{3} & -\frac{2}{3} & a \\
+\frac{2}{3} & \frac{1}{3} & b \\
+\frac{1}{3} & \frac{2}{3} & c
+\end{pmatrix}, \quad
+B =
+\begin{pmatrix}
+\bm{b}_1 & \bm{b}_2 & \bm{b}_3 & \bm{b}_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} & \frac{1}{2} & d \\
+\frac{1}{2} & \frac{1}{2} & -\frac{1}{2} & e \\
+\frac{1}{2} & -\frac{1}{2} & \frac{1}{2} & f \\
+\frac{1}{2} & -\frac{1}{2} & -\frac{1}{2} & g
+\end{pmatrix}
+\]
+とおく。
+
+\noindent (1) $|\bm{a}_1| = |\bm{a}_2| = 1$である。
+
+\noindent (2) $\bm{a}_1 \cdot \bm{a}_2 = 0$となる。これと$\bm{a}_1, \bm{a}_2 \neq \bm{0}$より、$\bm{a}_1$と$\bm{a}_2$は垂直である。
+
+\noindent (3) $\bm{a}_1 \times \bm{a}_2 = {}^t(\frac{1}{3}, -\frac{2}{3}, \frac{2}{3})$となる。
+
+\noindent (4) $\bm{a}_1 \times \bm{a}_2$は$\bm{a}_1$, $\bm{a}_2$のどちらとも垂直である。そして$\bm{a}_1, \bm{a}_2$は$1$辺の長さ$1$の正方形を張るから、$|\bm{a}_1 \times \bm{a}_2| = 1$である。よって${}^t (a, b, c) = \pm(\bm{a}_1 \times \bm{a}_2)$と定めればよい。
+
+\noindent (5) (1) から (4) までの真似をして、$(\bm{b}_1, \bm{b}_2, \bm{b}_3, \bm{b}_4)$が正規直交基底になるように$\bm{b}_4$を定めればよい。連立$1$次方程式$\bm{b}_1 \cdot \bm{b}_4 = \bm{b}_2 \cdot \bm{b}_4 = \bm{b}_3 \cdot \bm{b}_4 = 0$を解き、その上で$|\bm{b}_4| = 1$となるよう全体をスカラー倍して調整すると、$\bm{b}_4 = \pm {}^t( -\frac{1}{2}, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2})$と分かる。 \qed
+
+\paragraph{直交群と特殊直交群}
+
+ちなみに$n$次直交行列の全体は、よく\textbf{$n$次直交群}と呼ばれ
+\[
+O(n) := \{A \in \Mat_n(\mathbb{R}) \mid A^{-1} = {}^t\!A \}
+\]
+という記号で表されます\footnote{前回のおまけで触れたときは$O(n) := \{A \in GL_n(\mathbb{R}) \mid A^{-1} = {}^t\!A \}$と定めていました。見た目がちょっとだけ違いますが、直交行列は常に正則なので、$\Mat_n$の中で定義しても$GL_n$の中で定義しても結局同じものが得られます。}。今の正規直交基底の話を$O(n)$を使って書きなおすと「$\mathbb{R}^n$の正規直交基底全体と$O(n)$の元が$1$対$1$に対応する」という意味になります。普段僕たちは「$2$つの基底の間の変換行列」など、基底を$1$つ$1$つのものとして扱うことが多いですが、直交群を使うと「基底を全部集めた集合」が考えられるようになるのです。
+
+また正規直交基底は、順番を並べ替えても正規直交基底です。したがって正規直交基底の中には「正の向き」のものと「負の向き」のものがあります。そこで、行列式が正の直交行列全体を
+\[
+SO(n) := \{A \in O(n) \mid \det A = 1\}
+\]
+と書けば\footnote{実は直交行列の行列式は$\pm1$のいずれかです。したがって、直交行列の行列式が正なら、値は$1$と決まります。}、$SO(n)$の元が正の向きの正規直交基底全体と$1$対$1$に対応します。この$SO(n)$のことを\textbf{$n$次特殊直交群}といいます。
+
+そして負の向きの正規直交基底は、どれか$1$本を$(-1)$倍すれば正の向きになります。そこで$SO(n)$の$1$列目を$-1$倍して得られる行列全体の集合を
+\[
+SO(n)
+\begin{pmatrix}
+-1 & \\
+& 1 & \\
+& & \ddots \\
+& & & 1
+\end{pmatrix}
+:=
+\left\{
+A
+\begin{pmatrix}
+-1 & \\
+& 1 & \\
+& & \ddots \\
+& & & 1
+\end{pmatrix}
+\mid
+A \in SO(n)
+\right\}
+\]
+と書くことにすれば
+\[
+O(n) =
+SO(n)
+\cup
+SO(n)
+\begin{pmatrix}
+-1 & \\
+& 1 & \\
+& & \ddots \\
+& & & 1
+\end{pmatrix}
+\]
+と書けそうだと分かります。つまり大雑把には「$O(n)$は大体$SO(n)$が$2$つ分」です。こうしたことを考えながら、次回以降、もう少し詳しく$O(n)$や$SO(n)$の性質を調べていきましょう。
+

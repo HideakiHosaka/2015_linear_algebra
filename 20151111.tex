@@ -1,0 +1,366 @@
+\chapter{固有値の性質}
+\lectureinfo{2015年11月11日 1限}
+
+\section{固有値の性質}
+
+今回のテーマは「固有値の性質」です。行列の固有値は名前に「固有」と入っていることから、何らかの意味で重要な量であることが推測されます。その意味を明らかにしましょう。
+
+\subsection{基底の取り換えについての復習}
+
+まずA2タームの終わりの方で「基底の取り換え」の話をしたことを思い出しましょう。$(m, n)$型の正方行列$A$を$\mathbb{R}^n \rightarrow \mathbb{R}^m$という線型写像だと思います。このとき
+\begin{itemize}
+\item 定義域の$\mathbb{R}^n$の基底$(\bm{e}_1^{(n)}, \bm{e}_2^{(n)}, \ldots, \bm{e}_n^{(n)})$を$n$次正方行列$Q$によって
+\item 値域の$\mathbb{R}^n$の基底$(\bm{e}_1^{(m)}, \bm{e}_2^{(m)}, \ldots, \bm{e}_n^{(m)})$を$m$次正方行列$P$によって
+\end{itemize}
+それぞれ取り換えると、元々の線型写像$A$は新しい基底で$Q^{-1} A P$と表示されるのでした。
+\[
+\begin{tikzcd}
+\mathbb{R}^n \arrow{r}{A} \arrow{d}[swap]{P^{-1}} & \mathbb{R}^m \arrow{d}{Q^{-1}} \\
+\mathbb{R}^n \arrow{r}[swap]{Q^{-1} A P} & \mathbb{R}^m
+\end{tikzcd}
+\]
+
+ここで特に$m = n$の場合を考えましょう。このとき$A \colon \mathbb{R}^n \rightarrow \mathbb{R}^n$の定義域と値域はどちらも$\mathbb{R}^n$で同じです。したがって、特に理由がない限り、定義域と値域とで同じ基底を用いるのが自然でしょう。そこで今の$B = Q^{-1} A P$の式で$Q = P$とおけば、$P^{-1} A P$が新しい行列表示になります。このようにして、$P^{-1} A P$という形の行列は\textbf{基底変換によって行列の見え方がどう変わるか}を表しているのです。
+
+この見方に基づけば、$(P^{-1} A P)(P^{-1} B P) = P^{-1} AB P$という式の意味も見えてきます。もちろんこの等式自体は、ただ$P P^{-1} = I$という事実だけを使えば導けるものです。ですが次のように図式で表してみれば「写像を合成してから基底変換をしても、基底変換をした後で写像の合成をしても、現れる行列表示は同じ」という意味になることが分かります。
+\[
+\begin{tikzcd}
+\mathbb{R}^n \arrow{r}{A} \arrow{d}[swap]{P^{-1}} & \mathbb{R}^n \arrow{d}[swap]{P^{-1}}  \arrow{r}{B} & \mathbb{R}^n \ar{d}{P^{-1}} \\
+\mathbb{R}^n \arrow{r}[swap]{P^{-1} A P} & \mathbb{R}^n \arrow{r}[swap]{P^{-1} B P} & \mathbb{R}^n
+\end{tikzcd}
+\]
+
+\subsection{座標の取り換えに対する不変性}
+
+固有値や固有多項式に出てくる「固有」の意味は、「座標に依らない」という意味を表します。つまり$n$次正方行列$A \in \Mat_n(\mathbb{R})$と、$n$次の正則行列$P \in GL_n(\mathbb{R})$に対し、$A$と$P^{-1} A P$の固有多項式は等しいのです。
+
+この証明自体は非常に簡単です。行列式の乗法性を使えば
+\begin{align*}
+\varphi_{P^{-1} A P}(t)
+&= \det(tI - P^{-1} A P) = \det P^{-1} (tI - A) P = \det P^{-1} \det (tI - A) \det P = (\det P)^{-1} \varphi_A(t) \det P \\
+&= \varphi_A(t)
+\end{align*}
+となります。$A$と$P^{-1} A P$は固有多項式が等しいので、固有値も一致します。
+
+このことを使うと、正方行列を対角化したとき、対角成分には固有値が並ぶことが分かります。
+
+\paragraph{問5の解答}
+$P^{-1} A P$が対角行列$\diag(\alpha_1, \alpha_2, \ldots, \alpha_n)$だったとする\footnote{$\diag(\alpha_1, \ldots, \alpha_n)$は、対角線に$\alpha_1, \ldots, \alpha_n$がこの順で並び、非対角成分が全て$0$であるような行列のことです。}。これの固有多項式は
+\[
+\varphi_{P^{-1} A P}
+= \det
+\begin{pmatrix}
+t - \alpha_1 \\
+& t - \alpha_2 \\
+& & \ddots \\
+& & & t - \alpha_n
+\end{pmatrix}
+= (t - \alpha_1) (t - \alpha_2) \cdots (t - \alpha_n)
+\]
+なので、$P^{-1} A P$の固有値は$\alpha_1, \alpha_2, \ldots, \alpha_n$である。これらは$A$の固有値でもある。 \qed
+
+\paragraph{問1の解答}
+$3$次正方行列$A \in \Mat_3(\mathbb{R})$の固有値が$1, 2, -3$であったとする。$3$つの固有値が全て異なるので$A$は対角化可能であり、$P^{-1} A P = \diag(1, 2, -3)$となる正則行列$P \in GL_3(\mathbb{R})$が取れる。すると
+\[
+(P^{-1} A P)^{-1}
+=
+\begin{pmatrix}
+1 \\
+& 2 \\
+& & -3
+\end{pmatrix}^{-1}
+=
+\begin{pmatrix}
+1 \\
+& \frac{1}{2} \\
+& & -\frac{1}{3}
+\end{pmatrix}
+\]
+なので、$(P^{-1} A P)^{-1} = P^{-1} A^{-1} P$の固有値が$1, 1/2, -1/3$と分かる。$P^{-1} A^{-1} P$と$A^{-1}$の固有値は同じなので、これで$A^{-1}$の固有値が全て求まった。\qed
+
+\paragraph{その他座標変換で不変なもの}
+
+「$A$と$P^{-1} A P$の固有多項式が一致する」という事実からは、さらに色々な情報が得られます。たとえば固有多項式は$\varphi_A(t) = t^n - (\tr A) t + \cdots + (-1)^n \det A$と書けていました。したがって$\varphi_{P^{-1} A P}(t)$と$\varphi_A(t)$で$t^{n - 1}$の係数を比較すれば$\tr P^{-1} A P$が、定数項を比較すれば$\det P^{-1} A P = \det A$が分かります\footnote{固有多項式を持ち出さなくても、$\tr AB = \tr BA$や$\det AB = \det BA$という式さえ知ってれば、簡単な計算で直接示せます。}。トレースや行列式は、基底の取り方に依存しない量なのです。
+
+また固有多項式以外にも座標変換で不変な性質をいくつか確認しておきましょう。これまでと同様、$A \in \Mat_n(\mathbb{R})$を$n$次正方行列、$P \in GL_n(\mathbb{R})$を$n$次正則行列とします。
+
+まず行列が正則かどうかは基底の取り方に依存しません。なぜなら、正則であることは「全単射」と言い換えられます。座標を取り換えたら全射性 / 単射性が崩れるというのは、直感的に考えづらいことです。実際に式の上でも、$(P^{-1} A P)(P^{-1} A^{-1} P) = I$となるので、$A$が正則なら$P^{-1} A P$も正則だと分かります。
+
+次に、何乗かしたら零行列になる\textbf{巾零}という性質も、座標に依りません。どんな基底で表示しても零行列は零行列ですから、何回か合成したら零行列になるという性質も、座標に依らなさそうですね。そして実際$A^k = O$のとき$(P^{-1} A P)^k = P^{-1} A^k P = O$なので、$P^{-1} A P$はやはり巾零です。
+
+そして、対角化可能という性質も座標の取り方に依りません。もし上手く$n$次正方行列$Q \in GL_n(\mathbb{R})$を取って$Q^{-1} A Q$が対角行列になるなら、$(P^{-1} Q)^{-1} (P^{-1} A P) (P^{-1} Q) = (Q^{-1} P) (P^{-1} A P) (P^{-1} Q) = Q^{-1} A Q$となるので、$P^{-1} A P$も対角化可能です。
+
+以上のことをまとめれば、問4がほとんど解けます。
+
+\paragraph{問4の解答}
+(1) 正則、(2) 対角化可能、(3) 固有値が全て$0$、(4) 巾零、(6) $\det = 1$、(7) $\tr = 0$は全て座標の取り方に依存しない、内在的な性質である。(5) の上三角行列に関しては、内在的な性質でない。たとえば
+\[
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}^{-1}
+\begin{pmatrix}
+1 & 2 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+2 & 1 \\
+1 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+2 & 1
+\end{pmatrix}
+\]
+となっている。上三角行列を座標変換したものが、上三角でない行列になっている。\qed
+% flag の話をはさむ？
+
+\subsection{トレース、行列式と固有値の関係}
+
+この節の間、\textbf{行列の成分は複素数}だとします。
+
+$n$次正方行列$A \in \Mat_n(\mathbb{C})$の$n$個の固有値が$\lambda_1, \lambda_2, \ldots, \lambda_n$だったとしましょう ($\lambda_i$たちの中には、同じものがあっても良いとします)。このとき固有多項式$\varphi_A(t)$は、最高次の係数が$1$なので
+\[
+\varphi_A(t) = (t - \lambda_1) (t - \lambda_2) \cdots (t - \lambda_n)
+\]
+と書けます。これを展開すると
+\[
+\varphi_A(t) = t^n - (\lambda_1 + \lambda_2 + \cdots + \lambda_n) t^{n - 1} + \cdots + (-1)^n \lambda_1 \lambda_2 \cdots \lambda_n
+\]
+となります\footnote{間の省いた項についても、計算できます。$x_1, \ldots, x_n$たちの$k$次基本対称式を$e_k(x_1, \ldots, x_n)$で表せば、$\varphi_A(t)$における$t^k$の係数は$(-1)^{n - k}e_{n - k}(\lambda_1, \ldots, \lambda_n)$です。}。これを$\varphi_A(t) = t^n - (\tr A)t + \cdots + (-1)^n \det A$と比較することによって
+\[
+\tr A = \lambda_1 + \lambda_2 + \cdots + \lambda_n, \quad
+\det A = \lambda_1 \lambda_2 \cdots \lambda_n
+\]
+が得られます。\textbf{トレースは固有値の和、行列式は固有値の積}です。トレースは簡単に計算でき、$2$次の場合なら行列式も簡単に求まるので、これら公式は対角化問題の検算に非常に役立ちます。ぜひ覚えておきましょう。
+
+再度の注意になりますが、今の公式を使うときは\textbf{固有値は複素数まで考えないとダメ}です。たとえば$2$次正方行列
+\[
+\begin{pmatrix}
+1 & -2 \\
+2 & 1
+\end{pmatrix}
+\]
+のトレースは$2$、行列式は$5$です。固有多項式は$t^2 - 2t + 5$で、固有値は$1\pm \sqrt{2}i$となります。そして$2 = (1 + \sqrt{2}i) + (1 - \sqrt{2}i)$, $5 = (1 + \sqrt{2}i)(1 - \sqrt{2}i)$となっています。しかし実数の範囲だけで考えてしまうと、固有値が全くないので、固有値の和は$0$、積は$1$になってしまいます\footnote{「$0$個のものの積が$1$」というのは、$0! = 1$と同じ理屈です。}。このように固有値とトレース、対角和を結びつけるときは、無理やりでも固有多項式の解を全部作らないといけません\footnote{先週おまけで紹介した「係数体を代数閉体まで拡大する」という操作のことです。}。間違えないでください。
+
+\subsection{固有値のシフト}
+
+$n$次正方行列$A \in \Mat_n(\mathbb{R})$が固有値$\lambda$を持つとします。このとき固有値$\lambda$に属する固有ベクトル$\bm{u}$を取ると、実数$\mu \in \mathbb{R}$に対し$(A + \mu I)\bm{u} = A\bm{u} + \mu \bm{u} = \lambda \bm{u} + \mu \bm{u} = (\lambda + \mu) \bm{u}$です。つまり行列$A + \mu I$は、固有値$\lambda + \mu$を持ちます。単位行列の定数倍を足し引きすると、固有値の値をずらせるのです。
+
+これは簡単な話ではありますが、地味に役立つこともあります。たとえば対角化ができない行列の見やすい形を探す問題では、実は「全ての固有値が同じ行列」を考えれば十分だと知られています。ここで固有値をずらせば、結局「全ての固有値が$0$である行列」に全ての問題を帰着させることができるのです。こんな感じで、固有値のシフトは役立ちます。
+
+\paragraph{問2の解答} $A \in \Mat_2(\mathbb{R})$とする。
+
+\noindent (1) $A$の固有値が$2, -3$のとき、$A$の$2$つの固有値が異なるので$A$は対角化可能である。そこで正則な行列$P \in GL_2(\mathbb{R})$を$P^{-1} A P = \diag(2, -3)$となるように取れる。すると
+\[
+P^{-1} A^3 P = (P^{-1} A P)^3 =
+\begin{pmatrix}
+2 \\
+& -3
+\end{pmatrix}^3
+=
+\begin{pmatrix}
+8 \\
+& -27
+\end{pmatrix}
+\]
+の固有値は$8, -27$である。$P^{-1} A^3 P$と$A^3$の固有値は等しいので、$A^3$の固有値も$8, -27$である。
+
+\noindent (2) $A$の$1$つの固有値が$4$で、$\det A = -12$とする。$A$の固有値を全てかけたものが$\det A$だから、もう$1$つの固有値は$-12/4 = -3$である。
+
+\noindent (3) $A$の固有値が$1, 2$とする。$\mu = 0$のとき$A = A + 0I$は異なる$2$個の固有値を持つので対角化可能であり、$P^{-1} A P = \diag(1, 2)$と書ける。よって$A$は正則である。そこで$\mu \neq 0$としてよい。
+
+$\mu A + I = \mu (A + \frac{1}{\mu}I)$なので、$\mu A + I$が退化するのと$A + \frac{1}{\mu}I$が退化するのは同値である。そして行列が退化することと固有値に$0$を持つことは同値である。したがって固有値のシフトを考えれば、$\frac{1}{\mu} = -1, -2$つまり$\mu = -1, -\frac{1}{2}$のときに退化が起きると分かる。\qed
+
+\section{Cayley--Hamiltonの定理とスペクトル分解}
+
+いかなる正方行列$A$に対しても、その固有多項式$\varphi_A(t)$に自分自身を代入すると$\varphi_A(A) = O$となることが知られています。これを\textbf{Cayley--Hamiltonの定理}と言います。この定理を上手く使うことで、行列に関する色々な性質を知ることができます。
+
+\subsection{$2$次の場合}
+
+まず$2$次の場合に確認してみましょう。
+\[
+A = 
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\]
+の固有多項式は$\varphi_A(t) = t^2 - (a + d)t + (ad - bc)$でした。これに$A$を代入すると
+\[
+A^2 - (a + d)A + (\det A)I
+= 
+\begin{pmatrix}
+a^2 + bc & ab + bd \\
+ac + cd & bc + d^2
+\end{pmatrix}
+- (a + d)
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
++ (ad - bc)
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+= O
+\]
+になっていますね。
+
+\subsection{行列のスペクトル分解}
+
+一旦Cayley--Hamiltonの定理を認めて、先にそこから得られる帰結を導いてしまいましょう。
+
+いま$n$次正方行列$A$の固有多項式$\varphi_A(t)$が、既約な多項式の積として
+\[
+\varphi_A(t) = p_1(t) p_2(t) \cdots p_l(t)
+\]
+と書けていたとします。このとき$1/\varphi_A(t)$を部分分数分解することで
+\[
+\frac{1}{\varphi_A(t)} = \frac{f_1(t)}{p_1(t)} + \frac{f_2(t)}{p_2(t)} + \cdots + \frac{f_l(t)}{p_l(t)}
+\]
+と書けます。これの両辺に$\varphi_A(t) = p_1(t) p_2(t) \cdots p_l(t)$という恒等式をかけることで
+\begin{align*}
+1 &= \frac{f_1(t)\varphi_A(t)}{p_1(t)} + \frac{f_2(t)\varphi_A(t)}{p_2(t)} + \cdots + \frac{f_l(t)\varphi_A(t)}{p_l(t)} \\
+&= f_1(t) p_2(t) \cdots p_l(t) + p_1(t) f_2(t) p_3(t) \cdots p_l(t) + p_1(t) p_2(t) \cdots p_{l - 1}(t) f_l(t)
+\end{align*}
+が得られます。ここで$t$に行列$A$を代入してみましょう。$1 \leq i \leq k$に対し
+\[
+P_i := p_1(A) \cdots p_{i - 1}(A) f_i(A) p_{i + 1}(A) \cdots p_k(A)
+\]
+と書けば
+\[
+I = P_1 + P_2 + \cdots + P_k
+\]
+となります。
+
+\paragraph{スペクトル分解の性質}
+
+今のスペクトル分解で出てきた行列の性質を調べましょう。まず$i \neq j$のとき、$P_iP_j = P_jP_i = O$となることを示します。定義から
+\[
+P_i P_j = p_1(A) \cdots p_{i - 1}(A) f_i(A) p_{i + 1}(A) \cdots p_k(A) p_1(A) \cdots p_{j - 1}(A) f_j(A) p_{j + 1}(A) \cdots p_l(A)
+\]
+です。ここで$i \neq j$なら、右辺に$p_1(A), \ldots, p_l(A)$が全部出揃って
+\[
+P_i P_j = \varphi_A(A) \times (\text{その他の項})
+\]
+と書けます。よってCayley--Hamiltonの定理から$P_i P_j = O$です。これが分かると、$I = P_1 + P_2 + \cdots + P_k$の両辺に左から$P_i$をかけることで$P_i = P_i^2$が従います。
+
+\paragraph{スペクトル分解に応じた空間の分解}
+
+$I = P_1 + P_2 + \cdots + P_k$より、全てのベクトル$\bm{u} \in \mathbb{R}^n$は$\bm{u} = P_1\bm{u} + P_2\bm{u} + \cdots + P_l\bm{u}$と書けます。よって$\mathbb{R}^n = \Im P_1 + \Im P_2 + \cdots + \Im P_l$です。また$\bm{u} \in \Im P_i \cap \Im P_j$なら$\bm{u} = P_i \bm{v} = P_j \bm{w}$と書けます。すると$\bm{u} = P_i \bm{u} = P_i^2 \bm{u} = P_i P_j \bm{w} = \bm{0}$となるので、この分解は直和分解になっています。かくして$\mathbb{R}^n = \Im P_1 \oplus \Im P_2 \oplus \cdots \oplus \Im P_l$です。そこで各$\Im P_i$の基底を集めて$\mathbb{R}^n$の基底を作れば、$A$は
+\[
+\begin{pmatrix}
+AP_1 \\
+& AP_2 \\
+& & \ddots \\
+& & AP_n
+\end{pmatrix}
+\]
+と、ブロック対角行列に分解されます。
+
+\subsection{固有値問題の細分}
+
+スペクトル分解を使うと、行列の対角化の問題が「固有値が全て同じである行列の対角化問題」に帰着できます。さらに単位行列のスカラー倍を適当に足せば固有値はずらせるので、対角化問題が最終的に、「固有値が全て$0$である行列の対角化問題」まで帰着できます。これはすなわち、巾零行列の対角化問題に他なりません。
+
+\subsection{Cayley--Hamitonの定理の証明}
+
+せっかくなので、Cayley--Hamiltonの定理の証明を与えておきます。Cayley自身は「自分では一般の次数の場合に証明しようと思わない」と言っちゃってる\footnote{\url{https://archive.org/stream/philtrans05474612/05474612\#page/n7/mode/2up}に書いてあります。}のですが、僕たちは頑張って証明をつけます。
+
+\paragraph{固有多項式が重根を持たない場合}
+
+まず最初に、固有多項式が重根を持たない場合を示しましょう。$n$次正方行列$A \in \Mat_n(\mathbb{R})$の固有多項式$\varphi_A(t)$が
+\[
+\varphi_A(t) = (t - \lambda_1) (t - \lambda_2) \cdots (t - \lambda_n)
+\]
+と分解したとします。このとき$A$は対角化可能です。
+\[
+P^{-1} A P = 
+\begin{pmatrix}
+\lambda_1 \\
+& \lambda_2 \\
+& & \ddots \\
+& & & \lambda_n
+\end{pmatrix}
+\]
+とすると、
+\begin{align*}
+\varphi_A(A) &= P \varphi_A(P^{-1} A P ) P^{-1}
+= P (P^{-1} A P - \lambda_1 I) (P^{-1} A P - \lambda_2 I) \cdots (P^{-1} A P - \lambda_n I) P^{-1} \\
+&= 
+P 
+\begin{pmatrix}
+0 \\
+& \lambda_2 - \lambda_1 \\
+& & \ddots \\
+& & & \lambda_n - \lambda_1
+\end{pmatrix}
+\begin{pmatrix}
+\lambda_1 - \lambda_2 \\
+& 0 \\
+& & \ddots \\
+& & & \lambda_n - \lambda_2
+\end{pmatrix}
+\cdots
+\begin{pmatrix}
+\lambda_1 - \lambda_n \\
+& \lambda_2 - \lambda_n \\
+& & \ddots \\
+& & & 0
+\end{pmatrix}
+P^{-1} \\
+&= O
+\end{align*}
+となります。
+
+\paragraph{固有多項式が重根を持つような行列が「あまりない」こと}
+
+さて、行列$A$に対して固有多項式$\varphi_A(t)$を対応させる写像を$\varphi\colon \Mat_n(\mathbb{R}) \rightarrow \mathbb{R}[t]$と書きます。このとき$\varphi_A(t)$が重根を持つような$A$全体のなす集合を$\Mat_n(\mathbb{R})^{\text{rs}}$と書くことにします\footnote{rsは ``\uline{r}egular \uline{s}emisimple'' の略です。大体``semisimple''が対角化可能性に、``regular''が固有値が異なることに相当します。ただ線型代数だけをするときは余り使われず、代数群やLie環と呼ばれるものを扱う際に用いられる記法なのですが、他に手頃な記法がなかったのでこれを使いました。}。すると実は、$\Mat_n(\mathbb{R})$の中で$\Mat_n(\mathbb{R})^{\text{rs}}$に入らない元は「あまりない」ことが示せます。
+
+たとえば$2$次の場合、
+\[
+A = 
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\]
+の固有多項式$\varphi_A(t) = t^2 - (a + d)t + (ad - bc)$が重根を持つ条件は、判別式を使って
+\[
+(a + d)^2 - 4(ad - bc) = 0
+\]
+と書けます。すなわち
+\[
+\Mat_2(\mathbb{R})^{\text{rs}} =
+\biggl\{
+A = 
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\in \Mat_2(\mathbb{R})
+\mid
+(a + d)^2 - 4(ad - bc) = 0
+\biggr\}
+\]
+これは$a, b, c, d$という$4$つの変数の多項式の零点ですね。
+
+実は$3$次以上の多項式に対しても「判別式」を作ることができます。それによって$\varphi_A(t)$の判別式は、$A$の成分の多項式として表せます。$\Mat_n(\mathbb{R})^{\text{rs}}$の補集合は、$\Mat_n(\mathbb{R})$における多項式の零点集合です。
+
+ここで「多項式の零点集合」とはどんなものかを考えてみます。たとえば平面$\mathbb{R}^2$上で、$2$変数多項式$f(x, y) = y - x^2$の零点と言えば、放物線ですよね。平面全部の点に比べれば、放物線上に乗っている点の数は明らかに少ないです。もうちょっと正確に言えば、放物線上の点のどんな点でどんなに小さい半径の円を描いても、必ず$f(x, y) \neq 0$となる点が円の中に紛れ込みます。
+
+$\varphi$の場合も、これと全く同じ状況が成り立っています。$\Mat_n(\mathbb{R})$は実数を$4$つ並べた行列全体の集合なので、線型空間としては$\mathbb{R}^n$と同型です。そこで$\varphi$を$\mathbb{R}^4$上の写像と同一視すれば、$\varphi_A(t) = 0$となる行列の零点は多項式の零点として書けます。次元は少々高いものの、さっきの放物線のように「空間全体の中で見れば潰れている」と言うことができます。こうして、固有多項式が重根を持つような行列は少ないことが示せます。
+
+\paragraph{多項式写像の性質}
+

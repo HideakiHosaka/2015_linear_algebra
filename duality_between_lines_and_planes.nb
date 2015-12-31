@@ -1,0 +1,438 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     17293,        429]
+NotebookOptionsPosition[     16922,        411]
+NotebookOutlinePosition[     17278,        427]
+CellTagsIndexPosition[     17235,        424]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\:6b21\:306e\:884c\:3092\:5b9f\:884c\:3059\:308b\:3068", "\:3001", 
+  "\:30d1\:30e9\:30e1", "\:30fc", 
+  "\:30bf\:3092\:52d5\:304b\:305b\:308b\:56f3\:304c\:73fe\:308c\:307e\:3059", 
+  "\:3002", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"2", "\:5e73\:9762ax"}], "+", "by", "+", "cz"}], "=", "0"}], ",", 
+  " ", 
+  RowBox[{
+   RowBox[{"px", "+", "qy", "+", "rz"}], "=", 
+   RowBox[{
+    RowBox[{"0", "\:3092z"}], "=", 
+    RowBox[{
+    "1", "\:3067\:5207\:3063\:305f\:5207\:308a\:53e3\:304c\:898b\:3048\:308b\
+\:306f\:305a\:3067\:3059"}]}]}], "\:3002", "\:307e\:305f\:30d1\:30e9\:30e1", 
+  "\:30fc", 
+  "\:30bfR\:306f\:8868\:793a\:3059\:308b\:7bc4\:56f2\:306e\:5e83\:3055", 
+  "\:3001", "X\:306f\:900f\:660e\:5ea6\:3067\:3059", "\:3002"}]], "Input",
+ CellChangeTimes->{{3.660120724836653*^9, 3.6601208061154046`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{
+     RowBox[{"ContourPlot3D", "[", 
+      RowBox[{
+       RowBox[{"{", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"a", " ", "x"}], "+", 
+           RowBox[{"b", " ", "y"}], "+", 
+           RowBox[{"c", " ", "z"}]}], "\[Equal]", "0"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"p", " ", "x"}], "+", 
+           RowBox[{"q", " ", "y"}], "+", 
+           RowBox[{"r", " ", "z"}]}], "\[Equal]", "0"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"b", " ", "r"}], "-", 
+              RowBox[{"c", " ", "q"}]}], ")"}], "x"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"c", " ", "p"}], "-", 
+              RowBox[{"a", " ", "r"}]}], ")"}], "y"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}], ")"}], "z"}]}], "\[Equal]", "0"}]}], 
+        "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+       RowBox[{"ContourStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"RGBColor", "[", 
+           RowBox[{
+            FractionBox["100", "255"], ",", 
+            FractionBox["200", "255"], ",", 
+            FractionBox["150", "255"]}], "]"}], ",", 
+          RowBox[{"RGBColor", "[", 
+           RowBox[{
+            FractionBox["100", "255"], ",", 
+            FractionBox["200", "255"], ",", 
+            FractionBox["150", "255"]}], "]"}], ",", 
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"0", ",", "0", ",", "0.8"}], "]"}]}], "}"}]}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}], ",", 
+     RowBox[{"ContourPlot3D", "[", 
+      RowBox[{
+       RowBox[{"z", "\[Equal]", "1"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", 
+         RowBox[{"-", "R"}], ",", "R"}], "}"}], ",", 
+       RowBox[{"ContourStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Opacity", "[", "X", "]"}], "}"}]}], ",", 
+       RowBox[{"MeshStyle", "\[Rule]", "None"}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}], ",", 
+     RowBox[{"ParametricPlot3D", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"t", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"b", " ", "r"}], " ", "-", 
+              RowBox[{"c", " ", "q"}]}], ")"}]}], ",", 
+           RowBox[{"t", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"c", " ", "p"}], "-", 
+              RowBox[{"a", " ", "r"}]}], ")"}]}], ",", 
+           RowBox[{"t", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}], ")"}]}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"t", " ", "a"}], " ", ",", " ", 
+           RowBox[{"t", " ", "b"}], ",", " ", 
+           RowBox[{"t", " ", "c"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"t", " ", "p"}], " ", ",", " ", 
+           RowBox[{"t", " ", "q"}], ",", " ", 
+           RowBox[{"t", " ", "r"}]}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", 
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", "Thick", "}"}]}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}], ",", 
+     RowBox[{"ParametricPlot3D", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "c"}], " ", "q"}], "+", 
+              RowBox[{"b", " ", "r"}]}], 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}]], "+", 
+            RowBox[{"b", " ", "t"}]}], ",", 
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "a"}], " ", "r"}], "+", 
+              RowBox[{"c", " ", "p"}]}], 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}]], "-", 
+            RowBox[{"a", " ", "t"}]}], ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "c"}], " ", "q"}], "+", 
+              RowBox[{"b", " ", "r"}]}], 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}]], "+", 
+            RowBox[{"q", " ", "t"}]}], ",", 
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "a"}], " ", "r"}], "+", 
+              RowBox[{"c", " ", "p"}]}], 
+             RowBox[{
+              RowBox[{"a", " ", "q"}], "-", 
+              RowBox[{"b", " ", "p"}]}]], "-", 
+            RowBox[{"p", " ", "t"}]}], ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "c"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"c", " ", "p"}], "-", 
+                 RowBox[{"a", " ", "r"}]}], ")"}]}], "+", 
+              RowBox[{"b", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"a", " ", "q"}], "-", 
+                 RowBox[{"b", " ", "p"}]}], ")"}]}]}], 
+             RowBox[{
+              RowBox[{"a", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"c", " ", "p"}], "-", 
+                 RowBox[{"a", " ", "r"}]}], ")"}]}], "-", 
+              RowBox[{"b", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"b", " ", "r"}], "-", 
+                 RowBox[{"c", " ", "q"}]}], ")"}]}]}]], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"c", " ", "p"}], "-", 
+               RowBox[{"a", " ", "r"}]}], ")"}], " ", "t"}]}], ",", 
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "a"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"a", " ", "q"}], "-", 
+                 RowBox[{"b", " ", "p"}]}], ")"}]}], "+", 
+              RowBox[{"c", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"b", " ", "r"}], "-", 
+                 RowBox[{"c", " ", "q"}]}], ")"}]}]}], 
+             RowBox[{
+              RowBox[{"a", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"c", " ", "p"}], "-", 
+                 RowBox[{"a", " ", "r"}]}], ")"}]}], "-", 
+              RowBox[{"b", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"b", " ", "r"}], "-", 
+                 RowBox[{"c", " ", "q"}]}], ")"}]}]}]], "-", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"b", " ", "r"}], "-", 
+               RowBox[{"c", " ", "q"}]}], ")"}], " ", "t"}]}], ",", "1"}], 
+          "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", 
+         RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"1", ",", "1", ",", "0"}], "]"}]}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"c", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"p", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"q", ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"r", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"X", ",", "0.1", ",", "0.9"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"R", ",", "1.7", ",", "3"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 1, $CellContext`b$$ = 
+    1, $CellContext`c$$ = 1, $CellContext`p$$ = 
+    1, $CellContext`q$$ = -1, $CellContext`r$$ = 1, $CellContext`R$$ = 
+    1.7, $CellContext`X$$ = 0.1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:540d\:79f0\:672a\:5b9a\:7fa9\"", Typeset`specs$$ = {{
+      Hold[$CellContext`a$$], 1, 2}, {
+      Hold[$CellContext`b$$], 1, 2}, {
+      Hold[$CellContext`c$$], 1, 2}, {
+      Hold[$CellContext`p$$], 1, 2}, {
+      Hold[$CellContext`q$$], -1, -2}, {
+      Hold[$CellContext`r$$], 1, 2}, {
+      Hold[$CellContext`X$$], 0.1, 0.9}, {
+      Hold[$CellContext`R$$], 1.7, 3}}, Typeset`size$$ = {303., {162., 165.}},
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`a$80762$$ = 0, $CellContext`b$80763$$ = 
+    0, $CellContext`c$80764$$ = 0, $CellContext`p$80765$$ = 
+    0, $CellContext`q$80766$$ = 0, $CellContext`r$80767$$ = 
+    0, $CellContext`X$80768$$ = 0, $CellContext`R$80769$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 1, $CellContext`b$$ = 
+        1, $CellContext`c$$ = 1, $CellContext`p$$ = 
+        1, $CellContext`q$$ = -1, $CellContext`r$$ = 1, $CellContext`R$$ = 
+        1.7, $CellContext`X$$ = 0.1}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$80762$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$80763$$, 0], 
+        Hold[$CellContext`c$$, $CellContext`c$80764$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$80765$$, 0], 
+        Hold[$CellContext`q$$, $CellContext`q$80766$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$80767$$, 0], 
+        Hold[$CellContext`X$$, $CellContext`X$80768$$, 0], 
+        Hold[$CellContext`R$$, $CellContext`R$80769$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        ContourPlot3D[{$CellContext`a$$ $CellContext`x + $CellContext`b$$ \
+$CellContext`y + $CellContext`c$$ $CellContext`z == 
+          0, $CellContext`p$$ $CellContext`x + $CellContext`q$$ \
+$CellContext`y + $CellContext`r$$ $CellContext`z == 
+          0, ($CellContext`b$$ $CellContext`r$$ - $CellContext`c$$ \
+$CellContext`q$$) $CellContext`x + ($CellContext`c$$ $CellContext`p$$ - \
+$CellContext`a$$ $CellContext`r$$) $CellContext`y + ($CellContext`a$$ \
+$CellContext`q$$ - $CellContext`b$$ $CellContext`p$$) $CellContext`z == 
+          0}, {$CellContext`x, -$CellContext`R$$, $CellContext`R$$}, \
+{$CellContext`y, -$CellContext`R$$, $CellContext`R$$}, {$CellContext`z, \
+-$CellContext`R$$, $CellContext`R$$}, Mesh -> None, ContourStyle -> {
+           RGBColor[100/255, 200/255, 150/255], 
+           RGBColor[100/255, 200/255, 150/255], 
+           RGBColor[0, 0, 0.8]}, Boxed -> False], 
+        ContourPlot3D[$CellContext`z == 
+         1, {$CellContext`x, -$CellContext`R$$, $CellContext`R$$}, \
+{$CellContext`y, -$CellContext`R$$, $CellContext`R$$}, {$CellContext`z, \
+-$CellContext`R$$, $CellContext`R$$}, ContourStyle -> {
+           Opacity[$CellContext`X$$]}, MeshStyle -> None, Boxed -> False], 
+        ParametricPlot3D[{{$CellContext`t ($CellContext`b$$ $CellContext`r$$ - \
+$CellContext`c$$ $CellContext`q$$), $CellContext`t ($CellContext`c$$ \
+$CellContext`p$$ - $CellContext`a$$ $CellContext`r$$), $CellContext`t \
+($CellContext`a$$ $CellContext`q$$ - $CellContext`b$$ $CellContext`p$$)}, \
+{$CellContext`t $CellContext`a$$, $CellContext`t $CellContext`b$$, \
+$CellContext`t $CellContext`c$$}, {$CellContext`t $CellContext`p$$, \
+$CellContext`t $CellContext`q$$, $CellContext`t $CellContext`r$$}}, \
+{$CellContext`t, -3, 3}, PlotStyle -> {Thick}, Boxed -> False], 
+        ParametricPlot3D[{{((-$CellContext`c$$) $CellContext`q$$ + \
+$CellContext`b$$ $CellContext`r$$)/($CellContext`a$$ $CellContext`q$$ - \
+$CellContext`b$$ $CellContext`p$$) + $CellContext`b$$ $CellContext`t, \
+((-$CellContext`a$$) $CellContext`r$$ + $CellContext`c$$ \
+$CellContext`p$$)/($CellContext`a$$ $CellContext`q$$ - $CellContext`b$$ \
+$CellContext`p$$) - $CellContext`a$$ $CellContext`t, 
+           1}, {((-$CellContext`c$$) $CellContext`q$$ + $CellContext`b$$ \
+$CellContext`r$$)/($CellContext`a$$ $CellContext`q$$ - $CellContext`b$$ \
+$CellContext`p$$) + $CellContext`q$$ $CellContext`t, ((-$CellContext`a$$) \
+$CellContext`r$$ + $CellContext`c$$ $CellContext`p$$)/($CellContext`a$$ \
+$CellContext`q$$ - $CellContext`b$$ $CellContext`p$$) - $CellContext`p$$ \
+$CellContext`t, 
+           1}, {((-$CellContext`c$$) ($CellContext`c$$ $CellContext`p$$ - \
+$CellContext`a$$ $CellContext`r$$) + $CellContext`b$$ ($CellContext`a$$ \
+$CellContext`q$$ - $CellContext`b$$ $CellContext`p$$))/($CellContext`a$$ \
+($CellContext`c$$ $CellContext`p$$ - $CellContext`a$$ $CellContext`r$$) - \
+$CellContext`b$$ ($CellContext`b$$ $CellContext`r$$ - $CellContext`c$$ \
+$CellContext`q$$)) + ($CellContext`c$$ $CellContext`p$$ - $CellContext`a$$ \
+$CellContext`r$$) $CellContext`t, ((-$CellContext`a$$) ($CellContext`a$$ \
+$CellContext`q$$ - $CellContext`b$$ $CellContext`p$$) + $CellContext`c$$ \
+($CellContext`b$$ $CellContext`r$$ - $CellContext`c$$ \
+$CellContext`q$$))/($CellContext`a$$ ($CellContext`c$$ $CellContext`p$$ - \
+$CellContext`a$$ $CellContext`r$$) - $CellContext`b$$ ($CellContext`b$$ \
+$CellContext`r$$ - $CellContext`c$$ $CellContext`q$$)) - ($CellContext`b$$ \
+$CellContext`r$$ - $CellContext`c$$ $CellContext`q$$) $CellContext`t, 
+           1}}, {$CellContext`t, -3, 3}, PlotStyle -> RGBColor[1, 1, 0], 
+         Boxed -> False]], 
+      "Specifications" :> {{$CellContext`a$$, 1, 2}, {$CellContext`b$$, 1, 
+         2}, {$CellContext`c$$, 1, 2}, {$CellContext`p$$, 1, 
+         2}, {$CellContext`q$$, -1, -2}, {$CellContext`r$$, 1, 
+         2}, {$CellContext`X$$, 0.1, 0.9}, {$CellContext`R$$, 1.7, 3}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{585., {224., 229.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.6601206470093412`*^9}]
+}, Open  ]]
+},
+WindowSize->{707, 636},
+WindowMargins->{{222, Automatic}, {Automatic, 29}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (2013\:5e741\:670828\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 833, 19, 72, "Input"],
+Cell[CellGroupData[{
+Cell[1415, 43, 8870, 252, 479, "Input"],
+Cell[10288, 297, 6618, 111, 470, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

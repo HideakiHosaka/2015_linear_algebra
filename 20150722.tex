@@ -399,7 +399,7 @@ a
 
 \subsection{直和の定義}
 
-前回のプリントの再掲になりますが、直和の定義と性質を確認しておきましょう。$U$を線型空間とし、$V, W\subset U$をその部分空間とします。そして「任意の$\bm{u} \in U$が、$\bm{u} = \bm{v} + \bm{w}$ ($\bm{v} \in V, \bm{w}\in W$)の形にただ一通りに書ける」という条件が成り立つとき、$U$は$V$と$W$の\textbf{直和}である\footnote{正確には、ここで定義した直和は「内部直和」といいます。この他に「外部直和」というものがあって、慣れてくると内部直和と外部直和をどっちも「直和」と略すようになります。事実としては内部直和と外部直和は自然に同型になるので、そんな深く気にすることはありません。でも他の場所で「この場所は、僕の知ってる直和と違うな？」と思ったときは、どっちの直和なのかを考えてみてください。}といい、$U = V \oplus W$と書きます。
+前回のプリントの再掲になりますが、直和の定義と性質を確認しておきましょう。$U$を線型空間とし、$V, W\subset U$をその部分空間とします。そして「任意の$\bm{u} \in U$が、$\bm{u} = \bm{v} + \bm{w}$ ($\bm{v} \in V, \bm{w}\in W$)の形にただ一通りに書ける」という条件が成り立つとき、$U$は$V$と$W$の\textbf{直和}\index{ちょくわ@直和}である\footnote{正確には、ここで定義した直和は「内部直和」といいます。この他に「外部直和」というものがあって、慣れてくると内部直和と外部直和をどっちも「直和」と略すようになります。事実としては内部直和と外部直和は自然に同型になるので、そんな深く気にすることはありません。でも他の場所で「この場所は、僕の知ってる直和と違うな？」と思ったときは、どっちの直和なのかを考えてみてください。}といい、$U = V \oplus W$と書きます。
 
 直感的に言えば、これは「$U$を$V$方向と$W$方向に分ける」ことを表しています。ですから直和の条件は、次のようにも言い換えられます。
 \begin{itemize}
@@ -505,7 +505,7 @@ X = \frac{1}{2} f(X) + \frac{1}{2} g(X)
 
 \subsection{交換子}
 
-$V$を線型空間とし、$X, Y \in \End(V)$を$V$上の線型変換とします。このとき$[X, Y] := XY - YX$を$X$と$Y$の\textbf{交換子}といいます。
+$V$を線型空間とし、$X, Y \in \End(V)$を$V$上の線型変換とします。このとき$[X, Y] := XY - YX$を$X$と$Y$の\textbf{交換子}\index{こうかんし@交換子}といいます。
 
 最も典型的な例は、行列の交換子です。たとえばS1タームの終わりの方に、一度演習問題で
 \[
@@ -537,13 +537,13 @@ F :=
 \begin{itemize}
 \item 双線型性: $[\alpha X_1 + \beta X_2, Y] = \alpha[X_1, Y] + \beta[X_2, Y]$, $[X, \alpha Y_1 + \beta Y_2] = \alpha [X, Y_1] + \beta [X, Y_2]$
 \item 交代性: $[Y, X] = -[X, Y]$
-\item Jacobi恒等式: $\bigl[X, [Y, Z]\bigr] + \bigl[Y, [Z, X]\bigr] + \bigl[Z, [X, Y]\bigr] = 0$
+\item Jacobi恒等式\index{Jacobiこうとうしき@Jacobi恒等式}: $\bigl[X, [Y, Z]\bigr] + \bigl[Y, [Z, X]\bigr] + \bigl[Z, [X, Y]\bigr] = 0$
 \end{itemize}
 これは定義式$[X, Y] = XY - YX$を逐一代入して計算するだけで証明ができます。試してみてください。
 
 \subsection{Lie環}
 
-さて、いまは行列などの掛け算を使って交換子$[, ]$を定義しました。ですが色々計算をしてみると、時と場合によっては\textbf{交換子の性質だけを使って議論を進められたりします}。そこで一般に線型空間$\mathfrak{g}$\footnote{`$\mathfrak{g}$'は、アルファベット`g'のフラクトゥール体です。Lie環の研究の創始者である数学者Sophus LieがLie環を表すのにフラクトゥール体を使ったことが、今では数学者の間で標準的な習わしになっています。}の上でJacobi恒等式を満たす交代双線型写像$[, ]\colon \mathfrak{g}\times\mathfrak{g}\rightarrow\mathfrak{g}$が定義されているとき、$\mathfrak{g}$を\textbf{Lie環}といいます。$n$次正方行列の集合$\Mat_n(\mathbb{R})$はLie環の一例です。
+さて、いまは行列などの掛け算を使って交換子$[, ]$を定義しました。ですが色々計算をしてみると、時と場合によっては\textbf{交換子の性質だけを使って議論を進められたりします}。そこで一般に線型空間$\mathfrak{g}$\footnote{`$\mathfrak{g}$'は、アルファベット`g'のフラクトゥール体です。Lie環の研究の創始者である数学者Sophus LieがLie環を表すのにフラクトゥール体を使ったことが、今では数学者の間で標準的な習わしになっています。}の上でJacobi恒等式を満たす交代双線型写像$[, ]\colon \mathfrak{g}\times\mathfrak{g}\rightarrow\mathfrak{g}$が定義されているとき、$\mathfrak{g}$を\textbf{Lie環}\index{Lieかん@Lie環}といいます。$n$次正方行列の集合$\Mat_n(\mathbb{R})$はLie環の一例です。
 
 \paragraph{なぜLie環を考えるのか？}
 
@@ -579,7 +579,7 @@ L_z := x\frac{\partial}{\partial y} - y\frac{\partial}{\partial z}
 \]
 で定める\footnote{つまり「$3$変数函数$f(x, y, z)$に対し$L_x f := yf_z - zf_y$などと定める」という意味です。}と、これらもまた$[L_x, L_y] = L_z, [L_y, L_z] = L_z, [L_z, L_x] = L_y$という関係式を満たします。これは$\sigma_x, \sigma_y, \sigma_z$の交換関係と大体同じです\footnote{$\sigma'_x := -i\sigma_x$, $\sigma'_y := -i\sigma_y$, $\sigma'_z := -i\sigma_z$とおくと、本当に$L_x$, $L_y$, $L_z$の交換関係と同じ式を満たすようになります。}。
 
-また量子力学の勉強をしていると、必ず$[\hat{x}, \hat{p}] = 1$という式が登場します\footnote{この式を\textbf{正準交換関係}といいます。量子力学の授業だと普通$[\hat{x}, \hat{p}] = i\hbar$という形で出てきますが、右辺が$1$でも$i\hbar$でもLie環を考えるにあたっては大差ないので、数学では$[x, p] = 1$としてしまうことが多いです。}。たとえば交換子の例として微分作用素$X = \frac{d}{dx}$と$x$倍作用素$Y$を挙げましたが、これらは$[X, Y] = 1$を満たしていました。この$X$と$Y$は、正準交換関係を満たす演算子の\textbf{Schr\"odinger表現}といいます。他にも正準交換関係を満たす演算子は色々ありますが、とにかく$[\hat{x}, \hat{p}] = 1$を満たすことが大事なのです。
+また量子力学の勉強をしていると、必ず$[\hat{x}, \hat{p}] = 1$という式が登場します\footnote{この式を\textbf{正準交換関係}\index{せいじゅんこうかんかんけい@正準交換関係}といいます。量子力学の授業だと普通$[\hat{x}, \hat{p}] = i\hbar$という形で出てきますが、右辺が$1$でも$i\hbar$でもLie環を考えるにあたっては大差ないので、数学では$[x, p] = 1$としてしまうことが多いです。}。たとえば交換子の例として微分作用素$X = \frac{d}{dx}$と$x$倍作用素$Y$を挙げましたが、これらは$[X, Y] = 1$を満たしていました。この$X$と$Y$は、正準交換関係を満たす演算子の\textbf{Schr\"odinger表現}\index{Schr\"odingerひょうげん@Schr\"odinger表現}といいます。他にも正準交換関係を満たす演算子は色々ありますが、とにかく$[\hat{x}, \hat{p}] = 1$を満たすことが大事なのです。
 
 このように「同じ交換関係式が、時と場所を変えて色々な状況で出現する」という実態を知ると「一々個別に調べるのは面倒だから、交換関係だけに注目して、その性質を調べ上げてしまえ」という発想に至るのは自然なことでしょう。こうして「特定の交換関係だけ」を抽出したものがLie環で、その交換関係を満たす行列や演算子のことを「Lie環の表現」といいます。
 
@@ -587,7 +587,7 @@ L_z := x\frac{\partial}{\partial y} - y\frac{\partial}{\partial z}
 
 さらに言うと、Lie環の役割を一段と良く理解するには「なぜLie環の交換関係が色々なところに登場するか」を知らないといけません。そのキーワードが「Lie群」と「対称性」です。
 
-たとえば水素原子を考えると、原子核は陽子$1$個だけからなります。陽子の作る電場は、原点を通るあらゆる軸に対する回転対称性を持ちます。回転対称性以外にも対称性には色々な種類がありますが、数学では対称性を表すのに「群」という言葉を使います。Lie群はその中でも特別な群であり、Lie群の対称性を「無限小」のレベルで見ようとするとLie環が登場します。いよいよLie環が重要そうな気がしてきますね\footnote{なおLie環の対称性は、いつもLie群に付随して現れるわけではありません。Lie環の対称性が単独で現れる状況もあります。}。
+たとえば水素原子を考えると、原子核は陽子$1$個だけからなります。陽子の作る電場は、原点を通るあらゆる軸に対する回転対称性を持ちます。回転対称性以外にも対称性には色々な種類がありますが、数学では対称性を表すのに「群」という言葉を使います。Lie群\index{Lieぐん@Lie群}はその中でも特別な群であり、Lie群の対称性を「無限小」のレベルで見ようとするとLie環が登場します。いよいよLie環が重要そうな気がしてきますね\footnote{なおLie環の対称性は、いつもLie群に付随して現れるわけではありません。Lie環の対称性が単独で現れる状況もあります。}。
 
 ですがLie群とLie環の対応を述べるには、行列の指数函数\footnote{指数函数$e^x = \exp x$をTaylor展開した式には、正方行列を代入することができます。その式で行列の指数函数を定義します。}の性質を詳しく調べなければいけません。事実としては、全ての行列$X, Y \in \Mat_n(\mathbb{R})$に対し
 \[
@@ -601,11 +601,11 @@ e^{tX} e^{tY} e^{-tX} e^{-tY} = \exp\Bigl( t^2 [X, Y] + (\text{$t^3$より高次
 
 \paragraph{定義}
 
-一般に$\tr\colon \Mat_n(\mathbb{R}) \rightarrow \mathbb{R}$の核を$\mathfrak{sl}_n(\mathbb{R})$と書きます\footnote{この$\mathfrak{sl}$も、``sl''のフラクトゥール体です。}。任意の$X, Y \in \Mat_n(\mathbb{R})$に対して$\tr XY = \tr YX$なので、特に$X, Y\in\mathfrak{sl}_n(\mathbb{R})$に対しても$[X, Y] \in \mathfrak{sl}_n(\mathbb{R})$が成り立ちます。よって$\mathfrak{sl}_n(\mathbb{R})$は$[, ]$で閉じており、Lie環になります。問7の議論を使えば、$\dim \mathfrak{sl}_n(\mathbb{R}) = n - 1$と分かります。
+一般に$\tr\colon \Mat_n(\mathbb{R}) \rightarrow \mathbb{R}$の核を$\mathfrak{sl}_n(\mathbb{R})$\index{sln@$\mathfrak{sl}_n$}と書きます\footnote{この$\mathfrak{sl}$も、``sl''のフラクトゥール体です。}。任意の$X, Y \in \Mat_n(\mathbb{R})$に対して$\tr XY = \tr YX$なので、特に$X, Y\in\mathfrak{sl}_n(\mathbb{R})$に対しても$[X, Y] \in \mathfrak{sl}_n(\mathbb{R})$が成り立ちます。よって$\mathfrak{sl}_n(\mathbb{R})$は$[, ]$で閉じており、Lie環になります。問7の議論を使えば、$\dim \mathfrak{sl}_n(\mathbb{R}) = n - 1$と分かります。
 
 \paragraph{$\mathfrak{sl}_2(\mathbb{C})$とPauli行列}
 
-ここで数の範囲を広げて、複素係数の行列で$\mathfrak{sl}_2(\mathbb{C})$を考えます。既に$E, H, F$という基底が$\mathfrak{sl}_2(\mathbb{C})$に取れることを知っていますが、複素係数の場合は特に
+ここで数の範囲を広げて、複素係数の行列で$\mathfrak{sl}_2(\mathbb{C})$\index{sl2@$\mathfrak{sl}_2$}を考えます。既に$E, H, F$という基底が$\mathfrak{sl}_2(\mathbb{C})$に取れることを知っていますが、複素係数の場合は特に
 \[
 \sigma_x := 
 \frac{1}{2}
@@ -626,9 +626,9 @@ i & 0
 0 & -1
 \end{pmatrix}
 \]
-という別の基底が取れます。これらの行列を\textbf{Pauli行列}といいます。
+という別の基底が取れます。これらの行列を\textbf{Pauli行列}\index{Pauliぎょうれつ@Pauli行列}といいます。
 
-Pauli行列の特徴的な点は、Hermite行列であること\footnote{複素数を成分とする行列$X$が$\overline{{}^tX} = X$を満たすとき、$X$を\textbf{Hermite行列}といいます。}です。Hermite行列はいつも「固有値」と呼ばれるものが実数になります。そして量子力学では
+Pauli行列の特徴的な点は、Hermite行列であること\footnote{複素数を成分とする行列$X$が$\overline{{}^tX} = X$を満たすとき、$X$を\textbf{Hermite行列}\index{Hermiteぎょうれつ@Hermite行列}といいます。}です。Hermite行列はいつも「固有値」と呼ばれるものが実数になります。そして量子力学では
 \begin{itemize}
 \item 物理系の状態は、複素線型空間のベクトルで表される
 \item 物理量はHermite行列で表される
@@ -639,7 +639,7 @@ Pauli行列の特徴的な点は、Hermite行列であること\footnote{複素�
 \subsection{随伴表現}
 最後に、問7に出てきた線型写像$h$がどうして大事なのか、軽く紹介します。
 
-$\mathfrak{g}$をLie環とします\footnote{慣れなければ$\mathfrak{g} = \Mat_n(\mathbb{R})$と思っていいです。}。交換子$[, ]$は双線型なので、片側については線型になっています。そこで$X \in \mathfrak{g}$に対して$\ad X(Y) := [X, Y]$と定義すれば、$\ad X \colon \mathfrak{g} \rightarrow \mathfrak{g}$という線型写像、つまり$\ad X \in \End(\mathfrak{g})$が得られます。これには\textbf{随伴表現}という名前がついています。
+$\mathfrak{g}$をLie環とします\footnote{慣れなければ$\mathfrak{g} = \Mat_n(\mathbb{R})$と思っていいです。}。交換子$[, ]$は双線型なので、片側については線型になっています。そこで$X \in \mathfrak{g}$に対して$\ad X(Y) := [X, Y]$と定義すれば、$\ad X \colon \mathfrak{g} \rightarrow \mathfrak{g}$という線型写像、つまり$\ad X \in \End(\mathfrak{g})$が得られます。これには\textbf{随伴表現}\index{ずいはんひょうげん@(Lie環の) 随伴表現}という名前がついています。
 
 交換子がJacobi恒等式を満たすことから、$\ad X$について次が成り立ちます。
 \begin{itemize}
@@ -665,7 +665,7 @@ Lie環論と呼ばれる分野では、Lie環の構造に整合的な線型写�
 
 線型空間$V, W$があったとき、$V$から$W$への線型写像全体の集合$\Hom(V, W)$も再び線型空間になるのでした。ここで特に$W = \mathbb{R}$のとき、$V^* := \Hom(V, \mathbb{R})$と書き、$V$の\textbf{双対 (そうつい) 空間}といいます。
 
-\paragraph{$\mathbb{R}^n$の双対空間} 一番簡単な$\mathbb{R}^2$の場合に、双対空間$(\mathbb{R}^2)^*$は何かを考えてみましょう。今の場合、$\mathbb{R}^2$から$\mathbb{R}$への線型写像は$(1, 2)$型行列、つまり行ベクトルと同じです。よって$\Hom(\mathbb{R}^2, \mathbb{R}) = \Mat_{1, 2}(\mathbb{R})$です。$\mathbb{R}^n$の場合でも全く話は同じで、列ベクトル全体のなす数ベクトル空間$\mathbb{R}^n$の双対空間$(\mathbb{R}^n)^*$は、同じ長さの行ベクトル全体がなす空間です。
+\paragraph{$\mathbb{R}^n$の双対空間} 一番簡単な$\mathbb{R}^2$の場合に、双対空間$(\mathbb{R}^2)^*$は何かを考えてみましょう。今の場合、$\mathbb{R}^2$から$\mathbb{R}$への線型写像は$(1, 2)$型行列、つまり行ベクトルと同じです。よって$\Hom(\mathbb{R}^2, \mathbb{R}) = \Mat_{1, 2}(\mathbb{R})$です。$\mathbb{R}^n$の場合でも全く話は同じで、列ベクトル全体のなす数ベクトル空間$\mathbb{R}^n$の双対空間\index{そうついくうかん@双対空間}$(\mathbb{R}^n)^*$は、同じ長さの行ベクトル全体がなす空間です。
 
 \subsection{双対基底}
 
@@ -679,7 +679,7 @@ Lie環論と呼ばれる分野では、Lie環の構造に整合的な線型写�
 0 & (i \neq j)
 \end{cases}
 \end{align*}
-と定めます。これから示すように、$(\bm{f}^{\vee}_1, \ldots, \bm{f}^{\vee}_n)$は$V^*$の基底になります。これを$(\bm{f}_1, \ldots, \bm{f}_n)$の\textbf{双対基底}といいます。まず具体例を見てみましょう。
+と定めます。これから示すように、$(\bm{f}^{\vee}_1, \ldots, \bm{f}^{\vee}_n)$は$V^*$の基底になります。これを$(\bm{f}_1, \ldots, \bm{f}_n)$の\textbf{双対基底}\index{そうついきてい@双対基底}といいます。まず具体例を見てみましょう。
 
 \paragraph{$\mathbb{R}^n$の場合} $\mathbb{R}^n$の標準基底が相手の場合、双対基底も非常に分かり易いものになります。$\bm{e}_i$を転置してできる行ベクトルを$\bm{e}^{\vee}_i$と書くと
 \[
@@ -702,7 +702,7 @@ Lie環論と呼ばれる分野では、Lie環の構造に整合的な線型写�
 
 \paragraph{双対基底が基底になること} 例を確認したところで、一般の場合に話を戻しましょう。$V$を線型空間とし、その基底$(\bm{f}_1, \bm{f}_2, \ldots, \bm{f}_n)$を取ります。
 
-さっき定義した$\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n$は$1$次独立です。実際$\alpha_1 \bm{f}^{\vee}_1 + \alpha_2 \bm{f}^{\vee}_2 + \cdots + \alpha_n \bm{f}^{\vee}_n = 0 \in V^*$とおく\footnote{全てのベクトルに$0$を対応させる写像は、線型写像です。これを\textbf{零写像}といい、$0$で表します。}と、この写像に何を代入しても値は$0$です。そこで$\bm{f}_j$ ($j = 1, 2, \ldots, n$) を代入すると
+さっき定義した$\bm{f}^{\vee}_1, \bm{f}^{\vee}_2, \ldots, \bm{f}^{\vee}_n$は$1$次独立です。実際$\alpha_1 \bm{f}^{\vee}_1 + \alpha_2 \bm{f}^{\vee}_2 + \cdots + \alpha_n \bm{f}^{\vee}_n = 0 \in V^*$とおく\footnote{全てのベクトルに$0$を対応させる写像は、線型写像です。これを\textbf{零写像}\index{ぜろしゃぞう@零写像}といい、$0$で表します。}と、この写像に何を代入しても値は$0$です。そこで$\bm{f}_j$ ($j = 1, 2, \ldots, n$) を代入すると
 \[
 0 = \sum_{i = 1}^n \alpha_i \bm{f}^{\vee}_i (\bm{f}_j) = \sum_{i = 1}^n \alpha_i \delta_{ij} = \alpha_j
 \]
@@ -722,7 +722,7 @@ f'(\bm{f}_j) = \sum_{i = 1}^n f(\bm{f}_i)\bm{f}^{\vee}_i(\bm{f}_j) = \sum_{i = 1
 
 線型空間$V$から双対空間$V^*$を作ったのと同じようにして、今度は$V^*$の双対空間$V^{**} := (V^*)^*$を考えることができます。$\mathbb{R}^n$の場合を思い出すと、双対$*$を取ることは行列としての転置と同じでした。ですから$*$を$2$回取ったら、元に戻りそうな気がします。そこで一般の場合に、この$V^{**}$の構造を調べましょう。
 
-\paragraph{評価写像} $V^{**}$の元は「$V^{*}$の元に対して、実数$\mathbb{R}$を対応させる」という写像です。そして$V^{*}$は$V\rightarrow\mathbb{R}$という写像です。だから$\bm{v} \in V$を$1$つ固定すると、$\varphi\mapsto \varphi(\bm{v})$という方法で$\ev_{\bm{v}}:V^{*}\rightarrow \mathbb{R}$という写像が作れます。これを\textbf{評価写像}というのでした。\pageref{paragraph:evaluation_map}ページでは多項式に対する評価写像を考えましたが、$V^*$の元に対する評価写像についても全く同様に、$\ev_{\bm{v}}$の線型性が示せます。よって$\ev_{\bm{v}}\in V^{**}$です。
+\paragraph{評価写像} $V^{**}$の元は「$V^{*}$の元に対して、実数$\mathbb{R}$を対応させる」という写像です。そして$V^{*}$は$V\rightarrow\mathbb{R}$という写像です。だから$\bm{v} \in V$を$1$つ固定すると、$\varphi\mapsto \varphi(\bm{v})$という方法で$\ev_{\bm{v}}:V^{*}\rightarrow \mathbb{R}$という写像が作れます。これを\textbf{評価写像}\index{ひょうかしゃぞう@評価写像}というのでした。\pageref{paragraph:evaluation_map}ページでは多項式に対する評価写像を考えましたが、$V^*$の元に対する評価写像についても全く同様に、$\ev_{\bm{v}}$の線型性が示せます。よって$\ev_{\bm{v}}\in V^{**}$です。
 
 そして$\ev_{\bm{v}}$の$\bm{v}$を動かすことで、$\ev\colon V\rightarrow V^{**}; \bm{v}\mapsto \ev_{\bm{v}}$という写像ができます。これも線型写像になっています。実際、任意の$\varphi \in V^*$に対し
 \begin{itemize}

@@ -32,7 +32,7 @@ y & x
 
 \subsection{問題の解答} \label{subsection:non-trivial_answer}
 
-「自明でない (非自明な) 解」という言葉に慣れていない人がいたので、補足しておきます。連立$1$次方程式$A\bm{x} = \bm{0}$を考えるとき、$\bm{x} = \bm{0}$は明らかにこの方程式の解です。$\bm{0}$ベクトルにどんな行列をかけても$\bm{0}$ですよね。というわけで、この$\bm{x} = \bm{0}$のことを\textbf{自明な解}と呼びます。そして自明な解以外の解を、\textbf{非自明な解}といいます。
+「自明でない (非自明な) 解」という言葉に慣れていない人がいたので、補足しておきます。連立$1$次方程式$A\bm{x} = \bm{0}$を考えるとき、$\bm{x} = \bm{0}$は明らかにこの方程式の解です。$\bm{0}$ベクトルにどんな行列をかけても$\bm{0}$ですよね。というわけで、この$\bm{x} = \bm{0}$のことを\textbf{自明な解}と呼びます。そして自明な解以外の解を、\textbf{非自明な解}\index{ひじめいなかい@非自明な解}といいます。
 
 特に$A$が$n$次正方行列の場合、$A$が正則なら非自明な解は存在しません。なぜなら$A\bm{x} = \bm{0}$から$\bm{x} = A^{-1}\bm{0} = \bm{0}$が導かれるからです。ですから連立$1$次方程式$A\bm{x} = \bm{0}$が非自明な解を持つためには、$A$が非正則なことが必要です。一方正方行列では、全射性と単射性が同時にしか成り立たないのでした。したがって$A$が非正則なら$A$は単射でないので、$\Ker A \neq 0$です。これは$A\bm{x} = \bm{0}$の解が$\bm{0}$以外に存在することを意味します。よって非自明な解が存在するための必要十分条件は、$A$が正則でないことです。
 
@@ -139,13 +139,13 @@ x = \frac{k + 1}{(k - 1)(k + 2)}, y = \frac{-1}{(k - 1)(k + 2)}, z = \frac{-1}{(
 置換のことを少し復習しましょう。$\{1, 2, \ldots, n\}$の置換の全体$\mathfrak{S}_n$を$n$次対称群と呼んでいました。この$n$次対称群は
 \begin{itemize}
 \item $\sigma, \tau \in \mathfrak{S}_n$の積$\sigma \tau \in \mathfrak{S}_n$が定義されている。
-\item $\sigma, \tau, \rho \in \mathfrak{S}_n$に対し、$(\sigma \tau)\rho = \sigma (\tau \rho)$が成り立つ\footnote{あみだくじ$3$つを縦$1$列に並べてつなげるとき、先に上の$2$つをくっつけても、下の$2$つをくっつけても、結果は同じですよね。これだけの話です。この「掛け算の結果が、くっつける順番に依存しない」ことを、\textbf{結合法則}といいます。}
+\item $\sigma, \tau, \rho \in \mathfrak{S}_n$に対し、$(\sigma \tau)\rho = \sigma (\tau \rho)$が成り立つ\footnote{あみだくじ$3$つを縦$1$列に並べてつなげるとき、先に上の$2$つをくっつけても、下の$2$つをくっつけても、結果は同じですよね。これだけの話です。この「掛け算の結果が、くっつける順番に依存しない」ことを、\textbf{結合法則}\index{けつごうほうそく@結合法則}といいます。}
 \item 恒等置換$\id \in \mathfrak{S}_n$がある
 \item 任意の$\sigma \in \mathfrak{S}_n$に対し$\sigma^{-1} \in \mathfrak{S}_n$が存在する
 \end{itemize}
 という性質を持っていました。
 
-この性質を一般化したものが「群 (group)」と呼ばれるものです。集合$G$が\textbf{群}であるとは、次の$4$つの条件を満たすことです。
+この性質を一般化したものが「群 (group)」と呼ばれるものです。集合$G$が\textbf{群}\index{ぐん@群}であるとは、次の$4$つの条件を満たすことです。
 \begin{itemize}
 \item 任意の$g, h \in G$に対し積$g \times h \in G$というものが定まる
 \item 任意の$g, h, k \in G$に対し$(gh)k = g(hk)$が成り立つ\footnote{ここで$gh := g \times h$です。一々$\times$の記号を書くのがかったるいので、このように略します。}
@@ -290,7 +290,7 @@ $1$つ目は、$0$でない実数全体の集合$\mathbb{R}^{\times} := \{ x \in
 
 % GL, SL, O, SO
 
-まず、$n$次正則行列の全体を
+まず、$n$次正則行列\index{GLn@$GL_n$}の全体を
 \[
 GL_n(\mathbb{R}) := \{ A \in \Mat_n(\mathbb{R}) \mid \det A \neq 0 \}
 \]
@@ -300,18 +300,18 @@ GL_n(\mathbb{R}) := \{ A \in \Mat_n(\mathbb{R}) \mid \det A \neq 0 \}
 \item 単位行列$I$はもちろん$GL_n(\mathbb{R})$の元です。
 \item 全ての$A \in GL_n(\mathbb{R})$は逆行列$A^{-1} \in GL_n(\mathbb{R})$を持ちます。
 \end{itemize}
-これで$GL_n(\mathbb{R})$が群になることを示せました。$GL_n(\mathbb{R})$を$n$次\textbf{一般線型群}\footnote{英語では``\uline{g}eneral \uline{l}inear group''です。この頭文字を取って$GL$と書いています。}といいます。$n = 1$の場合は$GL_1(\mathbb{R}) = \mathbb{R}^{\times}$です。
+これで$GL_n(\mathbb{R})$が群になることを示せました。$GL_n(\mathbb{R})$を$n$次\textbf{一般線型群}\index{いっぱんせんけいぐん@一般線型群}\footnote{英語では``\uline{g}eneral \uline{l}inear group''です。この頭文字を取って$GL$と書いています。}といいます。$n = 1$の場合は$GL_1(\mathbb{R}) = \mathbb{R}^{\times}$です。
 
 この$GL_n(\mathbb{R})$の中で、さらに色々な群を作ることができます。次に考えるのは
 \[
-SL_n(\mathbb{R}) := \{ A \in GL_n(\mathbb{R}) \mid \det A = 1\}
+SL_n(\mathbb{R}) := \{ A \in GL_n(\mathbb{R}) \mid \det A = 1\}\index{SLn@$SL_n$}
 \]
-というものです。$A, B \in GL_n(\mathbb{R})$が$\det A = \det B = 1$を満たせば$\det AB = \det A^{-1} = 1$なので、積や逆行列を取る操作で$SL_n(\mathbb{R})$は閉じています。よって$SL_n(\mathbb{R})$も群です。これを$n$次\textbf{特殊線型群}\footnote{英語では``\uline{s}pecial \uline{l}inear group''です。この頭文字を取って$SL$と書いています。}といいます。
+というものです。$A, B \in GL_n(\mathbb{R})$が$\det A = \det B = 1$を満たせば$\det AB = \det A^{-1} = 1$なので、積や逆行列を取る操作で$SL_n(\mathbb{R})$は閉じています。よって$SL_n(\mathbb{R})$も群です。これを$n$次\textbf{特殊線型群}\index{とくしゅせんけいぐん@特殊線型群}\footnote{英語では``\uline{s}pecial \uline{l}inear group''です。この頭文字を取って$SL$と書いています。}といいます。
 
 さらに
 \begin{align*}
-O(n) &:= \{A \in GL_n(\mathbb{R}) | A^{-1} = {}^t\!A \}, \quad
-SO(n) := \{A \in O(n) | \det A = 1 \}
+O(n) &:= \{A \in GL_n(\mathbb{R}) | A^{-1} = {}^t\!A \}\index{On@$O(n)$}, \quad
+SO(n) := \{A \in O(n) | \det A = 1 \}\index{SOn@$SO(n)$}
 \end{align*}
 と定めます。このとき
 \begin{itemize}
@@ -319,11 +319,11 @@ SO(n) := \{A \in O(n) | \det A = 1 \}
 \item 単位行列$I$は$I^{-1} = I = {}^t I$を満たす
 \item $A \in O(n)$なら$(A^{-1})^{-1} = A = {}^t({}^t\!A) = {}^t(A^{-1})$である
 \end{itemize}
-なので、やはり$O(n)$は群です。$SO(n) = O(n) \cap SL_n(\mathbb{R})$なので、$SO(n)$も群です。$O(n)$を$n$次\textbf{直交群}、$SO(n)$を$n$次\textbf{特殊直交群}といいます\footnote{名前の由来は``(\uline{s}pecial) \uline{o}rthogonal group''です。}。
+なので、やはり$O(n)$は群です。$SO(n) = O(n) \cap SL_n(\mathbb{R})$なので、$SO(n)$も群です。$O(n)$を$n$次\textbf{直交群}\index{ちょっこうぐん@直交群}、$SO(n)$を$n$次\textbf{特殊直交群}\index{とくしゅちょっこうぐん@特殊直交群}といいます\footnote{名前の由来は``(\uline{s}pecial) \uline{o}rthogonal group''です。}。
 
 \paragraph{回転群}
 
-$n$次直交群$SO(n)$は\textbf{回転群}とも呼ばれます。その中でも最も簡単な$SO(2)$の場合を調べてみましょう。
+$n$次直交群$SO(n)$は\textbf{回転群}\index{かいてんぐん@回転群}とも呼ばれます。その中でも最も簡単な$SO(2)$の場合を調べてみましょう。
 
 $SO(2)$の元は$2$次正方行列です。そこで
 \[
@@ -369,7 +369,7 @@ R(\theta) =
 
 群が「図形の対称性」として現れることを説明する際、群のそれぞれの元は「ある図形を不変に保つ操作」を表すことを見ました。このように、群が「何かの操作」を表すことは良くあります。
 
-典型的な例は一般線型群$GL_n(\mathbb{R})$です。$A \in GL_n(\mathbb{R})$は$n$次正方行列ですから、$n$次元の数ベクトル$\bm{u} \in \mathbb{R}^n$に対して$A\bm{u}$を定義することができます。こういう状況を指して、$GL_n(\mathbb{R})$は$\mathbb{R}^n$に\textbf{作用する}といいます。
+典型的な例は一般線型群$GL_n(\mathbb{R})$です。$A \in GL_n(\mathbb{R})$は$n$次正方行列ですから、$n$次元の数ベクトル$\bm{u} \in \mathbb{R}^n$に対して$A\bm{u}$を定義することができます。こういう状況を指して、$GL_n(\mathbb{R})$は$\mathbb{R}^n$に\textbf{作用する}\index{さよう@(群の) 作用}といいます。
 
 一般の定義も大体同じです。群$G$と集合$X$について
 \begin{itemize}
@@ -449,13 +449,13 @@ G := \biggl\{
 \end{pmatrix}
 \biggr\}
 \]
-と定めると、これは群になります。たとえば平面$\mathbb{R}^2$の$4$点$(\pm1, \pm1)$を頂点とする正方形の周を$S$とすると、この群$G$で不変な図形です。ただ正方形$S$は$90$度回転でも不変なので、$S$を不変に保つ線型変換の全体のなす群は、$G$より大きい群になります。また別の機会に紹介しますが、そういう正$n$角形を不変に保つような変換全体のなす群を\textbf{二面体群}といいます。
+と定めると、これは群になります。たとえば平面$\mathbb{R}^2$の$4$点$(\pm1, \pm1)$を頂点とする正方形の周を$S$とすると、この群$G$で不変な図形です。ただ正方形$S$は$90$度回転でも不変なので、$S$を不変に保つ線型変換の全体のなす群は、$G$より大きい群になります。また別の機会に紹介しますが、そういう正$n$角形を不変に保つような変換全体のなす群を\textbf{二面体群}\index{にめんたいぐん@二面体群}といいます。
 
 \subsection{準同型写像}
 
 さて、線型空間の間の写像を考えるにあたって、僕たちは線型写像という特別な写像を定義しました。これは線型空間における和やスカラー倍といった操作に対して整合的になるよう、写像に条件を課したものです。
 
-このアナロジーで考えると、群の間の写像を考える際には、群の積と整合的な写像を考えるべきだと思われます。つまり$G, H$が群で$x, y \in G$のとき、写像$f\colon G \rightarrow H$が$f(xy) = f(x)f(y)$を満たしてくれたら嬉しいというわけです。このような条件を満たす写像を群の\textbf{準同型写像}といいます。場合によっては「写像」を略し、単に準同型と呼ぶこともあります。
+このアナロジーで考えると、群の間の写像を考える際には、群の積と整合的な写像を考えるべきだと思われます。つまり$G, H$が群で$x, y \in G$のとき、写像$f\colon G \rightarrow H$が$f(xy) = f(x)f(y)$を満たしてくれたら嬉しいというわけです。このような条件を満たす写像を群の\textbf{準同型写像}\index{じゅんどうけい@(群の) 順同型写像}といいます。場合によっては「写像」を略し、単に準同型と呼ぶこともあります。
 
 既に今まで見た例の中にも、いくつか群準同型が現れています。確認してみましょう。
 
@@ -469,7 +469,7 @@ $n$次対称群$\mathfrak{S}_n$の符号$\sgn$は、置換に対して$\pm1$の�
 
 \subsection{同型写像}
 
-群$G, H$と群準同型$f\colon G\rightarrow H$が与えられたとします。$f$が全単射であるとき、$f$のことを特に\textbf{同型写像}といいます。略して単に同型と呼ぶこともあります。また群$G$と群$H$の間に同型写像があることを、$G \simeq H$と書きます。
+群$G, H$と群準同型$f\colon G\rightarrow H$が与えられたとします。$f$が全単射であるとき、$f$のことを特に\textbf{同型写像}\index{どうけいしゃぞう@(群の) 同型写像}といいます。略して単に同型と呼ぶこともあります。また群$G$と群$H$の間に同型写像があることを、$G \simeq H$と書きます。
 
 同型がありがたいのは、これによって群の\textbf{同一視}ができるということです。例を見てみましょう。
 
@@ -560,7 +560,7 @@ P\bigl((132)\bigr)
 0 & \bigl(j \neq \tau(\sigma(i))\bigr)
 \end{cases}
 \end{align*}
-なので、$\sigma \tau = \tau \circ \sigma$を思い出すと$P(\sigma)P(\tau) = P(\sigma\tau)$となっています。よって$P\colon \mathfrak{S}_n \rightarrow GL_n(\mathbb{R})$は群の準同型です。この$P(\sigma)$のことを、$\sigma$に対応する\textbf{置換行列}といったりします。$n$次の置換行列は$n!$個あり、これは$\mathfrak{S}_n$の個数と同じです。そして異なる置換に対応する置換行列は異なります。よって$P$は$\mathfrak{S}_n$と置換行列全体との集合の間の全単射を与え、$n$次の置換行列全体のなす群は$\mathfrak{S}_n$と同型になります。
+なので、$\sigma \tau = \tau \circ \sigma$を思い出すと$P(\sigma)P(\tau) = P(\sigma\tau)$となっています。よって$P\colon \mathfrak{S}_n \rightarrow GL_n(\mathbb{R})$は群の準同型です。この$P(\sigma)$のことを、$\sigma$に対応する\textbf{置換行列}\index{ちかんぎょうれつ@置換行列}といったりします。$n$次の置換行列は$n!$個あり、これは$\mathfrak{S}_n$の個数と同じです。そして異なる置換に対応する置換行列は異なります。よって$P$は$\mathfrak{S}_n$と置換行列全体との集合の間の全単射を与え、$n$次の置換行列全体のなす群は$\mathfrak{S}_n$と同型になります。
 
 \paragraph{正三角形の対称性}
 

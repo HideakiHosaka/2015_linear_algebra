@@ -400,7 +400,7 @@ D\bigl(T_a f(x)\bigr) = T_a\bigl( Df(x) \bigr)
 \]
 となっています。$n$は何でも良いですから、$n$に応じて$D T_a - T_a D = 0$という式を様々なサイズの行列で表現できる、というわけです。その他$T_a T_b = T_{a + b} = T_b T_a$などの関係式も、同様に成り立っています。興味のある人は確かめてみてください。
 
-そして今は「平行移動」と「微分」という操作が先に与えられていましたが、逆に$D T_a - T_a D$のような「関係式」だけを最初に取り出して、後から「どのように行列で表現できるか」を考えることもしばしばあります。このような分野は\textbf{表現論}と呼ばれ、現代数学の主たる分野の$1$つを形成しています。
+そして今は「平行移動」と「微分」という操作が先に与えられていましたが、逆に$D T_a - T_a D$のような「関係式」だけを最初に取り出して、後から「どのように行列で表現できるか」を考えることもしばしばあります。このような分野は\textbf{表現論}\index{ひょうげんろん@表現論}と呼ばれ、現代数学の主たる分野の$1$つを形成しています。
 
 \section{基底の変換}
 
@@ -720,7 +720,7 @@ x = \sum_{m = 1}^{\infty} \sin mx \cdot \frac{1}{\pi} \int_{-\pi}^{\pi} t \sin m
 \caption{閉区間$[-\pi, \pi]$における$y = x$のFourier級数展開の様子}
 \end{figure}
 
-このように、函数を$\{1, \cos mx, \sin mx \mid m\in\mathbb{Z}_{>0}\}$の無限級数で表すことを\textbf{Fourier級数展開}といいます。音波や交流など「波」を扱う際、Fourier級数展開が基本的な道具になります。詳細な計算法は別として、名前だけは知っておいてください。
+このように、函数を$\{1, \cos mx, \sin mx \mid m\in\mathbb{Z}_{>0}\}$の無限級数で表すことを\textbf{Fourier級数展開}\index{Fourierきゅうすう@Fourier級数}といいます。音波や交流など「波」を扱う際、Fourier級数展開が基本的な道具になります。詳細な計算法は別として、名前だけは知っておいてください。
 
 \paragraph{内積の一般化}
 
@@ -755,7 +755,7 @@ a_m = \bigl(f(x), \sin 2mx\bigr), b_m = \bigl(f(x), \cos 2mx\bigr)
 \]
 という式で取り出せています。
 
-いまはいきなり函数空間の例でやってしまいましたが、もっと手頃な有限次元線型空間の場合でも、同じようなことができます。線型空間に「内積」と呼ぶべきものを定義したり、さらに「基底との内積で成分を取り出す」といった操作を考えたりします。このような「内積」を付け加えた線型空間を\textbf{計量線型空間}といいます。また、その内積に関して「長さが$1$」で「異なるベクトルがお互いに直交する」という条件を満たす基底を、\textbf{正規直交基底}といいます。
+いまはいきなり函数空間の例でやってしまいましたが、もっと手頃な有限次元線型空間の場合でも、同じようなことができます。線型空間に「内積」と呼ぶべきものを定義したり、さらに「基底との内積で成分を取り出す」といった操作を考えたりします。このような「内積」を付け加えた線型空間を\textbf{計量線型空間}\index{けいりょうせんけいくうかん@計量線型空間}といいます。また、その内積に関して「長さが$1$」で「異なるベクトルがお互いに直交する」という条件を満たす基底を、\textbf{正規直交基底}といいます。
 
 これまでに出てきた函数のなす線型空間や多項式のなす線型空間では、その上にいろいろな内積を入れることができ、内積に応じて様々な面白いことが起こります。そうした内積の詳しい取扱いを、来学期に行います。
 
@@ -794,7 +794,7 @@ $f, g\colon \Mat_2(\mathbb{R}) \rightarrow \Mat_2(\mathbb{R})$を、$f(X) := X +
 
 \paragraph{問6と問7}
 
-線型写像$\tr\colon \Mat_2(\mathbb{R}) \rightarrow \mathbb{R}$について、$\tr (E/2) = 1 \in \mathbb{R}$なので、$\Im \tr = \mathbb{R}$である。よって$\mathfrak{sl}_2(\mathbb{R}) := \Ker \tr$とおく\footnote{$n$次正方行列の場合でも、$\tr\colon\Mat_n(\mathbb{R})\rightarrow \mathbb{R}$の核を$\mathfrak{sl}_n(\mathbb{R})$と書き、「$n$次特殊線型群$SL_n(\mathbb{R})$のLie環」といいます。}と、$\dim \mathfrak{sl}_2(\mathbb{R}) = \dim \Mat_2(\mathbb{R}) - \dim \mathbb{R} = 4 - 1 = 3$である。そして
+線型写像$\tr\colon \Mat_2(\mathbb{R}) \rightarrow \mathbb{R}$について、$\tr (E/2) = 1 \in \mathbb{R}$なので、$\Im \tr = \mathbb{R}$である。よって$\mathfrak{sl}_2(\mathbb{R}) := \Ker \tr$\index{sl2@$\mathfrak{sl}_2$}とおく\footnote{$n$次正方行列の場合でも、$\tr\colon\Mat_n(\mathbb{R})\rightarrow \mathbb{R}$の核を$\mathfrak{sl}_n(\mathbb{R})$と書き、「$n$次特殊線型群$SL_n(\mathbb{R})$のLie環」といいます。}と、$\dim \mathfrak{sl}_2(\mathbb{R}) = \dim \Mat_2(\mathbb{R}) - \dim \mathbb{R} = 4 - 1 = 3$である。そして
 \[
 E :=
 \begin{pmatrix}

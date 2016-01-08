@@ -18,6 +18,8 @@
 \usetikzlibrary{arrows}							% 可換図式の矢印のバリエーションを増やす
 \usepackage{mathtools}							% 
 \usepackage{youngtab}							% Young図形を表示する
+\usepackage{makeidx}							% 索引をつくる
+\makeindex
 
 % 種々の設定
 
@@ -75,6 +77,8 @@
 
 \maketitle
 
+\include{frontmatter}
+
 \tableofcontents
 
 \mainmatter
@@ -119,5 +123,9 @@
 \include{20151125}
 \include{20151202}
 \include{20151209}
+
+\backmatter
+
+\printindex
 
 \end{document}
